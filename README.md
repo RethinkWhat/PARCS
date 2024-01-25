@@ -1,4 +1,4 @@
-﻿# Welcome to PARCS!
+# Welcome to PARCS!
 
 This project aims to solve an existing problem that exists in the Saint Louis University MaryHeights Campus - **parking.** 
 
@@ -8,13 +8,13 @@ The application attempts to resolve this issue by introducing a **Parking Reserv
 
 
 ## Authors
-* Marcos, Jay Paolo
 * Jasmin, Ramon Emmiel
 * Lacanilao, Marvin Patrick
+* Marcos, Jay Paolo
 * Roxas, Johan Rickardo
 * Siccuan, Sebastian
 * Tank, Rithik
-* Yuen, Ka Hung
+* Yuen, Ka Hang
 
 ## License
 The project was created in partial fulfilment of the course Computer Programming 3, offered under **Saint Louis University**. 
