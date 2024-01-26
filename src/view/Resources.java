@@ -1,6 +1,7 @@
 package view;
 
-import java.awt.Color;
+import javax.swing.*;
+import java.awt.*;
 
 /**
  * The design system of the view.
@@ -31,6 +32,9 @@ public class Resources {
      * I/O color
      */
     public final Color gray = new Color(133,133,133);
+
+    public Resources() {
+    }
 
 
 }
