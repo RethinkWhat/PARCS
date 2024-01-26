@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * The design system of the view.
+ * The stylesheet of the different view classes.
  */
 public class Resources {
 
@@ -36,5 +36,6 @@ public class Resources {
     public Resources() {
     }
 
+    public final int resTitleLocY = 25;
 
 }
