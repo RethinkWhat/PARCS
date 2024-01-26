@@ -4,6 +4,7 @@ import view.Resources;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class RegisterView extends JFrame {
     /**
@@ -14,7 +15,9 @@ public class RegisterView extends JFrame {
      * Password text field
      */
     private JPasswordField txtPassword;
-
+    /**
+     * Checkbox to show password
+     */
     private JCheckBox chkShowPassword;
     /**
      * Login button
@@ -30,7 +33,7 @@ public class RegisterView extends JFrame {
     private JButton btnSignup;
 
     /**
-     * Constructs a RegisterView graphical user interface
+     * Constructs a RegisterView frame
      */
     public RegisterView() {
         super("PARCS");
@@ -75,13 +78,13 @@ public class RegisterView extends JFrame {
         gbc.gridy = 3;
 
         txtUsername = new JTextField(20);
-        txtUsername.setText("Username");
+        txtUsername.setText("Username"); // Omit text when model is set up
         pnlRight.add(txtUsername, gbc);
 
         gbc.gridy = 4;
 
         txtPassword = new JPasswordField(20);
-        txtPassword.setText("Password");
+        txtPassword.setText("Password"); // Omit text when model is set up
         pnlRight.add(txtPassword, gbc);
 
         gbc.gridy = 5;
@@ -112,6 +115,7 @@ public class RegisterView extends JFrame {
         this.setVisible(true);
     }
 
+    // Temporary main method
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -119,5 +123,10 @@ public class RegisterView extends JFrame {
                 new RegisterView();
             }
         });
+    }
+
+
+    public void setActionListener(ActionListener listener) {
+
     }
 }
