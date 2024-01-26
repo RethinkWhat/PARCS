@@ -4,7 +4,15 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * Template for an Account object
+ * Template for a user object.
+ * The user object contains the needed attributes to identify a single end user.
+ * 1. Username
+ * 2. Password encrypted in SHA 256
+ * 3. Last Name
+ * 4. First Name
+ * 5. Phone Number
+ * 6.
+ * @see model.Vehicle
  */
 public class User {
     /**

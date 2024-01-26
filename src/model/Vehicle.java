@@ -2,6 +2,8 @@ package model;
 
 /**
  * Template for a vehicle object.
+ * The vehicle object contains the needed attributes to identify a single vehicle owned by a user.
+ * @see model.User
  */
 public class Vehicle {
     /**
