@@ -42,31 +42,34 @@ public class RegisterView extends JFrame {
 
         // Body panel acting as a container to hold all UI components
         Container contentArea = new JPanel(new BorderLayout());
+        GridBagConstraints gbc = new GridBagConstraints();
 
         // Main Panel
         JPanel pnlMain = new JPanel(new GridLayout(0,2));
         contentArea.add(pnlMain, BorderLayout.CENTER);
 
         // Left Panel
-        JPanel pnlLeft = new JPanel();
+
+        JPanel pnlLeft = new JPanel(new GridBagLayout());
         pnlLeft.setBackground(new Resources().feldgrau);
         pnlMain.add(pnlLeft);
 
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
         JLabel lblLogo = new JLabel("");
         lblLogo.setIcon(res.logoParcs);
-        pnlLeft.add(lblLogo);
+        pnlLeft.add(lblLogo, gbc);
 
-        JLabel lblTagline = res.createLblH2("PARKING MADE EASY", res.white);
-        pnlLeft.add(lblTagline);
+        gbc.gridy = 1;
+        JLabel lblTagline = res.createLblH2("Parking made easy.", res.white);
+        pnlLeft.add(lblTagline, gbc);
 
         // Right Panel
-        JPanel pnlRight = new JPanel();
-        pnlRight.setLayout(new GridBagLayout());
+        JPanel pnlRight = new JPanel(new GridBagLayout());
         pnlRight.setBackground(new Resources().white);
         pnlMain.add(pnlRight);
 
         // GridBagConstraints to position components using the GB layout
-        GridBagConstraints gbc = new GridBagConstraints();
 
         // !! Right Panel Components
         gbc.gridx = 0;
@@ -88,14 +91,18 @@ public class RegisterView extends JFrame {
         txtPassword.setText("Password"); // Omit text when model is set up
         pnlRight.add(txtPassword, gbc);
 
-        gbc.gridy = 5;
+        gbc.gridy = 7;
+        JLabel lblWrongPassword = res.createLblP("Wrong credentials. Try again.", res.red);
+        pnlRight.add(lblWrongPassword, gbc);
+
+        gbc.gridy = 6;
         gbc.gridx = 0;
         chkShowPassword = new JCheckBox("Show Password");
         chkShowPassword.setFont(new Font("Arial", Font.PLAIN, 14));
         chkShowPassword.setHorizontalAlignment(SwingConstants.LEFT);
         pnlRight.add(chkShowPassword, gbc);
 
-        gbc.gridy = 11;
+        gbc.gridy = 8;
         gbc.ipady = 40;
         JPanel pnlButtons = new JPanel(new FlowLayout());
         pnlButtons.setBackground(new Resources().white);
@@ -114,6 +121,14 @@ public class RegisterView extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    class LoginForm extends JPanel {
+
+    }
+
+    class SignupForm extends JPanel {
+
     }
 
     // Temporary main method to view and debug frame
