@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * TODO: Documentation
+ */
 public class RegisterView extends JFrame {
     /**
      * Username text field
@@ -23,10 +26,7 @@ public class RegisterView extends JFrame {
      * Login button
      */
     private JButton btnLogin;
-    /**
-     * Forgot password button
-     */
-    private JButton btnForgotPassword;
+
     /**
      * Signup for an account button
      */
@@ -40,15 +40,6 @@ public class RegisterView extends JFrame {
 
         // Body panel acting as a container to hold all UI components
         JPanel pnlContentArea = new JPanel(new BorderLayout());
-        pnlContentArea.setLayout(new BorderLayout());
-
-        // Header Panel
-        /*
-        JPanel pnlHeader = new JPanel(new BorderLayout());
-        pnlHeader.setPreferredSize(new Dimension(1138,75));
-        pnlHeader.setBackground(new Resources().celadon);
-        pnlContentArea.add(pnlHeader, BorderLayout.NORTH);
-         */
 
         // Main Panel
         JPanel pnlMain = new JPanel(new GridLayout(0,2));
@@ -91,10 +82,6 @@ public class RegisterView extends JFrame {
         chkShowPassword = new JCheckBox("Show Password");
         pnlRight.add(chkShowPassword, gbc);
 
-        gbc.gridy = 8;
-        btnForgotPassword = new JButton("Forgot Password?");
-        pnlRight.add(btnForgotPassword, gbc);
-
         gbc.gridy = 11;
         JPanel pnlButtons = new JPanel(new FlowLayout());
         pnlButtons.setBackground(new Resources().white);
@@ -115,7 +102,7 @@ public class RegisterView extends JFrame {
         this.setVisible(true);
     }
 
-    // Temporary main method
+    // Temporary main method to view and debug frame
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
