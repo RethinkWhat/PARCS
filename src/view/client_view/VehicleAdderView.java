@@ -43,12 +43,12 @@ public class VehicleAdderView extends JFrame {
         // GridBagConstraints to position components using the GB layout
         GridBagConstraints gbc = new GridBagConstraints();
 
-        gbc.gridx = 0;
-        gbc.gridy = 0;
         JLabel lblTitle = new JLabel("Add Vehicle");
         lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
-        contentPane.add(lblTitle, gbc);
+        lblTitle.setBounds(0,25,50,50);
+        contentPane.add(lblTitle);
 
+        gbc.gridx = 0;
         gbc.gridy = 1;
         gbc.insets = new Insets(20,0,0,0);
         cmbType = new JComboBox();
