@@ -33,9 +33,10 @@ public class Resources {
      * Foreground color for I/O components.
      */
     public final Color gray = new Color(133,133,133);
-
-    public Resources() {
-    }
+    /**
+     * Error color.
+     */
+    public final Color red = new Color(230,92,92);
 
     /**
      *
@@ -98,6 +99,16 @@ public class Resources {
         return label;
     }
 
+    public JButton createBtnTxtOnly(String text, Color color) {
+        JButton button = new JButton(text);
+        button.setFont(new Font("Arial", Font.BOLD, 15));
+        button.setForeground(color);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        return button;
+    }
+
     /**
      * Creates a new JButton with a specified text, background color, foreground color, and radius.
      * @param text The specified text.
@@ -110,6 +121,7 @@ public class Resources {
         JButton button = new JButton(text);
         button.setBackground(background);
         button.setForeground(foreground);
+        button.setFont(new Font("Arial", Font.PLAIN, 15));
         button.setBorder(new RoundedBorder(radius));
         button.setVerticalTextPosition(SwingConstants.CENTER);
         button.setHorizontalAlignment(SwingConstants.CENTER);

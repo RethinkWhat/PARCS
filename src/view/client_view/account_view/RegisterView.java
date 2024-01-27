@@ -32,6 +32,9 @@ public class RegisterView extends JFrame {
      */
     private JButton btnSignup;
 
+    /**
+     * Instance variable of resources to invoke stylesheet and UI resources.
+     */
     private Resources res = new Resources();
 
     /**
@@ -42,16 +45,20 @@ public class RegisterView extends JFrame {
 
         // Body panel acting as a container to hold all UI components
         Container contentArea = new JPanel(new BorderLayout());
+
+        // GridBagConstraints to position components using the GB layout
         GridBagConstraints gbc = new GridBagConstraints();
+
+        // Control components of the Container
+        CardLayout cardLayout = new CardLayout();
 
         // Main Panel
         JPanel pnlMain = new JPanel(new GridLayout(0,2));
         contentArea.add(pnlMain, BorderLayout.CENTER);
 
         // Left Panel
-
         JPanel pnlLeft = new JPanel(new GridBagLayout());
-        pnlLeft.setBackground(new Resources().feldgrau);
+        pnlLeft.setBackground(res.feldgrau);
         pnlMain.add(pnlLeft);
 
         gbc.gridy = 0;
@@ -66,10 +73,8 @@ public class RegisterView extends JFrame {
 
         // Right Panel
         JPanel pnlRight = new JPanel(new GridBagLayout());
-        pnlRight.setBackground(new Resources().white);
+        pnlRight.setBackground(res.white);
         pnlMain.add(pnlRight);
-
-        // GridBagConstraints to position components using the GB layout
 
         // !! Right Panel Components
         gbc.gridx = 0;
@@ -105,7 +110,7 @@ public class RegisterView extends JFrame {
         gbc.gridy = 8;
         gbc.ipady = 40;
         JPanel pnlButtons = new JPanel(new FlowLayout());
-        pnlButtons.setBackground(new Resources().white);
+        pnlButtons.setBackground(res.white);
         pnlRight.add(pnlButtons, gbc);
 
         // !!! Buttons Panel components
@@ -121,14 +126,6 @@ public class RegisterView extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
-    }
-
-    class LoginForm extends JPanel {
-
-    }
-
-    class SignupForm extends JPanel {
-
     }
 
     // Temporary main method to view and debug frame
