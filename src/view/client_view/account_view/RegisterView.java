@@ -32,6 +32,8 @@ public class RegisterView extends JFrame {
      */
     private JButton btnSignup;
 
+    private Resources res = new Resources();
+
     /**
      * Constructs a RegisterView frame
      */
@@ -39,17 +41,25 @@ public class RegisterView extends JFrame {
         super("PARCS");
 
         // Body panel acting as a container to hold all UI components
-        JPanel pnlContentArea = new JPanel(new BorderLayout());
+        Container contentArea = new JPanel(new BorderLayout());
 
         // Main Panel
         JPanel pnlMain = new JPanel(new GridLayout(0,2));
-        pnlContentArea.add(pnlMain, BorderLayout.CENTER);
+        contentArea.add(pnlMain, BorderLayout.CENTER);
 
-        // ! Main Panel Components
+        // Left Panel
         JPanel pnlLeft = new JPanel();
         pnlLeft.setBackground(new Resources().feldgrau);
         pnlMain.add(pnlLeft);
 
+        JLabel lblLogo = new JLabel("");
+        lblLogo.setIcon(res.logoParcs);
+        pnlLeft.add(lblLogo);
+
+        JLabel lblTagline = res.createLblH2("PARKING MADE EASY", res.white);
+        pnlLeft.add(lblTagline);
+
+        // Right Panel
         JPanel pnlRight = new JPanel();
         pnlRight.setLayout(new GridBagLayout());
         pnlRight.setBackground(new Resources().white);
@@ -62,39 +72,43 @@ public class RegisterView extends JFrame {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-
-        JLabel lblTitle = new JLabel("Log In");
+        gbc.ipady = 40;
+        gbc.insets = new Insets(5,0,5,0);
+        JLabel lblTitle = res.createLblH1("Log In", res.eerieBlack);
         pnlRight.add(lblTitle, gbc);
 
         gbc.gridy = 3;
-
-        txtUsername = new JTextField(20);
+        gbc.ipady = 3;
+        txtUsername = res.createTxtRounded("Username", res.lightGray, res.gray,20);
         txtUsername.setText("Username"); // Omit text when model is set up
         pnlRight.add(txtUsername, gbc);
 
         gbc.gridy = 4;
-
-        txtPassword = new JPasswordField(20);
+        txtPassword = res.createPwdRounded(res.lightGray, res.gray, 20);
         txtPassword.setText("Password"); // Omit text when model is set up
         pnlRight.add(txtPassword, gbc);
 
         gbc.gridy = 5;
+        gbc.gridx = 0;
         chkShowPassword = new JCheckBox("Show Password");
+        chkShowPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+        chkShowPassword.setHorizontalAlignment(SwingConstants.LEFT);
         pnlRight.add(chkShowPassword, gbc);
 
         gbc.gridy = 11;
+        gbc.ipady = 40;
         JPanel pnlButtons = new JPanel(new FlowLayout());
         pnlButtons.setBackground(new Resources().white);
         pnlRight.add(pnlButtons, gbc);
 
         // !!! Buttons Panel components
-        btnSignup = new JButton("Sign Up");
+        btnSignup = res.createBtnRounded("Sign Up", res.gray, res.gray, 10);
         pnlButtons.add(btnSignup);
 
-        btnLogin = new JButton("Log In");
+        btnLogin = res.createBtnRounded("Log In", res.celadon, res.celadon, 10);
         pnlButtons.add(btnLogin);
 
-        this.setContentPane(pnlContentArea);
+        this.setContentPane(contentArea);
         this.setLocationRelativeTo(null);
         this.setSize(950,560);
         this.setResizable(false);
@@ -112,8 +126,4 @@ public class RegisterView extends JFrame {
         });
     }
 
-
-    public void setActionListener(ActionListener listener) {
-
-    }
 }
