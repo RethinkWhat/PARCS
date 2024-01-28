@@ -6,6 +6,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * TODO: Documentation
+ */
 public class RegisterView extends JFrame {
     /**
      * Username text field
@@ -23,14 +26,16 @@ public class RegisterView extends JFrame {
      * Login button
      */
     private JButton btnLogin;
-    /**
-     * Forgot password button
-     */
-    private JButton btnForgotPassword;
+
     /**
      * Signup for an account button
      */
     private JButton btnSignup;
+
+    /**
+     * Instance variable of resources to invoke stylesheet and UI resources.
+     */
+    private Resources res = new Resources();
 
     /**
      * Constructs a RegisterView frame
@@ -39,75 +44,83 @@ public class RegisterView extends JFrame {
         super("PARCS");
 
         // Body panel acting as a container to hold all UI components
-        JPanel pnlContentArea = new JPanel(new BorderLayout());
-        pnlContentArea.setLayout(new BorderLayout());
-
-        // Header Panel
-        /*
-        JPanel pnlHeader = new JPanel(new BorderLayout());
-        pnlHeader.setPreferredSize(new Dimension(1138,75));
-        pnlHeader.setBackground(new Resources().celadon);
-        pnlContentArea.add(pnlHeader, BorderLayout.NORTH);
-         */
-
-        // Main Panel
-        JPanel pnlMain = new JPanel(new GridLayout(0,2));
-        pnlContentArea.add(pnlMain, BorderLayout.CENTER);
-
-        // ! Main Panel Components
-        JPanel pnlLeft = new JPanel();
-        pnlLeft.setBackground(new Resources().feldgrau);
-        pnlMain.add(pnlLeft);
-
-        JPanel pnlRight = new JPanel();
-        pnlRight.setLayout(new GridBagLayout());
-        pnlRight.setBackground(new Resources().white);
-        pnlMain.add(pnlRight);
+        Container contentArea = new JPanel(new BorderLayout());
 
         // GridBagConstraints to position components using the GB layout
         GridBagConstraints gbc = new GridBagConstraints();
+
+        // Control components of the Container
+        CardLayout cardLayout = new CardLayout();
+
+        // Main Panel
+        JPanel pnlMain = new JPanel(new GridLayout(0,2));
+        contentArea.add(pnlMain, BorderLayout.CENTER);
+
+        // Left Panel
+        JPanel pnlLeft = new JPanel(new GridBagLayout());
+        pnlLeft.setBackground(res.feldgrau);
+        pnlMain.add(pnlLeft);
+
+        gbc.gridy = 0;
+        gbc.gridwidth = 1;
+        JLabel lblLogo = new JLabel("");
+        lblLogo.setIcon(res.logoParcs);
+        pnlLeft.add(lblLogo, gbc);
+
+        gbc.gridy = 1;
+        JLabel lblTagline = res.createLblH2("Parking made easy.", res.white);
+        pnlLeft.add(lblTagline, gbc);
+
+        // Right Panel
+        JPanel pnlRight = new JPanel(new GridBagLayout());
+        pnlRight.setBackground(res.white);
+        pnlMain.add(pnlRight);
 
         // !! Right Panel Components
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridwidth = 1;
-
-        JLabel lblTitle = new JLabel("Log In");
+        gbc.ipady = 40;
+        gbc.insets = new Insets(5,0,5,0);
+        JLabel lblTitle = res.createLblH1("Log In", res.eerieBlack);
         pnlRight.add(lblTitle, gbc);
 
         gbc.gridy = 3;
-
-        txtUsername = new JTextField(20);
+        gbc.ipady = 3;
+        txtUsername = res.createTxtRounded("Username", res.lightGray, res.gray,20);
         txtUsername.setText("Username"); // Omit text when model is set up
         pnlRight.add(txtUsername, gbc);
 
         gbc.gridy = 4;
-
-        txtPassword = new JPasswordField(20);
+        txtPassword = res.createPwdRounded(res.lightGray, res.gray, 20);
         txtPassword.setText("Password"); // Omit text when model is set up
         pnlRight.add(txtPassword, gbc);
 
-        gbc.gridy = 5;
+        gbc.gridy = 7;
+        JLabel lblWrongPassword = res.createLblP("Wrong credentials. Try again.", res.red);
+        pnlRight.add(lblWrongPassword, gbc);
+
+        gbc.gridy = 6;
+        gbc.gridx = 0;
         chkShowPassword = new JCheckBox("Show Password");
+        chkShowPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+        chkShowPassword.setHorizontalAlignment(SwingConstants.LEFT);
         pnlRight.add(chkShowPassword, gbc);
 
         gbc.gridy = 8;
-        btnForgotPassword = new JButton("Forgot Password?");
-        pnlRight.add(btnForgotPassword, gbc);
-
-        gbc.gridy = 11;
+        gbc.ipady = 40;
         JPanel pnlButtons = new JPanel(new FlowLayout());
-        pnlButtons.setBackground(new Resources().white);
+        pnlButtons.setBackground(res.white);
         pnlRight.add(pnlButtons, gbc);
 
         // !!! Buttons Panel components
-        btnSignup = new JButton("Sign Up");
+        btnSignup = res.createBtnRounded("Sign Up", res.gray, res.gray, 10);
         pnlButtons.add(btnSignup);
 
-        btnLogin = new JButton("Log In");
+        btnLogin = res.createBtnRounded("Log In", res.celadon, res.celadon, 10);
         pnlButtons.add(btnLogin);
 
-        this.setContentPane(pnlContentArea);
+        this.setContentPane(contentArea);
         this.setLocationRelativeTo(null);
         this.setSize(950,560);
         this.setResizable(false);
@@ -115,7 +128,7 @@ public class RegisterView extends JFrame {
         this.setVisible(true);
     }
 
-    // Temporary main method
+    // Temporary main method to view and debug frame
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
@@ -125,8 +138,4 @@ public class RegisterView extends JFrame {
         });
     }
 
-
-    public void setActionListener(ActionListener listener) {
-
-    }
 }
