@@ -133,7 +133,7 @@ public class Resources {
     /**
      * Template for RoundedBorder object.
      */
-    static class RoundedBorder implements Border {
+    public static class RoundedBorder implements Border {
         /**
          * The radius of the rounded border.
          */
@@ -143,7 +143,7 @@ public class Resources {
          * Constructs a rounded border with a specified radius.
          * @param radius The specified radius.
          */
-        RoundedBorder(int radius) {
+        public RoundedBorder(int radius) {
             this.radius = radius;
         }
 
