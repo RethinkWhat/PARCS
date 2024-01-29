@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
 
 /**
  * The stylesheet of the different view classes.
@@ -106,7 +107,17 @@ public class Resources {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
+        button.setFocusable(false);
         return button;
+    }
+
+    public JButton createBtnIconOnly(ImageIcon icon) {
+        JButton button = new JButton();
+        button.setIcon(icon);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setFocusable(false);
     }
 
     /**
@@ -313,5 +324,17 @@ public class Resources {
             }
             return shape.contains(x, y);
         }
+    }
+
+    // Temporary method to scale the dimensions of an image. Omit before production.
+    private Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
     }
 }
