@@ -1,5 +1,6 @@
 package server.view;
 
+import server.model.Server;
 import utilities.Resources;
 
 import javax.swing.*;
@@ -25,9 +26,28 @@ public class ReservationsView extends JFrame {
     }
 
     class MainScreenPanel extends JPanel{
-        public MainScreenPanel(){}
+        public MainScreenPanel(){
+
+        }
     }
 
+    class HeaderPanel extends JPanel{
+        public HeaderPanel(){
+
+        }
+    }
+
+    class ParkingSlotNumbersPanel extends JPanel{
+        public ParkingSlotNumbersPanel(){
+
+        }
+    }
+
+    class ServerStatusPanel extends JPanel{
+        public ServerStatusPanel(){
+
+        }
+    }
 
     public static void main(String[] args) {
         new ReservationsView();
