@@ -24,6 +24,11 @@ public class ReservationsView extends JFrame {
         }
     }
 
+    class MainScreenPanel extends JPanel{
+        public MainScreenPanel(){}
+    }
+
+
     public static void main(String[] args) {
         new ReservationsView();
     }
