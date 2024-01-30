@@ -105,6 +105,7 @@ public class RegisterView extends JFrame {
         chkShowPassword = new JCheckBox("Show Password");
         chkShowPassword.setFont(new Font("Arial", Font.PLAIN, 14));
         chkShowPassword.setHorizontalAlignment(SwingConstants.LEFT);
+        chkShowPassword.setBackground(res.white);
         pnlRight.add(chkShowPassword, gbc);
 
         gbc.gridy = 8;
@@ -114,10 +115,10 @@ public class RegisterView extends JFrame {
         pnlRight.add(pnlButtons, gbc);
 
         // !!! Buttons Panel components
-        btnSignup = res.createBtnRounded("Sign Up", res.gray, res.gray, 10);
+        btnSignup = res.createBtnRounded("Sign Up", res.gray, res.eerieBlack, 10);
         pnlButtons.add(btnSignup);
 
-        btnLogin = res.createBtnRounded("Log In", res.celadon, res.celadon, 10);
+        btnLogin = res.createBtnRounded("Log In", res.celadon, res.eerieBlack, 10);
         pnlButtons.add(btnLogin);
 
         this.setContentPane(contentArea);
