@@ -70,6 +70,18 @@ public class User {
         this.vehicles = new ArrayList<>();
     }
 
+    public User(ArrayList<String> userInfo) {
+        this.username = userInfo.get(0);
+        this.password = userInfo.get(1);
+        this.lastName = userInfo.get(2);
+        this.firstName = userInfo.get(3);
+        this.phoneNumber = userInfo.get(4);
+        this.vehicles = new ArrayList<>();
+        for (int x = 5; x <userInfo.size(); x++) {
+            vehicles.add(new Vehicle(userInfo.get(x).split(",")));
+        }
+    }
+
     /**
      * Retrieves the current username of the user.
      * @return The current username of the user.
@@ -171,10 +183,15 @@ public class User {
     /**
      * Returns a string representation of the user.
      * The string contains only the username.
+     *
      * @return A string representation of the user.
      */
     @Override
     public String toString() {
-        return super.toString();
+        String toReturn = username + "," + password + "," + lastName + "," + firstName + "," + phoneNumber;
+        for (Vehicle vehicle: vehicles) {
+            toReturn += "," + vehicle;
+        }
+        return toReturn;
     }
 }
