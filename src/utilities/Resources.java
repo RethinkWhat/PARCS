@@ -3,7 +3,9 @@ package utilities;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.font.ImageGraphicAttribute;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferedImage;
 
 /**
  * The stylesheet of the different view classes.
@@ -37,11 +39,26 @@ public class Resources {
      * Error color.
      */
     public final Color red = new Color(230,92,92);
-
     /**
-     *
+     * The icon for the PARCS logo.
      */
     public ImageIcon logoParcs = new ImageIcon("res/drawable/parcs-logo.png");
+    /**
+     * The icon for the home button in the navigation bar.
+     */
+    public ImageIcon iconHome = new ImageIcon("res/drawable/icons/home-white-outline.png");
+    /**
+     * The icon for the ticket button in the navigation bar.
+     */
+    public ImageIcon iconTicket = new ImageIcon("res/drawable/icons/ticket-white-outline.png");
+    /**
+     * The icon for the account button in the navigation bar.
+     */
+    public ImageIcon iconAccount = new ImageIcon("res/drawable/icons/user-white-outline.png");
+    /**
+     * The icon fot the logout button in the navigation bar.
+     */
+    public ImageIcon iconLogout = new ImageIcon("res/drawable/icons/exit-white-outline.png");
 
     /**
      * Creates a new JLabel with a specified text and color.
@@ -121,6 +138,17 @@ public class Resources {
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
+        button.setFocusable(false);
+        return button;
+    }
+
+    public JButton createBtnIconOnly(ImageIcon icon) {
+        JButton button = new JButton();
+        button.setIcon(icon);
+        button.setOpaque(false);
+        button.setContentAreaFilled(false);
+        button.setBorderPainted(false);
+        button.setFocusable(false);
         return button;
     }
 
@@ -148,7 +176,7 @@ public class Resources {
     /**
      * Template for RoundedBorder object.
      */
-    static class RoundedBorder implements Border {
+    public static class RoundedBorder implements Border {
         /**
          * The radius of the rounded border.
          */
@@ -158,7 +186,7 @@ public class Resources {
          * Constructs a rounded border with a specified radius.
          * @param radius The specified radius.
          */
-        RoundedBorder(int radius) {
+        public RoundedBorder(int radius) {
             this.radius = radius;
         }
 
@@ -328,5 +356,17 @@ public class Resources {
             }
             return shape.contains(x, y);
         }
+    }
+
+    // Temporary method to scale the dimensions of an image. Omit before production.
+    private Image getScaledImage(Image srcImg, int w, int h){
+        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g2 = resizedImg.createGraphics();
+
+        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
+        g2.drawImage(srcImg, 0, 0, w, h, null);
+        g2.dispose();
+
+        return resizedImg;
     }
 }
