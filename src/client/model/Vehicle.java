@@ -2,6 +2,8 @@ package client.model;
 
 import client.model.User;
 
+import java.util.ArrayList;
+
 /**
  * Template for a vehicle object.
  * The vehicle object contains the needed attributes to identify a single vehicle owned by a user.
@@ -40,6 +42,12 @@ public class Vehicle {
         this.type = type;
         this.model = model;
         this.plateNumber = plateNumber;
+    }
+
+    public Vehicle(String[] vehicleInfo) {
+        this.type = vehicleInfo[0];
+        this.model = vehicleInfo[1];
+        this.plateNumber = vehicleInfo[2];
     }
 
     /**
