@@ -1,8 +1,4 @@
-package client.model;
-
-import client.model.User;
-
-import java.util.ArrayList;
+package server.model;
 
 /**
  * Template for a vehicle object.
