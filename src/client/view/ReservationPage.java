@@ -7,17 +7,57 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ReservationPage extends JFrame {
+    /**
+     * The button that expands the navigation bar.
+     */
     private JButton btnNavMenu;
+    /**
+     * The home button in the navigation bar.
+     */
     private JButton btnNavHome;
+    /**
+     * The ticket button in the navigation.
+     */
     private JButton btnNavTicket;
+    /**
+     * The account button in the navigation.
+     */
     private JButton btnNavAccount;
+    /**
+     * The logout button in the navigation.
+     */
     private JButton btnNavLogout;
+    /**
+     * The button that shows the current number of available car slots.
+     */
     private JButton btnAvailCar;
+    /**
+     * The button that shows the current number of available motorcycle slots.
+     */
     private JButton btnAvailMotor;
+    /**
+     * The button that shows the current number of total bookings.
+     */
     private JButton btnTotalBookings;
+    /**
+     * The search bar.,
+     */
     private JTextField txtSearchbar;
+    /**
+     * The first name of the current user.
+     */
     private JLabel lblName;
+    /**
+     * The current date.
+     */
     private JLabel lblDate;
+    /**
+     * Location of the current user.
+     */
+    private JLabel lblLocation;
+    /**
+     * The stylesheet.
+     */
     private Resources res = new Resources();
 
     public ReservationPage() {
@@ -55,6 +95,10 @@ public class ReservationPage extends JFrame {
     class HeaderPanel extends JPanel {
         public HeaderPanel() {
             setBackground(res.celadon);
+            setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            btnNavMenu = res.createBtnIconOnly(res.logoParcs, 20,20);
+            add(btnNavMenu);
 
             this.setPreferredSize(new Dimension(1300, 40));
         }
@@ -64,16 +108,16 @@ public class ReservationPage extends JFrame {
         public NavbarPanel() {
             setBackground(res.feldgrau);
 
-            btnNavHome = res.createBtnIconOnly(res.iconHome);
+            btnNavHome = res.createBtnIconOnly(res.iconHome,30,30);
             add(btnNavHome);
 
-            btnNavTicket = res.createBtnIconOnly(res.iconTicket);
+            btnNavTicket = res.createBtnIconOnly(res.iconTicket, 30,30);
             add(btnNavTicket);
 
-            btnNavAccount = res.createBtnIconOnly(res.iconAccount);
+            btnNavAccount = res.createBtnIconOnly(res.iconAccount,30,30);
             add(btnNavAccount);
 
-            btnNavLogout = res.createBtnIconOnly(res.iconLogout);
+            btnNavLogout = res.createBtnIconOnly(res.iconLogout,30,30);
             add(btnNavLogout);
 
             this.setPreferredSize(new Dimension(60, 800));
