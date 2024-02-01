@@ -142,9 +142,12 @@ public class Resources {
         return button;
     }
 
-    public JButton createBtnIconOnly(ImageIcon icon) {
+    public JButton createBtnIconOnly(ImageIcon icon, int width, int height) {
+        Image img = icon.getImage();
+        Image scaledImg = img.getScaledInstance(width,height,Image.SCALE_SMOOTH);
+
         JButton button = new JButton();
-        button.setIcon(icon);
+        button.setIcon(new ImageIcon(scaledImg));
         button.setOpaque(false);
         button.setContentAreaFilled(false);
         button.setBorderPainted(false);
