@@ -86,6 +86,7 @@ public class ReservationPage extends JFrame {
 
         this.setContentPane(contentArea);
         this.setLocationRelativeTo(null);
+        this.pack();
         this.setSize(1300,800);
         this.setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -97,10 +98,13 @@ public class ReservationPage extends JFrame {
             setBackground(res.celadon);
             setLayout(new FlowLayout(FlowLayout.LEFT));
 
-            btnNavMenu = res.createBtnIconOnly(res.logoParcs, 20,20);
+            btnNavMenu = res.createBtnIconOnly(res.logoParcs, 40,30);
             add(btnNavMenu);
 
-            this.setPreferredSize(new Dimension(1300, 40));
+            lblLocation = res.createLblH3("Home", res.white);
+            add(lblLocation);
+
+            this.setPreferredSize(new Dimension(1300, 50));
         }
     }
 
