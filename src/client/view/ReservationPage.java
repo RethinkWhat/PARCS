@@ -89,6 +89,7 @@ public class ReservationPage extends JFrame {
         pnlMain.add(pnlMainBottom, BorderLayout.SOUTH);
 
         this.setContentPane(contentArea);
+        this.pack();
         this.setLocationRelativeTo(null);
         this.pack();
         this.setSize(1300,800);

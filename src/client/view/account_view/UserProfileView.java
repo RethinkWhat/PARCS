@@ -34,6 +34,7 @@ public class UserProfileView extends JFrame {
 
         cardLayout.show(mainPanel, "editProfile");
 
+        this.pack();
         this.setLocationRelativeTo(null);
         this.setSize(950,560);
         this.setResizable(false);
