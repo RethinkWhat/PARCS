@@ -28,6 +28,8 @@ public class ServerStatusView extends JFrame {
     private JLabel lblName;
     private JLabel lblDate;
 
+    private JLabel lblLocation;
+
 
     Resources res = new Resources();
 
@@ -83,6 +85,9 @@ public class ServerStatusView extends JFrame {
             btnNavMenu = res.createBtnIconOnly(res.logoParcs, 20, 20);
             add(btnNavMenu);
 
+            lblLocation = res.createLblH3("Home", res.white);
+            add(lblLocation);
+
 
             this.setPreferredSize(new Dimension(1300, 40));
 
@@ -95,15 +100,19 @@ public class ServerStatusView extends JFrame {
             setBackground(res.feldgrau);
 
             btnNavHome = res.createBtnIconOnly(res.iconHome,30,30);
+            btnNavHome.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavHome);
 
             btnNavTicket = res.createBtnIconOnly(res.iconTicket,30,30);
+            btnNavTicket.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavTicket);
 
             btnNavAccount = res.createBtnIconOnly(res.iconAccount,30,30);
+            btnNavAccount.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavAccount);
 
             btnNavLogout = res.createBtnIconOnly(res.iconLogout,30,30);
+            btnNavLogout.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavLogout);
 
             this.setPreferredSize(new Dimension(60,800));
@@ -116,6 +125,12 @@ public class ServerStatusView extends JFrame {
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
 
+            JPanel pnlInformation = new JPanel(new GridBagLayout());
+            pnlInformation.setPreferredSize(new Dimension(1300,50));
+            add(pnlInformation, BorderLayout.NORTH);
+            pnlInformation.setBackground(res.lightGray);
+
+            gbc = new GridBagConstraints();
 
             String userFirstName = "Ramon Emmiel";
             lblName = new JLabel("Hello, " + userFirstName);
