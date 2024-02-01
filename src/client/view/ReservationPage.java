@@ -174,7 +174,7 @@ public class ReservationPage extends JFrame {
 
             JPanel pnlButtons = new JPanel(new GridLayout(0,3));
             pnlButtons.setPreferredSize(new Dimension(1300,100));
-            pnlButtons.setBorder(new EmptyBorder(5,0,5,0));
+            pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
             pnlButtons.setBackground(res.lightGray);
             add(pnlButtons, BorderLayout.SOUTH);
 
