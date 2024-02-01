@@ -4,13 +4,34 @@ import server.model.Server;
 import utilities.Resources;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ReservationsView extends JFrame {
+
+    private JButton btnNavMenu;
+    private JButton btnNavHome;
+    private JButton btnNavAccount;
+    private JButton btnNavLogout;
+    private JButton btnAvailCar;
+    private JButton btnAvailMotor;
+    private JButton btnTotalBookings;
+
+    private JTextField txtSearchBar;
+
+    private JLabel lblName;
+    private JLabel lblDate;
 
     Resources res = new Resources();
 
     public ReservationsView(){
         super("Dashboard");
+
+        Container contentArea = new JPanel(new BorderLayout());
+
+        HeaderPanel pnlHeader = new HeaderPanel();
+        contentArea.add(pnlHeader, BorderLayout.NORTH);
+
+
 
         this.setLocationRelativeTo(null);
         this.setSize(950,560);
