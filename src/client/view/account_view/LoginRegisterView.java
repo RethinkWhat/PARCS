@@ -4,12 +4,11 @@ import utilities.Resources;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionListener;
 
 /**
  * TODO: Documentation
  */
-public class RegisterView extends JFrame {
+public class LoginRegisterView extends JFrame {
     /**
      * Username text field
      */
@@ -40,7 +39,7 @@ public class RegisterView extends JFrame {
     /**
      * Constructs a RegisterView frame
      */
-    public RegisterView() {
+    public LoginRegisterView() {
         super("PARCS");
 
         // Body panel acting as a container to hold all UI components
@@ -134,7 +133,7 @@ public class RegisterView extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new RegisterView();
+                new LoginRegisterView();
             }
         });
     }
