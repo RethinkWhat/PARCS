@@ -7,6 +7,19 @@ import javax.swing.*;
 
 public class ReservationsView extends JFrame {
 
+    private JButton btnNavMenu;
+    private JButton btnNavHome;
+    private JButton btnNavAccount;
+    private JButton btnNavLogout;
+    private JButton btnAvailCar;
+    private JButton btnAvailMotor;
+    private JButton btnTotalBookings;
+
+    private JTextField txtSearchBar;
+
+    private JLabel lblName;
+    private JLabel lblDate;
+
     Resources res = new Resources();
 
     public ReservationsView(){
