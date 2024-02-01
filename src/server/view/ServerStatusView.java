@@ -14,6 +14,7 @@ public class ServerStatusView extends JFrame {
 
     private JButton btnNavMenu;
     private JButton btnNavHome;
+    private JButton btnNavTicket;
     private JButton btnNavAccount;
     private JButton btnNavLogout;
     private JButton btnAvailCar;
@@ -41,6 +42,9 @@ public class ServerStatusView extends JFrame {
         HeaderPanel pnlHeader = new HeaderPanel();
         contentArea.add(pnlHeader, BorderLayout.NORTH);
 
+        NavbarPanel pnlNavbar = new NavbarPanel();
+        contentArea.add(pnlNavbar,BorderLayout.WEST);
+
 
         JPanel pnlMain = new JPanel(new BorderLayout());
         pnlMain.setPreferredSize(new Dimension(1100,700));
@@ -55,22 +59,6 @@ public class ServerStatusView extends JFrame {
 
         MainBottomPanel pnlMainBottom = new MainBottomPanel();
         pnlMain.add(pnlMainBottom, BorderLayout.SOUTH);
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
         this.setContentPane(contentArea);
@@ -99,6 +87,26 @@ public class ServerStatusView extends JFrame {
             this.setPreferredSize(new Dimension(1300, 40));
 
 
+        }
+    }
+
+    class NavbarPanel extends JPanel{
+        public NavbarPanel(){
+            setBackground(res.feldgrau);
+
+            btnNavHome = res.createBtnIconOnly(res.iconHome,30,30);
+            add(btnNavHome);
+
+            btnNavTicket = res.createBtnIconOnly(res.iconTicket,30,30);
+            add(btnNavTicket);
+
+            btnNavAccount = res.createBtnIconOnly(res.iconAccount,30,30);
+            add(btnNavAccount);
+
+            btnNavLogout = res.createBtnIconOnly(res.iconLogout,30,30);
+            add(btnNavLogout);
+
+            this.setPreferredSize(new Dimension(60,800));
         }
     }
 
@@ -146,7 +154,7 @@ public class ServerStatusView extends JFrame {
 
 
     public static void main(String[] args) {
-        new ReservationsView();
+        new ServerStatusView();
     }
 }
 
