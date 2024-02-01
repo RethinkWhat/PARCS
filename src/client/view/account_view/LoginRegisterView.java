@@ -121,6 +121,7 @@ public class LoginRegisterView extends JFrame {
         pnlButtons.add(btnLogin);
 
         this.setContentPane(contentArea);
+        this.pack();
         this.setLocationRelativeTo(null);
         this.setSize(950,560);
         this.setResizable(false);

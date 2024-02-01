@@ -78,6 +78,7 @@ public class VehicleAdderView extends JFrame {
         pnlButtons.add(btnCancel);
 
         this.setContentPane(contentPane);
+        this.pack();
         this.setLocationRelativeTo(null);
         this.setSize(600,400);
         this.setResizable(false);
