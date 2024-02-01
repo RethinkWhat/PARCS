@@ -4,6 +4,7 @@ import server.model.Server;
 import utilities.Resources;
 
 import javax.swing.*;
+import java.awt.*;
 
 public class ReservationsView extends JFrame {
 
@@ -24,6 +25,13 @@ public class ReservationsView extends JFrame {
 
     public ReservationsView(){
         super("Dashboard");
+
+        Container contentArea = new JPanel(new BorderLayout());
+
+        HeaderPanel pnlHeader = new HeaderPanel();
+        contentArea.add(pnlHeader, BorderLayout.NORTH);
+
+
 
         this.setLocationRelativeTo(null);
         this.setSize(950,560);
