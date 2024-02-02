@@ -32,7 +32,7 @@ public class UserProfileView extends JFrame {
         this.add(new ProfileOptionsPanel());
 
 
-        cardLayout.show(mainPanel, "editProfile");
+        cardLayout.show(mainPanel, "editCars");
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -62,37 +62,42 @@ public class UserProfileView extends JFrame {
             profileJLabel.setBounds(75, 25, 100, 100);
             this.add(profileJLabel);
 
-            JPanel buttonsPanel = new JPanel(new GridLayout(5, 2));
+            JPanel buttonsPanel = new JPanel(new GridLayout(5, 1));
             buttonsPanel.setBackground(res.white);
             buttonsPanel.setBounds(50, 150, 150, 300);
             this.add(buttonsPanel);
 
             ImageIcon editProfile = new ImageIcon("res/drawable/icons/edit.png");
-            JLabel editProfileLabel = res.createLblP("Edit Profile", res.gray);
+            JButton editProfileLabel = res.createBtnTxtOnly("Edit Profile", res.gray);
+            editProfileLabel.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editProfileResized = new ImageIcon(editProfile.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             editProfileLabel.setIcon(editProfileResized);
             buttonsPanel.add(editProfileLabel);
 
             ImageIcon editCars = new ImageIcon("res/drawable/icons/edit-cars.png");
-            JLabel editCarsLabel = res.createLblP("Edit Cars", res.gray);
+            JButton editCarsLabel = res.createBtnTxtOnly("Edit Cars", res.gray);
+            editCarsLabel.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editCarsResized = new ImageIcon(editCars.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             editCarsLabel.setIcon(editCarsResized);
             buttonsPanel.add(editCarsLabel);
 
             ImageIcon security = new ImageIcon("res/drawable/icons/security.png");
-            JLabel securityLabel = res.createLblP("Security", res.gray);
+            JButton securityLabel = res.createBtnTxtOnly("Security", res.gray);
+            securityLabel.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon securityResized = new ImageIcon(security.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             securityLabel.setIcon(securityResized);
             buttonsPanel.add(securityLabel);
 
             ImageIcon helpIcon = new ImageIcon("res/drawable/icons/help.png");
-            JLabel helpLabel = res.createLblP("Help", res.gray);
+            JButton helpLabel = res.createBtnTxtOnly("Help", res.gray);
+            helpLabel.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon helpResized = new ImageIcon(helpIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             helpLabel.setIcon(helpResized);
             buttonsPanel.add(helpLabel);
 
             ImageIcon exitIcon = new ImageIcon("res/drawable/icons/exit-grey-outline.png");
-            JLabel exitLabel = res.createLblP("Logout", res.gray);
+            JButton exitLabel = res.createBtnTxtOnly("Logout", res.gray);
+            exitLabel.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon exitResized = new ImageIcon(exitIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             exitLabel.setIcon(exitResized);
             buttonsPanel.add(exitLabel);
@@ -163,20 +168,114 @@ public class UserProfileView extends JFrame {
             continueButton.setPreferredSize(new Dimension(130,40));
             buttonsPanel.add(continueButton);
             this.add(buttonsPanel);
-
-
-
         }
     }
 
     class EditCars extends JPanel {
         public EditCars() {
             this.setBounds(220,0,750,560);
-            this.setBackground(res.feldgrau);
             this.setVisible(true);
+            this.setLayout(new GridBagLayout());
+
+            gbc.gridy=0;
+            gbc.anchor = GridBagConstraints.WEST;
             JLabel editProfile = res.createLblH1("Edit Cars", res.eerieBlack);
-            this.add(editProfile);
+            editProfile.setBorder(new EmptyBorder(30,20,0,0));
+            this.add(editProfile,gbc);
+
+            gbc.gridy=1;
+            gbc.anchor = GridBagConstraints.WEST;
+
+            JPanel carPanel1 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
+            JPanel carPanel2 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
+            this.add(carPanel1,gbc);
+            this.add(carPanel2,gbc);
+
+            JPanel carPanel3 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
+            JPanel carPanel4 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
+            gbc.gridy=2;
+            gbc.insets = new Insets(20,30,0,30);
+            this.add(carPanel3,gbc);
+            this.add(carPanel4,gbc);
+
+            gbc.gridy=5;
+            gbc.gridx = 1;
+            JButton btnBack = new JButton();
+            ImageIcon backIcon = new ImageIcon("res/drawable/icons/forward.png");
+            btnBack.setBorder(new EmptyBorder(0,0,0,20));
+            ImageIcon resizedBackIcon = new ImageIcon(backIcon.getImage().getScaledInstance(20,20, Image.SCALE_SMOOTH));
+            btnBack.setIcon(resizedBackIcon);
+            this.add(btnBack,gbc);
+
+
             this.setVisible(true);
+        }
+
+        public JPanel createCarsLayout(String plateNumber, String vehicleType, String model){//String PlateNumber, String vehicle, String model){
+            JPanel pnlCarInformation = res.createPnlRounded(290,150, res.feldgrau, res.gray);
+            //pnlCarInformation.setBackground(res.feldgrau);
+            pnlCarInformation.setLayout(new GridBagLayout());
+
+            JPanel innerContent = new JPanel(new GridBagLayout());
+            innerContent.setBackground(res.feldgrau);
+            //innerContent.setBackground(res.feldgrau);
+
+
+            gbc = new GridBagConstraints();
+            gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.WEST;
+
+            gbc.insets = new Insets(0,20,0,0);
+            JLabel lblPlateNumber = res.createLblP("Plate Number",res.eerieBlack);
+            lblPlateNumber.setMaximumSize(new Dimension(150,20));
+            innerContent.add(lblPlateNumber,gbc);
+
+            gbc.gridy = 1;
+            JLabel lblPlateNumberInfo = res.createLblP2(plateNumber, res.white);
+            lblPlateNumberInfo.setMaximumSize(new Dimension(150,30));
+            innerContent.add(lblPlateNumberInfo,gbc);
+
+            gbc.gridy = 2;
+            JLabel lblEmpty = new JLabel(" ");
+            innerContent.add(lblEmpty,gbc);
+
+            gbc.gridy = 3;
+            gbc.anchor = GridBagConstraints.WEST;
+            JLabel lblVehicle = res.createLblP("Vehicle",res.eerieBlack);
+            lblVehicle.setMaximumSize(new Dimension(120,12));
+            innerContent.add(lblVehicle,gbc);
+
+            gbc.gridy = 3;
+            gbc.anchor = GridBagConstraints.EAST;
+            gbc.insets = new Insets(0,0,0,20);
+            JLabel lblModel = res.createLblP("Model",res.eerieBlack);
+            lblModel.setMaximumSize(new Dimension(110,12));
+            innerContent.add(lblModel,gbc);
+
+            gbc.insets = new Insets(0,20,0,0);
+            gbc.gridy = 4;
+            gbc.anchor = GridBagConstraints.WEST;
+            JLabel lblVehicleInfo = res.createLblP(vehicleType,res.white);
+            lblVehicleInfo.setMaximumSize(new Dimension(95,12));
+            innerContent.add(lblVehicleInfo,gbc);
+
+
+            gbc.insets = new Insets(0,0,0,20);
+            gbc.gridy = 4;
+            gbc.anchor = GridBagConstraints.EAST;
+            JLabel lblModelInfo = res.createLblP(model,res.white);
+            lblModelInfo.setMaximumSize(new Dimension(100,20));
+            innerContent.add(lblModelInfo,gbc);
+
+
+
+
+
+
+            gbc.insets = new Insets(20,30,20,30);
+            pnlCarInformation.add(innerContent);
+
+            return pnlCarInformation;
         }
     }
 
