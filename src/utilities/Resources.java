@@ -142,6 +142,21 @@ public class Resources {
         return label;
     }
 
+    /**
+     * Creates a new JLabel with a specified text and color.
+     * The JLabel is a paragraph.
+     * @param text The specified text.
+     * @param color The specified color.
+     * @return JLabel with specified text and color in a paragraph format.
+     */
+    public JLabel createLblP2(String text, Color color) {
+        JLabel label = new JLabel(text);
+        label.setFont(new Font("Arial", Font.PLAIN, 20));
+        label.setForeground(color);
+        return label;
+    }
+
+
     public JButton createBtnTxtOnly(String text, Color color) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 15));
@@ -251,6 +266,27 @@ public class Resources {
         textField.setForeground(foreground);
         textField.setFont(new Font("Arial",Font.PLAIN,16));
         return textField;
+    }
+
+    public JPanel createPnlRounded(int width, int height, Color pnlColor, Color bgColor) {
+        JPanel panel = new JPanel() {
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+                Dimension arcs = new Dimension(30, 30);
+                Graphics2D graphics = (Graphics2D) g;
+                graphics.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+
+                //Draws the rounded panel with borders.
+                graphics.setColor(pnlColor);
+                graphics.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, arcs.width, arcs.height);
+                graphics.setColor(bgColor);
+            }
+        };
+
+        panel.setPreferredSize(new Dimension(width,height));
+        return panel;
     }
 
     /**
