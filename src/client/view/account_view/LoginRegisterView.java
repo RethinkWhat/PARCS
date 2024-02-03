@@ -39,6 +39,10 @@ public class LoginRegisterView extends JFrame {
      */
     private JCheckBox chkShowPassword;
     /**
+     * The button to return to the login page from the signup page.
+     */
+    private JButton btnBack;
+    /**
      * The button to log the user in the system.
      */
     private JButton btnLogin;
@@ -53,7 +57,7 @@ public class LoginRegisterView extends JFrame {
     /**
      * Instance variable of resources to invoke stylesheet and UI resources.
      */
-    private Resources res = new Resources();
+    private final Resources res = new Resources();
     /**
      * The GridBagConstraints to position components using GridBagLayout.
      */
@@ -185,13 +189,19 @@ public class LoginRegisterView extends JFrame {
 
             gbc = new GridBagConstraints();
 
-            gbc.gridx = 0;
-            gbc.gridy = 1;
-            gbc.gridwidth = 3;
-            gbc.ipady = 40;
             gbc.fill = GridBagConstraints.BOTH;
             gbc.anchor = GridBagConstraints.CENTER;
             gbc.insets = new Insets(5,5,5,5);
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 1;
+            btnBack = res.createBtnIconOnly(res.iconLeftArrow,30,30);
+            add(btnBack, gbc);
+
+            gbc.gridy = 1;
+            gbc.ipady = 40;
+            gbc.gridwidth = 3;
             JLabel lblTitle = res.createLblH1("Sign Up", res.eerieBlack);
             lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
             add(lblTitle, gbc);
