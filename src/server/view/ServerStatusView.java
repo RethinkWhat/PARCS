@@ -83,14 +83,14 @@ public class ServerStatusView extends JFrame {
             setLayout(new FlowLayout(FlowLayout.LEFT));
 
 
-            btnNavMenu = res.createBtnIconOnly(res.logoParcs, 20, 20);
+            btnNavMenu = res.createBtnIconOnly(res.logoParcs, 40, 30);
             add(btnNavMenu);
 
             lblLocation = res.createLblH3("Home", res.white);
             add(lblLocation);
 
 
-            this.setPreferredSize(new Dimension(1300, 40));
+            this.setPreferredSize(new Dimension(1300, 50));
 
 
         }
@@ -136,21 +136,36 @@ public class ServerStatusView extends JFrame {
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.gridwidth = 1;
+            gbc.ipadx = 475;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.anchor = GridBagConstraints.WEST;
 
             String userFirstName = "Ramon Emmiel";
-            lblName = new JLabel("Hello, " + userFirstName);
-            add(lblName);
+            lblName = res.createLblH2("Hello, " + userFirstName + "!", res.eerieBlack);
+            pnlInformation.add(lblName,gbc);
 
+            gbc.gridy = 0;
+            gbc.gridwidth = 3;
+            String date = "February 1, 2023 | Thursday 8:41 PM";
+            lblDate = res.createLblH4(date, res.eerieBlack);
+            pnlInformation.add(lblDate,gbc);
+
+            gbc.gridy = 0;
+            gbc.gridx = 1;
+            gbc.gridwidth = 5;
+            gbc.anchor = GridBagConstraints.EAST;
+            gbc.fill = GridBagConstraints.BOTH;
+            txtSearchBar = res.createTxtRounded("Search date", res.white, res.gray,30);
+            pnlInformation.add(txtSearchBar,gbc);
 
             JPanel pnlButtons = new JPanel(new GridLayout(0,3));
+            pnlButtons.setPreferredSize(new Dimension(1300,100));
+            pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
             pnlButtons.setBackground(res.lightGray);
             add(pnlButtons, BorderLayout.SOUTH);
 
 
-            JPanel pnlAvailCar = new JPanel();
-            pnlAvailCar.setBackground(res.white);
-            pnlButtons.add(pnlAvailCar);
-
+            Button pnlAvailCar = new
 
             this.setPreferredSize(new Dimension(1300,300));
         }
@@ -165,6 +180,12 @@ public class ServerStatusView extends JFrame {
 
 
             setPreferredSize(new Dimension(1300,500));
+        }
+    }
+
+    class ButtonPanel extends JPanel{
+        public ButtonPanel(JButton button, JLabel number, JLabel title){
+
         }
     }
 
