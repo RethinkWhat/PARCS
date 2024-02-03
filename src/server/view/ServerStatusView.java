@@ -143,7 +143,7 @@ public class ServerStatusView extends JFrame {
 
             gbc.gridy = 1;
             gbc.gridwidth = 3;
-            String date = "February 1, 2023 | Thursday 8:41 PM";
+            String date = "February 1, 2024 | Thursday 8:41 PM";
             lblDate = res.createLblH4(date, res.eerieBlack);
             pnlInformation.add(lblDate,gbc);
 
