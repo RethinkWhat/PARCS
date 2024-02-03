@@ -2,6 +2,7 @@ package server.model;
 
 import org.w3c.dom.*;
 import org.xml.sax.SAXException;
+import utilities.User;
 
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
