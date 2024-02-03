@@ -1,4 +1,20 @@
 package client.model;
 
-public class Client {
+import client.LoginRegisterApp;
+import client.controller.LoginRegisterController;
+
+import java.net.ServerSocket;
+import java.net.Socket;
+
+public class Client implements Runnable {
+
+    private Socket client;
+    public Client(ServerSocket server) throws Exception{
+        this.client = server.accept();
+    }
+
+    @Override
+    public void run() {
+        new LoginRegisterApp().run();
+    }
 }
