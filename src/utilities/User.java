@@ -1,6 +1,4 @@
-package server.model;
-
-import server.model.Vehicle;
+package utilities;
 
 import java.util.ArrayList;
 import java.util.List;
