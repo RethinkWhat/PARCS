@@ -16,7 +16,7 @@ public class UserProfileController {
 
         gui.btnEditProfile.addActionListener(new editProfile());
         gui.btnEditCars.addActionListener(new editCars());
-        gui.btnExit.addActionListener(new exit());
+        // gui.btnExit.addActionListener(new exit());
 
     }
 
@@ -34,6 +34,7 @@ public class UserProfileController {
         }
     }
 
+    /*
     public class exit implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -41,6 +42,7 @@ public class UserProfileController {
             loginObj.run();
         }
     }
+    */
 
     public static void main(String[] args) {
         UserProfileController obj = new UserProfileController(new UserProfileView(),
