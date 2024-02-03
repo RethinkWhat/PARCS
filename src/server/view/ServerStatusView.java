@@ -1,9 +1,6 @@
 package server.view;
 
-import server.model.Server;
 import utilities.Resources;
-
-
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
@@ -66,6 +63,7 @@ public class ServerStatusView extends JFrame {
 
         this.setContentPane(contentArea);
         this.setLocationRelativeTo(null);
+        this.pack();
         this.setSize(1300,800);
         this.setResizable(false);
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -139,12 +137,11 @@ public class ServerStatusView extends JFrame {
             gbc.ipadx = 475;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.anchor = GridBagConstraints.WEST;
-
             String userFirstName = "Ramon Emmiel";
             lblName = res.createLblH2("Hello, " + userFirstName + "!", res.eerieBlack);
             pnlInformation.add(lblName,gbc);
 
-            gbc.gridy = 0;
+            gbc.gridy = 1;
             gbc.gridwidth = 3;
             String date = "February 1, 2023 | Thursday 8:41 PM";
             lblDate = res.createLblH4(date, res.eerieBlack);
@@ -165,9 +162,28 @@ public class ServerStatusView extends JFrame {
             add(pnlButtons, BorderLayout.SOUTH);
 
 
-            Button pnlAvailCar = new
+            ButtonPanel pnlAvailCar = new ButtonPanel(
+                    btnAvailCar = res.createBtnIconOnly(res.iconSolidCar,50,50),
+                    res.createLblH1("13",res.eerieBlack),
+                    res.createLblP("Available Car Slots", res. eerieBlack)
+            );
+            pnlButtons.add(pnlAvailCar);
 
-            this.setPreferredSize(new Dimension(1300,300));
+            ButtonPanel pnlAvailMotor = new ButtonPanel(
+                    btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor,50,50),
+                    res.createLblH1("10", res.eerieBlack),
+                    res.createLblP("Available Motor Slots", res.eerieBlack)
+            );
+            pnlButtons.add(pnlAvailMotor);
+
+            ButtonPanel pnlTotalBookings = new ButtonPanel(
+                    btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket,50,50),
+                    res.createLblH1("3",res.eerieBlack),
+                    res.createLblP("Your Total Bookings", res.eerieBlack)
+            );
+            add(pnlTotalBookings);
+
+            this.setPreferredSize(new Dimension(1300,150));
         }
     }
 
@@ -185,7 +201,23 @@ public class ServerStatusView extends JFrame {
 
     class ButtonPanel extends JPanel{
         public ButtonPanel(JButton button, JLabel number, JLabel title){
+            setBackground(res.white);
+            setLayout(new GridLayout());
 
+            gbc = new GridBagConstraints();
+            gbc.insets = new Insets(5,5,5,5);
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            add(button,gbc);
+
+            gbc.gridx = 1;
+            add(number,gbc);
+
+            gbc.gridx = 2;
+            add(title,gbc);
+
+            this.setPreferredSize(new Dimension(200,100));
         }
     }
 
