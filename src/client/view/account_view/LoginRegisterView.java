@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
  */
 public class LoginRegisterView extends JFrame {
     /**
+     * The panel that holds different component panels.
+     */
+    private JPanel pnlCards;
+    /**
      * The text field for the user's first name.
      */
     private JTextField txtFirstName;
@@ -65,7 +69,7 @@ public class LoginRegisterView extends JFrame {
     /**
      * Control components of the Container by switching panels.
      */
-    public CardLayout cardLayout = new CardLayout();
+    private CardLayout cardLayout = new CardLayout();
 
     /**
      * Constructs a RegisterView frame.
@@ -75,7 +79,7 @@ public class LoginRegisterView extends JFrame {
 
         // Body panel acting as a container to hold all UI components
         Container contentArea = new JPanel(new BorderLayout());
-        JPanel pnlCards = new JPanel(cardLayout);
+        pnlCards = new JPanel(cardLayout);
 
         JPanel pnlLogin = new LoginPanel();
         pnlCards.add(pnlLogin, "login");
@@ -264,11 +268,107 @@ public class LoginRegisterView extends JFrame {
         });
     }
 
+    /**
+     * Sets a specified action listener for btnLogin.
+     * @param loginListener The specified action listener.
+     */
+    public void setLoginListener(ActionListener loginListener) {
+        btnLogin.addActionListener(loginListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnSignup.
+     * @param signupListener The specified action listener.
+     */
     public void setSignupListener(ActionListener signupListener) {
         btnSignup.addActionListener(signupListener);
     }
 
+    /**
+     * Sets a specified action listener for btnCreateAccount.
+     * @param createAccountListener The specified action listener.
+     */
+    public void setCreateAccountListener(ActionListener createAccountListener) {
+        btnCreateAccount.addActionListener(createAccountListener);
+    }
+
+    /**
+     * Sets a specified action listener for chkShowPassword.
+     * @param actionListener The specified action listener.
+     */
     public void setShowPasswordListener(ActionListener actionListener) {
         chkShowPassword.addActionListener(actionListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnBack.
+     * @param backListener The specified action listener.
+     */
+    public void setBackListener(ActionListener backListener) {
+        btnBack.addActionListener(backListener);
+    }
+
+    public String getUsername() {
+        return txtUsername.getText();
+    }
+
+    public String getFirstName() {
+        return txtFirstName.getText();
+    }
+
+    public String getLastName() {
+        return txtLastName.getText();
+    }
+
+    public JPanel getPnlCards() {
+        return pnlCards;
+    }
+
+    public JTextField getTxtFirstName() {
+        return txtFirstName;
+    }
+
+    public JTextField getTxtLastName() {
+        return txtLastName;
+    }
+
+    public JTextField getTxtUsername() {
+        return txtUsername;
+    }
+
+    public JTextField getTxtPhoneNo() {
+        return txtPhoneNo;
+    }
+
+    public JPasswordField getTxtPassword() {
+        return txtPassword;
+    }
+
+    public JPasswordField getTxtConfirmPassword() {
+        return txtConfirmPassword;
+    }
+
+    public JCheckBox getChkShowPassword() {
+        return chkShowPassword;
+    }
+
+    public JButton getBtnBack() {
+        return btnBack;
+    }
+
+    public JButton getBtnLogin() {
+        return btnLogin;
+    }
+
+    public JButton getBtnSignup() {
+        return btnSignup;
+    }
+
+    public JButton getBtnCreateAccount() {
+        return btnCreateAccount;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
     }
 }
