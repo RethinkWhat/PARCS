@@ -27,8 +27,9 @@ public class ServerStatusView extends JFrame {
 
     private JLabel lblName;
     private JLabel lblDate;
-
     private JLabel lblLocation;
+
+    private GridBagConstraints gbc;
 
 
     Resources res = new Resources();
@@ -131,6 +132,10 @@ public class ServerStatusView extends JFrame {
             pnlInformation.setBackground(res.lightGray);
 
             gbc = new GridBagConstraints();
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 1;
 
             String userFirstName = "Ramon Emmiel";
             lblName = new JLabel("Hello, " + userFirstName);
