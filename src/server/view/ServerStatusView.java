@@ -181,7 +181,7 @@ public class ServerStatusView extends JFrame {
                     res.createLblH1("3",res.eerieBlack),
                     res.createLblP("Your Total Bookings", res.eerieBlack)
             );
-            add(pnlTotalBookings);
+            pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
         }
@@ -195,7 +195,7 @@ public class ServerStatusView extends JFrame {
             setBorder(new Resources.RoundedBorder(20));
 
 
-            setPreferredSize(new Dimension(1300,500));
+            setPreferredSize(new Dimension(1300,650));
         }
     }
 
