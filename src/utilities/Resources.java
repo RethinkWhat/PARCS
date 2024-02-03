@@ -60,17 +60,27 @@ public class Resources {
      */
     public ImageIcon iconLogout = new ImageIcon("res/drawable/icons/exit-white-outline.png");
     /**
-     * TODO: Documentation
+     * The icon for the available car slots panel.
      */
     public ImageIcon iconSolidCar = new ImageIcon("res/drawable/icons/car-black-outline.png");
     /**
-     * TODO: Documentation
+     * The icon for the available motorcycle slots panel.
      */
     public ImageIcon iconSolidMotor = new ImageIcon("motorcycle-black-solid.png");
     /**
-     * TODO: Documentation
+     * The icon for the total bookings of the user panel.
      */
     public ImageIcon iconSolidTicket = new ImageIcon("res/drawable/icons/ticket-black-solid.png");
+    /**
+     * The icon for navigation (forward).
+     */
+    public ImageIcon iconRightArrow = new ImageIcon("res/drawable/icons/arrow-right.png");
+    /**
+     * The icon for navigation (beck).
+     */
+    public ImageIcon iconLeftArrow = new ImageIcon("res/drawable/icons/arrow-left.png");
+
+
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h1).
@@ -197,7 +207,6 @@ public class Resources {
         button.setBorder(new RoundedBorder(radius));
         button.setVerticalTextPosition(SwingConstants.CENTER);
         button.setHorizontalAlignment(SwingConstants.CENTER);
-        button.setContentAreaFilled(true);
         button.setBorderPainted(true);
         return button;
     }
@@ -419,4 +428,6 @@ public class Resources {
 
         return resizedImg;
     }
+
+
 }
