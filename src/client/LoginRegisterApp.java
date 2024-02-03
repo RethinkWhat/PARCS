@@ -8,6 +8,6 @@ public class LoginRegisterApp {
     public static void main(String[] args) {
         LoginRegisterModel model = new LoginRegisterModel();
         LoginRegisterView view = new LoginRegisterView();
-        LoginRegisterController controller = new LoginRegisterController(view, model);
+        new LoginRegisterController(view, model);
     }
 }
