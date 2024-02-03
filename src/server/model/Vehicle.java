@@ -1,6 +1,4 @@
-package utilities;
-
-import utilities.User;
+package server.model;
 
 /**
  * Template for a vehicle object.
