@@ -12,17 +12,14 @@ public class LoginRegisterModel {
      * True if logged in, false if otherwise.
      */
     private boolean status;
-    /**
-     * The user of the program -- new or existing.
-     */
-    private User user;
+
+    private String username;
 
     /**
      * Constructs a LoginRegisterModel with null values.
      */
     public LoginRegisterModel() {
         status = false;
-        user = null;
     }
 
     protected void createAccount() {
@@ -31,7 +28,6 @@ public class LoginRegisterModel {
     }
 
     protected void validateAccount() {
-        // checks if the user exists
-        // updates status accordingly
+        // sends login info to server
     }
 }

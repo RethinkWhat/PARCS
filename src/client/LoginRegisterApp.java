@@ -9,6 +9,6 @@ public class LoginRegisterApp implements Runnable{
     public void run() {
         LoginRegisterModel model = new LoginRegisterModel();
         LoginRegisterView view = new LoginRegisterView();
-        LoginRegisterController controller = new LoginRegisterController(view, model);
+        new LoginRegisterController(view, model);
     }
 }
