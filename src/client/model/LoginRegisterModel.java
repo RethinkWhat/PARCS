@@ -13,6 +13,8 @@ public class LoginRegisterModel {
      */
     private boolean status;
 
+    private String username;
+
     /**
      * Constructs a LoginRegisterModel with null values.
      */
