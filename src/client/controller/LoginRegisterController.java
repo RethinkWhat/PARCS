@@ -1,23 +1,40 @@
 package client.controller;
 
+import client.model.LoginRegisterModel;
 import client.view.account_view.LoginRegisterView;
 
 import javax.swing.*;
 
-public class LoginRegisterController implements Runnable{
+/**
+ * Template for LoginRegisterController.
+ */
+public class LoginRegisterController {
+    /**
+     * The view LoginRegisterView object.
+     */
+    private LoginRegisterView view;
+    /**
+     * The model LoginRegisterModel object.
+     */
+    private LoginRegisterModel model;
 
-    // Temporary main method to view and debug fra
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginRegisterView();
-            }
+    /**
+     * Constructs a LoginRegisterController with a specified view and model.
+     * @param view The specified LoginRegisterView.
+     * @param model The specified LoginRegisterModel.
+     */
+    public LoginRegisterController(LoginRegisterView view, LoginRegisterModel model) {
+        this.view = view;
+        this.model = model;
+
+        // btnSignup action listener
+        view.setSignupListener(e -> {
+            view.getCardLayout().show(view.getPnlCards(), "signup");
         });
-    }
 
-    @Override
-    public void run() {
-        new LoginRegisterView();
+        // btnBack action listener
+        view.setBackListener(e -> {
+            view.getCardLayout().show(view.getPnlCards(), "login");
+        });
     }
 }
