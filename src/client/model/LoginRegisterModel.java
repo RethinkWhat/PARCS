@@ -1,6 +1,6 @@
 package client.model;
 
-import utilities.User;
+import server.model.User;
 
 /**
  * Template for LoginRegisterModel.
