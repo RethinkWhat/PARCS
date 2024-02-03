@@ -15,33 +15,49 @@ public class LoginRegisterView extends JFrame {
      */
     private JPanel pnlCards;
     /**
-     * The text field for the user's first name.
+     * The text field for the user's first name in the signup page.
      */
     private JTextField txtFirstName;
     /**
-     * The text field for the user's last name.
+     * The text field for the user's last name in the signup page.
      */
     private JTextField txtLastName;
     /**
-     * The text field for the username.
+     * The text field for the username in the login page.
      */
     private JTextField txtUsername;
     /**
-     * The text field for the user's phone number.
+     * The text field for the username in the signup page.
+     */
+    private JTextField txtSignupUsername;
+    /**
+     * The text field for the user's phone number in the signup page.
      */
     private JTextField txtPhoneNo;
     /**
-     * The password field for the user's password.
+     * The password field for the user's password in the login page.
      */
     private JPasswordField txtPassword;
     /**
-     * The password field for the user's password confirmation.
+     * The password field for the user's password in the signup page.
+     */
+    private JPasswordField txtSignupPassword;
+    /**
+     * The password field for the user's password confirmation in the signup page.
      */
     private JPasswordField txtConfirmPassword;
     /**
-     * The checkbox to show password.
+     * The checkbox to show password in the login page.
      */
     private JCheckBox chkShowPassword;
+    /**
+     * The checkbox to show password in the signup page.
+     */
+    private JCheckBox chkShowSignupPassword;
+    /**
+     * The checkbox to show password confirmation in the signup page.
+     */
+    private JCheckBox chkShowConfirmPassword;
     /**
      * The button to return to the login page from the signup page.
      */
@@ -88,7 +104,7 @@ public class LoginRegisterView extends JFrame {
         pnlCards.add(pnlSignup, "signup");
 
         contentArea.add(pnlCards, BorderLayout.CENTER);
-        cardLayout.show(pnlCards, "signup");
+        cardLayout.show(pnlCards, "login");
 
         this.setContentPane(contentArea);
         this.pack();
@@ -148,7 +164,7 @@ public class LoginRegisterView extends JFrame {
 
             gbc.gridy = 4;
             txtPassword = res.createPwdRounded(res.lightGray, res.gray, 20);
-            txtPassword.setText("Password"); // Omit text when model is set up
+            txtPassword.setEchoChar((char)0);
             pnlRight.add(txtPassword, gbc);
 
             gbc.gridy = 7;
@@ -226,8 +242,8 @@ public class LoginRegisterView extends JFrame {
             gbc.gridx = 0;
             gbc.gridy = 4;
             gbc.gridwidth = 2;
-            txtUsername = res.createTxtRounded("Username", res.lightGray, res.gray, 20);
-            add(txtUsername, gbc);
+            txtSignupUsername = res.createTxtRounded("Username", res.lightGray, res.gray, 20);
+            add(txtSignupUsername, gbc);
 
             gbc.gridx = 2;
             gbc.gridwidth = 1;
@@ -237,35 +253,39 @@ public class LoginRegisterView extends JFrame {
             gbc.gridx = 0;
             gbc.gridy = 5;
             gbc.gridwidth = 100;
-            txtPassword = res.createPwdRounded(res.lightGray, res.gray, 35);
-            add(txtPassword, gbc);
+            txtSignupPassword = res.createPwdRounded(res.lightGray, res.gray, 35);
+            add(txtSignupPassword, gbc);
+
+            gbc.gridy = 6;
+            chkShowSignupPassword = new JCheckBox("Show Password");
+            chkShowSignupPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+            chkShowSignupPassword.setHorizontalAlignment(SwingConstants.LEFT);
+            chkShowSignupPassword.setBackground(res.white);
+            add(chkShowPassword, gbc);
 
             gbc.gridx = 0;
-            gbc.gridy = 6;
+            gbc.gridy = 7;
             txtConfirmPassword = res.createPwdRounded(res.lightGray, res.gray, 35);
             add(txtConfirmPassword, gbc);
 
-            gbc.gridy = 7;
+            gbc.gridy = 8;
+            chkShowConfirmPassword = new JCheckBox("Show Password");
+            chkShowConfirmPassword.setFont(new Font("Arial", Font.PLAIN, 14));
+            chkShowConfirmPassword.setHorizontalAlignment(SwingConstants.LEFT);
+            chkShowConfirmPassword.setBackground(res.white);
+            add(chkShowConfirmPassword, gbc);
+
+            gbc.gridy = 9;
             gbc.fill = GridBagConstraints.NONE;
             JLabel lblWrongPassword = res.createLblP("Passwords do not match. Try again", res.red);
             add(lblWrongPassword, gbc);
 
-            gbc.gridy = 8;
+            gbc.gridy = 10;
             btnCreateAccount = res.createBtnRounded("Create Account", res.celadon, res.eerieBlack, 10);
             add(btnCreateAccount, gbc);
 
             this.setPreferredSize(new Dimension(950,560));
         }
-    }
-
-    // Temporary main method to view and debug frame
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new LoginRegisterView();
-            }
-        });
     }
 
     /**
@@ -324,6 +344,10 @@ public class LoginRegisterView extends JFrame {
         return pnlCards;
     }
 
+    public JTextField getTxtSignupUsername() {
+        return txtSignupUsername;
+    }
+
     public JTextField getTxtFirstName() {
         return txtFirstName;
     }
@@ -342,6 +366,10 @@ public class LoginRegisterView extends JFrame {
 
     public JPasswordField getTxtPassword() {
         return txtPassword;
+    }
+
+    public JPasswordField getTxtSignupPassword() {
+        return txtSignupPassword;
     }
 
     public JPasswordField getTxtConfirmPassword() {
@@ -370,5 +398,13 @@ public class LoginRegisterView extends JFrame {
 
     public CardLayout getCardLayout() {
         return cardLayout;
+    }
+
+    public JCheckBox getChkShowSignupPassword() {
+        return chkShowSignupPassword;
+    }
+
+    public JCheckBox getChkShowConfirmPassword() {
+        return chkShowConfirmPassword;
     }
 }
