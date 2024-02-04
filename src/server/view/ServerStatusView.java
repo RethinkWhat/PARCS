@@ -206,6 +206,7 @@ public class ServerStatusView extends JFrame {
             serverSwitch.setAlignmentX(Component.CENTER_ALIGNMENT);
             serverSwitch.setForeground(res.eerieBlack);
             serverSwitch.setBackground(res.red);
+            add(serverSwitch,BorderLayout.SOUTH);
 
 
 
