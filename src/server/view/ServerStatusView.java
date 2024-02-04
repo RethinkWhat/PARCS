@@ -193,6 +193,20 @@ public class ServerStatusView extends JFrame {
             setBackground(res.white);
             setForeground(res.white);
             setBorder(new Resources.RoundedBorder(20));
+            setLayout(new BorderLayout());
+
+            //To be dynamically changed in the controller
+            JLabel serverStatus = new JLabel("Online");
+
+            JLabel serverPrompt = res.createLblH1("SERVER STATUS: " + serverStatus.getText(), res.eerieBlack);
+            serverPrompt.setHorizontalAlignment(SwingConstants.CENTER);
+            add(serverPrompt,BorderLayout.CENTER);
+
+            JButton serverSwitch = new JButton("Terminate Server");
+            serverSwitch.setAlignmentX(Component.CENTER_ALIGNMENT);
+            serverSwitch.setForeground(res.eerieBlack);
+            serverSwitch.setBackground(res.red);
+
 
 
             setPreferredSize(new Dimension(1300,650));
