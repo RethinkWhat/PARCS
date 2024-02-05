@@ -201,7 +201,7 @@ public class ReservationPage extends JFrame {
             ButtonPanel pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
                     res.createLblH1("3", res.eerieBlack),
-                    res.createLblP("<html>Your<br> Total Bookings</html>", res.eerieBlack)
+                    res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlTotalBookings);
 
@@ -210,6 +210,8 @@ public class ReservationPage extends JFrame {
     }
 
     class MainBottomPanel extends JPanel {
+        private JPanel panel;
+
         public MainBottomPanel() {
             setBackground(res.white);
             setForeground(res.white);
