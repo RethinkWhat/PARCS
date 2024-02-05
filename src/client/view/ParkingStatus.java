@@ -140,6 +140,36 @@ public class ParkingStatus extends JFrame {
 
             add(pnlSlotInformation);
 
+            // pnlReserve
+            JPanel pnlReserve = new JPanel(new GridBagLayout());
+            pnlReserve.setPreferredSize(new Dimension(1300, 100));
+            pnlReserve.setBackground(Color.white);
+
+            gbc = new GridBagConstraints();
+            gbc.insets = new Insets(5, 10, 5, 10); // Add space around components
+            gbc.anchor = GridBagConstraints.CENTER; // Center components horizontally
+
+            // Dropdown for Select Vehicle
+            JComboBox<String> vehicleDropdown = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
+            vehicleDropdown.setPreferredSize(new Dimension(200, 40));
+            vehicleDropdown.setFont(new Font("Arial", Font.BOLD, 16));
+            pnlReserve.add(vehicleDropdown, gbc);
+
+            // Dropdown for Select Time
+            JComboBox<String> timeDropdown = new JComboBox<>(new String[]{"Select Time:", "6:00", "10:00", "15:00", "20:00"});
+            timeDropdown.setPreferredSize(new Dimension(200, 40));
+            timeDropdown.setFont(new Font("Arial", Font.BOLD, 16));
+            gbc.gridx = 1;
+            pnlReserve.add(timeDropdown, gbc);
+
+            // Dropdown for Duration
+            JComboBox<String> durationDropdown = new JComboBox<>(new String[]{"Duration:", "1hr", "5hr", "10hr", "15hr", "19hr"});
+            durationDropdown.setPreferredSize(new Dimension(200, 40));
+            durationDropdown.setFont(new Font("Arial", Font.BOLD, 16));
+            gbc.gridx = 2;
+            pnlReserve.add(durationDropdown, gbc);
+
+
 
 
             this.setPreferredSize(new Dimension(1300,160));
