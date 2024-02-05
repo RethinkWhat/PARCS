@@ -1,4 +1,4 @@
-package client.view.application;//imported packages that help display items in graphical form
+package client.view.application_pages;//imported packages that help display items in graphical form
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
