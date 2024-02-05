@@ -1,7 +1,7 @@
-package client.controller.account;
+package client.controller;
 
-import client.model.account.LoginRegisterModel;
-import client.view.account.LoginRegisterView;
+import client.model.LoginRegisterModel;
+import client.view.LoginRegisterView;
 
 import javax.swing.*;
 import java.awt.*;
