@@ -173,7 +173,10 @@ public class ReservationPage extends JFrame {
             txtSearchbar = res.createTxtRounded("Search date",res.white,res.gray, 30);
             pnlInformation.add(txtSearchbar, gbc);
 
-            JPanel pnlButtons = new JPanel(new GridLayout(0,3));
+            GridLayout gridLayout = new GridLayout(0,3);
+            gridLayout.setHgap(10);
+
+            JPanel pnlButtons = new JPanel(gridLayout);
             pnlButtons.setPreferredSize(new Dimension(1300,100));
             pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
             pnlButtons.setBackground(res.lightGray);
@@ -200,7 +203,7 @@ public class ReservationPage extends JFrame {
                     res.createLblH1("3", res.eerieBlack),
                     res.createLblP("Your Total Bookings", res.eerieBlack)
             );
-            add(pnlTotalBookings);
+            pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
         }
@@ -237,7 +240,7 @@ public class ReservationPage extends JFrame {
             gbc.gridx = 2;
             add(title, gbc);
 
-            this.setPreferredSize(new Dimension(200, 100));
+            this.setPreferredSize(new Dimension(100, 100));
         }
     }
 
