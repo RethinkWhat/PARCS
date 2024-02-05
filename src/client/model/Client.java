@@ -1,20 +1,41 @@
 package client.model;
 
-import client.LoginRegisterApp;
 import client.controller.LoginRegisterController;
+import client.view.account_view.LoginRegisterView;
 
-import java.net.ServerSocket;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+
 import java.net.Socket;
 
 public class Client implements Runnable {
 
     private Socket client;
-    public Client(ServerSocket server) throws Exception{
-        this.client = server.accept();
+    public Client(Socket server) {
+        this.client = server;
     }
 
     @Override
     public void run() {
-        new LoginRegisterApp().run();
+        LoginRegisterModel model = new LoginRegisterModel();
+        LoginRegisterView view = new LoginRegisterView();
+        new LoginRegisterController(view, model);
     }
+
+    public static void main(String[] args) {
+
+        try {
+            Socket clientSocket = new Socket("localhost", 2020);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+
+            Client client = new Client(clientSocket);
+            new Thread(client).start();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
