@@ -1,4 +1,4 @@
-package client.view;
+package client.view.application;
 
 import utilities.Resources;
 
@@ -235,7 +235,7 @@ public class ReservationPage extends JFrame {
     }
 
     /**
-     * The panel that contains the
+     * The panel that contains the parking slots.
      */
     class MainBottomPanel extends JPanel {
         /**

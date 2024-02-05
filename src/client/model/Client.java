@@ -1,7 +1,6 @@
 package client.model;
 
 import client.LoginRegisterApp;
-import client.controller.LoginRegisterController;
 
 import java.net.ServerSocket;
 import java.net.Socket;

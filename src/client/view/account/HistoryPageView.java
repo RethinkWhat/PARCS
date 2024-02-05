@@ -1,4 +1,4 @@
-package client.view.account_view;
+package client.view.account;
 
 import utilities.Resources;
 
