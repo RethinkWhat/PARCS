@@ -1,5 +1,7 @@
 package client.model;
 
+import server.model.User;
+
 /**
  * Template for LoginRegisterModel.
  * TODO: Documentation (describe this class)
@@ -10,6 +12,8 @@ public class LoginRegisterModel {
      * True if logged in, false if otherwise.
      */
     private boolean status;
+
+    private String username;
 
     /**
      * Constructs a LoginRegisterModel with null values.

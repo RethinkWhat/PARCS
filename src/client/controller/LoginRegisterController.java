@@ -1,16 +1,23 @@
 package client.controller;
 
+import client.model.Client;
 import client.model.LoginRegisterModel;
 import client.view.LoginRegisterView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.io.IOException;
+import java.io.OutputStreamWriter;
+import java.io.PrintWriter;
+import java.net.Socket;
 
 /**
  * Template for LoginRegisterController.
  */
 public class LoginRegisterController {
+
+    private Client client;
     /**
      * The view LoginRegisterView object.
      */
@@ -26,12 +33,13 @@ public class LoginRegisterController {
      * @param view  The specified LoginRegisterView.
      * @param model The specified LoginRegisterModel.
      */
-    public LoginRegisterController(LoginRegisterView view, LoginRegisterModel model) {
+    public LoginRegisterController(Client client, LoginRegisterView view, LoginRegisterModel model) {
+        this.client = client;
         this.view = view;
         this.model = model;
 
         // action listeners
-        view.setLoginListener(e -> new LoginListener());
+        view.setLoginListener(new LoginListener());
         view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
         view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
         view.setShowPasswordListener(new ShowPasswordListener(view.getChkShowPassword(),view.getTxtPassword()));
@@ -70,7 +78,15 @@ public class LoginRegisterController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
+            client.writeString(view.getUsername());
+            client.writeString(view.getPassword());
 
+            // Authentication success
+            if (client.readString().equals("true")) {
+                System.out.println("success");
+            } else {
+                System.out.println("fail");
+            }
         }
     }
 

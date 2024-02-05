@@ -332,6 +332,10 @@ public class LoginRegisterView extends JFrame {
         return txtUsername.getText();
     }
 
+    public String getPassword() {
+        return txtPassword.getText();
+    }
+
     public String getFirstName() {
         return txtFirstName.getText();
     }

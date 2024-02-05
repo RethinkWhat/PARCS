@@ -1,19 +1,74 @@
 package client.model;
 
-import client.LoginRegisterApp;
+import client.controller.LoginRegisterController;
+import client.view.LoginRegisterView;
 
-import java.net.ServerSocket;
+import java.io.*;
+
 import java.net.Socket;
 
 public class Client implements Runnable {
 
     private Socket client;
-    public Client(ServerSocket server) throws Exception{
-        this.client = server.accept();
+
+    private PrintWriter writer;
+
+    private BufferedReader reader;
+
+    private boolean loggedIn;
+    public Client(Socket server) {
+        this.client = server;
     }
 
     @Override
     public void run() {
-        new LoginRegisterApp().run();
+        LoginRegisterModel model = new LoginRegisterModel();
+        LoginRegisterView view = new LoginRegisterView();
+        new LoginRegisterController(this,view, model);
     }
+
+    public void writeString(String line) {
+        try {
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+            writer.println(line);
+            writer.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public String readString() {
+        String toReturn = null;
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            toReturn =  reader.readLine();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return toReturn;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
+    }
+
+    public static void main(String[] args) {
+
+        try {
+            Socket clientSocket = new Socket("localhost", 2020);
+
+            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+
+
+            Client client = new Client(clientSocket);
+            new Thread(client).start();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 }
