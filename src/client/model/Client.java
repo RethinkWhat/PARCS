@@ -1,7 +1,7 @@
 package client.model;
 
 import client.controller.LoginRegisterController;
-import client.view.LoginRegisterView;
+import client.view.account_view.LoginRegisterView;
 
 import java.io.*;
 

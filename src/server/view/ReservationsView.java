@@ -1,6 +1,5 @@
 package server.view;
 
-import server.model.Server;
 import utilities.Resources;
 
 import javax.swing.*;

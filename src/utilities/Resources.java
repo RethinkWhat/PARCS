@@ -76,13 +76,10 @@ public class Resources {
      */
     public ImageIcon iconRightArrow = new ImageIcon("res/drawable/icons/arrow-right.png");
     /**
-     * The icon for navigation (back).
+     * The icon for navigation (beck).
      */
     public ImageIcon iconLeftArrow = new ImageIcon("res/drawable/icons/arrow-left.png");
-    /**
-     * The icon for closing.
-     */
-    public ImageIcon iconClose = new ImageIcon("res/drawable/icons/close-black-solid.png");
+
 
     /**
      * Creates a new JLabel with a specified text and color.

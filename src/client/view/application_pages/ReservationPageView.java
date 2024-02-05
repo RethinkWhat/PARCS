@@ -256,7 +256,8 @@ public class ReservationPageView extends JPanel {
             pnlContainer.setLayout(new GridLayout(3, 1)); // Divided into 3 rows, 1 column
             add(pnlContainer, BorderLayout.CENTER);
 
-            btnClose = res.createBtnIconOnly(res.iconClose, 20,20);
+            //TODO: Change icon to iconClose
+            btnClose = res.createBtnIconOnly(res.iconHome, 20,20);
             // TODO: Add close button
 
             // pnlSlot
