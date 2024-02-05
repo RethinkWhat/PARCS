@@ -277,6 +277,14 @@ public class Resources {
         return textField;
     }
 
+    /**
+     * TODO: Documentation
+     * @param width
+     * @param height
+     * @param pnlColor
+     * @param bgColor
+     * @return
+     */
     public JPanel createPnlRounded(int width, int height, Color pnlColor, Color bgColor) {
         JPanel panel = new JPanel() {
             @Override
