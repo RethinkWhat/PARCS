@@ -10,7 +10,7 @@ import java.awt.*;
  * Template for object ReservationPage.
  * The ReservationPage is the home page of the client application.
  */
-public class ReservationPage extends JFrame {
+public class ReservationPageView extends JFrame {
     /**
      * The button that expands the navigation bar.
      */
@@ -71,7 +71,7 @@ public class ReservationPage extends JFrame {
     /**
      * Constructs a ReservationPage frame.
      */
-    public ReservationPage() {
+    public ReservationPageView() {
         super("PARCS");
 
         // Body panel acting as a container to hold all UI components
@@ -288,7 +288,7 @@ public class ReservationPage extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ReservationPage();
+                new ReservationPageView();
             }
         });
     }

@@ -6,7 +6,7 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class ParkingStatus extends JFrame {
+public class ParkingStatusView extends JFrame {
 
     private JButton btnNavMenu;
     private JButton btnNavHome;
@@ -16,16 +16,16 @@ public class ParkingStatus extends JFrame {
 
     private Resources res = new Resources();
 
-    public ParkingStatus() {
+    public ParkingStatusView() {
         super("PARCS");
 
         // Body panel acting as a container to hold all UI components
         Container contentArea = new JPanel(new BorderLayout());
 
-        ParkingStatus.HeaderPanel pnlHeader = new ParkingStatus.HeaderPanel();
+        ParkingStatusView.HeaderPanel pnlHeader = new ParkingStatusView.HeaderPanel();
         contentArea.add(pnlHeader, BorderLayout.NORTH);
 
-        ParkingStatus.NavbarPanel pnlNavbar = new ParkingStatus.NavbarPanel();
+        ParkingStatusView.NavbarPanel pnlNavbar = new ParkingStatusView.NavbarPanel();
         contentArea.add(pnlNavbar, BorderLayout.WEST);
 
         JPanel pnlMain = new JPanel(new BorderLayout());
@@ -198,7 +198,7 @@ public class ParkingStatus extends JFrame {
         SwingUtilities.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new ParkingStatus();
+                new ParkingStatusView();
             }
         });
     }
