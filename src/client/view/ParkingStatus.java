@@ -7,12 +7,13 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
 public class ParkingStatus extends JFrame {
+
+    private JButton btnNavMenu;
     private JButton btnNavHome;
     private JButton btnNavTicket;
     private JButton btnNavAccount;
     private JButton btnNavLogout;
-    private JButton btnbtnParkingSlotOne;
-    private JButton btnReserveSlot;
+    private JButton btnNavMenu;
 
     private Resources res = new Resources();
 
@@ -31,7 +32,7 @@ public class ParkingStatus extends JFrame {
         JPanel pnlMain = new JPanel(new BorderLayout());
         pnlMain.setPreferredSize(new Dimension(1100,700));
         pnlMain.setBackground(res.lightGray);
-        pnlMain.setBorder(new EmptyBorder(25,25,25,25));
+        pnlMain.setBorder(new EmptyBorder(0,25,25,25));
         contentArea.add(pnlMain, BorderLayout.CENTER);
 
         MainTopPanel pnlMainTop = new MainTopPanel();
@@ -53,7 +54,7 @@ public class ParkingStatus extends JFrame {
         public HeaderPanel() {
             setBackground(res.celadon);
 
-            this.setPreferredSize(new Dimension(1300, 40));
+            this.setPreferredSize(new Dimension(1300, 50));
         }
     }
 
