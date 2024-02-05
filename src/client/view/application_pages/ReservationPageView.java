@@ -203,6 +203,10 @@ public class ReservationPageView extends JPanel {
         /**
          * TODO: Documentation
          */
+        private JButton btnClose;
+        /**
+         * TODO: Documentation
+         */
         private JPanel pnlContainer;
         /**
          * TODO: Documentation
@@ -220,6 +224,22 @@ public class ReservationPageView extends JPanel {
          * TODO: Documentation
          */
         private JLabel lblDate;
+        /**
+         * TODO: Documentation
+         */
+        private JButton btnReserve;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbVehicle;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbTime;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbDuration;
 
         /**
          * The stylesheet.
@@ -235,6 +255,9 @@ public class ReservationPageView extends JPanel {
             pnlContainer = res.createPnlRounded(1300,130,res.white, res.lightGray);
             pnlContainer.setLayout(new GridLayout(3, 1)); // Divided into 3 rows, 1 column
             add(pnlContainer, BorderLayout.CENTER);
+
+            btnClose = res.createBtnIconOnly(res.iconClose, 20,20);
+            // TODO: Add close button
 
             // pnlSlot
             JPanel pnlSlotNumber = new JPanel();
@@ -296,32 +319,32 @@ public class ReservationPageView extends JPanel {
             gbc.anchor = GridBagConstraints.CENTER; // Center components horizontally
 
             // Dropdown for Select Vehicle
-            JComboBox<String> vehicleDropdown = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
-            vehicleDropdown.setPreferredSize(new Dimension(200, 40));
-            vehicleDropdown.setFont(new Font("Arial", Font.BOLD, 16));
-            pnlReserve.add(vehicleDropdown, gbc);
+            cmbVehicle = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
+            cmbVehicle.setPreferredSize(new Dimension(200, 40));
+            cmbVehicle.setFont(new Font("Arial", Font.BOLD, 16));
+            pnlReserve.add(cmbVehicle, gbc);
 
             // Dropdown for Select Time
-            JComboBox<String> timeDropdown = new JComboBox<>(new String[]{"Select Time:", "6:00", "10:00", "15:00", "20:00"});
-            timeDropdown.setPreferredSize(new Dimension(200, 40));
-            timeDropdown.setFont(new Font("Arial", Font.BOLD, 16));
+            JComboBox<String> cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "10:00", "15:00", "20:00"});
+            cmbTime.setPreferredSize(new Dimension(200, 40));
+            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 1;
-            pnlReserve.add(timeDropdown, gbc);
+            pnlReserve.add(cmbTime, gbc);
 
             // Dropdown for Duration
-            JComboBox<String> durationDropdown = new JComboBox<>(new String[]{"Duration:", "1hr", "5hr", "10hr", "15hr", "19hr"});
-            durationDropdown.setPreferredSize(new Dimension(200, 40));
-            durationDropdown.setFont(new Font("Arial", Font.BOLD, 16));
+            cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "5hr", "10hr", "15hr", "19hr"});
+            cmbDuration.setPreferredSize(new Dimension(200, 40));
+            cmbDuration.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 2;
-            pnlReserve.add(durationDropdown, gbc);
+            pnlReserve.add(cmbDuration, gbc);
 
             // Reserve Slot Button (using createBtnRounded from Resources)
-            JButton reserveButton = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            JButton btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
             gbc.gridx = 3;
             gbc.gridwidth = 2; // Set the button to span 2 columns
-            reserveButton.setPreferredSize(new Dimension(140, 40));
-            reserveButton.setFont(new Font("Arial", Font.BOLD, 16));
-            pnlReserve.add(reserveButton, gbc);
+            btnReserve.setPreferredSize(new Dimension(140, 40));
+            btnReserve.setFont(new Font("Arial", Font.BOLD, 16));
+            pnlReserve.add(btnReserve, gbc);
 
             pnlContainer.add(pnlReserve);
 
