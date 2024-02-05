@@ -13,7 +13,6 @@ public class ParkingStatus extends JFrame {
     private JButton btnNavTicket;
     private JButton btnNavAccount;
     private JButton btnNavLogout;
-    private JButton btnNavMenu;
 
     private Resources res = new Resources();
 
@@ -53,10 +52,18 @@ public class ParkingStatus extends JFrame {
     class HeaderPanel extends JPanel {
         public HeaderPanel() {
             setBackground(res.celadon);
+            setLayout(new FlowLayout(FlowLayout.LEFT));
+
+            JButton btnNavMenu = res.createBtnIconOnly(res.logoParcs, 40, 30);
+            add(btnNavMenu);
+
+            JLabel lblLocation = res.createLblH3("Home", res.white);
+            add(lblLocation);
 
             this.setPreferredSize(new Dimension(1300, 50));
         }
     }
+
 
     class NavbarPanel extends JPanel {
         public NavbarPanel() {
