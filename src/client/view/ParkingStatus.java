@@ -169,7 +169,15 @@ public class ParkingStatus extends JFrame {
             gbc.gridx = 2;
             pnlReserve.add(durationDropdown, gbc);
 
+            // Reserve Slot Button (using createBtnRounded from Resources)
+            JButton reserveButton = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            gbc.gridx = 3;
+            gbc.gridwidth = 2; // Set the button to span 2 columns
+            reserveButton.setPreferredSize(new Dimension(140, 40));
+            reserveButton.setFont(new Font("Arial", Font.BOLD, 16));
+            pnlReserve.add(reserveButton, gbc);
 
+            add(pnlReserve);
 
 
             this.setPreferredSize(new Dimension(1300,160));
