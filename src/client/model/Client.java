@@ -3,15 +3,19 @@ package client.model;
 import client.controller.LoginRegisterController;
 import client.view.account_view.LoginRegisterView;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 
 import java.net.Socket;
 
 public class Client implements Runnable {
 
     private Socket client;
+
+    private PrintWriter writer;
+
+    private BufferedReader reader;
+
+    private boolean loggedIn;
     public Client(Socket server) {
         this.client = server;
     }
@@ -20,7 +24,36 @@ public class Client implements Runnable {
     public void run() {
         LoginRegisterModel model = new LoginRegisterModel();
         LoginRegisterView view = new LoginRegisterView();
-        new LoginRegisterController(view, model);
+        new LoginRegisterController(this,view, model);
+    }
+
+    public void writeString(String line) {
+        try {
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+            writer.println(line);
+            writer.flush();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public String readString() {
+        String toReturn = null;
+        try {
+            BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            toReturn =  reader.readLine();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        return toReturn;
+    }
+
+    public boolean isLoggedIn() {
+        return loggedIn;
+    }
+
+    public void setLoggedIn(boolean loggedIn) {
+        this.loggedIn = loggedIn;
     }
 
     public static void main(String[] args) {

@@ -83,6 +83,7 @@ public class XMLParser {
 
 
 
+
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         XMLParser obj = new XMLParser();
         Map<String, String> userList = obj.getUserLoginCredentials();
