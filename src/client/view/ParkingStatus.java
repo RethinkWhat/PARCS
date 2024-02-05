@@ -88,7 +88,20 @@ public class ParkingStatus extends JFrame {
     class MainTopPanel extends JPanel {
         public MainTopPanel() {
             setBackground(res.white);
-            setLayout(new BorderLayout());
+            setLayout(new GridLayout(3, 1)); // Divided into 3 rows, 1 column
+
+            // pnlSlot
+            JPanel pnlSlotNumber = new JPanel();
+            pnlSlotNumber.setLayout(new FlowLayout(FlowLayout.CENTER));
+            pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
+            pnlSlotNumber.setBackground(Color.white);
+
+            // Label for the slot number
+            JLabel lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
+            pnlSlotNumber.add(lblSlotNumber);
+
+            add(pnlSlotNumber);
+
 
             this.setPreferredSize(new Dimension(1300,160));
         }
