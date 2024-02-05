@@ -6,6 +6,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * Template for object ReservationPage.
+ * The ReservationPage is the home page of the client application.
+ */
 public class ReservationPage extends JFrame {
     /**
      * The button that expands the navigation bar.
@@ -64,6 +68,9 @@ public class ReservationPage extends JFrame {
      */
     private GridBagConstraints gbc;
 
+    /**
+     * Constructs a ReservationPage frame.
+     */
     public ReservationPage() {
         super("PARCS");
 
@@ -98,7 +105,13 @@ public class ReservationPage extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * The panel that contains useful information and the searchbar.
+     */
     class HeaderPanel extends JPanel {
+        /**
+         * Constructs a panel of HeaderPanel.
+         */
         public HeaderPanel() {
             setBackground(res.celadon);
             setLayout(new FlowLayout(FlowLayout.LEFT));
@@ -113,7 +126,13 @@ public class ReservationPage extends JFrame {
         }
     }
 
+    /**
+     * The navigation bar contains the buttons for navigation.
+     */
     class NavbarPanel extends JPanel {
+        /**
+         * Constructs a panel of NavbarPanel.
+         */
         public NavbarPanel() {
             setBackground(res.feldgrau);
 
@@ -137,7 +156,13 @@ public class ReservationPage extends JFrame {
         }
     }
 
+    /**
+     * The panel that contains multiple objects of the ButtonsPanel.
+     */
     class MainTopPanel extends JPanel {
+        /**
+         * Constructs a panel of MainTopPanel.
+         */
         public MainTopPanel() {
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
@@ -209,38 +234,50 @@ public class ReservationPage extends JFrame {
         }
     }
 
+    /**
+     * The panel that contains the
+     */
     class MainBottomPanel extends JPanel {
-        private JPanel panel;
+        /**
+         * The rounded panel.
+         */
+        private JPanel container;
 
+        /**
+         * Constructs a panel of MainBottomPanel.
+         */
         public MainBottomPanel() {
-            setBackground(res.white);
-            setForeground(res.white);
-            setBorder(new Resources.RoundedBorder(20));
+            setLayout(new BorderLayout());
 
-            setPreferredSize(new Dimension(1300,650));
+            container = res.createPnlRounded(1300,520, res.white, res.lightGray);
+            add(container, BorderLayout.CENTER);
+
+            setPreferredSize(new Dimension(1300,520));
         }
     }
 
+    /**
+     * The panel that creates the useful buttons of the home page.
+     */
     class ButtonPanel extends JPanel {
+        /**
+         * The rounded panel.
+         */
+        private JPanel container;
+
         /**
          * Constructs a panel with a specified button, number label, and title label.
          */
         public ButtonPanel(JButton button, JLabel number, JLabel title) {
-            setBackground(res.white);
-            setLayout(new GridLayout());
+            setLayout(new BorderLayout());
 
-            gbc = new GridBagConstraints();
-            gbc.insets = new Insets(5,5,5,5);
+            container = res.createPnlRounded(100,80, res.white, res.lightGray);
+            container.setLayout(new GridLayout(0,3));
+            add(container, BorderLayout.NORTH);
 
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            add(button, gbc);
-
-            gbc.gridx = 1;
-            add(number, gbc);
-
-            gbc.gridx = 2;
-            add(title, gbc);
+            container.add(button);
+            container.add(number);
+            container.add(title);
 
             this.setPreferredSize(new Dimension(100, 100));
         }
