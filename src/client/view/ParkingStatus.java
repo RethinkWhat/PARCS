@@ -102,6 +102,45 @@ public class ParkingStatus extends JFrame {
 
             add(pnlSlotNumber);
 
+            // pnlSlotInformation
+            JPanel pnlSlotInformation = new JPanel(new GridBagLayout());
+            pnlSlotInformation.setPreferredSize(new Dimension(1300, 50));
+            pnlSlotInformation.setBackground(Color.white);
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(0, 10, 0, 10);
+            gbc.anchor = GridBagConstraints.CENTER;
+
+            // Labels for Type
+            JLabel lblTypeName = res.createLblH3("Type:", res.eerieBlack); // Used createLblH3 for distinction
+            gbc.gridx = 0;
+            pnlSlotInformation.add(lblTypeName, gbc);
+
+            JLabel lblType = res.createLblP("Car", res.eerieBlack);
+            gbc.gridx = 1;
+            pnlSlotInformation.add(lblType, gbc);
+
+            // Labels for Status
+            JLabel lblStatName = res.createLblH3("Status:", res.eerieBlack); // Used createLblH3 for distinction
+            gbc.gridx = 2;
+            pnlSlotInformation.add(lblStatName, gbc);
+
+            JLabel lblStatus = res.createLblP("Unavailable", res.eerieBlack);
+            gbc.gridx = 3;
+            pnlSlotInformation.add(lblStatus, gbc);
+
+            // Labels for Date
+            JLabel lblDateName = res.createLblH3("Date:", res.eerieBlack); // Used createLblH3 distinction
+            gbc.gridx = 4;
+            pnlSlotInformation.add(lblDateName, gbc);
+
+            JLabel lblDate = res.createLblP("January 24, 2024", res.eerieBlack);
+            gbc.gridx = 5;
+            pnlSlotInformation.add(lblDate, gbc);
+
+            add(pnlSlotInformation);
+
+
 
             this.setPreferredSize(new Dimension(1300,160));
         }
