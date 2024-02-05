@@ -1,25 +1,38 @@
-package server.model;
+package server.controller;
 
+
+import server.model.XMLParser;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 public class Server{
     private ServerSocket server;
 
+    private XMLParser xmlParser;
+
     public Server(SocketAddress socketAddress) throws IOException {
         server = new ServerSocket();
         server.bind(socketAddress);
+        xmlParser = new XMLParser();
+    }
+
+    public boolean validateAccount(String username, String password) {
+        Map<String, String> accounts = xmlParser.getUserLoginCredentials();
+        String associatedPass = accounts.getOrDefault(username, "");
+        return password.equals(associatedPass);
     }
 
     public ServerSocket getServer() {
         return server;
     }
+
 
     public static void main(String[] args) {
         // TODO: change address
@@ -30,7 +43,7 @@ public class Server{
 
             while (true) {
                 Socket clientSocket = server.getServer().accept();
-                new Thread(new ClientHandler(clientSocket)).start();
+                new Thread(new ClientHandler(server, clientSocket)).start();
 
             }
         } catch (IOException ex) {
