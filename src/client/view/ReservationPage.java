@@ -173,7 +173,10 @@ public class ReservationPage extends JFrame {
             txtSearchbar = res.createTxtRounded("Search date",res.white,res.gray, 30);
             pnlInformation.add(txtSearchbar, gbc);
 
-            JPanel pnlButtons = new JPanel(new GridLayout(0,3));
+            GridLayout gridLayout = new GridLayout(0,3);
+            gridLayout.setHgap(10);
+
+            JPanel pnlButtons = new JPanel(gridLayout);
             pnlButtons.setPreferredSize(new Dimension(1300,100));
             pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
             pnlButtons.setBackground(res.lightGray);
@@ -184,29 +187,31 @@ public class ReservationPage extends JFrame {
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     res.createLblH1("13", res.eerieBlack),
-                    res.createLblP("Available Car Slots", res.eerieBlack)
+                    res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
             ButtonPanel pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     res.createLblH1("10", res.eerieBlack),
-                    res.createLblP("Available Motor Slots", res.eerieBlack)
+                    res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
             ButtonPanel pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
                     res.createLblH1("3", res.eerieBlack),
-                    res.createLblP("Your Total Bookings", res.eerieBlack)
+                    res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
             );
-            add(pnlTotalBookings);
+            pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
         }
     }
 
     class MainBottomPanel extends JPanel {
+        private JPanel panel;
+
         public MainBottomPanel() {
             setBackground(res.white);
             setForeground(res.white);
@@ -237,7 +242,7 @@ public class ReservationPage extends JFrame {
             gbc.gridx = 2;
             add(title, gbc);
 
-            this.setPreferredSize(new Dimension(200, 100));
+            this.setPreferredSize(new Dimension(100, 100));
         }
     }
 

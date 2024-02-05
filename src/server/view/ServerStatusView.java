@@ -155,12 +155,14 @@ public class ServerStatusView extends JFrame {
             txtSearchBar = res.createTxtRounded("Search date", res.white, res.gray,30);
             pnlInformation.add(txtSearchBar,gbc);
 
-            JPanel pnlButtons = new JPanel(new GridLayout(0,3));
+            GridLayout gridLayout = new GridLayout(0,3);
+            gridLayout.setHgap(10);
+
+            JPanel pnlButtons = new JPanel(gridLayout);
             pnlButtons.setPreferredSize(new Dimension(1300,100));
             pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
             pnlButtons.setBackground(res.lightGray);
             add(pnlButtons, BorderLayout.SOUTH);
-
 
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar,50,50),
