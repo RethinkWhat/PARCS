@@ -187,21 +187,21 @@ public class ReservationPage extends JFrame {
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     res.createLblH1("13", res.eerieBlack),
-                    res.createLblP("Available Car Slots", res.eerieBlack)
+                    res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
             ButtonPanel pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     res.createLblH1("10", res.eerieBlack),
-                    res.createLblP("Available Motor Slots", res.eerieBlack)
+                    res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
             ButtonPanel pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
                     res.createLblH1("3", res.eerieBlack),
-                    res.createLblP("Your Total Bookings", res.eerieBlack)
+                    res.createLblP("<html>Your<br> Total Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlTotalBookings);
 
