@@ -1,7 +1,7 @@
 package server.controller;
 
 
-import server.model.XMLParser;
+import server.model.UserParser;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -15,16 +15,16 @@ import java.util.concurrent.Executors;
 public class Server{
     private ServerSocket server;
 
-    private XMLParser xmlParser;
+    private UserParser userParser;
 
     public Server(SocketAddress socketAddress) throws IOException {
         server = new ServerSocket();
         server.bind(socketAddress);
-        xmlParser = new XMLParser();
+        userParser = new UserParser();
     }
 
     public boolean validateAccount(String username, String password) {
-        Map<String, String> accounts = xmlParser.getUserLoginCredentials();
+        Map<String, String> accounts = userParser.getUserLoginCredentials();
         String associatedPass = accounts.getOrDefault(username, "");
         return password.equals(associatedPass);
     }

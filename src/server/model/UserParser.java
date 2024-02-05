@@ -13,13 +13,16 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class XMLParser {
+public class UserParser {
 
     DocumentBuilder builder;
     Document document;
 
 
-    public void getUserAccountsFile() {
+    /**
+     * Method to retrieve the user accounts file and to be used for the methods found in this class
+     */
+    private void getUserAccountsFile() {
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             document = builder.parse(new File("src/server/model/userAccounts.xml"));
@@ -30,6 +33,10 @@ public class XMLParser {
 
     }
 
+    /**
+     * Method to retrieve all the user objects in the xml file
+     * @return List<User>
+     */
     public List<User> getUserList() {
         //Method which sets the value for which file to access by document builder
         getUserAccountsFile();
@@ -55,6 +62,11 @@ public class XMLParser {
         return userList;
     }
 
+    /**
+     * Get a Map of all the users that has username as the key and the associated password as the value
+     * Will be used for validating login attempt by server
+     * @return
+     */
     public Map<String, String> getUserLoginCredentials() {
         //Method which sets the value for which file to access by document builder
         getUserAccountsFile();
@@ -76,17 +88,43 @@ public class XMLParser {
                     }
                 }
             }
-
         }
         return userList;
     }
 
+    public void editUserInfo(String username, String tagToEdit, String newInformation) {
+
+        getUserAccountsFile(); // Set document
+
+        NodeList nodeList = document.getElementsByTagName("user");
+
+        for (int x = 0; x < nodeList.getLength(); x ++) {
+            Node curr = nodeList.item(x);
+            if (curr.getAttributes().item(0).getTextContent().equalsIgnoreCase(username)) {
+
+                NodeList currChildren = curr.getChildNodes();
+                for (int y = 0 ; y < currChildren.getLength() ; y++) {
+                    Node currNode = currChildren.item(y);
+
+                    if (currNode.getNodeType() == Node.ELEMENT_NODE) {
+                        System.out.println(currChildren.item(y).getNodeName() + " : " + tagToEdit);
+                        if (currChildren.item(y).getNodeName().equalsIgnoreCase(tagToEdit)) {
+                            System.out.println("reached");
+                            currChildren.item(y).setTextContent(newInformation);
+                            break;
+                        }
+                    }
+                }
+            }
+        }
+    }
 
 
 
+    /** Will be deleted later */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
-        XMLParser obj = new XMLParser();
-        Map<String, String> userList = obj.getUserLoginCredentials();
-        System.out.println(userList.get("test"));;
+        UserParser obj = new UserParser();
+
+        obj.editUserInfo("r","password","rethinkwhat");
     }
 }
