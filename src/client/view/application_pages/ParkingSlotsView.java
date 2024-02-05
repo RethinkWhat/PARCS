@@ -1,5 +1,10 @@
 package client.view.application_pages;
 
-public class ParkingSlotsView {
-    // Parking slots GUI
+import javax.swing.*;
+
+public class ParkingSlotsView extends JPanel {
+    private JButton btnSlot;
+    public ParkingSlotsView() {
+
+    }
 }
