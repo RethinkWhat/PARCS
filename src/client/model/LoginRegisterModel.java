@@ -1,6 +1,4 @@
-package client.model.account;
-
-import server.model.User;
+package client.model;
 
 /**
  * Template for LoginRegisterModel.
@@ -12,8 +10,6 @@ public class LoginRegisterModel {
      * True if logged in, false if otherwise.
      */
     private boolean status;
-
-    private String username;
 
     /**
      * Constructs a LoginRegisterModel with null values.
