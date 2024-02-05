@@ -212,7 +212,7 @@ public class ServerStatusView extends JFrame {
             serverSwitch.setAlignmentX(Component.CENTER_ALIGNMENT);
             serverSwitch.setForeground(res.eerieBlack);
             serverSwitch.setBackground(res.red);
-            serverSwitch.setPreferredSize(new Dimension(20,20));
+            serverSwitch.setPreferredSize(new Dimension(200,40));
             gbc.gridx = 1;
             gbc.gridy = 2;
             add(serverSwitch,gbc);
