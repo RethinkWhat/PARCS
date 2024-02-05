@@ -82,7 +82,7 @@ public class ParkingStatus extends JFrame {
             setBackground(res.white);
             setLayout(new BorderLayout());
 
-            this.setPreferredSize(new Dimension(1300,300));
+            this.setPreferredSize(new Dimension(1300,160));
         }
     }
 
@@ -92,7 +92,7 @@ public class ParkingStatus extends JFrame {
             setForeground(res.white);
             setBorder(new Resources.RoundedBorder(20));
 
-            setPreferredSize(new Dimension(1300,500));
+            setPreferredSize(new Dimension(1300,515));
         }
     }
 
