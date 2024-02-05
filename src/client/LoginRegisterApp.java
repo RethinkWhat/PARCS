@@ -1,8 +1,8 @@
 package client;
 
-import client.controller.account.LoginRegisterController;
-import client.model.account.LoginRegisterModel;
-import client.view.account.LoginRegisterView;
+import client.controller.LoginRegisterController;
+import client.model.LoginRegisterModel;
+import client.view.LoginRegisterView;
 
 public class LoginRegisterApp implements Runnable{
     @Override
