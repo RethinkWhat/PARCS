@@ -66,7 +66,7 @@ public class Resources {
     /**
      * The icon for the available motorcycle slots panel.
      */
-    public ImageIcon iconSolidMotor = new ImageIcon("motorcycle-black-solid.png");
+    public ImageIcon iconSolidMotor = new ImageIcon("res/drawable/icons/motorcycle-black-solid.png");
     /**
      * The icon for the total bookings of the user panel.
      */
