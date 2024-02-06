@@ -2,6 +2,7 @@ package client.controller;
 
 import client.model.Client;
 import client.model.LoginRegisterModel;
+import client.view.ApplicationView;
 import client.view.account_view.LoginRegisterView;
 
 import javax.swing.*;
@@ -14,9 +15,14 @@ import java.net.Socket;
 
 /**
  * Template for LoginRegisterController.
+ * The LoginRegisterController processes the user requests for creating an account and logging in.
+ * Based on the user request, the LoginRegisterController defines methods and invokes methods in the View and Model
+ * to accomplish the requested action.
  */
 public class LoginRegisterController {
-
+    /**
+     * The client connecting to the server.
+     */
     private Client client;
     /**
      * The view LoginRegisterView object.
@@ -68,8 +74,43 @@ public class LoginRegisterController {
         view.revalidate();
     }
 
+    public LoginRegisterController(LoginRegisterView view, LoginRegisterModel model) {
+        this.view = view;
+        this.model = model;
+
+        // action listeners
+        view.setLoginListener(new LoginListener());
+        view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
+        view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
+        view.setShowPasswordListener(new ShowPasswordListener(view.getChkShowPassword(),view.getTxtPassword()));
+        view.setCreateAccountListener(e -> new CreateAccountListener());
+
+        // mouse listeners
+        view.getBtnSignup().addMouseListener(new CursorChanger(view.getBtnSignup()));
+        view.getBtnLogin().addMouseListener(new CursorChanger(view.getBtnLogin()));
+        view.getBtnBack().addMouseListener(new CursorChanger(view.getBtnBack()));
+        view.getBtnCreateAccount().addMouseListener(new CursorChanger(view.getBtnCreateAccount()));
+
+        // focus listeners
+        view.getTxtUsername().addFocusListener(new TextFieldFocus(view.getTxtUsername(), "Username"));
+        view.getTxtPassword().addFocusListener(new PasswordFocus(view.getTxtPassword(),
+                view.getChkShowPassword(), "Password"));
+        view.getTxtFirstName().addFocusListener(new TextFieldFocus(view.getTxtFirstName(), "First Name"));
+        view.getTxtLastName().addFocusListener(new TextFieldFocus(view.getTxtLastName(), "Last Name"));
+        view.getTxtSignupUsername().addFocusListener(new TextFieldFocus(view.getTxtSignupUsername(), "Username"));
+        view.getTxtPhoneNo().addFocusListener(new TextFieldFocus(view.getTxtPhoneNo(), "Phone Number"));
+        view.getTxtSignupPassword().addFocusListener(new PasswordFocus(view.getTxtSignupPassword(),
+                view.getChkShowSignupPassword(), "Password"));
+        view.getTxtConfirmPassword().addFocusListener(new PasswordFocus(view.getTxtConfirmPassword(),
+                view.getChkShowConfirmPassword(), "Confirm Password"));
+
+        view.repaint();
+        view.revalidate();
+    }
+
     /**
-     * TODO: Documentation
+     * Creates an object that will be sent to the server to verify whether the user's credentials are matching an
+     * existing account.
      */
     class LoginListener implements ActionListener {
         /**
@@ -91,7 +132,7 @@ public class LoginRegisterController {
     }
 
     /**
-     * TODO: Documentation
+     * Creates an object that will be sent to the server for processing.
      */
     class CreateAccountListener implements ActionListener {
         /**
@@ -105,22 +146,22 @@ public class LoginRegisterController {
     }
 
     /**
-     * TODO: Documentation
+     * Shows the password of a specified JPasswordField.
      */
     class ShowPasswordListener implements ActionListener {
         /**
-         * TODO: Documentation
+         * The specified checkbox of show password.
          */
         private JCheckBox checkBox;
         /**
-         * TODO: Documentation
+         * The specified password field.
          */
         private JPasswordField passwordField;
 
         /**
-         * TODO: Documentation
-         * @param checkBox
-         * @param passwordField
+         * Constructs an object of ShowPasswordField listener with a specified JCheckBox and JPasswordField.
+         * @param checkBox The specified "show password" checkbox.
+         * @param passwordField The specified password field.
          */
         public ShowPasswordListener(JCheckBox checkBox, JPasswordField passwordField) {
             this.checkBox = checkBox;
@@ -128,7 +169,7 @@ public class LoginRegisterController {
         }
 
         /**
-         * TODO: Documentation
+         * Processes the user request.
          * @param e the event to be processed
          */
         @Override
@@ -142,24 +183,24 @@ public class LoginRegisterController {
     }
 
     /**
-     * TODO: Documentation
+     * Changes the Cursor when hovered to a specific UI component.
      */
     class CursorChanger extends MouseAdapter {
         /**
-         * TODO: Documentation
+         * The specified button.
          */
         private JButton button;
 
         /**
-         * TODO: Documentation
-         * @param button
+         * Constructs an object of CursorChanger with a specified JButton.
+         * @param button The specified button.
          */
         public CursorChanger(JButton button) {
             this.button = button;
         }
 
         /**
-         * TODO: Documentation
+         * When the mouse hovers inside the vicinity of the UI component.
          * @param e the event to be processed
          */
         @Override
@@ -168,7 +209,7 @@ public class LoginRegisterController {
         }
 
         /**
-         * TODO: Documentation
+         * When the mouse hovers outside the UI component.
          * @param e the event to be processed
          */
         @Override
@@ -178,21 +219,23 @@ public class LoginRegisterController {
     }
 
     /**
-     * TODO: Documentation
+     * Clears the text in a specified JTextField when it is focused, and inserts a specified placeholder
+     * text when unfocused.
      */
     class TextFieldFocus implements FocusListener {
         /**
-         * TODO: Documentation
+         * The specified text field.
          */
         private JTextField textField;
         /**
-         * TODO: Documentation
+         * The specified placeholder text.
          */
         private String placeholder;
 
         /**
-         * TODO: Documentation
-         * @param textField
+         * Constructs an object of TextFieldFocus with a specified text field and placeholder text.
+         * @param textField The specified text field.
+         * @param placeholder The specified placeholder text.
          */
         public TextFieldFocus(JTextField textField, String placeholder) {
             this.textField = textField;
@@ -200,7 +243,7 @@ public class LoginRegisterController {
         }
 
         /**
-         * TODO: Documentation
+         * Processes the event when focused. The text field contents are cleared to accommodate user input.
          * @param e the event to be processed
          */
         @Override
@@ -211,7 +254,7 @@ public class LoginRegisterController {
         }
 
         /**
-         * TODO: Documentation
+         * Processes the event when unfocused. A placeholder text is inserted in the text field.
          * @param e the event to be processed
          */
         @Override
@@ -223,26 +266,29 @@ public class LoginRegisterController {
     }
 
     /**
-     * TODO: Documentation
+     * Clears the text in a specified JPasswordField when it is focused, and inserts a specified placeholder
+     * text when unfocused.
      */
     class PasswordFocus implements FocusListener {
         /**
-         * TODO: Documentation
+         * The specified password field.
          */
         private JPasswordField passwordField;
         /**
-         * TODO: Documentation
+         * The specified show password checkbox.
          */
         private JCheckBox chkShowPassword;
         /**
-         * TODO: Documentation
+         * The specified placeholder text.
          */
         private String placeholder;
 
         /**
-         * TODO: Documentation
-         * @param passwordField
-         * @param chkShowPassword
+         * Constructs an object of PasswordFocus with a specified password field, show password text box and
+         * placeholder text.
+         * @param passwordField The specified password field.
+         * @param chkShowPassword The specified show password checkbox.
+         * @param placeholder The specified placeholder text.
          */
 
         public PasswordFocus(JPasswordField passwordField, JCheckBox chkShowPassword, String placeholder) {
@@ -252,7 +298,8 @@ public class LoginRegisterController {
         }
 
         /**
-         * TODO: Documentation
+         * Processes the event when focused. The checkbox is overridden and hides the password input, and clears
+         * the password field of its placeholder text.
          * @param e the event to be processed
          */
         @Override
@@ -267,7 +314,8 @@ public class LoginRegisterController {
         }
 
         /**
-         * TODO: Documentation
+         * Processes the event when focused. The checkbox is overridden and displays the password in plain text, and
+         * adds a placeholder text.
          * @param e the event to be processed
          */
         @Override
@@ -278,6 +326,11 @@ public class LoginRegisterController {
                 passwordField.setEchoChar((char) 0);
             }
         }
+    }
+
+    // temporary main method for debugging
+    public static void main(String[] args) {
+        new LoginRegisterController(new LoginRegisterView(), new LoginRegisterModel());
     }
 }
 
