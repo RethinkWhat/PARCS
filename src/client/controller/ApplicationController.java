@@ -5,6 +5,8 @@ import client.view.ApplicationView;
 
 /**
  * Template for ApplicationController object.
+ * The ApplicationController processes the user requests. Based on the user request, the ApplicationController
+ * defines methods and invokes methods in the View and Model to accomplish the requested action.
  */
 public class ApplicationController {
     /**

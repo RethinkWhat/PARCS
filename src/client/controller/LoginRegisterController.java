@@ -2,16 +2,11 @@ package client.controller;
 
 import client.model.Client;
 import client.model.LoginRegisterModel;
-import client.view.ApplicationView;
-import client.view.account_view.LoginRegisterView;
+import client.view.LoginRegisterView;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
-import java.io.PrintWriter;
-import java.net.Socket;
 
 /**
  * Template for LoginRegisterController.
@@ -27,11 +22,11 @@ public class LoginRegisterController {
     /**
      * The view LoginRegisterView object.
      */
-    private LoginRegisterView view;
+    private final LoginRegisterView view;
     /**
      * The model LoginRegisterModel object.
      */
-    private LoginRegisterModel model;
+    private final LoginRegisterModel model;
 
     /**
      * Constructs a LoginRegisterController with a specified view and model.
@@ -48,7 +43,12 @@ public class LoginRegisterController {
         view.setLoginListener(new LoginListener());
         view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
         view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
-        view.setShowPasswordListener(new ShowPasswordListener(view.getChkShowPassword(),view.getTxtPassword()));
+        view.getChkShowPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowPassword(),
+                view.getTxtPassword()));
+        view.getChkShowSignupPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowSignupPassword(),
+                view.getTxtSignupPassword()));
+        view.getChkShowConfirmPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowConfirmPassword(),
+                view.getTxtConfirmPassword()));
         view.setCreateAccountListener(e -> new CreateAccountListener());
 
         // mouse listeners
@@ -82,7 +82,12 @@ public class LoginRegisterController {
         view.setLoginListener(new LoginListener());
         view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
         view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
-        view.setShowPasswordListener(new ShowPasswordListener(view.getChkShowPassword(),view.getTxtPassword()));
+        view.getChkShowPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowPassword(),
+                view.getTxtPassword()));
+        view.getChkShowSignupPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowSignupPassword(),
+                view.getTxtSignupPassword()));
+        view.getChkShowConfirmPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowConfirmPassword(),
+                view.getTxtConfirmPassword()));
         view.setCreateAccountListener(e -> new CreateAccountListener());
 
         // mouse listeners
@@ -176,7 +181,7 @@ public class LoginRegisterController {
         public void actionPerformed(ActionEvent e) {
             if (checkBox.isSelected()) {
                 passwordField.setEchoChar((char) 0); // shows password in characters
-            } else {
+            } else if (!checkBox.isSelected()) {
                 passwordField.setEchoChar('●');
             }
         }
@@ -259,7 +264,7 @@ public class LoginRegisterController {
          */
         @Override
         public void focusLost(FocusEvent e) {
-            if (textField.getText().equals("")) {
+            if (textField.getText().isEmpty()) {
                 textField.setText(placeholder);
             }
         }
@@ -290,9 +295,9 @@ public class LoginRegisterController {
          * @param chkShowPassword The specified show password checkbox.
          * @param placeholder The specified placeholder text.
          */
-
         public PasswordFocus(JPasswordField passwordField, JCheckBox chkShowPassword, String placeholder) {
             this.passwordField = passwordField;
+            this.placeholder = placeholder;
             this.passwordField.setText(placeholder);
             this.chkShowPassword = chkShowPassword;
         }
@@ -304,11 +309,10 @@ public class LoginRegisterController {
          */
         @Override
         public void focusGained(FocusEvent e) {
-            String password = String.valueOf(passwordField.getPassword());
-            if (chkShowPassword.isSelected()) {
+            if (!chkShowPassword.isSelected()) {
                 passwordField.setEchoChar('●');
             }
-            if (password.equals(placeholder)) {
+            if (String.valueOf(passwordField.getPassword()).equals(placeholder)) {
                 passwordField.setText("");
             }
         }
@@ -320,8 +324,10 @@ public class LoginRegisterController {
          */
         @Override
         public void focusLost(FocusEvent e) {
-            String password = String.valueOf(view.getTxtPassword().getPassword());
-            if (password.equals(placeholder) || password.equals("")) {
+            if (!chkShowPassword.isSelected()) {
+                passwordField.setEchoChar('●');
+            }
+            if (String.valueOf(passwordField.getPassword()).isEmpty()) {
                 passwordField.setText(placeholder);
                 passwordField.setEchoChar((char) 0);
             }
