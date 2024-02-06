@@ -13,7 +13,7 @@ public class VehicleAdderView extends JFrame {
     /**
      * The text field for the vehicle type.
      */
-    private JComboBox cmbType;
+    private JComboBox<?> cmbType;
     /**
      * The text field for the vehicle model.
      */
@@ -52,13 +52,14 @@ public class VehicleAdderView extends JFrame {
         gbc.gridy = 0;
         gbc.ipady = 40;
         gbc.gridwidth = 1;
+        gbc.fill = GridBagConstraints.BOTH;
         gbc.insets = new Insets(5,5,5,5);
         JLabel lblTitle = res.createLblH1("Add Vehicle", res.eerieBlack);
         contentPane.add(lblTitle);
 
         gbc.gridy = 1;
         gbc.ipady = 3;
-        cmbType = new JComboBox();
+        cmbType = res.createCmbRounded(res.lightGray,res.white,10);
         contentPane.add(cmbType, gbc);
 
         gbc.gridy = 2;
@@ -91,6 +92,26 @@ public class VehicleAdderView extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    public JComboBox<?> getCmbType() {
+        return cmbType;
+    }
+
+    public JTextField getTxtModel() {
+        return txtModel;
+    }
+
+    public JTextField getTxtPlateNumber() {
+        return txtPlateNumber;
+    }
+
+    public JButton getBtnAddVehicle() {
+        return btnAddVehicle;
+    }
+
+    public JButton getBtnCancel() {
+        return btnCancel;
     }
 
     // Temporary main method to view and debug frame
