@@ -1,10 +1,13 @@
 package client.view;
 
+import utilities.Resources;
+
 import javax.swing.*;
 import java.awt.*;
 
 /**
- * TODO: Documentation
+ * Template for object VehicleAdderView.
+ * The VehicleAdderView is the page to add the user's vehicles of the client application.
  */
 public class VehicleAdderView extends JFrame {
     /**
@@ -27,6 +30,10 @@ public class VehicleAdderView extends JFrame {
      * The button to cancel and close the frame.
      */
     private JButton btnCancel;
+    /**
+     * The stylesheet.
+     */
+    private Resources res = new Resources();
 
     /**
      * Constructs the VehicleAdderView frame.
@@ -41,28 +48,28 @@ public class VehicleAdderView extends JFrame {
         // GridBagConstraints to position components using the GB layout
         GridBagConstraints gbc = new GridBagConstraints();
 
-        JLabel lblTitle = new JLabel("Add Vehicle");
-        lblTitle.setFont(new Font("Arial", Font.BOLD, 22));
-        lblTitle.setBounds(0,25,50,50);
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.ipady = 40;
+        gbc.gridwidth = 1;
+        gbc.insets = new Insets(5,5,5,5);
+        JLabel lblTitle = res.createLblH1("Add Vehicle", res.eerieBlack);
         contentPane.add(lblTitle);
 
-        gbc.gridx = 0;
         gbc.gridy = 1;
-        gbc.insets = new Insets(20,0,0,0);
+        gbc.ipady = 3;
         cmbType = new JComboBox();
         contentPane.add(cmbType, gbc);
 
         gbc.gridy = 2;
-        gbc.insets = new Insets(0,0,0,0);
-        txtModel = new JTextField(30);
-        txtModel.setText("Vehicle Model (e.g., Honda Civic)");
-        txtModel.setFont(new Font("Arial", Font.PLAIN, 16));
+        gbc.ipady = 3;
+        txtModel = res.createTxtRounded("Vehicle Model (e.g., Honda Civic)", res.white, res.gray, 30);
         contentPane.add(txtModel, gbc);
 
         gbc.gridy = 3;
-        txtPlateNumber = new JTextField(30);
-        txtPlateNumber.setText("License Plate Number (e.g., NWA 991)");
-        txtPlateNumber.setFont(new Font("Arial", Font.PLAIN, 16));
+        gbc.ipady = 3;
+        txtPlateNumber = res.createTxtRounded("License Plate Number (e.g., NWA 991)", res.white,
+                res.gray, 30);
         contentPane.add(txtPlateNumber, gbc);
 
         gbc.insets = new Insets(10,10,10,10);
@@ -71,10 +78,10 @@ public class VehicleAdderView extends JFrame {
         JPanel pnlButtons = new JPanel(new FlowLayout());
         contentPane.add(pnlButtons, gbc);
 
-        btnAddVehicle = new JButton("Add Vehicle");
+        btnAddVehicle = res.createBtnRounded("Add Vehicle",res.celadon, res.eerieBlack,10);
         pnlButtons.add(btnAddVehicle);
 
-        btnCancel = new JButton("Cancel");
+        btnCancel = res.createBtnRounded("Cancel",res.gray, res.eerieBlack,10);
         pnlButtons.add(btnCancel);
 
         this.setContentPane(contentPane);
