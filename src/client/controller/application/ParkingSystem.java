@@ -1,4 +1,4 @@
-package client.controller;
+package client.controller.application;
 
 import java.lang.*;
 

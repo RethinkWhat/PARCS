@@ -1,6 +1,6 @@
-package client.controller;
+package client.controller.account;
 
-import client.view.account_view.UserProfileView;
+import client.view.account.UserProfileView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

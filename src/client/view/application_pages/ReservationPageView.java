@@ -1,0 +1,355 @@
+package client.view.application_pages;
+
+import utilities.Resources;
+
+import javax.swing.*;
+import javax.swing.border.EmptyBorder;
+import java.awt.*;
+
+public class ReservationPageView extends JPanel {
+    /**
+     * The panel that holds different component panels.
+     */
+    private JPanel pnlCards;
+    /**
+     * The button that shows the current number of available car slots.
+     */
+    private JButton btnAvailCar;
+    /**
+     * The button that shows the current number of available motorcycle slots.
+     */
+    private JButton btnAvailMotor;
+    /**
+     * The button that shows the current number of total bookings.
+     */
+    private JButton btnTotalBookings;
+    /**
+     * The search bar.,
+     */
+    private JTextField txtSearchbar;
+    /**
+     * The first name of the current user.
+     */
+    private JLabel lblName;
+    /**
+     * The current date.
+     */
+    private JLabel lblDate;
+    /**
+     * The stylesheet.
+     */
+    private Resources res = new Resources();
+    /**
+     * Instance variable of GridBagConstraints used for JPanels using GridBagLayout.
+     */
+    private GridBagConstraints gbc;
+    /**
+     * The CardLayout that controls the components of the MainTopPanel.
+     */
+    private CardLayout topCardLayout = new CardLayout();
+
+    /**
+     * Constructs a panel of ReservationPageView.
+     */
+    public ReservationPageView() {
+        setLayout(new BorderLayout());
+        setBorder(new EmptyBorder(25,25,25,25));
+
+        pnlCards = new JPanel(topCardLayout);
+        add(pnlCards, BorderLayout.NORTH);
+
+        // Top Panel
+        pnlCards.add(new MainTopPanel(), "dashboard");
+        pnlCards.add(new ParkingSlotButtonsView(), "buttons");
+        topCardLayout.show(pnlCards, "buttons");
+
+        // Bottom Panel
+        add(new MainBottomPanel(), BorderLayout.SOUTH);
+
+        this.setPreferredSize(new Dimension(1100,700));
+    }
+
+    /**
+     * The panel that contains the parking slots.
+     */
+    class MainBottomPanel extends JPanel {
+        /**
+         * The rounded panel.
+         */
+        private JPanel container;
+
+        /**
+         * Constructs a panel of MainBottomPanel.
+         */
+        public MainBottomPanel() {
+            setLayout(new BorderLayout());
+
+            container = res.createPnlRounded(1300,510, res.white, res.lightGray);
+            add(container, BorderLayout.CENTER);
+
+            setPreferredSize(new Dimension(1300,510));
+        }
+    }
+
+    /**
+     * The panel that contains multiple objects of the ButtonsPanel.
+     */
+    class MainTopPanel extends JPanel {
+        /**
+         * Constructs a panel of MainTopPanel.
+         */
+        public MainTopPanel() {
+            setBackground(res.lightGray);
+            setLayout(new BorderLayout());
+
+            JPanel pnlInformation = new JPanel(new GridBagLayout());
+            pnlInformation.setPreferredSize(new Dimension(1300,50));
+            add(pnlInformation, BorderLayout.NORTH);
+            pnlInformation.setBackground(res.lightGray);
+
+            gbc = new GridBagConstraints();
+
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.gridwidth = 1;
+            gbc.ipadx = 475;
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.anchor = GridBagConstraints.WEST;
+            String userFirstName = "Ramon Emmiel";
+            lblName = res.createLblH2("Hello, " + userFirstName + "!", res.eerieBlack);
+            pnlInformation.add(lblName, gbc);
+
+            gbc.gridy = 1;
+            gbc.gridwidth = 3;
+            String date = "January 28, 2023 | Wednesday 10:28 AM";
+            lblDate = res.createLblH4(date, res.eerieBlack);
+            pnlInformation.add(lblDate, gbc);
+
+            gbc.gridy = 0;
+            gbc.gridx = 1;
+            gbc.gridwidth = 5;
+            gbc.anchor = GridBagConstraints.EAST;
+            gbc.fill = GridBagConstraints.BOTH;
+            txtSearchbar = res.createTxtRounded("Search date",res.white,res.gray, 30);
+            pnlInformation.add(txtSearchbar, gbc);
+
+            GridLayout gridLayout = new GridLayout(0,3);
+            gridLayout.setHgap(10);
+
+            JPanel pnlButtons = new JPanel(gridLayout);
+            pnlButtons.setPreferredSize(new Dimension(1300,100));
+            pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
+            pnlButtons.setBackground(res.lightGray);
+            add(pnlButtons, BorderLayout.SOUTH);
+
+
+            // Update parameters as models from controller when backend has commenced.
+            ButtonPanel pnlAvailCar = new ButtonPanel(
+                    btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
+                    res.createLblH1("13", res.eerieBlack),
+                    res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
+            );
+            pnlButtons.add(pnlAvailCar);
+
+            ButtonPanel pnlAvailMotor = new ButtonPanel(
+                    btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
+                    res.createLblH1("10", res.eerieBlack),
+                    res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
+            );
+            pnlButtons.add(pnlAvailMotor);
+
+            ButtonPanel pnlTotalBookings = new ButtonPanel(
+                    btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
+                    res.createLblH1("3", res.eerieBlack),
+                    res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
+            );
+            pnlButtons.add(pnlTotalBookings);
+
+            this.setPreferredSize(new Dimension(1300,150));
+        }
+    }
+
+    /**
+     * The panel that creates the useful buttons of the home page.
+     */
+    class ButtonPanel extends JPanel {
+        /**
+         * The rounded panel.
+         */
+        private JPanel container;
+
+        /**
+         * Constructs a panel with a specified button, number label, and title label.
+         */
+        public ButtonPanel(JButton button, JLabel number, JLabel title) {
+            setLayout(new BorderLayout());
+
+            container = res.createPnlRounded(100, 80, res.white, res.lightGray);
+            container.setLayout(new GridLayout(0, 3));
+            add(container, BorderLayout.NORTH);
+
+            container.add(button);
+            container.add(number);
+            container.add(title);
+
+            this.setPreferredSize(new Dimension(100, 100));
+        }
+    }
+
+    /**
+     * TODO: Documentation
+     */
+    class ParkingSlotButtonsView extends JPanel {
+        /**
+         * TODO: Documentation
+         */
+        private JButton btnClose;
+        /**
+         * TODO: Documentation
+         */
+        private JPanel pnlContainer;
+        /**
+         * TODO: Documentation
+         */
+        private JLabel lblSlotNumber;
+        /**
+         * TODO: Documentation
+         */
+        private JLabel lblType;
+        /**
+         * TODO: Documentation
+         */
+        private JLabel lblStatus;
+        /**
+         * TODO: Documentation
+         */
+        private JLabel lblDate;
+        /**
+         * TODO: Documentation
+         */
+        private JButton btnReserve;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbVehicle;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbTime;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbDuration;
+
+        /**
+         * The stylesheet.
+         */
+        private Resources res = new Resources();
+
+        /**
+         * Constructs a panel of ParkingSlotButtonsView
+         */
+        public ParkingSlotButtonsView() { // TODO: Replace constructors
+            this.setLayout(new BorderLayout());
+
+            pnlContainer = res.createPnlRounded(1300,130,res.white, res.lightGray);
+            pnlContainer.setLayout(new GridLayout(3, 1)); // Divided into 3 rows, 1 column
+            add(pnlContainer, BorderLayout.CENTER);
+
+            //TODO: Change icon to iconClose
+            btnClose = res.createBtnIconOnly(res.iconHome, 20,20);
+            // TODO: Add close button
+
+            // pnlSlot
+            JPanel pnlSlotNumber = new JPanel();
+            pnlSlotNumber.setLayout(new FlowLayout(FlowLayout.CENTER));
+            pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
+            pnlSlotNumber.setBackground(Color.white);
+
+            // Label for the slot number
+            lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
+            pnlSlotNumber.add(lblSlotNumber);
+
+            pnlContainer.add(pnlSlotNumber);
+
+            // pnlSlotInformation
+            JPanel pnlSlotInformation = new JPanel(new GridBagLayout());
+            pnlSlotInformation.setPreferredSize(new Dimension(1300, 50));
+            pnlSlotInformation.setBackground(Color.white);
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(0, 10, 0, 10);
+            gbc.anchor = GridBagConstraints.CENTER;
+
+            // Labels for Type
+            JLabel lblTypeName = res.createLblH3("Type:", res.eerieBlack); // Used createLblH3 for distinction
+            gbc.gridx = 0;
+            pnlSlotInformation.add(lblTypeName, gbc);
+
+            lblType = res.createLblP("Car", res.eerieBlack);
+            gbc.gridx = 1;
+            pnlSlotInformation.add(lblType, gbc);
+
+            // Labels for Status
+            JLabel lblStatName = res.createLblH3("Status:", res.eerieBlack); // Used createLblH3 for distinction
+            gbc.gridx = 2;
+            pnlSlotInformation.add(lblStatName, gbc);
+
+            lblStatus = res.createLblP("Unavailable", res.eerieBlack);
+            gbc.gridx = 3;
+            pnlSlotInformation.add(lblStatus, gbc);
+
+            // Labels for Date
+            JLabel lblDateName = res.createLblH3("Date:", res.eerieBlack); // Used createLblH3 distinction
+            gbc.gridx = 4;
+            pnlSlotInformation.add(lblDateName, gbc);
+
+            lblDate = res.createLblP("January 24, 2024", res.eerieBlack);
+            gbc.gridx = 5;
+            pnlSlotInformation.add(lblDate, gbc);
+
+            pnlContainer.add(pnlSlotInformation);
+
+            // pnlReserve
+            JPanel pnlReserve = new JPanel(new GridBagLayout());
+            pnlReserve.setPreferredSize(new Dimension(1300, 100));
+            pnlReserve.setBackground(Color.white);
+
+            gbc = new GridBagConstraints();
+            gbc.insets = new Insets(5, 10, 5, 10); // Add space around components
+            gbc.anchor = GridBagConstraints.CENTER; // Center components horizontally
+
+            // Dropdown for Select Vehicle
+            cmbVehicle = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
+            cmbVehicle.setPreferredSize(new Dimension(200, 40));
+            cmbVehicle.setFont(new Font("Arial", Font.BOLD, 16));
+            pnlReserve.add(cmbVehicle, gbc);
+
+            // Dropdown for Select Time
+            JComboBox<String> cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "10:00", "15:00", "20:00"});
+            cmbTime.setPreferredSize(new Dimension(200, 40));
+            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
+            gbc.gridx = 1;
+            pnlReserve.add(cmbTime, gbc);
+
+            // Dropdown for Duration
+            cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "5hr", "10hr", "15hr", "19hr"});
+            cmbDuration.setPreferredSize(new Dimension(200, 40));
+            cmbDuration.setFont(new Font("Arial", Font.BOLD, 16));
+            gbc.gridx = 2;
+            pnlReserve.add(cmbDuration, gbc);
+
+            // Reserve Slot Button (using createBtnRounded from Resources)
+            JButton btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            gbc.gridx = 3;
+            gbc.gridwidth = 2; // Set the button to span 2 columns
+            btnReserve.setPreferredSize(new Dimension(140, 40));
+            btnReserve.setFont(new Font("Arial", Font.BOLD, 16));
+            pnlReserve.add(btnReserve, gbc);
+
+            pnlContainer.add(pnlReserve);
+
+            this.setPreferredSize(new Dimension(1300, 130));
+        }
+    }
+}
