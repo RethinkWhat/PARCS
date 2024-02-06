@@ -4,6 +4,7 @@ import utilities.Resources;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Template for object VehicleAdderView.
@@ -59,7 +60,7 @@ public class VehicleAdderView extends JFrame {
 
         gbc.gridy = 1;
         gbc.ipady = 3;
-        cmbType = res.createCmbRounded(res.lightGray,res.white,10);
+        cmbType = res.createCmbRounded(res.lightGray,res.eerieBlack,0);
         contentPane.add(cmbType, gbc);
 
         gbc.gridy = 2;
@@ -92,6 +93,14 @@ public class VehicleAdderView extends JFrame {
         this.setResizable(false);
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
+    }
+
+    public void setAddVehicleListener(ActionListener actionListener) {
+        btnAddVehicle.addActionListener(actionListener);
+    }
+
+    public void setCancelListener(ActionListener actionListener) {
+        btnCancel.addActionListener(actionListener);
     }
 
     public JComboBox<?> getCmbType() {
