@@ -43,52 +43,13 @@ public class LoginRegisterController {
         view.setLoginListener(new LoginListener());
         view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
         view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
-        view.getChkShowPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowPassword(),
+        view.getChkShowPassword().addActionListener(new ShowPasswordListener(view.getChkShowPassword(),
                 view.getTxtPassword()));
-        view.getChkShowSignupPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowSignupPassword(),
+        view.getChkShowSignupPassword().addActionListener(new ShowPasswordListener(view.getChkShowSignupPassword(),
                 view.getTxtSignupPassword()));
-        view.getChkShowConfirmPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowConfirmPassword(),
+        view.getChkShowConfirmPassword().addActionListener(new ShowPasswordListener(view.getChkShowConfirmPassword(),
                 view.getTxtConfirmPassword()));
-        view.setCreateAccountListener(e -> new CreateAccountListener());
-
-        // mouse listeners
-        view.getBtnSignup().addMouseListener(new CursorChanger(view.getBtnSignup()));
-        view.getBtnLogin().addMouseListener(new CursorChanger(view.getBtnLogin()));
-        view.getBtnBack().addMouseListener(new CursorChanger(view.getBtnBack()));
-        view.getBtnCreateAccount().addMouseListener(new CursorChanger(view.getBtnCreateAccount()));
-
-        // focus listeners
-        view.getTxtUsername().addFocusListener(new TextFieldFocus(view.getTxtUsername(), "Username"));
-        view.getTxtPassword().addFocusListener(new PasswordFocus(view.getTxtPassword(),
-                view.getChkShowPassword(), "Password"));
-        view.getTxtFirstName().addFocusListener(new TextFieldFocus(view.getTxtFirstName(), "First Name"));
-        view.getTxtLastName().addFocusListener(new TextFieldFocus(view.getTxtLastName(), "Last Name"));
-        view.getTxtSignupUsername().addFocusListener(new TextFieldFocus(view.getTxtSignupUsername(), "Username"));
-        view.getTxtPhoneNo().addFocusListener(new TextFieldFocus(view.getTxtPhoneNo(), "Phone Number"));
-        view.getTxtSignupPassword().addFocusListener(new PasswordFocus(view.getTxtSignupPassword(),
-                view.getChkShowSignupPassword(), "Password"));
-        view.getTxtConfirmPassword().addFocusListener(new PasswordFocus(view.getTxtConfirmPassword(),
-                view.getChkShowConfirmPassword(), "Confirm Password"));
-
-        view.repaint();
-        view.revalidate();
-    }
-
-    public LoginRegisterController(LoginRegisterView view, LoginRegisterModel model) {
-        this.view = view;
-        this.model = model;
-
-        // action listeners
-        view.setLoginListener(new LoginListener());
-        view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
-        view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
-        view.getChkShowPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowPassword(),
-                view.getTxtPassword()));
-        view.getChkShowSignupPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowSignupPassword(),
-                view.getTxtSignupPassword()));
-        view.getChkShowConfirmPassword().addActionListener(e -> new ShowPasswordListener(view.getChkShowConfirmPassword(),
-                view.getTxtConfirmPassword()));
-        view.setCreateAccountListener(e -> new CreateAccountListener());
+        view.setCreateAccountListener(new CreateAccountListener());
 
         // mouse listeners
         view.getBtnSignup().addMouseListener(new CursorChanger(view.getBtnSignup()));
@@ -114,25 +75,24 @@ public class LoginRegisterController {
     }
 
     /**
-     * Creates an object that will be sent to the server to verify whether the user's credentials are matching an
-     * existing account.
+     * User inputs are sent to the server to verify whether the user's credentials are matching an existing account.
      */
     class LoginListener implements ActionListener {
         /**
-         * TODO: Documentation
+         * The user input of username and password are sent to the server and validated if the account exists and if
+         * the credentials are correct. An error message is displayed if the user input is wrong.
          * @param e the event to be processed
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            client.writeString(view.getUsername());
-            client.writeString(view.getPassword());
-
-            // Authentication success
-            if (client.readString().equals("true")) {
-                System.out.println("success");
+            if (model.validateAccount(view.getUsername(), view.getPassword())) {
+                client.setLoggedIn(true);
+                // instantiate application controller
             } else {
-                System.out.println("fail");
+                view.displayLoginErrorMessage("Wrong credentials or the account does not exist. Try again.");
             }
+            // add else where option pane message is displayed if server is offline.
+            view.displayLoginErrorMessage(""); // resets the login error message
         }
     }
 
@@ -146,7 +106,14 @@ public class LoginRegisterController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-
+            if (!model.verifySignupPassword(view.getSignupPassword(), view.getConfirmPassword())) {
+                view.displaySignupErrorMessage("Passwords do not match. Try again.");
+            } else {
+                // TODO: invoke create account method from model with given inputs (encrypt password)
+                // view.displayOptionPane("Account has been successfully made. You will be redirected to the login page."); // informs the user that the account has been successfully made.
+                view.getCardLayout().show(view.getPnlCards(), "login"); // redirection to the login page
+            }
+            view.displaySignupErrorMessage(""); // resets error message
         }
     }
 
@@ -332,11 +299,6 @@ public class LoginRegisterController {
                 passwordField.setEchoChar((char) 0);
             }
         }
-    }
-
-    // temporary main method for debugging
-    public static void main(String[] args) {
-        new LoginRegisterController(new LoginRegisterView(), new LoginRegisterModel());
     }
 }
 
