@@ -212,6 +212,23 @@ public class Resources {
     }
 
     /**
+     * Creates a new JComboBox with a specified background color, foreground color, and radius.
+     * @param background The specified background.
+     * @param foreground The specified foreground.
+     * @param radius The specified radius.
+     * @return The specified combo box.
+     */
+    public JComboBox<?> createCmbRounded(Color background, Color foreground, int radius) {
+        JComboBox<?> comboBox = new JComboBox<>();
+        comboBox.setFont(new Font("Arial", Font.PLAIN, 14));
+        comboBox.setBackground(background);
+        comboBox.setForeground(foreground);
+        comboBox.setLightWeightPopupEnabled(true);
+        comboBox.setBorder(new RoundedBorder(radius));
+        return comboBox;
+    }
+
+    /**
      * Template for RoundedBorder object.
      */
     public static class RoundedBorder implements Border {
