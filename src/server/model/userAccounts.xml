@@ -1,18 +1,19 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <userClass>
-    <user username = "r">
-        <password>t</password>
-        <lastName>Tank</lastName>
-        <firstName>Rithik</firstName>
-        <phoneNumber>6309177900153</phoneNumber>
+    <user username = "basti">
+        <type>user</type>
+        <password>siccuan123</password>
+        <lastName>Siccuan</lastName>
+        <firstName>Basti</firstName>
+        <phoneNumber>6334934393</phoneNumber>
         <vehicle>car,Honda Civic,NWA 911 </vehicle>
         <vehicle>car,Mitsubishi Mirage,N99 399 </vehicle>
     </user>
-    <user username = "test">
-        <password>rithikTank123</password>
-        <lastName>Tank</lastName>
-        <firstName>Rithik</firstName>
-        <phoneNumber>6309177900153</phoneNumber>
+    <user username = "rickardo">
+        <password>ricky</password>
+        <lastName>Roxas</lastName>
+        <firstName>Johan</firstName>
+        <phoneNumber>638484</phoneNumber>
         <vehicle>car,Mitsubishi Mirage,N99 399</vehicle>
         <vehicle>car,Mitsubishi Mirage,N99 399</vehicle>
     </user>
