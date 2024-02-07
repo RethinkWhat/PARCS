@@ -35,7 +35,6 @@ public class Server{
 
 
     public static void main(String[] args) {
-        // TODO: change address
         SocketAddress address = new InetSocketAddress(2020);
         ExecutorService executor = Executors.newFixedThreadPool(5);
         try {

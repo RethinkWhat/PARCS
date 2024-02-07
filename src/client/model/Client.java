@@ -11,10 +11,13 @@ import java.util.Scanner;
 
 public class Client implements Runnable {
 
+    // Object to hold client socket
     private Socket client;
 
+    // Object for writing to server
     private PrintWriter writer;
 
+    // Object for reading from server
     private BufferedReader reader;
 
     private boolean loggedIn;
