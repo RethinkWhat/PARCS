@@ -83,6 +83,10 @@ public class LoginRegisterView extends JFrame {
      */
     private JLabel lblSignupErrorMessage;
     /**
+     * The option pane to tell the user of specific messages.
+     */
+    private JOptionPane optMessage;
+    /**
      * Instance variable of resources to invoke stylesheet and UI resources.
      */
     private final Resources res = new Resources();
@@ -339,11 +343,21 @@ public class LoginRegisterView extends JFrame {
     }
 
     /**
-     * Sets a specified error message for lblSignupErrorMessage
+     * Sets a specified error message for lblSignupErrorMessage.
      * @param message The specified error.
      */
     public void displaySignupErrorMessage(String message) {
         lblSignupErrorMessage.setText(message);
+    }
+
+    /**
+     * Sets a specified message for optMessage.
+     * @param message The specified message.
+     */
+    public void displayOptionPane(String message, String title) {
+       // optMessage = JOptionPane.showConfirmDialog(null, message, title, JOptionPane.OK_OPTION);
+        optMessage.setFont(new Font("Arial", Font.PLAIN, 15));
+        optMessage.requestFocusInWindow();
     }
 
     /**
@@ -419,69 +433,129 @@ public class LoginRegisterView extends JFrame {
     }
 
     /**
-     * Retrieves the current JTextField object of txtSignupUsername.
+     * Retrieves the current JTextField object of txtSignupUsername in the signup page.
      * @return The current txtSignupUsername.
      */
     public JTextField getTxtSignupUsername() {
         return txtSignupUsername;
     }
 
+    /**
+     * Retrieves the current JTextField object of txtFirstName in the signup page.
+     * @return The current txtFirstName.
+     */
     public JTextField getTxtFirstName() {
         return txtFirstName;
     }
 
+    /**
+     * Retrieves the current JTextField object of txtLastName in the signup page.
+     * @return The current txtLastName.
+     */
     public JTextField getTxtLastName() {
         return txtLastName;
     }
 
+    /**
+     * Retrieves the current JTextField object of txtUsername in the login page.
+     * @return The current txtUsername.
+     */
     public JTextField getTxtUsername() {
         return txtUsername;
     }
 
+    /**
+     * Retrieves the current JTextField object of txtPhoneNo in the signup page.
+     * @return The current txtPhoneNo.
+     */
     public JTextField getTxtPhoneNo() {
         return txtPhoneNo;
     }
 
+    /**
+     * Retrieves the current JTextField object of txtPassword in the login page.
+     * @return The current txtPassword.
+     */
     public JPasswordField getTxtPassword() {
         return txtPassword;
     }
 
+    /**
+     * Retrieves the current JPasswordField object of txtSignupPassword in the signup page.
+     * @return The current txtSignupPassword.
+     */
     public JPasswordField getTxtSignupPassword() {
         return txtSignupPassword;
     }
 
+    /**
+     * Retrieves the current JPasswordField object of txtConfirmPassword in the signup page.
+     * @return The current txtConfirmPassword.
+     */
     public JPasswordField getTxtConfirmPassword() {
         return txtConfirmPassword;
     }
 
+    /**
+     * Retrieves the current JCheckBox object of chkShowPassword in the login page.
+     * @return The current chkShowPassword.
+     */
     public JCheckBox getChkShowPassword() {
         return chkShowPassword;
     }
 
+    /**
+     * Retrieves the current JButton object of btnBack in the signup page.
+     * @return The current btnBack.
+     */
     public JButton getBtnBack() {
         return btnBack;
     }
 
+    /**
+     * Retrieves the current JButton object of btnLogin in the login page.
+     * @return The current btnLogin.
+     */
     public JButton getBtnLogin() {
         return btnLogin;
     }
 
+    /**
+     * Retrieves the current JButton object of btnSignup in the login page.
+     * @return The current btnSignup.
+     */
     public JButton getBtnSignup() {
         return btnSignup;
     }
 
+    /**
+     * Retrieves the current JButton object of btnCreateAccount in the signup page.
+     * @return The current btnCreateAccount.
+     */
     public JButton getBtnCreateAccount() {
         return btnCreateAccount;
     }
 
+    /**
+     * Retrieves the current card layout used in pnlCards.
+     * @return The current card layout of pnlCards.
+     */
     public CardLayout getCardLayout() {
         return cardLayout;
     }
 
+    /**
+     * Retrieves the current JCheckBox object of chkShowSignupPassword.
+     * @return The current chkShowSignupPassword.
+     */
     public JCheckBox getChkShowSignupPassword() {
         return chkShowSignupPassword;
     }
 
+    /**
+     * Retrieves the current JCheckbox object of chkShowConfirmPassword.
+     * @return The current chkShowConfirmPassword.
+     */
     public JCheckBox getChkShowConfirmPassword() {
         return chkShowConfirmPassword;
     }
