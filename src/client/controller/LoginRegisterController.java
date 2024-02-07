@@ -85,9 +85,9 @@ public class LoginRegisterController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (model.validateAccount(view.getUsername(), view.getPassword())) {
+            if (model.validateAccount(view.getUsername(), model.encryptPassword(view.getPassword()))) {
                 client.setLoggedIn(true);
-                // instantiate application controller
+                // TODO: instantiate application controller
             } else {
                 view.displayLoginErrorMessage("Wrong credentials or the account does not exist. Try again.");
             }
@@ -109,7 +109,8 @@ public class LoginRegisterController {
             if (!model.verifySignupPassword(view.getSignupPassword(), view.getConfirmPassword())) {
                 view.displaySignupErrorMessage("Passwords do not match. Try again.");
             } else {
-                // TODO: invoke create account method from model with given inputs (encrypt password)
+                model.encryptPassword(view.getSignupPassword());
+                // TODO: invoke create account method from model with given inputs
                 // view.displayOptionPane("Account has been successfully made. You will be redirected to the login page."); // informs the user that the account has been successfully made.
                 view.getCardLayout().show(view.getPnlCards(), "login"); // redirection to the login page
             }
