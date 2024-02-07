@@ -6,6 +6,12 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +24,8 @@ public class UserParser {
     DocumentBuilder builder;
     Document document;
 
+    final File userAccountsFile = new File("src/server/model/userAccounts.xml");
+
 
     /**
      * Method to retrieve the user accounts file and to be used for the methods found in this class
@@ -25,7 +33,7 @@ public class UserParser {
     private void getUserAccountsFile() {
         try {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
-            document = builder.parse(new File("src/server/model/userAccounts.xml"));
+            document = builder.parse(userAccountsFile);
             document.getDocumentElement().normalize();
         } catch (Exception ex) {
             ex.printStackTrace();
@@ -119,12 +127,77 @@ public class UserParser {
         }
     }
 
+    /** Method to create a user node to add to xml file */
+    private Node createUserNode(String username, String type,
+                                String lastName, String firstName, String phoneNumber, ArrayList<Vehicle> vehicles) {
+
+
+        Element userElement = document.createElement("user");
+        userElement.setAttribute("user", username);
+
+        Element typeNode = document.createElement("type");
+        typeNode.setTextContent(type);
+        userElement.appendChild(typeNode);
+
+
+        Element lastNameNode = document.createElement("lastName");
+        lastNameNode.setTextContent(lastName);
+        userElement.appendChild(lastNameNode);
+
+        Element firstNameNode = document.createElement("firstName");
+        firstNameNode.setTextContent(firstName);
+        userElement.appendChild(firstNameNode);
+
+        Element phoneNumberNode = document.createElement("phoneNumber");
+        phoneNumberNode.setTextContent(phoneNumber);
+        userElement.appendChild(phoneNumberNode);
+
+        if (vehicles !=null) {
+            for (Vehicle vehicle: vehicles) {
+                Element vehicleNode = document.createElement("vehicle");
+                vehicleNode.setTextContent(vehicle.toString());
+                userElement.appendChild(vehicleNode);
+            }
+        }
+        return userElement;
+
+
+    }
+
+    public void createUser(String username, String type, String lastName, String firstName,
+                           String phoneNumber, ArrayList<Vehicle> vehicles) {
+
+        getUserAccountsFile();
+
+        Node userNode = createUserNode(username, type, lastName, firstName, phoneNumber, vehicles);
+
+        document.getDocumentElement().appendChild(userNode);
+        DOMSource source = new DOMSource(document);
+
+        TransformerFactory factory = null;
+        Transformer transformer = null;
+        try {
+            factory = TransformerFactory.newInstance();
+            transformer = factory.newTransformer();
+            transformer.setOutputProperty(OutputKeys.INDENT,"yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+            StreamResult result = new StreamResult(userAccountsFile);
+            transformer.transform(source,result);
+
+        } catch (TransformerException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
 
     /** Will be deleted later */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
-        obj.editUserInfo("r","password","rethinkwhat");
+        obj.createUser("laclac", "user","lacanilao","patrick","+639177900153",
+                null);
+
     }
 }
