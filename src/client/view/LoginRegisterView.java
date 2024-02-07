@@ -75,6 +75,14 @@ public class LoginRegisterView extends JFrame {
      */
     private JButton btnCreateAccount;
     /**
+     * The error message displayed in the login page.
+     */
+    private JLabel lblLoginErrorMessage;
+    /**
+     * The error message displayed in the signup page.
+     */
+    private JLabel lblSignupErrorMessage;
+    /**
      * Instance variable of resources to invoke stylesheet and UI resources.
      */
     private final Resources res = new Resources();
@@ -168,8 +176,8 @@ public class LoginRegisterView extends JFrame {
             pnlRight.add(txtPassword, gbc);
 
             gbc.gridy = 7;
-            JLabel lblWrongPassword = res.createLblP("Wrong credentials. Try again.", res.red);
-            pnlRight.add(lblWrongPassword, gbc);
+            lblLoginErrorMessage = res.createLblP("", res.red);
+            pnlRight.add(lblLoginErrorMessage, gbc);
 
             gbc.gridy = 6;
             gbc.gridx = 0;
@@ -279,8 +287,8 @@ public class LoginRegisterView extends JFrame {
 
             gbc.gridy = 9;
             gbc.fill = GridBagConstraints.NONE;
-            JLabel lblWrongPassword = res.createLblP("Passwords do not match. Try again", res.red);
-            add(lblWrongPassword, gbc);
+            lblSignupErrorMessage = res.createLblP("", res.red);
+            add(lblSignupErrorMessage, gbc);
 
             gbc.gridy = 10;
             btnCreateAccount = res.createBtnRounded("Create Account", res.celadon, res.eerieBlack, 10);
@@ -322,26 +330,98 @@ public class LoginRegisterView extends JFrame {
         btnBack.addActionListener(backListener);
     }
 
+    /**
+     * Sets a specified error message for lblLoginErrorMessage.
+     * @param message The specified error.
+     */
+    public void displayLoginErrorMessage(String message) {
+        lblLoginErrorMessage.setText(message);
+    }
+
+    /**
+     * Sets a specified error message for lblSignupErrorMessage
+     * @param message The specified error.
+     */
+    public void displaySignupErrorMessage(String message) {
+        lblSignupErrorMessage.setText(message);
+    }
+
+    /**
+     * Retrieves the current username input in the txtUsername of the login page.
+     * @return The current username input.
+     */
     public String getUsername() {
         return txtUsername.getText();
     }
 
+    /**
+     * Retrieves the current password input in the txtPassword of the login page.
+     * @return The current password input.
+     */
     public String getPassword() {
         return txtPassword.getText();
     }
 
-    public String getFirstName() {
+    /**
+     * Retrieves the current first name input in the txtFirstName of the signup page.
+     * @return The current first name input.
+     */
+    public String getSignupFirstName() {
         return txtFirstName.getText();
     }
 
-    public String getLastName() {
+    /**
+     * Retrieves the current last name input in the txtLastName of the signup page.
+     * @return The current last name input.
+     */
+    public String getSignupLastName() {
         return txtLastName.getText();
     }
 
+    /**
+     * Retrieves the current username input in the txtSignupUsername of the signup page.
+     * @return The current username input.
+     */
+    public String getSignupUsername() {
+        return txtSignupUsername.getText();
+    }
+
+    /**
+     * Retrieves the current phone number input in the txtPhoneNo of the signup page.
+     * @return The current phone number input.
+     */
+    public String getSignupPhoneNo() {
+        return txtPhoneNo.getText();
+    }
+
+    /**
+     * Retrieves the current password input in the txtSignupPassword of the signup page.
+     * @return The current password input.
+     */
+    public String getSignupPassword() {
+        return String.valueOf(txtSignupPassword.getPassword());
+    }
+
+    /**
+     * Retrieves the current password input in the txtConfirmPassword of the signup page.
+     * @return The current password input.
+     */
+    public String getConfirmPassword() {
+        return String.valueOf(txtConfirmPassword.getPassword());
+    }
+
+    /**
+     * Retrieves the current card layout panel containing the login and signup panels..
+     * @return The current card layout panel.
+     */
     public JPanel getPnlCards() {
         return pnlCards;
     }
 
+    /**
+     * Retrieves the current JTextField object of txtSignupUsername.
+     * @return The current txtSignupUsername.
+     */
     public JTextField getTxtSignupUsername() {
         return txtSignupUsername;
     }
