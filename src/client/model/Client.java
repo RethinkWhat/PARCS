@@ -22,7 +22,7 @@ public class Client implements Runnable {
 
     @Override
     public void run() {
-        LoginRegisterModel model = new LoginRegisterModel();
+        LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
         new LoginRegisterController(this,view, model);
     }
