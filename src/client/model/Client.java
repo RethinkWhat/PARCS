@@ -6,6 +6,8 @@ import client.view.LoginRegisterView;
 import java.io.*;
 
 import java.net.Socket;
+import java.net.UnknownHostException;
+import java.util.Scanner;
 
 public class Client implements Runnable {
 
@@ -59,7 +61,20 @@ public class Client implements Runnable {
     public static void main(String[] args) {
 
         try {
-            Socket clientSocket = new Socket("localhost", 2020);
+            Scanner fileReader = new Scanner(new File("src/client/host"));
+            String host = "";
+            Socket clientSocket = null;
+            while (fileReader.hasNext()) {
+                try {
+                    host = fileReader.nextLine();
+                    clientSocket = new Socket(host, 2020);
+                } catch (UnknownHostException ignored) {
+
+                }
+            }
+
+            fileReader.close();
+
 
             BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
 
