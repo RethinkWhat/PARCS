@@ -1,4 +1,4 @@
-package client.view.account_view;
+package client.view;
 
 import utilities.Resources;
 
@@ -116,11 +116,11 @@ public class LoginRegisterView extends JFrame {
     }
 
     /**
-     * TODO: Documentation
+     * Contains the UI components for the login page.
      */
     class LoginPanel extends JPanel {
         /**
-         * Constructs a LoginaPanel panel.
+         * Constructs a LoginPanel panel.
          */
         public LoginPanel() {
             // Main Panel
@@ -197,7 +197,7 @@ public class LoginRegisterView extends JFrame {
     }
 
     /**
-     * TODO: Documentation
+     * Contains the different signup UI components.
      */
     class SignupPanel extends JPanel {
         /**
@@ -254,6 +254,7 @@ public class LoginRegisterView extends JFrame {
             gbc.gridy = 5;
             gbc.gridwidth = 100;
             txtSignupPassword = res.createPwdRounded(res.lightGray, res.gray, 35);
+            txtSignupPassword.setEchoChar((char)0);
             add(txtSignupPassword, gbc);
 
             gbc.gridy = 6;
@@ -261,11 +262,12 @@ public class LoginRegisterView extends JFrame {
             chkShowSignupPassword.setFont(new Font("Arial", Font.PLAIN, 14));
             chkShowSignupPassword.setHorizontalAlignment(SwingConstants.LEFT);
             chkShowSignupPassword.setBackground(res.white);
-            add(chkShowPassword, gbc);
+            add(chkShowSignupPassword, gbc);
 
             gbc.gridx = 0;
             gbc.gridy = 7;
             txtConfirmPassword = res.createPwdRounded(res.lightGray, res.gray, 35);
+            txtConfirmPassword.setEchoChar((char)0);
             add(txtConfirmPassword, gbc);
 
             gbc.gridy = 8;
@@ -310,14 +312,6 @@ public class LoginRegisterView extends JFrame {
      */
     public void setCreateAccountListener(ActionListener createAccountListener) {
         btnCreateAccount.addActionListener(createAccountListener);
-    }
-
-    /**
-     * Sets a specified action listener for chkShowPassword.
-     * @param actionListener The specified action listener.
-     */
-    public void setShowPasswordListener(ActionListener actionListener) {
-        chkShowPassword.addActionListener(actionListener);
     }
 
     /**
