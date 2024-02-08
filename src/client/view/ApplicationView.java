@@ -6,6 +6,7 @@ import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Template for object ReservationPage.
@@ -75,7 +76,7 @@ public class ApplicationView extends JFrame {
         contentArea.add(pnlCards, BorderLayout.CENTER);
 
         // Home Page
-        pnlCards.add(reservationPageView, "home");
+        pnlCards.add(reservationPageView = new ReservationPageView(), "home");
 
         // Ticket Page
         // TODO: card and panel
@@ -159,6 +160,22 @@ public class ApplicationView extends JFrame {
                 new ApplicationView();
             }
         });
+    }
+
+    public void setNavHomeListener(ActionListener actionListener) {
+        btnNavHome.addActionListener(actionListener);
+    }
+
+    public void setNavTicketListener(ActionListener actionListener) {
+        btnNavTicket.addActionListener(actionListener);
+    }
+
+    public void setNavAccountListener(ActionListener actionListener) {
+        btnNavAccount.addActionListener(actionListener);
+    }
+
+    public void setNavLogoutListener(ActionListener actionListener) {
+        btnNavLogout.addActionListener(actionListener);
     }
 
     public JPanel getPnlCards() {
