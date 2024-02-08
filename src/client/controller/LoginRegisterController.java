@@ -1,8 +1,12 @@
 package client.controller;
 
+import client.model.ApplicationModel;
 import client.model.Client;
 import client.model.LoginRegisterModel;
+import client.model.VehicleAdderModel;
+import client.view.ApplicationView;
 import client.view.LoginRegisterView;
+import client.view.VehicleAdderView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -86,13 +90,12 @@ public class LoginRegisterController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (model.validateAccount(view.getUsername(), model.encryptPassword(view.getPassword()))) {
-                client.setLoggedIn(true);
-                // TODO: instantiate application controller
+                new ApplicationController(new ApplicationView(), new ApplicationModel(null));
+                view.dispose();
             } else {
                 view.displayLoginErrorMessage("Wrong credentials or the account does not exist. Try again.");
             }
             // add else where option pane message is displayed if server is offline.
-            view.displayLoginErrorMessage(""); // resets the login error message
         }
     }
 
@@ -110,7 +113,16 @@ public class LoginRegisterController {
                 view.displaySignupErrorMessage("Passwords do not match. Try again.");
             } else {
                 model.encryptPassword(view.getSignupPassword());
-                // TODO: invoke create account method from model with given inputs
+                /*
+                client.writeString(
+                        view.getSignupUsername() + "," +
+                                "user" + "," +
+                                view.getSignupLastName() + "," +
+                                view.getSignupFirstName() + "," +
+                                view.getSignupPhoneNo()
+                );
+                */
+                new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
                 // view.displayOptionPane("Account has been successfully made. You will be redirected to the login page."); // informs the user that the account has been successfully made.
                 view.getCardLayout().show(view.getPnlCards(), "login"); // redirection to the login page
             }
@@ -221,6 +233,8 @@ public class LoginRegisterController {
          */
         @Override
         public void focusGained(FocusEvent e) {
+            view.displayLoginErrorMessage(""); // resets the login error message
+            view.displaySignupErrorMessage(""); // resets the signup error message
             if (textField.getText().equals(placeholder)) {
                 textField.setText("");
             }
@@ -277,6 +291,8 @@ public class LoginRegisterController {
          */
         @Override
         public void focusGained(FocusEvent e) {
+            view.displayLoginErrorMessage(""); // resets the login error message
+            view.displaySignupErrorMessage(""); // resets the signup error message
             if (!chkShowPassword.isSelected()) {
                 passwordField.setEchoChar('●');
             }
