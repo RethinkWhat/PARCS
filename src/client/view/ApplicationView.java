@@ -49,10 +49,9 @@ public class ApplicationView extends JFrame {
      */
     private Resources res = new Resources();
     /**
-     * Instance variable of GridBagConstraints used for JPanels using GridBagLayout.
+     * TODO: Documentation
      */
-    private GridBagConstraints gbc;
-
+    private ReservationPageView reservationPageView;
     /**
      * Constructs a ReservationPage frame.
      */
@@ -76,7 +75,7 @@ public class ApplicationView extends JFrame {
         contentArea.add(pnlCards, BorderLayout.CENTER);
 
         // Home Page
-        pnlCards.add(new ReservationPageView(), "home");
+        pnlCards.add(reservationPageView, "home");
 
         // Ticket Page
         // TODO: card and panel
@@ -142,6 +141,14 @@ public class ApplicationView extends JFrame {
 
             this.setPreferredSize(new Dimension(60, 800));
         }
+    }
+
+    /**
+     * Retrieves the current panel of ReservationPageView
+     * @return The current panel of ReservationPageView.
+     */
+    public ReservationPageView getReservationPageView() {
+        return reservationPageView;
     }
 
     // Temporary main method for testing. Omit before production.

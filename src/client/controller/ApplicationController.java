@@ -1,5 +1,6 @@
 package client.controller;
 
+import client.controller.application_pages.ReservationPageController;
 import client.model.ApplicationModel;
 import client.view.ApplicationView;
 
@@ -26,5 +27,15 @@ public class ApplicationController {
     public ApplicationController(ApplicationView view, ApplicationModel model) {
         this.view = view;
         this.model = model;
+
+        // constants / variables
+        ReservationPageController reservationPageController =
+                new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
+
+        // action listeners
+
+        // mouse listeners
+
+        // focus listeners
     }
 }
