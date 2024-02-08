@@ -30,7 +30,7 @@ public class LoginRegisterModel {
      * @return True if the password matches. False if otherwise.
      */
     public boolean verifySignupPassword(String password, String passwordConfirmation) {
-        return password == passwordConfirmation;
+        return password.equals(passwordConfirmation);
     }
 
     /**
@@ -59,9 +59,11 @@ public class LoginRegisterModel {
      * @return The success state.
      */
     public boolean validateAccount(String username, String password) {
+        client.openSocket();
         client.writeString(username);
         client.writeString(password);
-        return client.readString().equals("true");
-        // TODO: if account exists but wrong credentials, if account does not exist.
+        boolean validated =  client.readString().equals("true");
+        client.closeSocket();
+        return validated;
     }
 }

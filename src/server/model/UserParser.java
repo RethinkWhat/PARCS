@@ -100,6 +100,7 @@ public class UserParser {
         return userList;
     }
 
+
     public void editUserInfo(String username, String tagToEdit, String newInformation) {
 
         getUserAccountsFile(); // Set document

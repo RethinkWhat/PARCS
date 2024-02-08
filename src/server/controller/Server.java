@@ -8,6 +8,8 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -17,14 +19,10 @@ public class Server{
 
     private UserParser userParser;
 
-    public Server() {
-        int port = 2020;
-        try {
-            this.server = new ServerSocket(port);
-            userParser = new UserParser();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public Server(SocketAddress socketAddress) throws IOException {
+        server = new ServerSocket();
+        server.bind(socketAddress);
+        userParser = new UserParser();
     }
 
     public boolean validateAccount(String username, String password) {
@@ -33,32 +31,28 @@ public class Server{
         return password.equals(associatedPass);
     }
 
+
     public ServerSocket getServer() {
         return server;
     }
 
-    public void startServer() {
-        while (true) {
-            try {
-                Socket clientSocket = server.accept();
-                new Thread(new ClientHandler(this, clientSocket)).start();
-            } catch (IOException ex) {
-                ex.printStackTrace();
-            }
-        }
-    }
-
-    public void closeServer() {
-        try {
-            server.close();
-        } catch (IOException ez) {
-            ez.printStackTrace();
-        }
-    }
-
 
     public static void main(String[] args) {
-        Server server = new Server();
+        SocketAddress address = new InetSocketAddress(2020);
+        ExecutorService executor = Executors.newFixedThreadPool(5);
+        try {
+            Server server = new Server(address);
+
+            while (true) {
+                Socket clientSocket = server.getServer().accept();
+                new Thread(new ClientHandler(server, clientSocket)).start();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
+
+
