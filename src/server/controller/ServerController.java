@@ -32,7 +32,6 @@ public class ServerController {
 
             if (!serverStatus){
                 server.startServer();
-
                 serverStatusView.setOnline();
                 serverStatus = true;
             }else {
@@ -46,6 +45,9 @@ public class ServerController {
     }
 
     public static void main(String[] args) {
+        Server server = new Server();
+        ServerStatusView view = new ServerStatusView();
+        ServerController controller = new ServerController(server, view);
 
     }
 }
