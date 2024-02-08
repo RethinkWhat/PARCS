@@ -199,23 +199,22 @@ public class ServerStatusView extends JFrame {
             setBorder(new Resources.RoundedBorder(20));
             setLayout(new GridBagLayout());
 
-            //To be dynamically changed in the controller
-            JLabel serverStatus = res.createLblH1("ONLINE",res.celadon);
-            gbc.gridx = 1;
-            gbc.gridy = 1;
-            add(serverStatus,gbc);
-
-            JLabel serverPrompt = res.createLblH1("SERVER STATUS:", res.eerieBlack);
+            JLabel serverPrompt = res.createLblH1("SERVER STATUS", res.eerieBlack);
             serverPrompt.setHorizontalAlignment(SwingConstants.CENTER);
             gbc.gridx = 0;
             gbc.gridy = 1;
             add(serverPrompt, gbc);
 
-
-            serverSwitch = res.createBtnRounded("Terminate Server", res.red, res.red, 15);
-            serverSwitch.setPreferredSize(new Dimension(200,50));
+            //To be dynamically changed in the controller
+            JLabel serverStatus = res.createLblH1("OFFLINE",res.red);
             gbc.gridx = 0;
             gbc.gridy = 2;
+            add(serverStatus,gbc);
+
+            serverSwitch = res.createBtnRounded("Start Server", res.white, res.celadon, 15);
+            serverSwitch.setPreferredSize(new Dimension(200,50));
+            gbc.gridx = 0;
+            gbc.gridy = 3;
             add(serverSwitch,gbc);
 
 
