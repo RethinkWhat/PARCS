@@ -5,11 +5,12 @@ import client.view.LoginRegisterView;
 
 import java.io.*;
 
-import java.net.Socket;
-import java.net.UnknownHostException;
+import java.net.*;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
-public class Client implements Runnable {
+public class Client {
 
     // Object to hold client socket
     private Socket client;
@@ -20,17 +21,35 @@ public class Client implements Runnable {
     // Object for reading from server
     private BufferedReader reader;
 
-    private boolean loggedIn;
-    public Client(Socket server) {
-        this.client = server;
+    private String username;
+
+    private SocketAddress socketAddress;
+
+    public Client(Socket client) {
+        this.client = client;
     }
 
-    @Override
-    public void run() {
-        LoginRegisterModel model = new LoginRegisterModel(this);
-        LoginRegisterView view = new LoginRegisterView();
-        new LoginRegisterController(this,view, model);
+    public Client(int port ) {
+        try {
+            Scanner fileReader = new Scanner(new File("src/client/host"));
+            String host = "";
+
+
+            // read host IP address
+            host = fileReader.nextLine();
+            // attempt to connect to server
+            client = new Socket(host, port);
+            client.close();
+
+            // if no exception occurs in connecting to server
+            socketAddress = new InetSocketAddress(host, port);
+            fileReader.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
+
+
 
     public void writeString(String line) {
         try {
@@ -53,37 +72,37 @@ public class Client implements Runnable {
         return toReturn;
     }
 
-    public boolean isLoggedIn() {
-        return loggedIn;
-    }
-
-    public void setLoggedIn(boolean loggedIn) {
-        this.loggedIn = loggedIn;
-    }
-
-    public static void main(String[] args) {
-
+    public void openSocket() {
         try {
-            Scanner fileReader = new Scanner(new File("src/client/host"));
-            String host = "";
-            Socket clientSocket = null;
-            while (fileReader.hasNext()) {
-                try {
-                    host = fileReader.nextLine();
-                    clientSocket = new Socket(host, 2020);
-                } catch (UnknownHostException ignored) {
-
-                }
-            }
-            fileReader.close();
-
-            Client client = new Client(clientSocket);
-
-            new Thread(client).start();
-
+            client = new Socket();
+            client.connect(socketAddress);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
+
+    public void closeSocket() {
+        try {
+            client.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void startGUI() {
+        LoginRegisterModel model = new LoginRegisterModel(this);
+        LoginRegisterView view = new LoginRegisterView();
+        new LoginRegisterController(this,view, model);
+    }
+
+    public static void main(String[] args) {
+        Thread clientsThread = new Thread(() ->{
+            Client client = new Client(2020);
+
+            client.startGUI();
+        });
+        clientsThread.start();
+    }
+
 
 }

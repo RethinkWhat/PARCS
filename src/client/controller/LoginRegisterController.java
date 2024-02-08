@@ -89,7 +89,9 @@ public class LoginRegisterController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (model.validateAccount(view.getUsername(), model.encryptPassword(view.getPassword()))) {
+            String username = view.getUsername();
+            if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
+
                 new ApplicationController(new ApplicationView(), new ApplicationModel());
                 view.dispose();
             } else {

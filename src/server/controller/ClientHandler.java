@@ -9,6 +9,8 @@ public class ClientHandler implements Runnable {
     Socket client;
 
     boolean authenticateLogin = false;
+
+    boolean userLoggedIn = true;
     public ClientHandler(Server server, Socket client) {
         this.client = client;
         this.server = server;
@@ -23,6 +25,7 @@ public class ClientHandler implements Runnable {
             while (!authenticateLogin) {
                 String username = reader.readLine();
                 String password = reader.readLine();
+                System.out.println(password);
 
                 authenticateLogin = server.validateAccount(username, password);
                 if (authenticateLogin)
@@ -31,6 +34,7 @@ public class ClientHandler implements Runnable {
                     writer.println("false");
                 writer.flush();
             }
+
 
 
 
