@@ -78,6 +78,7 @@ public class Client implements Runnable {
             fileReader.close();
 
             Client client = new Client(clientSocket);
+
             new Thread(client).start();
 
         } catch (IOException ex) {

@@ -27,6 +27,8 @@ public class ServerStatusView extends JFrame {
     private JLabel lblName;
     private JLabel lblDate;
     private JLabel lblLocation;
+    private JLabel serverPrompt;
+    private JLabel serverStatus;
 
     private GridBagConstraints gbc;
 
@@ -199,14 +201,14 @@ public class ServerStatusView extends JFrame {
             setBorder(new Resources.RoundedBorder(20));
             setLayout(new GridBagLayout());
 
-            JLabel serverPrompt = res.createLblH1("SERVER STATUS", res.eerieBlack);
+            serverPrompt = res.createLblH1("SERVER STATUS", res.eerieBlack);
             serverPrompt.setHorizontalAlignment(SwingConstants.CENTER);
             gbc.gridx = 0;
             gbc.gridy = 1;
             add(serverPrompt, gbc);
 
             //To be dynamically changed in the controller
-            JLabel serverStatus = res.createLblH1("OFFLINE",res.red);
+            serverStatus = res.createLblH1("OFFLINE",res.red);
             gbc.gridx = 0;
             gbc.gridy = 2;
             add(serverStatus,gbc);
@@ -245,17 +247,37 @@ public class ServerStatusView extends JFrame {
         }
     }
 
+    public JButton getServerSwitch() {
+        return serverSwitch;
+    }
+
+    public JLabel getServerPrompt() {
+        return serverPrompt;
+    }
+
+    public JLabel getServerStatus() {
+        return serverStatus;
+    }
+
     public void setServerListener(ActionListener actionListener){
         serverSwitch.addActionListener(actionListener);
     }
 
+    public void setOnline(){
+        serverStatus.setText("ONLINE");
+        serverStatus.setForeground(res.celadon);
 
-
-
-
-
-    public static void main(String[] args) {
-        new ServerStatusView();
+        serverSwitch.setText("Terminate Server");
+        serverSwitch.setBackground(res.red);
     }
+
+    public void setOffline(){
+        serverStatus.setText("OFFLINE");
+        serverStatus.setForeground(res.red);
+
+        serverSwitch.setText("Start Server");
+        serverSwitch.setBackground(res.celadon);
+    }
+
 }
 
