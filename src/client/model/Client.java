@@ -75,15 +75,11 @@ public class Client implements Runnable {
 
                 }
             }
-
             fileReader.close();
-
-
-            BufferedReader reader = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-
 
             Client client = new Client(clientSocket);
             new Thread(client).start();
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
