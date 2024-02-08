@@ -1,5 +1,6 @@
 package client.controller;
 
+import client.controller.application_pages.ReservationPageController;
 import client.model.ApplicationModel;
 import client.view.ApplicationView;
 
@@ -26,5 +27,32 @@ public class ApplicationController {
     public ApplicationController(ApplicationView view, ApplicationModel model) {
         this.view = view;
         this.model = model;
+
+        // constants / variables
+        view.getLblLocation().setText("Home");
+        ReservationPageController reservationPageController =
+                new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
+
+        // action listeners
+        view.setNavHomeListener(e -> {
+            view.getLblLocation().setText("Home");
+            view.getMainCardLayout().show(view.getPnlCards(), "home");
+        });
+        view.setNavTicketListener(e -> {
+            view.getLblLocation().setText("Ticket");
+            // TODO: change panel
+        });
+        view.setNavAccountListener(e -> {
+            view.getLblLocation().setText("Account");
+            // TODO: change panel
+        });
+        view.setNavLogoutListener(e -> {
+            // TODO: add functions here to save user actions and send to server.
+            view.dispose();
+        });
+
+        // mouse listeners
+
+        // focus listeners
     }
 }

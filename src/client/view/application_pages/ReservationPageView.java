@@ -61,7 +61,7 @@ public class ReservationPageView extends JPanel {
         // Top Panel
         pnlCards.add(new MainTopPanel(), "dashboard");
         pnlCards.add(new ParkingSlotButtonsView(), "buttons");
-        topCardLayout.show(pnlCards, "buttons");
+        topCardLayout.show(pnlCards, "dashboard");
 
         // Bottom Panel
         add(new MainBottomPanel(), BorderLayout.SOUTH);
@@ -121,7 +121,7 @@ public class ReservationPageView extends JPanel {
 
             gbc.gridy = 1;
             gbc.gridwidth = 3;
-            String date = "January 28, 2023 | Wednesday 10:28 AM";
+            String date = "";
             lblDate = res.createLblH4(date, res.eerieBlack);
             pnlInformation.add(lblDate, gbc);
 
@@ -351,5 +351,37 @@ public class ReservationPageView extends JPanel {
 
             this.setPreferredSize(new Dimension(1300, 130));
         }
+    }
+
+    public JPanel getPnlCards() {
+        return pnlCards;
+    }
+
+    public JButton getBtnAvailCar() {
+        return btnAvailCar;
+    }
+
+    public JButton getBtnAvailMotor() {
+        return btnAvailMotor;
+    }
+
+    public JButton getBtnTotalBookings() {
+        return btnTotalBookings;
+    }
+
+    public JTextField getTxtSearchbar() {
+        return txtSearchbar;
+    }
+
+    public JLabel getLblName() {
+        return lblName;
+    }
+
+    public JLabel getLblDate() {
+        return lblDate;
+    }
+
+    public CardLayout getTopCardLayout() {
+        return topCardLayout;
     }
 }

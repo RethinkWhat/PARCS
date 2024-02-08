@@ -6,6 +6,7 @@ import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Template for object ReservationPage.
@@ -49,10 +50,9 @@ public class ApplicationView extends JFrame {
      */
     private Resources res = new Resources();
     /**
-     * Instance variable of GridBagConstraints used for JPanels using GridBagLayout.
+     * TODO: Documentation
      */
-    private GridBagConstraints gbc;
-
+    private ReservationPageView reservationPageView;
     /**
      * Constructs a ReservationPage frame.
      */
@@ -76,7 +76,7 @@ public class ApplicationView extends JFrame {
         contentArea.add(pnlCards, BorderLayout.CENTER);
 
         // Home Page
-        pnlCards.add(new ReservationPageView(), "home");
+        pnlCards.add(reservationPageView = new ReservationPageView(), "home");
 
         // Ticket Page
         // TODO: card and panel
@@ -144,6 +144,14 @@ public class ApplicationView extends JFrame {
         }
     }
 
+    /**
+     * Retrieves the current panel of ReservationPageView
+     * @return The current panel of ReservationPageView.
+     */
+    public ReservationPageView getReservationPageView() {
+        return reservationPageView;
+    }
+
     // Temporary main method for testing. Omit before production.
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {
@@ -152,5 +160,53 @@ public class ApplicationView extends JFrame {
                 new ApplicationView();
             }
         });
+    }
+
+    public void setNavHomeListener(ActionListener actionListener) {
+        btnNavHome.addActionListener(actionListener);
+    }
+
+    public void setNavTicketListener(ActionListener actionListener) {
+        btnNavTicket.addActionListener(actionListener);
+    }
+
+    public void setNavAccountListener(ActionListener actionListener) {
+        btnNavAccount.addActionListener(actionListener);
+    }
+
+    public void setNavLogoutListener(ActionListener actionListener) {
+        btnNavLogout.addActionListener(actionListener);
+    }
+
+    public JPanel getPnlCards() {
+        return pnlCards;
+    }
+
+    public JButton getBtnNavMenu() {
+        return btnNavMenu;
+    }
+
+    public JButton getBtnNavHome() {
+        return btnNavHome;
+    }
+
+    public JButton getBtnNavTicket() {
+        return btnNavTicket;
+    }
+
+    public JButton getBtnNavAccount() {
+        return btnNavAccount;
+    }
+
+    public JButton getBtnNavLogout() {
+        return btnNavLogout;
+    }
+
+    public JLabel getLblLocation() {
+        return lblLocation;
+    }
+
+    public CardLayout getMainCardLayout() {
+        return mainCardLayout;
     }
 }
