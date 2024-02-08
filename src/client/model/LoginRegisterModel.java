@@ -24,13 +24,11 @@ public class LoginRegisterModel {
     }
 
     /**
-     *
+     * Verifies if the user input of password matches the password confirmation in the signup page.
+     * @param password Specified user input of password.
+     * @param passwordConfirmation Specified user input of password confirmation.
+     * @return True if the password matches. False if otherwise.
      */
-    public void createAccount(String lastName, String firstName) {
-        // creates a new user
-        // XML processing here
-    }
-
     public boolean verifySignupPassword(String password, String passwordConfirmation) {
         return password == passwordConfirmation;
     }
