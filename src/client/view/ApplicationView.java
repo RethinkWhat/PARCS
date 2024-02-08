@@ -160,4 +160,36 @@ public class ApplicationView extends JFrame {
             }
         });
     }
+
+    public JPanel getPnlCards() {
+        return pnlCards;
+    }
+
+    public JButton getBtnNavMenu() {
+        return btnNavMenu;
+    }
+
+    public JButton getBtnNavHome() {
+        return btnNavHome;
+    }
+
+    public JButton getBtnNavTicket() {
+        return btnNavTicket;
+    }
+
+    public JButton getBtnNavAccount() {
+        return btnNavAccount;
+    }
+
+    public JButton getBtnNavLogout() {
+        return btnNavLogout;
+    }
+
+    public JLabel getLblLocation() {
+        return lblLocation;
+    }
+
+    public CardLayout getMainCardLayout() {
+        return mainCardLayout;
+    }
 }
