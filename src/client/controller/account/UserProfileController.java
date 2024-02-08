@@ -1,7 +1,10 @@
 package client.controller.account;
 
+import client.view.account.HistoryPageView;
 import client.view.account.UserProfileView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -9,29 +12,36 @@ public class UserProfileController {
 
     UserProfileView gui;
     Object userAccount;
+    JPanel pnlMain;
 
     public UserProfileController(UserProfileView view, Object userLoggedIn) {
         this.gui = view;
         this.userAccount = userLoggedIn;
 
-        gui.btnEditProfile.addActionListener(new editProfile());
-        gui.btnEditCars.addActionListener(new editCars());
-        // gui.btnExit.addActionListener(new exit());
+        pnlMain = gui.pnlMain;
+
+        view.btnEditProfile.addActionListener(e -> editProfile());
+        view.btnEditCars.addActionListener(e -> showEditCars());
+        view.historyButton.addActionListener(e -> showHistory());
+//        gui.btnExit.addActionListener(new exit());
 
     }
 
-    public class editProfile implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            gui.cardLayout.show(gui.pnlMain, "editProfile");
-        }
+    private void editProfile() {
+        gui.cardLayout.show(gui.pnlMain, "editProfile");
     }
 
-    public class editCars implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            gui.cardLayout.show(gui.pnlMain, "editCars");
-        }
+
+    private void showEditCars() {
+        gui.cardLayout.show(gui.pnlMain, "editCars");
+    }
+
+
+    private void showHistory() {
+        // Dispose the current window and show the history page
+        gui.dispose();
+        HistoryPageView historyPageView = new HistoryPageView();
+        historyPageView.setVisible(true);
     }
 
     /*
@@ -45,11 +55,6 @@ public class UserProfileController {
     */
 
     public static void main(String[] args) {
-        UserProfileController obj = new UserProfileController(new UserProfileView(),
-                new Object()
-        );
-
+                UserProfileView userProfileView = new UserProfileView();
     }
-
-
 }
