@@ -4,6 +4,7 @@ import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 
 public class ServerStatusView extends JFrame {
@@ -17,6 +18,7 @@ public class ServerStatusView extends JFrame {
     private JButton btnAvailCar;
     private JButton btnAvailMotor;
     private JButton btnTotalBookings;
+    private JButton serverSwitch;
 
 
     private JTextField txtSearchBar;
@@ -25,6 +27,8 @@ public class ServerStatusView extends JFrame {
     private JLabel lblName;
     private JLabel lblDate;
     private JLabel lblLocation;
+    private JLabel serverPrompt;
+    private JLabel serverStatus;
 
     private GridBagConstraints gbc;
 
@@ -197,23 +201,22 @@ public class ServerStatusView extends JFrame {
             setBorder(new Resources.RoundedBorder(20));
             setLayout(new GridBagLayout());
 
-            //To be dynamically changed in the controller
-            JLabel serverStatus = res.createLblH1("ONLINE",res.celadon);
-            gbc.gridx = 1;
-            gbc.gridy = 1;
-            add(serverStatus,gbc);
-
-            JLabel serverPrompt = res.createLblH1("SERVER STATUS:", res.eerieBlack);
+            serverPrompt = res.createLblH1("SERVER STATUS", res.eerieBlack);
             serverPrompt.setHorizontalAlignment(SwingConstants.CENTER);
             gbc.gridx = 0;
             gbc.gridy = 1;
             add(serverPrompt, gbc);
 
-
-            JButton serverSwitch = res.createBtnRounded("Terminate Server", res.red, res.red, 15);
-            serverSwitch.setPreferredSize(new Dimension(200,50));
+            //To be dynamically changed in the controller
+            serverStatus = res.createLblH1("OFFLINE",res.red);
             gbc.gridx = 0;
             gbc.gridy = 2;
+            add(serverStatus,gbc);
+
+            serverSwitch = res.createBtnRounded("Start Server", res.white, res.celadon, 15);
+            serverSwitch.setPreferredSize(new Dimension(200,50));
+            gbc.gridx = 0;
+            gbc.gridy = 3;
             add(serverSwitch,gbc);
 
 
@@ -244,13 +247,37 @@ public class ServerStatusView extends JFrame {
         }
     }
 
-
-
-
-
-
-    public static void main(String[] args) {
-        new ServerStatusView();
+    public JButton getServerSwitch() {
+        return serverSwitch;
     }
+
+    public JLabel getServerPrompt() {
+        return serverPrompt;
+    }
+
+    public JLabel getServerStatus() {
+        return serverStatus;
+    }
+
+    public void setServerListener(ActionListener actionListener){
+        serverSwitch.addActionListener(actionListener);
+    }
+
+    public void setOnline(){
+        serverStatus.setText("ONLINE");
+        serverStatus.setForeground(res.celadon);
+
+        serverSwitch.setText("Terminate Server");
+        serverSwitch.setBackground(res.red);
+    }
+
+    public void setOffline(){
+        serverStatus.setText("OFFLINE");
+        serverStatus.setForeground(res.red);
+
+        serverSwitch.setText("Start Server");
+        serverSwitch.setBackground(res.celadon);
+    }
+
 }
 
