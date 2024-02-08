@@ -10,6 +10,10 @@ public class ReservationPageController {
         this.view = view;
         this.model = model;
 
+        // constants/variables
+        // model.setTime();
+        view.getLblDate().setText(model.getTime());
+
         // action listeners
 
         // mouse listeners

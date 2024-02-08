@@ -2,8 +2,10 @@ package client.model;
 
 import client.model.application_pages.ReservationPageModel;
 
-import java.util.Calendar;
-
+/**
+ * Template for object ApplicationModel.
+ * The application model contains the different data to be displayed in the client application domain.
+ */
 public class ApplicationModel {
     /**
      * The location of the user in the application domain
@@ -15,7 +17,7 @@ public class ApplicationModel {
     /**
      * The model for the reservation page.
      */
-    private ReservationPageModel reservationPageModel;
+    private ReservationPageModel reservationPageModel = new ReservationPageModel();
 
     /**
      * Retrieves the current model of the reservation page.
