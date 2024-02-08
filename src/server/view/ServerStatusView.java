@@ -4,6 +4,7 @@ import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 
 public class ServerStatusView extends JFrame {
@@ -17,6 +18,7 @@ public class ServerStatusView extends JFrame {
     private JButton btnAvailCar;
     private JButton btnAvailMotor;
     private JButton btnTotalBookings;
+    private JButton serverSwitch;
 
 
     private JTextField txtSearchBar;
@@ -210,7 +212,7 @@ public class ServerStatusView extends JFrame {
             add(serverPrompt, gbc);
 
 
-            JButton serverSwitch = res.createBtnRounded("Terminate Server", res.red, res.red, 15);
+            serverSwitch = res.createBtnRounded("Terminate Server", res.red, res.red, 15);
             serverSwitch.setPreferredSize(new Dimension(200,50));
             gbc.gridx = 0;
             gbc.gridy = 2;
@@ -242,6 +244,10 @@ public class ServerStatusView extends JFrame {
 
             this.setPreferredSize(new Dimension(200,100));
         }
+    }
+
+    public void setServerListener(ActionListener actionListener){
+        serverSwitch.addActionListener(actionListener);
     }
 
 
