@@ -5,6 +5,7 @@ import javax.swing.*;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class UserProfileView extends JPanel {
     /**
@@ -16,29 +17,29 @@ public class UserProfileView extends JPanel {
      */
     GridBagConstraints gbc = new GridBagConstraints();
     /**
-     * The
+     * The 
      */
     private JLabel btnHome;
     /**
      * The edit profile button.
      */
-    private JButton btnEditProfile;
+    private JButton btnNavEditProfile;
     /**
      * The edit cars button.
      */
-    private JButton btnEditCars;
+    private JButton btnNavEditCars;
     /**
      * The security button.
      */
-    private JButton btnSecurity;
+    private JButton btnNavSecurity;
     /**
      * The history button.
      */
-    private JButton historyButton;
+    private JButton btnNavHistory;
     /**
      * The exit/logout button.
      */
-    private JButton btnExit;
+    private JButton btnNavExit;
     /**
      * The CardLayout that controls the components of pnlMain.
      */
@@ -63,7 +64,6 @@ public class UserProfileView extends JPanel {
         this.add(cntnrMain);
 
         //shows edit profile first
-
         cardLayout.show(pnlMain, "editProfile");
 
         ProfileOptionsPanel profileOptionsPanel = new ProfileOptionsPanel(cardLayout, pnlMain);
@@ -74,7 +74,11 @@ public class UserProfileView extends JPanel {
      * The panel that contains the sidebar op
      */
     class ProfileOptionsPanel extends JPanel {
-
+        /**
+         * Constructs a panel of ProfileOptions with a specified layout manager and main panel to hold the components.
+         * @param cardLayout The specified CardLayout layout manager.
+         * @param pnlMain The specified main panel.
+         */
         public ProfileOptionsPanel(CardLayout cardLayout, JPanel pnlMain) {
             this.setLayout(null);
             this.setBackground(res.white);
@@ -97,52 +101,84 @@ public class UserProfileView extends JPanel {
             this.add(buttonsPanel);
 
             ImageIcon editProfile = new ImageIcon("res/drawable/icons/edit.png");
-            btnEditProfile = res.createBtnTxtOnly("Edit Profile", res.gray);
-            btnEditProfile.setHorizontalAlignment(SwingConstants.LEFT);
+            btnNavEditProfile = res.createBtnTxtOnly("Edit Profile", res.gray);
+            btnNavEditProfile.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editProfileResized = new ImageIcon(editProfile.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            btnEditProfile.setIcon(editProfileResized);
-            buttonsPanel.add(btnEditProfile);
+            btnNavEditProfile.setIcon(editProfileResized);
+            buttonsPanel.add(btnNavEditProfile);
 
             ImageIcon editCars = new ImageIcon("res/drawable/icons/edit-cars.png");
-            btnEditCars = res.createBtnTxtOnly("Edit Cars", res.gray);
-            btnEditCars.setHorizontalAlignment(SwingConstants.LEFT);
+            btnNavEditCars = res.createBtnTxtOnly("Edit Cars", res.gray);
+            btnNavEditCars.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editCarsResized = new ImageIcon(editCars.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            btnEditCars.setIcon(editCarsResized);
-            buttonsPanel.add(btnEditCars);
+            btnNavEditCars.setIcon(editCarsResized);
+            buttonsPanel.add(btnNavEditCars);
 
             ImageIcon security = new ImageIcon("res/drawable/icons/security.png");
-            btnSecurity = res.createBtnTxtOnly("Security", res.gray);
-            btnSecurity.setHorizontalAlignment(SwingConstants.LEFT);
+            btnNavSecurity = res.createBtnTxtOnly("Security", res.gray);
+            btnNavSecurity.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon securityResized = new ImageIcon(security.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            btnSecurity.setIcon(securityResized);
-            buttonsPanel.add(btnSecurity);
+            btnNavSecurity.setIcon(securityResized);
+            buttonsPanel.add(btnNavSecurity);
 
             ImageIcon historyIcon = new ImageIcon("res/drawable/icons/history.png");
-            historyButton = res.createBtnTxtOnly("History", res.gray);
-            historyButton.setHorizontalAlignment(SwingConstants.LEFT);
+            btnNavHistory = res.createBtnTxtOnly("History", res.gray);
+            btnNavHistory.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon helpResized = new ImageIcon(historyIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            historyButton.setIcon(helpResized);
-            buttonsPanel.add(historyButton);
+            btnNavHistory.setIcon(helpResized);
+            buttonsPanel.add(btnNavHistory);
 
             ImageIcon exitIcon = new ImageIcon("res/drawable/icons/exit-grey-outline.png");
-            btnExit = res.createBtnTxtOnly("Logout", res.gray);
-            btnExit.setHorizontalAlignment(SwingConstants.LEFT);
+            btnNavExit = res.createBtnTxtOnly("Logout", res.gray);
+            btnNavExit.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon exitResized = new ImageIcon(exitIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            btnExit.setIcon(exitResized);
-            buttonsPanel.add(btnExit);
+            btnNavExit.setIcon(exitResized);
+            buttonsPanel.add(btnNavExit);
 
-            btnEditProfile.addActionListener(e -> {
+            // TODO: add these action listeners in the UserProfileController.
+            btnNavEditProfile.addActionListener(e -> {
                 cardLayout.show(pnlMain, "editProfile");
             });
 
-            btnEditCars.addActionListener(e -> {
+            btnNavEditCars.addActionListener(e -> {
                 cardLayout.show(pnlMain, "editCars");
             });
-
         }
     }
 
+    /**
+     * The panel that contains pertinent information of the user. The user can edit or simply view their information
+     * on this page.
+     */
     class EditProfile extends JPanel {
+        /**
+         * The text field where the first name of the user can be viewed and edited.
+         */
+        private JTextField txtFirstName;
+        /**
+         * The text field where the last name of the user can be viewed and edited.
+         */
+        private JTextField txtLastName;
+        /**
+         * The text field where the username of the user can be viewed and edited.
+         */
+        private JTextField txtUsername;
+        /**
+         * The text field where the contact number of the user can be viewed and edited.
+         */
+        private JTextField txtContact;
+        /**
+         * The cancel button.
+         */
+        private JButton btnCancel;
+        /**
+         * The continue button.
+         */
+        private JButton btnContinue;
+        
+        /**
+         * Constructs a panel of EditProfile.
+         */
         public EditProfile() {
             this.setPreferredSize(new Dimension(650,490));
             this.setLayout(new GridLayout(8,1));
@@ -170,49 +206,101 @@ public class UserProfileView extends JPanel {
 
             JPanel pnlNameField = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-            JTextField firstNameField = res.createTxtRounded("Patrick", res.white, res.gray,20);
-            firstNameField.setPreferredSize(new Dimension(10,50));
+            // TODO: Add attributes of first name, last name, email, and contact number in the UserProfileModel.
+            txtFirstName = res.createTxtRounded("Patrick", res.white, res.gray,20);
+            txtFirstName.setPreferredSize(new Dimension(10,50));
 
-            JTextField fieldLastName = res.createTxtRounded("Bozorgi", res.white, res.gray,20);
-            fieldLastName.setPreferredSize(new Dimension(10,50));
-            pnlNameField.add(firstNameField);
-            pnlNameField.add(fieldLastName);
+            txtLastName = res.createTxtRounded("Bozorgi", res.white, res.gray,20);
+            txtLastName.setPreferredSize(new Dimension(10,50));
+
+            pnlNameField.add(txtFirstName);
+            pnlNameField.add(txtLastName);
 
             this.add(pnlNameField);
 
-            JLabel lblEmail = res.createLblH3("Email", res.eerieBlack);
-            lblEmail.setBorder(new EmptyBorder(30,0,0,0));
-            this.add(lblEmail);
+            JLabel lblUsername = res.createLblH3("Username", res.eerieBlack);
+            lblUsername.setBorder(new EmptyBorder(30,0,0,0));
+            this.add(lblUsername);
 
-            JTextField fieldEmail = res.createTxtRounded("Patrick@gmail.com", res.white, res.gray,20);
-            fieldEmail.setSize(new Dimension(50,50));
-            this.add(fieldEmail);
+            txtUsername = res.createTxtRounded("Patrick@gmail.com", res.white, res.gray,20);
+            txtUsername.setSize(new Dimension(50,50));
+            this.add(txtUsername);
 
             JLabel lblContact = res.createLblH3("Contact", res.eerieBlack);
             lblContact.setBorder(new EmptyBorder(30,0,0,0));
             this.add(lblContact);
 
-            JTextField fieldContact = res.createTxtRounded("+63 917 790 0153", res.white, res.gray,20);
-            this.add(fieldContact);
+            JTextField txtContact = res.createTxtRounded("+63 917 790 0153", res.white, res.gray,20);
+            this.add(txtContact);
 
             JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.LEADING));
             pnlButtons.setBorder(new EmptyBorder(0,0,5,0));
-            JButton btnCancel = res.createBtnRounded("Cancel", res.feldgrau,res.eerieBlack,30);
+
+            btnCancel = res.createBtnRounded("Cancel", res.feldgrau,res.eerieBlack,30);
             btnCancel.setPreferredSize(new Dimension(130,40));
             pnlButtons.add(btnCancel);
-            JButton btnContinue = res.createBtnRounded("Continue", res.feldgrau,res.eerieBlack,30);
+
+            btnContinue = res.createBtnRounded("Continue", res.feldgrau,res.eerieBlack,30);
             btnContinue.setPreferredSize(new Dimension(130,40));
             pnlButtons.add(btnContinue);
             this.add(pnlButtons);
         }
+
+        /**
+         * Sets a specified action listener for btnContinue.
+         * @param actionListener The specified action listener.
+         */
+        public void setContinueListener(ActionListener actionListener) {
+            btnContinue.addActionListener(actionListener);
+        }
+
+        /**
+         * Sets a specified action listener for btnCancel.
+         * @param actionListener The specified action listener.
+         */
+        public void setCancelListener(ActionListener actionListener) {
+            btnCancel.addActionListener(actionListener);
+        }
+
+        /**
+         * Retrieves the current JTextField of txtFirstName.
+         * @return The current txtFirstName.
+         */
+        public JTextField getTxtFirstName() {
+            return txtFirstName;
+        }
+
+        /**
+         * Retrieves the current JTextField of txtLastName.
+         * @return The current txtLastName.
+         */
+        public JTextField getTxtLastName() {
+            return txtLastName;
+        }
+
+        /**
+         * Retrieves the current JTextField of txtUsername.
+         * @return The current txtUsername.
+         */
+        public JTextField getTxtUsername() {
+            return txtUsername;
+        }
+
+        /**
+         * Retrieves the current JTextField of txtContact.
+         * @return The current txtContact
+         */
+        public JTextField getTxtContact() {
+            return txtContact;
+        }
     }
 
     /**
-     * The panel that contains multiple objects of
+     * The panel that contains the information on the vehicle of the users that can be edited or add new vehicles.
      */
     class EditCars extends JPanel {
         /**
-         * Constructs a
+         * Constructs a panel of EditCars.
          */
         public EditCars() {
             this.setBounds(220,0,750,560);
@@ -227,7 +315,8 @@ public class UserProfileView extends JPanel {
 
             gbc.gridy=1;
             gbc.anchor = GridBagConstraints.WEST;
-
+            
+            // TODO: Create method in UserProfileModel to create information of the cars.
             JPanel pnlCar1 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
             JPanel pnlCar2 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
             this.add(pnlCar1,gbc);
@@ -320,6 +409,30 @@ public class UserProfileView extends JPanel {
         }
     }
 
+    /**
+     * Sets a specified action listener for btnNavEditProfile.
+     * @param actionListener The specified action listener.
+     */
+    public void setNavEditProfileListener(ActionListener actionListener) {
+        btnNavEditProfile.addActionListener(actionListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnNavEditCars.
+     * @param actionListener The specified action listener.
+     */
+    public void setNavEditCarsListener(ActionListener actionListener) {
+        btnNavEditCars.addActionListener(actionListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnNavHistory.
+     * @param actionListener The specified action listener.
+     */
+    public void setNavHistoryListener(ActionListener actionListener) {
+        btnNavHistory.addActionListener(actionListener);
+    }
+    
     public static void main(String[] args) {
         UserProfileView obj = new UserProfileView();
     }
