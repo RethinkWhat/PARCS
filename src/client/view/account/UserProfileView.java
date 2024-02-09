@@ -1,5 +1,6 @@
 package client.view.account;
 
+import server.model.User;
 import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -15,17 +16,16 @@ public class UserProfileView extends JFrame {
     public JButton btnEditProfile;
     public JButton btnEditCars;
     public JButton btnSecurity;
-    public JButton btnHelp;
+    public JButton historyButton;
     public JButton btnExit;
     public CardLayout cardLayout;
-
     public JPanel pnlMain;
 
 
     public UserProfileView() {
-        super("User Profile");
-        this.add(new ProfileOptionsPanel());
 
+        super("User Profile");
+//        this.add(new ProfileOptionsPanel(cardLayout, pnlMain));
 
         CardLayout cardLayout = new CardLayout();
         pnlMain = new JPanel(cardLayout);
@@ -38,11 +38,13 @@ public class UserProfileView extends JFrame {
         cntnrMain.add(pnlMain);
         this.add(cntnrMain);
 
+        //shows edit profile first
 
-        this.add(new ProfileOptionsPanel());
+        cardLayout.show(pnlMain, "editProfile");
+//        cardLayout.show(pnlMain, "editCars");
 
-
-        cardLayout.show(pnlMain, "editCars");
+        ProfileOptionsPanel profileOptionsPanel = new ProfileOptionsPanel(cardLayout, pnlMain);
+        this.add(profileOptionsPanel);
 
         this.pack();
         this.setLocationRelativeTo(null);
@@ -56,10 +58,11 @@ public class UserProfileView extends JFrame {
 
     class ProfileOptionsPanel extends JPanel {
 
-        public ProfileOptionsPanel() {
+        public ProfileOptionsPanel(CardLayout cardLayout, JPanel pnlMain) {
             this.setLayout(null);
             this.setBackground(res.white);
             this.setVisible(true);
+
 
             btnHome = new JLabel();
             btnHome.setIcon(new ImageIcon("res/drawable/icons/return.png"));
@@ -98,12 +101,12 @@ public class UserProfileView extends JFrame {
             btnSecurity.setIcon(securityResized);
             buttonsPanel.add(btnSecurity);
 
-            ImageIcon helpIcon = new ImageIcon("res/drawable/icons/help.png");
-            btnHelp = res.createBtnTxtOnly("Help", res.gray);
-            btnHelp.setHorizontalAlignment(SwingConstants.LEFT);
-            ImageIcon helpResized = new ImageIcon(helpIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
-            btnHelp.setIcon(helpResized);
-            buttonsPanel.add(btnHelp);
+            ImageIcon historyIcon = new ImageIcon("res/drawable/icons/history.png");
+            historyButton = res.createBtnTxtOnly("History", res.gray);
+            historyButton.setHorizontalAlignment(SwingConstants.LEFT);
+            ImageIcon helpResized = new ImageIcon(historyIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
+            historyButton.setIcon(helpResized);
+            buttonsPanel.add(historyButton);
 
             ImageIcon exitIcon = new ImageIcon("res/drawable/icons/exit-grey-outline.png");
             btnExit = res.createBtnTxtOnly("Logout", res.gray);
@@ -111,6 +114,14 @@ public class UserProfileView extends JFrame {
             ImageIcon exitResized = new ImageIcon(exitIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnExit.setIcon(exitResized);
             buttonsPanel.add(btnExit);
+
+            btnEditProfile.addActionListener(e -> {
+                cardLayout.show(pnlMain, "editProfile");
+            });
+
+            btnEditCars.addActionListener(e -> {
+                cardLayout.show(pnlMain, "editCars");
+            });
 
         }
     }
@@ -182,6 +193,7 @@ public class UserProfileView extends JFrame {
 
     class EditCars extends JPanel {
         public EditCars() {
+
             this.setBounds(220,0,750,560);
             this.setVisible(true);
             this.setLayout(new GridBagLayout());
@@ -285,11 +297,16 @@ public class UserProfileView extends JFrame {
             pnlCarInformation.add(innerContent);
 
             return pnlCarInformation;
+
+
+
         }
     }
-
     public static void main(String[] args) {
         UserProfileView obj = new UserProfileView();
     }
+
+
+
 
 }
