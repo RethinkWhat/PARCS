@@ -169,7 +169,13 @@ public class Resources {
         return label;
     }
 
-
+    /**
+     * Creates a new JButton with a specified text and color.
+     * The JButton will only contain text with no background color and no icon.
+     * @param text The specified text.
+     * @param color The specified foreground color.
+     * @return The JButton with specified text and foreground color.
+     */
     public JButton createBtnTxtOnly(String text, Color color) {
         JButton button = new JButton(text);
         button.setFont(new Font("Arial", Font.BOLD, 15));
@@ -181,6 +187,13 @@ public class Resources {
         return button;
     }
 
+    /**
+     * Creates a new JButton with a specified icon and size.
+     * @param icon The specified icon URL.
+     * @param width The desired width of the icon.
+     * @param height The desired height of the icon.
+     * @return The JButton with a specified icon and size.
+     */
     public JButton createBtnIconOnly(ImageIcon icon, int width, int height) {
         Image img = icon.getImage();
         Image scaledImg = img.getScaledInstance(width,height,Image.SCALE_SMOOTH);
@@ -298,12 +311,14 @@ public class Resources {
     }
 
     /**
-     * TODO: Documentation
-     * @param width
-     * @param height
-     * @param pnlColor
-     * @param bgColor
-     * @return
+     * Creates a new JPanel with a specified width, height, foreground and background color.
+     * The JPanel to be created will have rounded edges.
+     * @param width The specified width.
+     * @param height The specified height.
+     * @param pnlColor The specified foreground color.
+     * @param bgColor The specified background color. This color must be the same with another component's background
+     *                color for the foreground to have its rounded edges.
+     * @return The JPanel with rounded edges with specified width, height, foreground and background color.
      */
     public JPanel createPnlRounded(int width, int height, Color pnlColor, Color bgColor) {
         JPanel panel = new JPanel() {

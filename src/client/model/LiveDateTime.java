@@ -1,12 +1,14 @@
 package client.model;
 
 import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 
 /**
  * Template for LiveDateTime object.
  * LiveDateTime contains the different formats for specifying the time, date, and day of the week.
  */
-public class LiveDateTime {
+public class LiveDateTime extends Thread {
     /**
      * The format for the time (HH:MM AM/PM MARKER)
      */
@@ -19,6 +21,10 @@ public class LiveDateTime {
      * The format for date in MMMM dd, YYYY format (e.g., February 19, 2024).
      */
     private SimpleDateFormat dateFormat;
+    /**
+     * The time
+     */
+    private volatile String time;
 
     /**
      * Constructs an object of LiveDate Time with default values.
@@ -27,6 +33,32 @@ public class LiveDateTime {
         timeFormat = new SimpleDateFormat("hh:mm a");
         dayFormat = new SimpleDateFormat("EEEE");
         dateFormat = new SimpleDateFormat("MMMMM dd, yyyy");
+        start();
+    }
+
+    @Override
+    public void run() {
+        while (!isInterrupted()) {
+            try {
+                time = setTime();
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                break;
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    private String setTime() {
+        Date currentTime = Calendar.getInstance().getTime();
+        return dateFormat.format(currentTime) + " | " +
+                dayFormat.format(currentTime) + " " +
+                timeFormat.format(currentTime);
+    }
+
+    public String getTime() {
+        return time;
     }
 
     /**
