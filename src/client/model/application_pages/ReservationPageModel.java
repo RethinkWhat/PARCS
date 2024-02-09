@@ -2,6 +2,7 @@ package client.model.application_pages;
 
 import client.model.LiveDateTime;
 
+import javax.swing.*;
 import java.util.Calendar;
 
 /**
@@ -16,7 +17,11 @@ public class ReservationPageModel {
     /**
      * The formatter for the current date and time.
      */
-    private LiveDateTime liveDateTime;
+    private LiveDateTime liveDateTime = new LiveDateTime();
+    /**
+     * The current date.
+     */
+    private String date;
     /**
      * The date, day, and time now.
      */
@@ -26,27 +31,7 @@ public class ReservationPageModel {
      */
     private String[] vehicles;
 
-    // This method causes the client to be unresponsive and crash. The suspected cause is similar to the
-    // server crashing when turned on / off in the admin side.
-    /*
-    public void setTime() {
-        while (true) {
-            liveDateTime = new LiveDateTime();
-            time = liveDateTime.getDateFormat().format(Calendar.getInstance().getTime()) + " | " +
-                    liveDateTime.getDayFormat().format(Calendar.getInstance().getTime()) + " " +
-                    liveDateTime.getTimeFormat().format(Calendar.getInstance().getTime());
-            try {
-                Thread.sleep(1000);
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
-        }
-    }
-     */
-
-
     public String getTime() {
-        return time;
+        return liveDateTime.getTime();
     }
 }
