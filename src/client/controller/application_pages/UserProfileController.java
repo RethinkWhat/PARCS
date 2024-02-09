@@ -1,4 +1,4 @@
-package client.controller.account;
+package client.controller.application_pages;
 
 import client.view.application_pages.HistoryPageView;
 import client.view.application_pages.UserProfileView;

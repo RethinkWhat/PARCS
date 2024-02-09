@@ -10,8 +10,11 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * Template for object ReservationPage.
- * The ReservationPage is the home page of the client application.
+ * Template for object ApplicationView.
+ * The ApplicationView is the layout that holds all the different pages of the client application:
+ * 1. The Reservation Page as the Home Page
+ * 2. Ticket Page
+ * 3. Account Page
  */
 public class ApplicationView extends JFrame {
     /**

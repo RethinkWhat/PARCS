@@ -6,25 +6,50 @@ import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
-public class UserProfileView extends JFrame {
-
+public class UserProfileView extends JPanel {
+    /**
+     * The stylesheet
+     */
     Resources res = new Resources();
+    /**
+     * Instance variable of grid bag constraints used in grid bag layout.
+     */
     GridBagConstraints gbc = new GridBagConstraints();
+    /**
+     * The
+     */
+    private JLabel btnHome;
+    /**
+     * The edit profile button.
+     */
+    private JButton btnEditProfile;
+    /**
+     * The edit cars button.
+     */
+    private JButton btnEditCars;
+    /**
+     * The security button.
+     */
+    private JButton btnSecurity;
+    /**
+     * The history button.
+     */
+    private JButton historyButton;
+    /**
+     * The exit/logout button.
+     */
+    private JButton btnExit;
+    /**
+     * The CardLayout that controls the components of pnlMain.
+     */
+    private CardLayout cardLayout;
+    private JPanel pnlMain;
 
-    public JLabel btnHome;
-    public JButton btnEditProfile;
-    public JButton btnEditCars;
-    public JButton btnSecurity;
-    public JButton historyButton;
-    public JButton btnExit;
-    public CardLayout cardLayout;
-    public JPanel pnlMain;
-
-
+    /**
+     * Constructs a panel of UserProfileView.
+     */
     public UserProfileView() {
-
-        super("User Profile");
-//        this.add(new ProfileOptionsPanel(cardLayout, pnlMain));
+        // setLayout(new );
 
         CardLayout cardLayout = new CardLayout();
         pnlMain = new JPanel(cardLayout);
@@ -40,28 +65,20 @@ public class UserProfileView extends JFrame {
         //shows edit profile first
 
         cardLayout.show(pnlMain, "editProfile");
-//        cardLayout.show(pnlMain, "editCars");
 
         ProfileOptionsPanel profileOptionsPanel = new ProfileOptionsPanel(cardLayout, pnlMain);
         this.add(profileOptionsPanel);
-
-        this.pack();
-        this.setLocationRelativeTo(null);
-        this.setSize(950,560);
-        this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        this.setVisible(true);
-
-
     }
 
+    /**
+     * The panel that contains the sidebar op
+     */
     class ProfileOptionsPanel extends JPanel {
 
         public ProfileOptionsPanel(CardLayout cardLayout, JPanel pnlMain) {
             this.setLayout(null);
             this.setBackground(res.white);
             this.setVisible(true);
-
 
             btnHome = new JLabel();
             btnHome.setIcon(new ImageIcon("res/drawable/icons/return.png"));
@@ -190,9 +207,14 @@ public class UserProfileView extends JFrame {
         }
     }
 
+    /**
+     * The panel that contains multiple objects of
+     */
     class EditCars extends JPanel {
+        /**
+         * Constructs a
+         */
         public EditCars() {
-
             this.setBounds(220,0,750,560);
             this.setVisible(true);
             this.setLayout(new GridBagLayout());
@@ -227,10 +249,16 @@ public class UserProfileView extends JFrame {
             btnBack.setIcon(resizedBackIcon);
             this.add(btnBack,gbc);
 
-
             this.setVisible(true);
         }
 
+        /**
+         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehcile.
+         * @param plateNumber The specified license plate number.
+         * @param vehicleType The specified type of vehicle.
+         * @param model The specified model of the vehicle.
+         * @return JPanel with vehicle information.
+         */
         public JPanel createCarsLayout(String plateNumber, String vehicleType, String model){//String PlateNumber, String vehicle, String model){
             JPanel pnlCarInformation = res.createPnlRounded(290,150, res.feldgrau, res.gray);
             //pnlCarInformation.setBackground(res.feldgrau);
@@ -239,7 +267,6 @@ public class UserProfileView extends JFrame {
             JPanel innerContent = new JPanel(new GridBagLayout());
             innerContent.setBackground(res.feldgrau);
             //innerContent.setBackground(res.feldgrau);
-
 
             gbc = new GridBagConstraints();
             gbc.gridy = 0;
@@ -279,7 +306,6 @@ public class UserProfileView extends JFrame {
             lblVehicleInfo.setMaximumSize(new Dimension(95,12));
             innerContent.add(lblVehicleInfo,gbc);
 
-
             gbc.insets = new Insets(0,0,0,20);
             gbc.gridy = 4;
             gbc.anchor = GridBagConstraints.EAST;
@@ -287,25 +313,14 @@ public class UserProfileView extends JFrame {
             lblModelInfo.setMaximumSize(new Dimension(100,20));
             innerContent.add(lblModelInfo,gbc);
 
-
-
-
-
-
             gbc.insets = new Insets(20,30,20,30);
             pnlCarInformation.add(innerContent);
 
             return pnlCarInformation;
-
-
-
         }
     }
+
     public static void main(String[] args) {
         UserProfileView obj = new UserProfileView();
     }
-
-
-
-
 }
