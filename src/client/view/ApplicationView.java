@@ -1,6 +1,7 @@
 package client.view;
 
 import client.view.application_pages.ReservationPageView;
+import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
 import javax.swing.*;
@@ -54,6 +55,11 @@ public class ApplicationView extends JFrame {
      */
     private ReservationPageView reservationPageView;
     /**
+     * TODO: Documentation
+     */
+    private UserProfileView userProfileView;
+
+    /**
      * Constructs a ReservationPage frame.
      */
     public ApplicationView() {
@@ -82,7 +88,7 @@ public class ApplicationView extends JFrame {
         // TODO: card and panel
 
         // Account Page
-        // TODO: card and panel
+        pnlCards.add(userProfileView = new UserProfileView(), "account");
 
         this.setContentPane(contentArea);
         this.setLocationRelativeTo(null);
@@ -162,50 +168,98 @@ public class ApplicationView extends JFrame {
         });
     }
 
+    /**
+     * Sets a specified action listener for btnNavHome.
+     * @param actionListener The specified action listener.
+     */
     public void setNavHomeListener(ActionListener actionListener) {
         btnNavHome.addActionListener(actionListener);
     }
 
+    /**
+     * Sets a specified action listener for btnNavTicket.
+     * @param actionListener The specified action listener.
+     */
     public void setNavTicketListener(ActionListener actionListener) {
         btnNavTicket.addActionListener(actionListener);
     }
 
+    /**
+     * Sets a specified action listener for btnNavAccount.
+     * @param actionListener The specified action listener.
+     */
     public void setNavAccountListener(ActionListener actionListener) {
         btnNavAccount.addActionListener(actionListener);
     }
 
+    /**
+     * Sets a specified action listener for btnNavLogout.
+     * @param actionListener The specified action listener.
+     */
     public void setNavLogoutListener(ActionListener actionListener) {
         btnNavLogout.addActionListener(actionListener);
     }
 
+    /**
+     * Retrieves the current card layout panel containing the different pages.
+     * @return The current card layout panel.
+     */
     public JPanel getPnlCards() {
         return pnlCards;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavMenu in the navigation bar.
+     * @return The current btnNavMenu.
+     */
     public JButton getBtnNavMenu() {
         return btnNavMenu;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavHome in the navigation bar.
+     * @return The current btnNavHome.
+     */
     public JButton getBtnNavHome() {
         return btnNavHome;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavTicket in the navigation bar.
+     * @return The current btnNavTicket.
+     */
     public JButton getBtnNavTicket() {
         return btnNavTicket;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavAccount in the navigation bar.
+     * @return The current btnNavAccount.
+     */
     public JButton getBtnNavAccount() {
         return btnNavAccount;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavLogout in the navigation bar.
+     * @return The current btnNavLogout.
+     */
     public JButton getBtnNavLogout() {
         return btnNavLogout;
     }
 
+    /**
+     * Retrieves the current JLabel of getLblLocation in the HeaderPanel.
+     * @return The current getLblLocation.
+     */
     public JLabel getLblLocation() {
         return lblLocation;
     }
 
+    /**
+     * Retrieves the current card layout panel that contains the different views.
+     * @return The current mainCardLayout.
+     */
     public CardLayout getMainCardLayout() {
         return mainCardLayout;
     }

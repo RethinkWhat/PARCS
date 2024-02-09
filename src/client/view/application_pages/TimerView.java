@@ -1,4 +1,4 @@
-package client.view;
+package client.view.application_pages;
 
 
 import java.awt.Color;
