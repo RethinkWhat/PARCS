@@ -36,8 +36,7 @@ public class ApplicationController {
 
         // constants / variables
         view.getLblLocation().setText("Home");
-        ReservationPageController reservationPageController =
-                new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
+        new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
 
         // action listeners
         view.setNavHomeListener(e -> {

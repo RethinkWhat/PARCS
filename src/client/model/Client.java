@@ -93,7 +93,7 @@ public class Client {
     public void startGUI() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
-        new LoginRegisterController(this,view, model);
+        new LoginRegisterController(view, model);
     }
 
     public static void main(String[] args) {

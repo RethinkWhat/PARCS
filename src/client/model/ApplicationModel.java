@@ -31,6 +31,9 @@ public class ApplicationModel {
      * @return The current model of the reservation page.
      */
     public ReservationPageModel getReservationPageModel() {
+        client.openSocket();
+        client.writeString("TEST STRING");
+        client.closeSocket();
         reservationPageModel = new ReservationPageModel(this.client);
         return reservationPageModel;
     }

@@ -16,8 +16,6 @@ public class ClientHandler implements Runnable {
 
     boolean authenticateLogin = false;
 
-    String page = "login";
-
     String username;
 
 
@@ -37,17 +35,19 @@ public class ClientHandler implements Runnable {
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
             while (true) {
-                switch (page) {
-                    case "login":
-                        username = login();
-                        page = reader.readLine();
-                        System.out.println("page: " + page);
-                        break;
-                    case "reservation":
-                        System.out.println("reservation page starting");
-                        reserve();
-                        System.out.println("reservation page finished");
-                        break;
+                String page = reader.readLine();
+                if (page != null) {
+                    switch (page) {
+                        case "login":
+                            username = login();
+                            System.out.println("page: " + page);
+                            break;
+                        case "reservation":
+                            System.out.println("reservation page starting");
+                            reserve();
+                            System.out.println("reservation page finished");
+                            break;
+                    }
                 }
             }
         } catch (IOException e) {
@@ -78,13 +78,12 @@ public class ClientHandler implements Runnable {
 
 
     public void reserve() {
-        System.out.println("---RESERVE---");
+        System.out.println("-----------RESERVE-----------");
         String startReserve = null;
         try {
             while (startReserve == null) {
                 try {
                     startReserve = reader.readLine();
-                    System.out.println(startReserve);
                 } catch (NullPointerException ignore) {
                 }
             }
