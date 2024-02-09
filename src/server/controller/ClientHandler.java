@@ -7,6 +7,8 @@ public class ClientHandler implements Runnable {
 
     Server server;
     Socket client;
+    BufferedReader reader;
+    PrintWriter writer;
 
     boolean authenticateLogin = false;
 
@@ -19,23 +21,22 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
 
-            while (!authenticateLogin) {
-                String username = reader.readLine();
-                String password = reader.readLine();
-                System.out.println(password);
+            String username = reader.readLine();
+            String password = reader.readLine();
 
+            if (username != null && password != null)
                 authenticateLogin = server.validateAccount(username, password);
-                if (authenticateLogin)
-                    writer.println("true");
-                else
-                    writer.println("false");
-                writer.flush();
-            }
 
-
+            if (authenticateLogin)
+                writer.println("true");
+            else
+                writer.println("false");
+            writer.flush();
+            reader.close();
+            writer.close();
 
 
         } catch (IOException ex) {
