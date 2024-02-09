@@ -1,12 +1,9 @@
 package client.controller.account;
 
-import client.view.account.HistoryPageView;
-import client.view.account.UserProfileView;
+import client.view.application_pages.HistoryPageView;
+import client.view.application_pages.UserProfileView;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UserProfileController {
 

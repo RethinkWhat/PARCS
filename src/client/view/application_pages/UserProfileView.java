@@ -1,6 +1,5 @@
-package client.view.account;
+package client.view.application_pages;
 
-import server.model.User;
 import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.Border;
