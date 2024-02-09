@@ -20,27 +20,42 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
+        login();
+    }
+
+    public void login() {
+        String username = read();
+        String password = read();
+
+        if (username != null && password != null)
+            authenticateLogin = server.validateAccount(username, password);
+
+        if (authenticateLogin)
+            write("true");
+        else
+            write("false");
+
+    }
+
+
+    public void write(String message ) {
+        try {
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
+            writer.println(message);
+            writer.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public String read() {
+        String line = null;
         try {
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
-
-            String username = reader.readLine();
-            String password = reader.readLine();
-
-            if (username != null && password != null)
-                authenticateLogin = server.validateAccount(username, password);
-
-            if (authenticateLogin)
-                writer.println("true");
-            else
-                writer.println("false");
-            writer.flush();
-            reader.close();
-            writer.close();
-
-
+            line = reader.readLine();
         } catch (IOException ex) {
-
+            ex.printStackTrace();
         }
+        return  line;
     }
 }
