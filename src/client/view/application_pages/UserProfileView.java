@@ -41,45 +41,49 @@ public class UserProfileView extends JPanel {
      */
     private JButton btnNavExit;
     /**
-     * The CardLayout that controls the components of pnlMain.
+     * The CardLayout that controls the components of pnlCards.
      */
     private CardLayout cardLayout;
-    private JPanel pnlMain;
+    /**
+     * The panel that holds different component panels.
+     */
+    private JPanel pnlCards;
 
     /**
      * Constructs a panel of UserProfileView.
      */
     public UserProfileView() {
-        // setLayout(new );
+        setLayout(new BorderLayout());
 
-        CardLayout cardLayout = new CardLayout();
-        pnlMain = new JPanel(cardLayout);
-        pnlMain.setBounds(220,0,750,560);
-        pnlMain.add(new EditProfile(), "editProfile");
-        pnlMain.add(new EditCars(), "editCars");
+        cardLayout = new CardLayout();
+        
+        pnlCards = new JPanel(cardLayout);
+        pnlCards.setPreferredSize(new Dimension(750,560));
+        // pnlCards.setBounds(220,0,750,560);
+        add(pnlCards, BorderLayout.EAST);
 
-        JPanel cntnrMain = new JPanel();
-        cntnrMain.setBounds(220,0,750,560);
-        cntnrMain.add(pnlMain);
-        this.add(cntnrMain);
+        pnlCards.add(new EditProfile(), "editProfile");
+        pnlCards.add(new EditCars(), "editCars");
 
         //shows edit profile first
-        cardLayout.show(pnlMain, "editProfile");
+        cardLayout.show(pnlCards, "editProfile");
 
-        ProfileOptionsPanel profileOptionsPanel = new ProfileOptionsPanel(cardLayout, pnlMain);
-        this.add(profileOptionsPanel);
+        ProfileOptionsPanel profileOptionsPanel = new ProfileOptionsPanel(cardLayout, pnlCards);
+        add(profileOptionsPanel, BorderLayout.WEST);
+
+        this.setPreferredSize(new Dimension(1100,700));
     }
 
     /**
-     * The panel that contains the sidebar op
+     * The panel that contains the sidebar options.
      */
     class ProfileOptionsPanel extends JPanel {
         /**
          * Constructs a panel of ProfileOptions with a specified layout manager and main panel to hold the components.
          * @param cardLayout The specified CardLayout layout manager.
-         * @param pnlMain The specified main panel.
+         * @param pnlCards The specified main panel.
          */
-        public ProfileOptionsPanel(CardLayout cardLayout, JPanel pnlMain) {
+        public ProfileOptionsPanel(CardLayout cardLayout, JPanel pnlCards) {
             this.setLayout(null);
             this.setBackground(res.white);
             this.setVisible(true);
@@ -135,13 +139,15 @@ public class UserProfileView extends JPanel {
             btnNavExit.setIcon(exitResized);
             buttonsPanel.add(btnNavExit);
 
+            this.setPreferredSize(new Dimension(350,700));
+
             // TODO: add these action listeners in the UserProfileController.
             btnNavEditProfile.addActionListener(e -> {
-                cardLayout.show(pnlMain, "editProfile");
+                cardLayout.show(pnlCards, "editProfile");
             });
 
             btnNavEditCars.addActionListener(e -> {
-                cardLayout.show(pnlMain, "editCars");
+                cardLayout.show(pnlCards, "editCars");
             });
         }
     }

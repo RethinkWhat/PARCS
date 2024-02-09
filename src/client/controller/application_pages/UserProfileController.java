@@ -11,6 +11,7 @@ public class UserProfileController {
     Object userAccount;
     JPanel pnlMain;
 
+    /*
     public UserProfileController(UserProfileView view, Object userLoggedIn) {
         this.gui = view;
         this.userAccount = userLoggedIn;
