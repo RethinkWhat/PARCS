@@ -29,13 +29,15 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
         try {
+            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
             switch (page) {
                 case "login": {
                     login();
                     System.out.println("login completed");
                 }//page = read(); };
                 case "reservation": {
-                    register();
+                    reserve();
                 }//page = read();
             }
         } catch (IOException e) {
@@ -46,11 +48,9 @@ public class ClientHandler implements Runnable {
     public void login() throws IOException{
         System.out.println("login attempt");
 
-        reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-
-        String username = read();
+        String username = reader.readLine();
         System.out.println("read username attempt: " + username);
-        String password = read();
+        String password = reader.readLine();
         System.out.println("read password attempt: " + password);
 
 
@@ -65,29 +65,18 @@ public class ClientHandler implements Runnable {
     }
 
 
-    public void register() {}
-
+    public void reserve() {
+        System.out.println("-----RESERVE-----");
+        write("");
+    }
 
 
 
     public void write(String message ) {
-        try {
-            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
-            writer.println(message);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        writer.println(message);
     }
 
 
-    public String read() {
-        String line = null;
-        try {
-            line = reader.readLine();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-        return  line;
-    }
+
 }
 
