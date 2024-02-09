@@ -44,7 +44,7 @@ public class ApplicationController {
         });
         view.setNavAccountListener(e -> {
             view.getLblLocation().setText("Account");
-            // TODO: change panel
+            view.getMainCardLayout().show(view.getPnlCards(), "account");
         });
         view.setNavLogoutListener(e -> {
             // TODO: add functions here to save user actions and send to server.
