@@ -1,17 +1,23 @@
 package server.controller;
 
+
 import java.io.*;
 import java.net.Socket;
-import java.net.SocketException;
+
 
 public class ClientHandler implements Runnable {
+
 
     Server server;
     Socket client;
     BufferedReader reader;
     PrintWriter writer;
 
+
     boolean authenticateLogin = false;
+
+    String page = "login";
+
 
     boolean userLoggedIn = true;
     public ClientHandler(Server server, Socket client) {
@@ -19,15 +25,21 @@ public class ClientHandler implements Runnable {
         this.server = server;
     }
 
+
     @Override
     public void run() {
-        String username = login();
-            write(server.getUserFullName(username));
+
+        switch (page) {
+            case "login" : { login(); }//page = read(); };
+            case "reservation" : { register() ; }//page = read();
+                System.out.println("reservation");
+        }
     }
 
-    public String login() {
+    public void login() {
         String username = read();
         String password = read();
+
 
         if (username != null && password != null)
             authenticateLogin = server.validateAccount(username, password);
@@ -36,8 +48,13 @@ public class ClientHandler implements Runnable {
             write("true");
         else
             write("false");
-        return username;
     }
+
+
+    public void register() {}
+
+
+
 
     public void write(String message ) {
         try {
@@ -48,6 +65,7 @@ public class ClientHandler implements Runnable {
             ex.printStackTrace();
         }
     }
+
 
     public String read() {
         String line = null;
@@ -60,3 +78,4 @@ public class ClientHandler implements Runnable {
         return  line;
     }
 }
+

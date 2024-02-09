@@ -91,9 +91,10 @@ public class LoginRegisterController {
         public void actionPerformed(ActionEvent e) {
             String username = view.getUsername();
             if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
-
-                new ApplicationController(new ApplicationView(), new ApplicationModel(client));
-                view.dispose();
+               // if (!model.isAdmin()) {
+                    new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+                    view.dispose();
+                //}
             } else {
                 view.displayLoginErrorMessage("Wrong credentials or the account does not exist. Try again.");
             }

@@ -200,6 +200,16 @@ public class UserParser {
         return name;
     }
 
+    public boolean isAdmin(String username) {
+        String name = null;
+        List<User> userList = getUserList();
+        for (User user : userList) {
+            if (user.getUsername().equals(username))
+                return user.getType().equals("admin");
+        }
+        return false;
+    }
+
 
 
 

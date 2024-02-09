@@ -37,6 +37,7 @@ public class Client {
 
             // read host IP address
             host = fileReader.nextLine();
+
             // attempt to connect to server
             client = new Socket(host, port);
             client.close();
@@ -69,6 +70,7 @@ public class Client {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         return toReturn;
     }
 

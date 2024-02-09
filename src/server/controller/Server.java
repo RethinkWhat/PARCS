@@ -31,6 +31,11 @@ public class Server{
         return password.equals(associatedPass);
     }
 
+    public boolean checkAdminStatus(String username) {
+        return userParser.isAdmin(username);
+    }
+
+
     public String getUserFullName(String username) {
         return userParser.getUserFullName(username);
     }
@@ -43,7 +48,7 @@ public class Server{
 
     public static void main(String[] args) {
         SocketAddress address = new InetSocketAddress(2020);
-        ExecutorService executor = Executors.newFixedThreadPool(5);
+        ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             Server server = new Server(address);
 

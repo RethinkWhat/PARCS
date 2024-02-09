@@ -60,10 +60,21 @@ public class LoginRegisterModel {
      */
     public boolean validateAccount(String username, String password) {
         client.openSocket();
+        client.writeString("login");
         client.writeString(username);
         client.writeString(password);
         boolean validated =  client.readString().equals("true");
+        return validated;
+    }
+
+    /*
+    public boolean isAdmin(){
+        client.readString();
+        boolean validated =  client.readString().equals("admin");
         client.closeSocket();
         return validated;
     }
+
+     */
+
 }

@@ -107,6 +107,14 @@ public class User {
         this.username = username;
     }
 
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
+    }
+
     /**
      * Retrieves the current decoded password of the user.
      * The password is decoded using SHA 256.
