@@ -1,5 +1,6 @@
 package client.model.application_pages;
 
+import client.model.Client;
 import client.model.LiveDateTime;
 
 import java.util.Calendar;
@@ -13,6 +14,8 @@ public class ReservationPageModel {
      * The first name of the user
      */
     private String userFirstName;
+
+    private Client client;
     /**
      * The formatter for the current date and time.
      */
@@ -25,6 +28,10 @@ public class ReservationPageModel {
      * The vehicles of the user.
      */
     private String[] vehicles;
+
+    public ReservationPageModel(Client client) {
+        this.client = client;
+    }
 
     // This method causes the client to be unresponsive and crash. The suspected cause is similar to the
     // server crashing when turned on / off in the admin side.
@@ -48,5 +55,15 @@ public class ReservationPageModel {
 
     public String getTime() {
         return time;
+    }
+
+    public String getFullName() {
+        client.openSocket();
+        System.out.println("attempting socket connection");
+        String name = client.readString();
+        System.out.println(name);
+        client.closeSocket();
+
+        return name;
     }
 }

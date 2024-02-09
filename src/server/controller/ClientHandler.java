@@ -2,6 +2,7 @@ package server.controller;
 
 import java.io.*;
 import java.net.Socket;
+import java.net.SocketException;
 
 public class ClientHandler implements Runnable {
 
@@ -20,10 +21,11 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-        login();
+        String username = login();
+            write(server.getUserFullName(username));
     }
 
-    public void login() {
+    public String login() {
         String username = read();
         String password = read();
 
@@ -34,9 +36,8 @@ public class ClientHandler implements Runnable {
             write("true");
         else
             write("false");
-
+        return username;
     }
-
 
     public void write(String message ) {
         try {

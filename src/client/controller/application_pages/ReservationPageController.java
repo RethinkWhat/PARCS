@@ -14,6 +14,8 @@ public class ReservationPageController {
         // model.setTime();
         view.getLblDate().setText(model.getTime());
 
+        view.setUserFullName(model.getFullName());
+
         // action listeners
 
         // mouse listeners

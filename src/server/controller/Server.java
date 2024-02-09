@@ -31,6 +31,10 @@ public class Server{
         return password.equals(associatedPass);
     }
 
+    public String getUserFullName(String username) {
+        return userParser.getUserFullName(username);
+    }
+
 
     public ServerSocket getServer() {
         return server;

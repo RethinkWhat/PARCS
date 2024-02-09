@@ -190,6 +190,16 @@ public class UserParser {
         }
     }
 
+    public String getUserFullName(String username) {
+        String name = null;
+        List<User> userList = getUserList();
+        for (User user : userList) {
+            if (user.getUsername().equals(username))
+                name = user.getFirstName() + user.getLastName();
+        }
+        return name;
+    }
+
 
 
 

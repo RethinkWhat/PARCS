@@ -14,10 +14,18 @@ public class ApplicationModel {
      * 3. Account
      */
     private String pageLocation;
+
+    private Client client;
+
+    private ReservationPageModel reservationPageModel;
     /**
      * The model for the reservation page.
      */
-    private ReservationPageModel reservationPageModel = new ReservationPageModel();
+
+    public ApplicationModel(Client client) {
+        this.client = client;
+        reservationPageModel = new ReservationPageModel(client);
+    }
 
     /**
      * Retrieves the current model of the reservation page.

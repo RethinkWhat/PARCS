@@ -2,6 +2,7 @@ package client.controller;
 
 import client.controller.application_pages.ReservationPageController;
 import client.model.ApplicationModel;
+import client.model.Client;
 import client.view.ApplicationView;
 
 /**
@@ -18,6 +19,11 @@ public class ApplicationController {
      * The model ApplicationModel model.
      */
     private ApplicationModel model;
+
+    /**
+     * A reference to the client logged in
+     */
+
 
     /**
      * Constructs an ApplicationController with a specified view and model.
