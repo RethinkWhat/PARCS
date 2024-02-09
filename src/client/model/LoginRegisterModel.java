@@ -66,6 +66,7 @@ public class LoginRegisterModel {
 
         if (validated)
             client.writeString("reservation");
+
         client.closeSocket();
         return validated;
     }

@@ -12,9 +12,9 @@ public class ReservationPageController {
 
         // constants/variables
         // model.setTime();
-        view.getLblDate().setText(model.getTime());
+       // view.getLblDate().setText(model.getTime());
 
-        view.setUserFullName(model.getFullName());
+        //System.out.println("Username" + model.getFullName());
 
         // action listeners
 
@@ -22,4 +22,10 @@ public class ReservationPageController {
 
         // focus listeners
     }
+    public void setName() {
+        System.out.println("Username" + model.getFullName());
+    }
+
+
 }
+

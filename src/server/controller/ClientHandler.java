@@ -18,8 +18,11 @@ public class ClientHandler implements Runnable {
 
     String page = "login";
 
+    String username;
+
 
     boolean userLoggedIn = true;
+
     public ClientHandler(Server server, Socket client) {
         this.client = client;
         this.server = server;
@@ -30,60 +33,67 @@ public class ClientHandler implements Runnable {
     public void run() {
 
         //TODO: Change to while GUI open
-        while (true) {
-            try {
-                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+        try {
+            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+            while (true) {
                 switch (page) {
                     case "login":
-                        login();
+                        username = login();
                         page = reader.readLine();
                         System.out.println("page: " + page);
                         break;
-
                     case "reservation":
+                        System.out.println("reservation page starting");
                         reserve();
+                        System.out.println("reservation page finished");
                         break;
-
                 }
-            } catch (IOException e) {
-                e.printStackTrace();
             }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void login() throws IOException{
+    public String login() throws IOException {
         System.out.println("login attempt");
 
-        String username = reader.readLine();
+        String username = null;
+        while (username == null) {
+            username = reader.readLine();
+        }
         System.out.println("read username attempt: " + username);
         String password = reader.readLine();
         System.out.println("read password attempt: " + password);
 
 
-        if (username != null && password != null) {
-            authenticateLogin = server.validateAccount(username, password);
-        }
+        authenticateLogin = server.validateAccount(username, password);
 
         if (authenticateLogin)
-            write("true");
+            writer.println("true");
         else
-            write("false");
+            writer.println("false");
+        return username;
     }
 
 
     public void reserve() {
-        System.out.println("-----RESERVE-----");
-        write("");
+        System.out.println("---RESERVE---");
+        String startReserve = null;
+        try {
+            while (startReserve == null) {
+                try {
+                    startReserve = reader.readLine();
+                    System.out.println(startReserve);
+                } catch (NullPointerException ignore) {
+                }
+            }
+            System.out.println("out of loop");
+            writer.println(username);
+            System.out.println(username);
+            reader.readLine();
+        } catch (IOException j) {
+            System.out.println("J");
+        }
     }
-
-
-
-    public void write(String message ) {
-        writer.println(message);
-    }
-
-
-
 }
-

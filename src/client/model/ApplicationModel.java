@@ -24,7 +24,6 @@ public class ApplicationModel {
 
     public ApplicationModel(Client client) {
         this.client = client;
-        reservationPageModel = new ReservationPageModel(client);
     }
 
     /**
@@ -32,6 +31,7 @@ public class ApplicationModel {
      * @return The current model of the reservation page.
      */
     public ReservationPageModel getReservationPageModel() {
+        reservationPageModel = new ReservationPageModel(this.client);
         return reservationPageModel;
     }
 }

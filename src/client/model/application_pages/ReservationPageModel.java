@@ -60,6 +60,7 @@ public class ReservationPageModel {
     public String getFullName() {
         client.openSocket();
         System.out.println("attempting socket connection");
+        client.writeString("start");
         String name = client.readString();
         System.out.println(name);
         client.closeSocket();
