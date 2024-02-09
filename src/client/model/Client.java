@@ -54,9 +54,9 @@ public class Client {
 
     public void writeString(String line) {
         try {
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
+            PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
+            System.out.println("printing " + line);
             writer.println(line);
-            writer.flush();
         } catch (IOException ex) {
             ex.printStackTrace();
         }

@@ -28,21 +28,35 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-
-        switch (page) {
-            case "login" : { login(); }//page = read(); };
-            case "reservation" : { register() ; }//page = read();
-                System.out.println("reservation");
+        try {
+            switch (page) {
+                case "login": {
+                    login();
+                    System.out.println("login completed");
+                }//page = read(); };
+                case "reservation": {
+                    register();
+                }//page = read();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
-    public void login() {
+    public void login() throws IOException{
+        System.out.println("login attempt");
+
+        reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+
         String username = read();
+        System.out.println("read username attempt: " + username);
         String password = read();
+        System.out.println("read password attempt: " + password);
 
 
-        if (username != null && password != null)
+        if (username != null && password != null) {
             authenticateLogin = server.validateAccount(username, password);
+        }
 
         if (authenticateLogin)
             write("true");
@@ -60,7 +74,6 @@ public class ClientHandler implements Runnable {
         try {
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
             writer.println(message);
-            writer.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -70,7 +83,6 @@ public class ClientHandler implements Runnable {
     public String read() {
         String line = null;
         try {
-            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             line = reader.readLine();
         } catch (IOException ex) {
             ex.printStackTrace();
