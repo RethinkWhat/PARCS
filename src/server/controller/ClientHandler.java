@@ -28,20 +28,27 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-        try {
-            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
-            switch (page) {
-                case "login": {
-                    login();
-                    System.out.println("login completed");
-                }//page = read(); };
-                case "reservation": {
-                    reserve();
-                }//page = read();
+
+        //TODO: Change to while GUI open
+        while (true) {
+            try {
+                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+                switch (page) {
+                    case "login":
+                        login();
+                        page = reader.readLine();
+                        System.out.println("page: " + page);
+                        break;
+
+                    case "reservation":
+                        reserve();
+                        break;
+
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
         }
     }
 
