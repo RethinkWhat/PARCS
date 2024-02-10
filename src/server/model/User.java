@@ -22,6 +22,11 @@ public class User {
     /**
      * The password of the user.
      */
+
+    /**
+     * The type of the user
+     */
+    private String type;
     private String password;
     /**
      * The last name of the user.
@@ -45,6 +50,7 @@ public class User {
      */
     public User() {
         username = "";
+        type = "";
         password = "";
         lastName = "";
         firstName = "";
@@ -56,13 +62,15 @@ public class User {
      * Constructs a user with specified values.
      * The list of vehicles remain unpopulated.
      * @param username The specified username.
+     * @param type The specified type
      * @param password The specified password.
      * @param lastName The specified last name.
      * @param firstName The specified first name.
      * @param phoneNumber The specified phone number.
      */
-    public User(String username, String password, String lastName, String firstName, String phoneNumber) {
+    public User(String username, String type, String password, String lastName, String firstName, String phoneNumber) {
         this.username = username;
+        this.type = type;
         this.password = password;
         this.lastName = lastName;
         this.firstName = firstName;
@@ -72,12 +80,13 @@ public class User {
 
     public User(ArrayList<String> userInfo) {
         this.username = userInfo.get(0);
-        this.password = userInfo.get(1);
-        this.lastName = userInfo.get(2);
-        this.firstName = userInfo.get(3);
-        this.phoneNumber = userInfo.get(4);
+        this.type = userInfo.get(1);
+        this.password = userInfo.get(2);
+        this.lastName = userInfo.get(3);
+        this.firstName = userInfo.get(4);
+        this.phoneNumber = userInfo.get(5);
         this.vehicles = new ArrayList<>();
-        for (int x = 5; x <userInfo.size(); x++) {
+        for (int x = 6; x <userInfo.size(); x++) {
             vehicles.add(new Vehicle(userInfo.get(x).split(",")));
         }
     }
@@ -96,6 +105,14 @@ public class User {
      */
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    public String getType() {
+        return type;
+    }
+
+    public void setType(String type) {
+        this.type = type;
     }
 
     /**

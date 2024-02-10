@@ -20,10 +20,6 @@ import java.awt.event.*;
  */
 public class LoginRegisterController {
     /**
-     * The client connecting to the server.
-     */
-    private Client client;
-    /**
      * The view LoginRegisterView object.
      */
     private final LoginRegisterView view;
@@ -38,8 +34,7 @@ public class LoginRegisterController {
      * @param view  The specified LoginRegisterView.
      * @param model The specified LoginRegisterModel.
      */
-    public LoginRegisterController(Client client, LoginRegisterView view, LoginRegisterModel model) {
-        this.client = client;
+    public LoginRegisterController(LoginRegisterView view, LoginRegisterModel model) {
         this.view = view;
         this.model = model;
 
@@ -91,9 +86,9 @@ public class LoginRegisterController {
         public void actionPerformed(ActionEvent e) {
             String username = view.getUsername();
             if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
-
-                new ApplicationController(new ApplicationView(), new ApplicationModel());
-                view.dispose();
+               // if (!model.isAdmin()) {
+                    view.dispose();
+                //}
             } else {
                 view.displayLoginErrorMessage("Wrong credentials or the account does not exist. Try again.");
             }

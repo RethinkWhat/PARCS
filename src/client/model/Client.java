@@ -15,15 +15,13 @@ public class Client {
     // Object to hold client socket
     private Socket client;
 
-    // Object for writing to server
-    private PrintWriter writer;
-
-    // Object for reading from server
-    private BufferedReader reader;
-
     private String username;
 
     private SocketAddress socketAddress;
+
+    BufferedReader reader;
+
+    PrintWriter writer;
 
     public Client(Socket client) {
         this.client = client;
@@ -37,6 +35,7 @@ public class Client {
 
             // read host IP address
             host = fileReader.nextLine();
+
             // attempt to connect to server
             client = new Socket(host, port);
             client.close();
@@ -49,33 +48,64 @@ public class Client {
         }
     }
 
+    public Socket getClient() {
+        return client;
+    }
 
+    public void setClient(Socket client) {
+        this.client = client;
+    }
 
     public void writeString(String line) {
-        try {
-            PrintWriter writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()));
             writer.println(line);
-            writer.flush();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
     }
 
     public String readString() {
         String toReturn = null;
         try {
-            BufferedReader reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             toReturn =  reader.readLine();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+
         return toReturn;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void openSocket() {
         try {
             client = new Socket();
             client.connect(socketAddress);
+            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void newSocket(int port) {
+        try {
+            Scanner fileReader = new Scanner(new File("src/client/host"));
+            String host = "";
+
+
+            // read host IP address
+            host = fileReader.nextLine();
+
+            // attempt to connect to server
+            client = new Socket(host, port);
+            client.close();
+
+            // if no exception occurs in connecting to server
+            socketAddress = new InetSocketAddress(host, port);
+            fileReader.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -84,6 +114,8 @@ public class Client {
     public void closeSocket() {
         try {
             client.close();
+            reader.close();
+            writer.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -92,7 +124,7 @@ public class Client {
     public void startGUI() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
-        new LoginRegisterController(this,view, model);
+        new LoginRegisterController(view, model);
     }
 
     public static void main(String[] args) {

@@ -14,6 +14,8 @@ public class ReservationPageController {
         this.view = view;
         this.model = model;
 
+        view.setUserFullName(model.getFullName());
+
         // constants/variables
         view.getLblDate().setText(model.getTime());
         // updates the time every second.
@@ -37,3 +39,4 @@ public class ReservationPageController {
         });
     }
 }
+

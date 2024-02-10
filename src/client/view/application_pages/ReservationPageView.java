@@ -47,6 +47,11 @@ public class ReservationPageView extends JPanel {
      * Instance variable of GridBagConstraints used for JPanels using GridBagLayout.
      */
     private GridBagConstraints gbc;
+
+    /**
+     * Variable to hold full name of user
+     */
+    private JLabel userFullName = new JLabel("Ramon");
     /**
      * The CardLayout that controls the components of the MainTopPanel.
      */
@@ -119,8 +124,7 @@ public class ReservationPageView extends JPanel {
             gbc.ipadx = 475;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.anchor = GridBagConstraints.WEST;
-            String userFirstName = "Ramon Emmiel";
-            lblName = res.createLblH2("Hello, " + userFirstName + "!", res.eerieBlack);
+            lblName = res.createLblH2("Hello, " + "Ramon Jasmin"+ "!", res.eerieBlack);
             pnlInformation.add(lblName, gbc);
 
             gbc.gridy = 1;
@@ -379,6 +383,10 @@ public class ReservationPageView extends JPanel {
 
     public JLabel getLblName() {
         return lblName;
+    }
+
+    public void setUserFullName(String fullName) {
+        lblName.setText("Hello, " + fullName + "!");
     }
 
     public JLabel getLblDate() {

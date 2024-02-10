@@ -1,5 +1,6 @@
 package client.model.application_pages;
 
+import client.model.Client;
 import client.model.LiveDateTime;
 
 import javax.swing.*;
@@ -14,6 +15,8 @@ public class ReservationPageModel {
      * The first name of the user
      */
     private String userFirstName;
+
+    private Client client;
     /**
      * The formatter for the current date and time.
      */
@@ -33,5 +36,14 @@ public class ReservationPageModel {
 
     public String getTime() {
         return liveDateTime.getTime();
+    }
+
+    public String getFullName() {
+        client.openSocket();
+        client.writeString("reservation");
+        client.writeString(client.getUsername());
+        String name = client.readString();
+        client.closeSocket();
+        return name;
     }
 }

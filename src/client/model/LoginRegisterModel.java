@@ -1,5 +1,8 @@
 package client.model;
 
+import client.controller.ApplicationController;
+import client.view.ApplicationView;
+
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.security.SecureRandom;
@@ -60,10 +63,28 @@ public class LoginRegisterModel {
      */
     public boolean validateAccount(String username, String password) {
         client.openSocket();
+        client.writeString("login");
         client.writeString(username);
         client.writeString(password);
         boolean validated =  client.readString().equals("true");
+
+        if (validated) {
+            client.writeString("disconnect");
+            client.closeSocket();
+            client.setUsername(username);
+            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+        }
+        return validated;
+    }
+
+    /*
+    public boolean isAdmin(){
+        client.readString();
+        boolean validated =  client.readString().equals("admin");
         client.closeSocket();
         return validated;
     }
+
+     */
+
 }

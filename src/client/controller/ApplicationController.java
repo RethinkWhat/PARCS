@@ -2,6 +2,7 @@ package client.controller;
 
 import client.controller.application_pages.ReservationPageController;
 import client.model.ApplicationModel;
+import client.model.Client;
 import client.view.ApplicationView;
 
 /**
@@ -20,6 +21,11 @@ public class ApplicationController {
     private ApplicationModel model;
 
     /**
+     * A reference to the client logged in
+     */
+
+
+    /**
      * Constructs an ApplicationController with a specified view and model.
      * @param view The specified ApplicationView.
      * @param model The specified ApplicationModel.
@@ -30,8 +36,7 @@ public class ApplicationController {
 
         // constants / variables
         view.getLblLocation().setText("Home");
-        ReservationPageController reservationPageController =
-                new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
+        new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
 
         // action listeners
         view.setNavHomeListener(e -> {
