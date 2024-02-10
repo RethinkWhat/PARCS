@@ -106,7 +106,7 @@ public class LoginRegisterModel {
             client.writeString("disconnect");
             client.closeSocket();
             client.setUsername(username);
-            new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
+            new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel(client));
         }
         return signUpSuccess;
     }

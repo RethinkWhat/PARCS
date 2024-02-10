@@ -36,7 +36,6 @@ public class Server{
         return userParser.isAdmin(username);
     }
 
-
     public String getUserFullName(String username) {
         return userParser.getUserFullName(username);
     }
@@ -48,6 +47,11 @@ public class Server{
     public boolean createAccount(String username, String type, String password, String lastName, String firstName,
                            String phoneNumber, ArrayList<Vehicle> vehicles) {
         userParser.createUser(username,type,password,lastName,firstName,phoneNumber,vehicles);
+        return true;
+    }
+
+    public boolean addVehicle(String username, Vehicle vehicle) {
+        userParser.addVehicle(username, vehicle);
         return true;
     }
 

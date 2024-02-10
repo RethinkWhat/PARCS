@@ -1,5 +1,8 @@
 package client.model;
 
+import client.controller.ApplicationController;
+import client.view.ApplicationView;
+
 /**
  * Template for VehicleAdderModel.
  * TODO: Documentation
@@ -15,10 +18,16 @@ public class VehicleAdderModel {
     private Object userInput;
 
     /**
+     * Reference to the client
+     */
+    private Client client;
+
+    /**
      * Constructs an object of VehicleAdderModel with default values.
      */
-    public VehicleAdderModel() {
+    public VehicleAdderModel(Client client) {
         vehicleTypes = new String[]{"Select Type:", "Car", "Motorcycle"};
+        this.client = client;
     }
 
     /**
@@ -29,6 +38,23 @@ public class VehicleAdderModel {
         return vehicleTypes;
     }
 
-    public void writeVehicle(String type, String model, String plateNumber) {}
+    public boolean writeVehicle(String type, String model, String plateNumber) {
+        client.openSocket();
+        client.writeString("addVehicle");
+        client.writeString(client.getUsername());
+        client.writeString(type);
+        client.writeString(model);
+        client.writeString(plateNumber);
+        boolean vehicleAccepted = client.readString().equals("true");
+        client.closeSocket();
+        if (vehicleAccepted) {
+            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+        }
+        return vehicleAccepted;
+    }
+
+    public void returnToApplication() {
+        new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+    }
 
 }

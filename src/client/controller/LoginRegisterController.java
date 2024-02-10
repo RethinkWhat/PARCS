@@ -111,11 +111,9 @@ public class LoginRegisterController {
             } else {
                 model.encryptPassword(view.getSignupPassword());
 
-                System.out.println(view.getSignupUsername());
                 if (model.createAccount(view.getSignupFirstName(), view.getSignupLastName(),
                         view.getSignupUsername(), view.getSignupPhoneNo(), view.getSignupPassword()))  {
-
-                    new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
+                    view.dispose();
                 }
             }
             view.displaySignupErrorMessage(""); // resets error message

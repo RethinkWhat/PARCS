@@ -2,6 +2,7 @@ package server.controller;
 
 
 import client.model.Client;
+import server.model.Vehicle;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -69,6 +70,9 @@ public class ClientHandler implements Runnable {
                                 account();
                                 System.out.println("account page finished");
                                 break;
+                            case "addVehicle":
+                                System.out.println("Add Vehicle");
+                                addVehicle();
                         }
                     }
                 }
@@ -181,6 +185,24 @@ public class ClientHandler implements Runnable {
             writer.println(server.getUserCredentials(username));
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void addVehicle() {
+        System.out.println("----- ADD VEHICLE ----");
+        try {
+            String username = reader.readLine();
+            System.out.println("ADD VEHICLE: " + username);
+            String type = reader.readLine();
+            String model = reader.readLine();
+            String plateNumber = reader.readLine();
+            Vehicle newVehicle = new Vehicle(type,model,plateNumber);
+
+            boolean addConfirmed = server.addVehicle(username, newVehicle);
+            System.out.println("Writing addConfirmed: " + addConfirmed);
+            writer.println(addConfirmed);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

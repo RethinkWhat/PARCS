@@ -134,7 +134,7 @@ public class UserParser {
 
 
         Element userElement = document.createElement("user");
-        userElement.setAttribute("user", username);
+        userElement.setAttribute("username", username);
 
         Element typeNode = document.createElement("type");
         typeNode.setTextContent(type);
@@ -177,8 +177,12 @@ public class UserParser {
         Node userNode = createUserNode(username, type, password, lastName, firstName, phoneNumber, vehicles);
 
         document.getDocumentElement().appendChild(userNode);
-        DOMSource source = new DOMSource(document);
 
+        transform();
+    }
+
+    private void transform() {
+        DOMSource source = new DOMSource(document);
         TransformerFactory factory = null;
         Transformer transformer = null;
         try {
@@ -250,7 +254,21 @@ public class UserParser {
         return false;
     }
 
+    public void addVehicle(String username, Vehicle vehicle) {
+        getUserAccountsFile();
 
+        NodeList nodeList = document.getElementsByTagName("user");
+
+        Element vehicleElement = document.createElement("vehicle");
+        vehicleElement.setTextContent(vehicle.toString());
+
+        for (int x =0 ; x < nodeList.getLength(); x++) {
+            if (nodeList.item(x).getAttributes().item(0).getTextContent().equalsIgnoreCase(username)) {
+                nodeList.item(x).appendChild(vehicleElement);
+            }
+        }
+        transform();
+    }
 
 
 
@@ -258,8 +276,9 @@ public class UserParser {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
-        obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",
-                null);
+        //obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",
+           //     null);
+        //obj.addVehicle("ri", new Vehicle("Car", "Civic", "A4949329"));
 
     }
 }
