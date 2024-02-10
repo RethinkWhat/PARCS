@@ -58,8 +58,12 @@ public class ClientHandler implements Runnable {
                                 reserve();
                                 System.out.println("reservation page finished");
                                 break;
+                            case "signUp" :
+                                System.out.println("Sign Up");
+                                signUp();
                             case "disconnect":
                                 handleDisconnect();
+                                break;
                         }
                     }
                 }
@@ -126,6 +130,10 @@ public class ClientHandler implements Runnable {
             writer.println("true");
         else
             writer.println("false");
+    }
+
+    public void signUp() {
+        System.out.println("SIGN UP METHOD");
     }
 
 

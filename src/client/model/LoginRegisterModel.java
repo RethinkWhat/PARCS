@@ -77,6 +77,43 @@ public class LoginRegisterModel {
         return validated;
     }
 
+    public boolean createAccount(String firstName, String lastName,
+                                 String username, String phoneNumber, String password,
+                                 String vehicleType, String vehicleModel, String licensePlate) {
+        client.openSocket();
+
+        // Tell clientHandler client on sign up
+        client.writeString("signUp");
+
+        // Write username and validate if username already in use
+        client.writeString(username);
+
+        // Read if username already in user
+        boolean uniqueUsername = client.readString().equals("true");
+
+        if (uniqueUsername) {
+            client.writeString("user");
+            client.writeString(password);
+            client.writeString(lastName);
+            client.writeString(firstName);
+            client.writeString(phoneNumber);
+            client.writeString(vehicleType);
+            client.writeString(vehicleModel);
+            client.writeString(licensePlate);
+        }
+
+
+        boolean signUpSuccess =  client.readString().equals("true");
+
+        if (signUpSuccess) {
+            client.writeString("disconnect");
+            client.closeSocket();
+            client.setUsername(username);
+            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+        }
+        return signUpSuccess;
+    }
+
     /*
     public boolean isAdmin(){
         client.readString();
