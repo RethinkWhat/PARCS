@@ -264,20 +264,14 @@ public class ReservationPageView extends JPanel {
             pnlContainer.setLayout(new GridLayout(3, 1)); // Divided into 3 rows, 1 column
             add(pnlContainer, BorderLayout.CENTER);
 
-            //TODO: Change icon to iconClose
-            btnClose = res.createBtnIconOnly(res.iconHome, 20,20);
-            // TODO: Add close button
-
-            // pnlSlot
-            JPanel pnlSlotNumber = new JPanel();
-            pnlSlotNumber.setLayout(new FlowLayout(FlowLayout.CENTER));
+            // pnlSlotNumber
+            JPanel pnlSlotNumber = new JPanel(new BorderLayout());
             pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
-            pnlSlotNumber.setBackground(Color.white);
+            pnlSlotNumber.setBackground(res.white);
 
             // Label for the slot number
             lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
             pnlSlotNumber.add(lblSlotNumber);
-
             pnlContainer.add(pnlSlotNumber);
 
             // pnlSlotInformation
