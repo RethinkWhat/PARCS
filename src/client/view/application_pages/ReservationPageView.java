@@ -101,6 +101,8 @@ public class ReservationPageView extends JPanel {
             container.add(lblParkingTitle, BorderLayout.NORTH);
 
             ParkingSlotsPanel parkingSlotsPanel = new ParkingSlotsPanel();
+            parkingSlotsPanel.setPreferredSize(new Dimension(1100, 350));
+            parkingSlotsPanel.setOpaque(false);
             container.add(parkingSlotsPanel, BorderLayout.CENTER);
 
             add(container, BorderLayout.CENTER);
