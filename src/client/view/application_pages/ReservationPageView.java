@@ -122,6 +122,8 @@ public class ReservationPageView extends JPanel {
                 int slotWidth = 1000 / (NUM_CAR_SLOTS + NUM_MOTOR_SLOTS);
                 int slotHeight = 300 / 2;
 
+                int motorSlotWidth = slotWidth / 2;
+
                 int xOffset = (panelWidth - 1000) / 2;
                 int yOffset = (panelHeight - 300) / 2;
 
@@ -137,6 +139,18 @@ public class ReservationPageView extends JPanel {
 
                     // Draw Slot number
                     g.drawString("" + (i + 1), x + slotWidth / 2 - 5, y + slotHeight / 2 + 5);
+                }
+
+                // Draw Motor Slots (Top Row)
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int y = yOffset;
+
+                    // Draw rectangles to represent motor slots
+                    g.drawRect(x, y, motorSlotWidth, slotHeight);
+
+                    // Draw Slot number
+                    g.drawString("" + (i + 1), x + motorSlotWidth / 2 - 5, y + slotHeight / 2 + 5);
                 }
 
 
