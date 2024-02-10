@@ -70,9 +70,15 @@ public class ClientHandler implements Runnable {
                                 account();
                                 System.out.println("account page finished");
                                 break;
+                            case "editInfo":
+                                System.out.println("editing");
+                                editInfo();
+                                System.out.println("edit finished");
+                                break;
                             case "addVehicle":
                                 System.out.println("Add Vehicle");
                                 addVehicle();
+                                break;
                         }
                     }
                 }
@@ -156,12 +162,28 @@ public class ClientHandler implements Runnable {
 
             System.out.println(username + ", " + password + ", " + lastName + ", " + firstName + ", " + phoneNumber);
 
-            //TODO: Create account
             boolean createAccount = server.createAccount(username,"user",password,lastName,firstName,phoneNumber,null);
             writer.println(createAccount);
 
         } catch (IOException e) {
             e.printStackTrace();
+        }
+    }
+
+    public void editInfo() {
+        try {
+            System.out.println("---EDIT INFO METHOD---");
+            String lineRead = "";
+            while (true) {
+                lineRead = reader.readLine();
+                if (lineRead.equals("complete"))
+                    break;
+                String[] tagAndUpdate = lineRead.split(",");
+                boolean editInfo = server.editInfo(tagAndUpdate[0], tagAndUpdate[1], tagAndUpdate[2]);
+                writer.println(editInfo);
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

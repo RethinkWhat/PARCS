@@ -63,6 +63,15 @@ public class Server{
         return server;
     }
 
+    public boolean editInfo(String username, String tag, String newInfo) {
+        try {
+            userParser.editUserInfo(username, tag, newInfo);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
 
     public static void main(String[] args) {
         SocketAddress address = new InetSocketAddress(2020);

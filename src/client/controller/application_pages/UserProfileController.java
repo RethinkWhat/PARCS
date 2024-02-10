@@ -5,6 +5,8 @@ import client.view.application_pages.HistoryPageView;
 import client.view.application_pages.UserProfileView;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 public class UserProfileController {
     /**
@@ -80,10 +82,25 @@ public class UserProfileController {
         view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
         view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
 
+        // editProfileListener
+        view.getPnlEditProfile().setContinueListener(new editListener());
+
         // mouse listeners
     }
 
     public static void main(String[] args) {
                 UserProfileView userProfileView = new UserProfileView();
+    }
+
+    public class editListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            boolean processEdit = model.editUserInformation(
+                    view.getPnlEditProfile().getFirstName(),
+                    view.getPnlEditProfile().getLastName(),
+                    view.getPnlEditProfile().getContact()
+            );
+            //TODO: Display message indicating edit was successful
+        }
     }
 }

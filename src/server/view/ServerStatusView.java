@@ -279,5 +279,9 @@ public class ServerStatusView extends JFrame {
         serverSwitch.setBackground(res.celadon);
     }
 
+    public static void main(String[] args) {
+        ServerStatusView obj = new ServerStatusView();
+    }
+
 }
 

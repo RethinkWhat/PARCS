@@ -310,6 +310,38 @@ public class UserProfileView extends JPanel {
         public JTextField getTxtContact() {
             return txtContact;
         }
+
+        /**
+         * Retrieves the current value of txtFirstName.
+         * @return The current firstName.
+         */
+        public String getFirstName() {
+            return txtFirstName.getText();
+        }
+
+        /**
+         * Retrieves the current value of txtLastName.
+         * @return The current LastName.
+         */
+        public String getLastName() {
+            return txtLastName.getText();
+        }
+
+        /**
+         * Retrieves the current value of txtUsername.
+         * @return The current Username.
+         */
+        public String getUsername() {
+            return txtUsername.getText();
+        }
+
+        /**
+         * Retrieves the current value of txtContact.
+         * @return The current Contact
+         */
+        public String getContact() {
+            return txtContact.getText();
+        }
     }
 
     /**
