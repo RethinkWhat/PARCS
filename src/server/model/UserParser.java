@@ -129,7 +129,7 @@ public class UserParser {
     }
 
     /** Method to create a user node to add to xml file */
-    private Node createUserNode(String username, String type,
+    private Node createUserNode(String username, String type, String password,
                                 String lastName, String firstName, String phoneNumber, ArrayList<Vehicle> vehicles) {
 
 
@@ -139,6 +139,10 @@ public class UserParser {
         Element typeNode = document.createElement("type");
         typeNode.setTextContent(type);
         userElement.appendChild(typeNode);
+
+        Element passwordNode = document.createElement("password");
+        passwordNode.setTextContent(password);
+        userElement.appendChild(passwordNode);
 
 
         Element lastNameNode = document.createElement("lastName");
@@ -165,12 +169,12 @@ public class UserParser {
 
     }
 
-    public void createUser(String username, String type, String lastName, String firstName,
+    public void createUser(String username, String type, String password, String lastName, String firstName,
                            String phoneNumber, ArrayList<Vehicle> vehicles) {
 
         getUserAccountsFile();
 
-        Node userNode = createUserNode(username, type, lastName, firstName, phoneNumber, vehicles);
+        Node userNode = createUserNode(username, type, password, lastName, firstName, phoneNumber, vehicles);
 
         document.getDocumentElement().appendChild(userNode);
         DOMSource source = new DOMSource(document);
@@ -217,7 +221,7 @@ public class UserParser {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
-        obj.createUser("laclac", "user","lacanilao","patrick","+639177900153",
+        obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",
                 null);
 
     }

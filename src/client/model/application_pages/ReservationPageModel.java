@@ -34,6 +34,9 @@ public class ReservationPageModel {
      */
     private String[] vehicles;
 
+    public ReservationPageModel(Client client) {
+        this.client = client;
+    }
     public String getTime() {
         return liveDateTime.getTime();
     }
