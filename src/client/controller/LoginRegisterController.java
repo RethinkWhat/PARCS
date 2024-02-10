@@ -111,8 +111,10 @@ public class LoginRegisterController {
             } else {
                 model.encryptPassword(view.getSignupPassword());
 
+                System.out.println(view.getSignupUsername());
                 if (model.createAccount(view.getSignupFirstName(), view.getSignupLastName(),
-                        view.getUsername(), view.getSignupPhoneNo(), view.getPassword()))  {
+                        view.getSignupUsername(), view.getSignupPhoneNo(), view.getSignupPassword()))  {
+
                     new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
                     /** What does this do */
                     view.displayOptionPane("Account has been successfully made. You will be redirected to the login page.","success"); // informs the user that the account has been successfully made.

@@ -137,12 +137,15 @@ public class ClientHandler implements Runnable {
             System.out.println("SIGN UP METHOD");
             String username = reader.readLine();
 
+            System.out.println(username);
             writer.println(server.checkUsernameExists(username));
 
             String password = reader.readLine();
             String lastName = reader.readLine();
             String firstName = reader.readLine();
             String phoneNumber = reader.readLine();
+
+            System.out.println(username + ", " + password + ", " + ", " + lastName + ", " + firstName + ", " + phoneNumber);
 
             //TODO: Create account
             boolean createAccount = false;

@@ -214,6 +214,17 @@ public class UserParser {
         return false;
     }
 
+    public boolean doesUsernameExist(String username) {
+        getUserAccountsFile();
+
+        NodeList nodeList = document.getElementsByTagName("user");
+
+        for (int x =0 ; x<nodeList.getLength(); x++) {
+            if (nodeList.item(x).getTextContent().equalsIgnoreCase(username))
+                return true;
+        }
+        return false;
+    }
 
 
 
