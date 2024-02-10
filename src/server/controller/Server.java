@@ -51,6 +51,10 @@ public class Server{
         return true;
     }
 
+    public String getUserCredentials(String username) {
+        return userParser.getFullUserInfo(username);
+    }
+
     public ServerSocket getServer() {
         return server;
     }

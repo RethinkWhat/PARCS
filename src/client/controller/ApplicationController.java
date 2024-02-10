@@ -1,9 +1,14 @@
 package client.controller;
 
 import client.controller.application_pages.ReservationPageController;
+import client.controller.application_pages.UserProfileController;
 import client.model.ApplicationModel;
 import client.model.Client;
+import client.model.application_pages.ReservationPageModel;
+import client.model.application_pages.UserProfileModel;
 import client.view.ApplicationView;
+import client.view.application_pages.ReservationPageView;
+import client.view.application_pages.UserProfileView;
 
 /**
  * Template for ApplicationController object.
@@ -21,11 +26,6 @@ public class ApplicationController {
     private ApplicationModel model;
 
     /**
-     * A reference to the client logged in
-     */
-
-
-    /**
      * Constructs an ApplicationController with a specified view and model.
      * @param view The specified ApplicationView.
      * @param model The specified ApplicationModel.
@@ -37,6 +37,7 @@ public class ApplicationController {
         // constants / variables
         view.getLblLocation().setText("Home");
         new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
+        new UserProfileController(view.getUserProfileView(), model.getUserProfileModel());
 
         // action listeners
         view.setNavHomeListener(e -> {
