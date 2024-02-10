@@ -95,17 +95,12 @@ public class ReservationPageView extends JPanel {
 
             container = res.createPnlRounded(1300,510, res.white, res.lightGray);
             container.setLayout(new BorderLayout());
+
+            JLabel lblParkingTitle = res.createLblH1("SLU Maryheights Parking", res.eerieBlack);
+            lblParkingTitle.setBorder(new EmptyBorder(20, 40, 0, 0));
+            container.add(lblParkingTitle, BorderLayout.NORTH);
+
             add(container, BorderLayout.CENTER);
-
-            // Panel for parking labels
-            JPanel pnlParkingLabel = new JPanel(new BorderLayout());
-            pnlParkingLabel.setPreferredSize(new Dimension(1300, 100));
-            container.add(pnlParkingLabel, BorderLayout.NORTH);
-
-            // Panel for parking slots
-            JPanel pnlParkingSlots = new JPanel(new BorderLayout());
-            pnlParkingSlots.setPreferredSize(new Dimension(1300, 310));
-            container.add(pnlParkingSlots, BorderLayout.SOUTH);
 
             setPreferredSize(new Dimension(1300,510));
         }
