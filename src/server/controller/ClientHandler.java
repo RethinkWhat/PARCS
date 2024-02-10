@@ -145,10 +145,10 @@ public class ClientHandler implements Runnable {
             String firstName = reader.readLine();
             String phoneNumber = reader.readLine();
 
-            System.out.println(username + ", " + password + ", " + ", " + lastName + ", " + firstName + ", " + phoneNumber);
+            System.out.println(username + ", " + password + ", " + lastName + ", " + firstName + ", " + phoneNumber);
 
             //TODO: Create account
-            boolean createAccount = false;
+            boolean createAccount = server.createAccount(username,"user",password,lastName,firstName,phoneNumber,null);
             writer.println(createAccount);
 
         } catch (IOException e) {

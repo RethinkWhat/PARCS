@@ -3,6 +3,7 @@ package client.model;
 import client.controller.ApplicationController;
 import client.controller.VehicleAdderController;
 import client.view.ApplicationView;
+import client.view.VehicleAdderView;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -92,7 +93,7 @@ public class LoginRegisterModel {
         // Read if username already taken
         boolean uniqueUsername = client.readString().equals("true");
 
-        if (uniqueUsername) {
+        if (!uniqueUsername) {
             client.writeString(password);
             client.writeString(lastName);
             client.writeString(firstName);
@@ -105,7 +106,7 @@ public class LoginRegisterModel {
             client.writeString("disconnect");
             client.closeSocket();
             client.setUsername(username);
-            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+            new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
         }
         return signUpSuccess;
     }

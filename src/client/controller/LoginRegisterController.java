@@ -116,9 +116,6 @@ public class LoginRegisterController {
                         view.getSignupUsername(), view.getSignupPhoneNo(), view.getSignupPassword()))  {
 
                     new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
-                    /** What does this do */
-                    view.displayOptionPane("Account has been successfully made. You will be redirected to the login page.","success"); // informs the user that the account has been successfully made.
-
                 }
             }
             view.displaySignupErrorMessage(""); // resets error message

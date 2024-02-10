@@ -2,6 +2,7 @@ package server.controller;
 
 
 import server.model.UserParser;
+import server.model.Vehicle;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -42,6 +43,12 @@ public class Server{
 
     public boolean checkUsernameExists(String username) {
         return userParser.doesUsernameExist(username);
+    }
+
+    public boolean createAccount(String username, String type, String password, String lastName, String firstName,
+                           String phoneNumber, ArrayList<Vehicle> vehicles) {
+        userParser.createUser(username,type,password,lastName,firstName,phoneNumber,vehicles);
+        return true;
     }
 
     public ServerSocket getServer() {
