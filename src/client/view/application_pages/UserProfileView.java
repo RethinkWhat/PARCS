@@ -222,11 +222,10 @@ public class UserProfileView extends JPanel {
 
             JPanel pnlNameField = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
-            // TODO: Add attributes of first name, last name, email, and contact number in the UserProfileModel.
-            txtFirstName = res.createTxtRounded("Patrick", res.white, res.gray,20);
+            txtFirstName = res.createTxtRounded("First Name", res.white, res.gray,20);
             txtFirstName.setPreferredSize(new Dimension(10,50));
 
-            txtLastName = res.createTxtRounded("Bozorgi", res.white, res.gray,20);
+            txtLastName = res.createTxtRounded("Last Name", res.white, res.gray,20);
             txtLastName.setPreferredSize(new Dimension(10,50));
 
             pnlNameField.add(txtFirstName);
@@ -448,6 +447,14 @@ public class UserProfileView extends JPanel {
      */
     public void setNavHistoryListener(ActionListener actionListener) {
         btnNavHistory.addActionListener(actionListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnNavExit.
+     * @param actionListener The specified action listener.
+     */
+    public void setNavExitListener(ActionListener actionListener) {
+        btnNavExit.addActionListener(actionListener);
     }
 
     public JButton getBtnNavEditProfile() {
