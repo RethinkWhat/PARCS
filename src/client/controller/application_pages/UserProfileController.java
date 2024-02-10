@@ -77,6 +77,8 @@ public class UserProfileController {
         view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
 
         // action listeners
+        view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
+        view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
 
         // mouse listeners
     }

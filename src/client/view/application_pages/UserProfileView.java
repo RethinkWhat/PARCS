@@ -160,15 +160,6 @@ public class UserProfileView extends JPanel {
             buttonsPanel.add(btnNavExit);
 
             this.setPreferredSize(new Dimension(350,700));
-
-            // TODO: add these action listeners in the UserProfileController.
-            btnNavEditProfile.addActionListener(e -> {
-                cardLayout.show(pnlCards, "editProfile");
-            });
-
-            btnNavEditCars.addActionListener(e -> {
-                cardLayout.show(pnlCards, "editCars");
-            });
         }
     }
 
