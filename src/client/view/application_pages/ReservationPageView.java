@@ -165,6 +165,18 @@ public class ReservationPageView extends JPanel {
                     g.drawString("" + (i + 6), x + slotWidth / 2 - 5, y + slotHeight / 2 + 5);
                 }
 
+                // Draw Motor Slots (Bottom Row)
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int y = yOffset + slotHeight;
+
+                    // Draw rectangles to represent motor slots
+                    g.drawRect(x, y, motorSlotWidth, slotHeight);
+
+                    // Draw Slot number
+                    g.drawString("" + (i + 3), x + motorSlotWidth / 2 - 5, y + slotHeight / 2 + 5);
+                }
+
             }
         }
     }
