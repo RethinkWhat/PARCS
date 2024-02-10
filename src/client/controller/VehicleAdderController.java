@@ -23,6 +23,7 @@ public class VehicleAdderController {
      */
     private VehicleAdderModel model;
 
+
     /**
      * Constructs a VehicleAdderController with a specified view and model.
      * @param view The specified VehicleAdderView.
@@ -50,12 +51,7 @@ public class VehicleAdderController {
     class AddVehicleListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO
+            model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
         }
-    }
-
-    // Temporary main method
-    public static void main(String[] args) {
-        new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
     }
 }

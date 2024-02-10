@@ -29,7 +29,6 @@ public class VehicleAdderModel {
         return vehicleTypes;
     }
 
-    public void sendToServer(Object object) {
-        // add method
-    }
+    public void writeVehicle(String type, String model, String plateNumber) {}
+
 }

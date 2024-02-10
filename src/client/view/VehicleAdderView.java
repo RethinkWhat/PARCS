@@ -115,6 +115,19 @@ public class VehicleAdderView extends JFrame {
         return txtPlateNumber;
     }
 
+    public String getVehicleType() {
+        return cmbType.getSelectedItem().toString();
+    }
+
+
+    public String getModel() {
+        return txtModel.getText();
+    }
+    public String getPlateNumber() {
+        return txtPlateNumber.getText();
+    }
+
+
     public JButton getBtnAddVehicle() {
         return btnAddVehicle;
     }

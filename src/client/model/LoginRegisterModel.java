@@ -1,6 +1,7 @@
 package client.model;
 
 import client.controller.ApplicationController;
+import client.controller.VehicleAdderController;
 import client.view.ApplicationView;
 
 import java.nio.charset.StandardCharsets;
@@ -77,9 +78,10 @@ public class LoginRegisterModel {
         return validated;
     }
 
-    public boolean createAccount(String firstName, String lastName,
+    public boolean verifyUsername(String firstName, String lastName,
                                  String username, String phoneNumber, String password,
                                  String vehicleType, String vehicleModel, String licensePlate) {
+
         client.openSocket();
 
         // Tell clientHandler client on sign up
@@ -101,7 +103,6 @@ public class LoginRegisterModel {
             client.writeString(vehicleModel);
             client.writeString(licensePlate);
         }
-
 
         boolean signUpSuccess =  client.readString().equals("true");
 
