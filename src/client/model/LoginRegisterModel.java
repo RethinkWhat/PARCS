@@ -94,7 +94,7 @@ public class LoginRegisterModel {
         boolean uniqueUsername = client.readString().equals("true");
 
         if (!uniqueUsername) {
-            client.writeString(password);
+            client.writeString(encryptPassword(password));
             client.writeString(lastName);
             client.writeString(firstName);
             client.writeString(phoneNumber);
