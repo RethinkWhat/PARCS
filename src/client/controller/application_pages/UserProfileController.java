@@ -1,12 +1,9 @@
-package client.controller.account;
+package client.controller.application_pages;
 
-import client.view.account.HistoryPageView;
-import client.view.account.UserProfileView;
+import client.view.application_pages.HistoryPageView;
+import client.view.application_pages.UserProfileView;
 
 import javax.swing.*;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 
 public class UserProfileController {
 
@@ -14,6 +11,7 @@ public class UserProfileController {
     Object userAccount;
     JPanel pnlMain;
 
+    /*
     public UserProfileController(UserProfileView view, Object userLoggedIn) {
         this.gui = view;
         this.userAccount = userLoggedIn;

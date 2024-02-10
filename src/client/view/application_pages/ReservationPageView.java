@@ -6,6 +6,10 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * Template for ReservationPageView object.
+ * The ReservationPage is the home page of the client application.
+ */
 public class ReservationPageView extends JPanel {
     /**
      * The panel that holds different component panels.
