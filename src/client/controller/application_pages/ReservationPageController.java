@@ -10,6 +10,8 @@ public class ReservationPageController {
         this.view = view;
         this.model = model;
 
+        view.setUserFullName(model.getFullName());
+
         // constants/variables
         // model.setTime();
        // view.getLblDate().setText(model.getTime());
@@ -21,9 +23,6 @@ public class ReservationPageController {
         // mouse listeners
 
         // focus listeners
-    }
-    public void setName() {
-       view.setUserFullName(model.getFullName());
     }
 
 

@@ -382,7 +382,7 @@ public class ReservationPageView extends JPanel {
     }
 
     public void setUserFullName(String fullName) {
-        lblName.setText("Hello, " + userFullName.getText() + "!");
+        lblName.setText("Hello, " + fullName + "!");
     }
 
     public JLabel getLblDate() {

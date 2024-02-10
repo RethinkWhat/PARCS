@@ -62,7 +62,6 @@ public class ReservationPageModel {
         client.writeString("reservation");
         client.writeString(client.getUsername());
         String name = client.readString();
-        System.out.println(name);
         client.closeSocket();
         return name;
     }
