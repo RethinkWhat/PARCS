@@ -38,6 +38,7 @@ public class VehicleAdderModel {
     public boolean writeVehicle(String type, String model, String plateNumber) {
         client.openSocket();
         client.writeString("addVehicle");
+        client.writeString(client.getUsername());
         client.writeString(type);
         client.writeString(model);
         client.writeString(plateNumber);
