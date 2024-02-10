@@ -146,7 +146,7 @@ public class ServerStatusView extends JFrame {
 
             gbc.gridy = 1;
             gbc.gridwidth = 3;
-            String date = "";
+            String date = "I love you";
             lblDate = res.createLblH4(date, res.eerieBlack);
             pnlInformation.add(lblDate,gbc);
 
@@ -208,6 +208,7 @@ public class ServerStatusView extends JFrame {
 
             //To be dynamically changed in the controller
             serverStatus = res.createLblH1("OFFLINE",res.red);
+            serverStatus.setHorizontalAlignment(SwingConstants.CENTER);
             gbc.gridx = 0;
             gbc.gridy = 2;
             add(serverStatus,gbc);
