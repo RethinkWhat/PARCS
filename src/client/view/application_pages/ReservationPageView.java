@@ -117,6 +117,28 @@ public class ReservationPageView extends JPanel {
             private static final int NUM_CAR_SLOTS = 5;
             private static final int NUM_MOTOR_SLOTS = 2;
 
+            private JButton[] carButtons;
+            private JButton[] motorButtons;
+
+            public ParkingSlotsPanel() {
+                initializeButtons();
+            }
+
+            private void initializeButtons() {
+                carButtons = new JButton[NUM_CAR_SLOTS];
+                motorButtons = new JButton[NUM_MOTOR_SLOTS];
+
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    carButtons[i] = res.createBtnRounded(String.valueOf(i + 1), res.celadon, res.white, 10);
+                    add(carButtons[i]);
+                }
+
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    motorButtons[i] = res.createBtnRounded(String.valueOf(i + 1), res.celadon, res.white, 10);
+                    add(motorButtons[i]);
+                }
+            }
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -142,10 +164,6 @@ public class ReservationPageView extends JPanel {
                     // Draw rectangles to represent car slots
                     g.drawRect(x, y, slotWidth, slotHeight);
 
-                    // Create button for car slot
-                    JButton carBtn = res.createBtnRounded(String.valueOf(i + 1), Color.BLUE, Color.WHITE, 10);
-                    carBtn.setBounds(x, y, slotWidth, slotHeight);
-                    add(carBtn);
                 }
 
                 // Draw Motor Slots (Top Row)
