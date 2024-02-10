@@ -1,7 +1,9 @@
 package client.model;
 
 import client.controller.ApplicationController;
+import client.controller.VehicleAdderController;
 import client.view.ApplicationView;
+import client.view.VehicleAdderView;
 
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
@@ -78,8 +80,8 @@ public class LoginRegisterModel {
     }
 
     public boolean createAccount(String firstName, String lastName,
-                                 String username, String phoneNumber, String password,
-                                 String vehicleType, String vehicleModel, String licensePlate) {
+                                 String username, String phoneNumber, String password) {
+
         client.openSocket();
 
         // Tell clientHandler client on sign up
@@ -88,20 +90,15 @@ public class LoginRegisterModel {
         // Write username and validate if username already in use
         client.writeString(username);
 
-        // Read if username already in user
+        // Read if username already taken
         boolean uniqueUsername = client.readString().equals("true");
 
-        if (uniqueUsername) {
-            client.writeString("user");
-            client.writeString(password);
+        if (!uniqueUsername) {
+            client.writeString(encryptPassword(password));
             client.writeString(lastName);
             client.writeString(firstName);
             client.writeString(phoneNumber);
-            client.writeString(vehicleType);
-            client.writeString(vehicleModel);
-            client.writeString(licensePlate);
         }
-
 
         boolean signUpSuccess =  client.readString().equals("true");
 
@@ -109,7 +106,7 @@ public class LoginRegisterModel {
             client.writeString("disconnect");
             client.closeSocket();
             client.setUsername(username);
-            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+            new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
         }
         return signUpSuccess;
     }
