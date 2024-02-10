@@ -23,7 +23,7 @@ public class ReservationPageController {
         // focus listeners
     }
     public void setName() {
-        System.out.println("Username" + model.getFullName());
+       view.setUserFullName(model.getFullName());
     }
 
 

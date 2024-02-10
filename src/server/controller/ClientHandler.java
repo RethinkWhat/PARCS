@@ -21,9 +21,6 @@ public class ClientHandler implements Runnable {
 
     boolean authenticateLogin = false;
 
-    String username;
-
-
     boolean disconnect = false;
     InetAddress address;
 
@@ -44,7 +41,6 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
 
-        //TODO: Change to while GUI open
         while (!disconnect) {
             try {
                 reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
@@ -54,7 +50,7 @@ public class ClientHandler implements Runnable {
                     if (page != null) {
                         switch (page) {
                             case "login":
-                                username = login();
+                                login();
                                 System.out.println("page: " + page);
                                 break;
                             case "reservation":
@@ -112,7 +108,7 @@ public class ClientHandler implements Runnable {
 
 
 
-    public String login() throws IOException {
+    public void login() throws IOException {
         System.out.println("login attempt");
 
         String username = null;
@@ -130,16 +126,17 @@ public class ClientHandler implements Runnable {
             writer.println("true");
         else
             writer.println("false");
-        return username;
     }
 
 
     public void reserve() {
         System.out.println("-----------RESERVE-----------");
         try {
-            System.out.println(reader.readLine());
-        } catch (IOException j) {
-            j.printStackTrace();
+            String username = reader.readLine();
+            System.out.println("Printing: " + username);
+            writer.println(server.getUserFullName(username));
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 }

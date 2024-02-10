@@ -71,6 +71,7 @@ public class LoginRegisterModel {
         if (validated) {
             client.writeString("disconnect");
             client.closeSocket();
+            client.setUsername(username);
             new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }
         return validated;

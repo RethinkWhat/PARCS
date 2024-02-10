@@ -195,7 +195,7 @@ public class UserParser {
         List<User> userList = getUserList();
         for (User user : userList) {
             if (user.getUsername().equals(username))
-                name = user.getFirstName() + user.getLastName();
+                name = user.getFirstName() + " " + user.getLastName();
         }
         return name;
     }

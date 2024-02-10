@@ -59,12 +59,11 @@ public class ReservationPageModel {
 
     public String getFullName() {
         client.openSocket();
-        System.out.println("attempting socket connection");
-        client.writeString("start");
+        client.writeString("reservation");
+        client.writeString(client.getUsername());
         String name = client.readString();
         System.out.println(name);
         client.closeSocket();
-
         return name;
     }
 }
