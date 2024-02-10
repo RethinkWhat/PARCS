@@ -110,18 +110,14 @@ public class LoginRegisterController {
                 view.displaySignupErrorMessage("Passwords do not match. Try again.");
             } else {
                 model.encryptPassword(view.getSignupPassword());
-                /*
-                client.writeString(
-                        view.getSignupUsername() + "," +
-                                "user" + "," +
-                                view.getSignupLastName() + "," +
-                                view.getSignupFirstName() + "," +
-                                view.getSignupPhoneNo()
-                );
-                */
-                new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
-                // view.displayOptionPane("Account has been successfully made. You will be redirected to the login page."); // informs the user that the account has been successfully made.
-                view.getCardLayout().show(view.getPnlCards(), "login"); // redirection to the login page
+
+                if (model.createAccount(view.getSignupFirstName(), view.getSignupLastName(),
+                        view.getUsername(), view.getSignupPhoneNo(), view.getPassword()))  {
+                    new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel());
+                    /** What does this do */
+                    view.displayOptionPane("Account has been successfully made. You will be redirected to the login page.","success"); // informs the user that the account has been successfully made.
+
+                }
             }
             view.displaySignupErrorMessage(""); // resets error message
         }

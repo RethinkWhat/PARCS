@@ -40,6 +40,9 @@ public class Server{
         return userParser.getUserFullName(username);
     }
 
+    public boolean checkUsernameExists(String username) {
+        return userParser.doesUsernameExist(username);
+    }
 
     public ServerSocket getServer() {
         return server;

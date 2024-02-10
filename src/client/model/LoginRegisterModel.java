@@ -78,9 +78,8 @@ public class LoginRegisterModel {
         return validated;
     }
 
-    public boolean verifyUsername(String firstName, String lastName,
-                                 String username, String phoneNumber, String password,
-                                 String vehicleType, String vehicleModel, String licensePlate) {
+    public boolean createAccount(String firstName, String lastName,
+                                 String username, String phoneNumber, String password) {
 
         client.openSocket();
 
@@ -90,18 +89,14 @@ public class LoginRegisterModel {
         // Write username and validate if username already in use
         client.writeString(username);
 
-        // Read if username already in user
+        // Read if username already taken
         boolean uniqueUsername = client.readString().equals("true");
 
         if (uniqueUsername) {
-            client.writeString("user");
             client.writeString(password);
             client.writeString(lastName);
             client.writeString(firstName);
             client.writeString(phoneNumber);
-            client.writeString(vehicleType);
-            client.writeString(vehicleModel);
-            client.writeString(licensePlate);
         }
 
         boolean signUpSuccess =  client.readString().equals("true");

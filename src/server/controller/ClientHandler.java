@@ -133,7 +133,24 @@ public class ClientHandler implements Runnable {
     }
 
     public void signUp() {
-        System.out.println("SIGN UP METHOD");
+        try {
+            System.out.println("SIGN UP METHOD");
+            String username = reader.readLine();
+
+            writer.println(server.checkUsernameExists(username));
+
+            String password = reader.readLine();
+            String lastName = reader.readLine();
+            String firstName = reader.readLine();
+            String phoneNumber = reader.readLine();
+
+            //TODO: Create account
+            boolean createAccount = false;
+            writer.println(createAccount);
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
 
