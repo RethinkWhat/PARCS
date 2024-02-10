@@ -69,7 +69,7 @@ public class LoginRegisterModel {
         boolean validated =  client.readString().equals("true");
 
         if (validated) {
-            client.writeString("reservation");
+            client.writeString("disconnect");
             client.closeSocket();
             new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }

@@ -54,6 +54,7 @@ public class Server{
 
             while (true) {
                 Socket clientSocket = server.getServer().accept();
+
                 new Thread(new ClientHandler(server, clientSocket)).start();
 
             }

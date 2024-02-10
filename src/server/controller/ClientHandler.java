@@ -1,8 +1,13 @@
 package server.controller;
 
 
+import client.model.Client;
+
 import java.io.*;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.Socket;
+import java.net.SocketAddress;
 
 
 public class ClientHandler implements Runnable {
@@ -19,41 +24,93 @@ public class ClientHandler implements Runnable {
     String username;
 
 
-    boolean userLoggedIn = true;
+    boolean disconnect = false;
+    InetAddress address;
 
     public ClientHandler(Server server, Socket client) {
         this.client = client;
         this.server = server;
+        this.address = server.getServer().getInetAddress();
     }
 
+    public Socket getClient() {
+        return client;
+    }
+
+    public void setClient(Socket client) {
+        this.client = client;
+    }
 
     @Override
     public void run() {
 
         //TODO: Change to while GUI open
-        try {
-            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
-            while (true) {
-                String page = reader.readLine();
-                if (page != null) {
-                    switch (page) {
-                        case "login":
-                            username = login();
-                            System.out.println("page: " + page);
-                            break;
-                        case "reservation":
-                            System.out.println("reservation page starting");
-                            reserve();
-                            System.out.println("reservation page finished");
-                            break;
+        while (!disconnect) {
+            try {
+                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+                while (!disconnect) {
+                    String page = reader.readLine();
+                    if (page != null) {
+                        switch (page) {
+                            case "login":
+                                username = login();
+                                System.out.println("page: " + page);
+                                break;
+                            case "reservation":
+                                System.out.println("reservation page starting");
+                                reserve();
+                                System.out.println("reservation page finished");
+                                break;
+                            case "disconnect":
+                                handleDisconnect();
+                        }
                     }
                 }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+    public void handleDisconnect() {
+        System.out.println("---------------");
+        System.out.println("disconnecting");
+        disconnect = true;
+        System.out.println("disconnected");
+        System.out.println("---------------");
+        closeResources();
+        openResources();
+    }
+
+    private void closeResources() {
+        try {
+            if (reader != null) {
+                reader.close();
+            }
+            if (writer != null) {
+                writer.close();
+            }
+            if (client != null && !client.isClosed()) {
+                client.close();
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
+
+    private void openResources() {
+        try {
+            client = new Socket();  // Create a new socket for a potential reconnection
+            client.connect(new InetSocketAddress(address, server.getServer().getLocalPort()));
+            reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+
 
     public String login() throws IOException {
         System.out.println("login attempt");
@@ -79,20 +136,10 @@ public class ClientHandler implements Runnable {
 
     public void reserve() {
         System.out.println("-----------RESERVE-----------");
-        String startReserve = null;
         try {
-            while (startReserve == null) {
-                try {
-                    startReserve = reader.readLine();
-                } catch (NullPointerException ignore) {
-                }
-            }
-            System.out.println("out of loop");
-            writer.println(username);
-            System.out.println(username);
-            reader.readLine();
+            System.out.println(reader.readLine());
         } catch (IOException j) {
-            System.out.println("J");
+            j.printStackTrace();
         }
     }
 }
