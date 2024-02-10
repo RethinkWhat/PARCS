@@ -142,8 +142,10 @@ public class ReservationPageView extends JPanel {
                     // Draw rectangles to represent car slots
                     g.drawRect(x, y, slotWidth, slotHeight);
 
-                    // Draw Slot number
-                    g.drawString("" + (i + 1), x + slotWidth / 2 - 5, y + slotHeight / 2 + 5);
+                    // Create button for car slot
+                    JButton carBtn = res.createBtnRounded(String.valueOf(i + 1), Color.BLUE, Color.WHITE, 10);
+                    carBtn.setBounds(x, y, slotWidth, slotHeight);
+                    add(carBtn);
                 }
 
                 // Draw Motor Slots (Top Row)
@@ -181,7 +183,6 @@ public class ReservationPageView extends JPanel {
                     // Draw Slot number
                     g.drawString("" + (i + 3), x + motorSlotWidth / 2 - 5, y + slotHeight / 2 + 5);
                 }
-
             }
         }
     }
