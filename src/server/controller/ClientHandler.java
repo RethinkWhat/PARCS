@@ -199,8 +199,8 @@ public class ClientHandler implements Runnable {
             Vehicle newVehicle = new Vehicle(type,model,plateNumber);
 
             boolean addConfirmed = server.addVehicle(username, newVehicle);
-            System.out.println("VEHICLE: " + username);
-            writer.write(String.valueOf(addConfirmed));
+            System.out.println("Writing addConfirmed: " + addConfirmed);
+            writer.println(addConfirmed);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

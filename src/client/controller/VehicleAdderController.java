@@ -1,6 +1,8 @@
 package client.controller;
 
+import client.model.ApplicationModel;
 import client.model.VehicleAdderModel;
+import client.view.ApplicationView;
 import client.view.VehicleAdderView;
 
 import javax.swing.*;
@@ -38,7 +40,7 @@ public class VehicleAdderController {
 
         // action listeners
         view.setAddVehicleListener(new AddVehicleListener());
-        view.setCancelListener(e -> view.dispose());
+        view.setCancelListener(new CancelVehicleAdder());
 
         // mouse listeners
 
@@ -51,7 +53,17 @@ public class VehicleAdderController {
     class AddVehicleListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
+            boolean validate = model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
+            if (validate) {
+                view.dispose();
+            }
+        }
+    }
+
+    class CancelVehicleAdder implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.dispose();
         }
     }
 }

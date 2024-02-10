@@ -1,5 +1,8 @@
 package client.model;
 
+import client.controller.ApplicationController;
+import client.view.ApplicationView;
+
 /**
  * Template for VehicleAdderModel.
  * TODO: Documentation
@@ -44,8 +47,14 @@ public class VehicleAdderModel {
         client.writeString(plateNumber);
         boolean vehicleAccepted = client.readString().equals("true");
         client.closeSocket();
-
+        if (vehicleAccepted) {
+            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+        }
         return vehicleAccepted;
+    }
+
+    public void returnToApplication() {
+        new ApplicationController(new ApplicationView(), new ApplicationModel(client));
     }
 
 }
