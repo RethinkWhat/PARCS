@@ -151,7 +151,7 @@ public class ReservationPageView extends JPanel {
                 int slotWidth = 1000 / (NUM_CAR_SLOTS + NUM_MOTOR_SLOTS);
                 int slotHeight = 300 / 2;
 
-                int motorSlotWidth = slotWidth / 2;
+                int motorSlotWidth = 90; // int motorSlotWidth = slotWidth / 2;
 
                 int xOffset = (panelWidth - 1000) / 2;
                 int yOffset = (panelHeight - 300) / 2;
