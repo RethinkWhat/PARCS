@@ -94,7 +94,12 @@ public class ReservationPageView extends JPanel {
             setLayout(new BorderLayout());
 
             container = res.createPnlRounded(1300,510, res.white, res.lightGray);
+            container.setLayout(new BorderLayout());
             add(container, BorderLayout.CENTER);
+
+            // Panel for parking labels
+            JPanel pnlParkingLabel = res.createPnlRounded(1300, 100, res.white, res.lightGray);
+            container.add(pnlParkingLabel, BorderLayout.NORTH);
 
             setPreferredSize(new Dimension(1300,510));
         }
