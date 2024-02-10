@@ -68,11 +68,15 @@ public class UserProfileView extends JPanel {
         setLayout(new BorderLayout());
 
         cardLayout = new CardLayout();
+
+        JPanel pnlRight = new JPanel(new BorderLayout());
+        pnlRight.setPreferredSize(new Dimension(750,700));
+        add(pnlRight, BorderLayout.EAST);
         
         pnlCards = new JPanel(cardLayout);
         pnlCards.setPreferredSize(new Dimension(750,560));
         // pnlCards.setBounds(220,0,750,560);
-        add(pnlCards, BorderLayout.EAST);
+        pnlRight.add(pnlCards, BorderLayout.NORTH);
 
         // edit profile page
         pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
@@ -202,11 +206,10 @@ public class UserProfileView extends JPanel {
          * Constructs a panel of EditProfile.
          */
         public EditProfile() {
-            this.setPreferredSize(new Dimension(650,490));
+            // this.setPreferredSize(new Dimension(650,490));
             this.setLayout(new GridLayout(8,1));
-            //this.setBackground(res.celadon);
-            Border border = new EmptyBorder(10,20,10,60);
-            this.setBorder(border);
+            this.setBorder(new EmptyBorder(10,20,10,60));
+
             JLabel lblEditProfile = res.createLblH1("Edit Profile", res.eerieBlack);
             lblEditProfile.setBorder(new EmptyBorder(25,0,0,0));
             lblEditProfile.setFont(new Font("Arial", Font.BOLD, 32));
@@ -244,15 +247,16 @@ public class UserProfileView extends JPanel {
             lblUsername.setBorder(new EmptyBorder(30,0,0,0));
             this.add(lblUsername);
 
-            txtUsername = res.createTxtRounded("Patrick@gmail.com", res.white, res.gray,20);
+            txtUsername = res.createTxtRounded("Username", res.lightGray, res.gray,20);
             txtUsername.setSize(new Dimension(50,50));
+            txtUsername.setFocusable(false);
             this.add(txtUsername);
 
             JLabel lblContact = res.createLblH3("Contact", res.eerieBlack);
             lblContact.setBorder(new EmptyBorder(30,0,0,0));
             this.add(lblContact);
 
-            txtContact = res.createTxtRounded("+63 917 790 0153", res.white, res.gray,20);
+            txtContact = res.createTxtRounded("#############", res.white, res.gray,20);
             this.add(txtContact);
 
             JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.LEADING));
