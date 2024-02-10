@@ -127,6 +127,18 @@ public class ReservationPageView extends JPanel {
 
                 g.setColor(Color.black);
 
+                // Draw Car Slots (Top Row)
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    int x = xOffset + i * slotWidth;
+                    int y = yOffset;
+
+                    // Draw rectangles to represent car slots
+                    g.drawRect(x, y, slotWidth, slotHeight);
+
+                    // Draw Slot number
+                    g.drawString("" + (i + 1), x + slotWidth / 2 - 5, y + slotHeight / 2 + 5);
+                }
+
 
             }
         }
