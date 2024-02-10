@@ -112,8 +112,24 @@ public class ReservationPageView extends JPanel {
             private static final int NUM_CAR_SLOTS = 5;
             private static final int NUM_MOTOR_SLOTS = 2;
 
-        }
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
 
+                int panelWidth = getWidth();
+                int panelHeight = getHeight();
+
+                int slotWidth = 1000 / (NUM_CAR_SLOTS + NUM_MOTOR_SLOTS);
+                int slotHeight = 300 / 2;
+
+                int xOffset = (panelWidth - 1000) / 2;
+                int yOffset = (panelHeight - 300) / 2;
+
+                g.setColor(Color.black);
+
+
+            }
+        }
     }
 
     /**
