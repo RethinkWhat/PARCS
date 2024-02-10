@@ -129,12 +129,14 @@ public class ReservationPageView extends JPanel {
                 motorButtons = new JButton[NUM_MOTOR_SLOTS];
 
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    carButtons[i] = res.createBtnRounded(String.valueOf(i + 1), res.celadon, res.white, 10);
+                    String carLabel = "CP " + String.format("%02d", i + 1); // CP (Car Parking)
+                    carButtons[i] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
                     add(carButtons[i]);
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    motorButtons[i] = res.createBtnRounded(String.valueOf(i + 1), res.celadon, res.white, 10);
+                    String motorLabel = "MP " + String.format("%02d", i + 1); // MP (Motor Parking)
+                    motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
                     add(motorButtons[i]);
                 }
             }
