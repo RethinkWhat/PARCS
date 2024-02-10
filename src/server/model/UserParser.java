@@ -204,6 +204,30 @@ public class UserParser {
         return name;
     }
 
+    /**
+     * Retrieves the full information of the user:
+     * 1. Last Name
+     * 2. First Name
+     * 3. Username
+     * 4. Contact Number
+     * @param username The specified username.
+     * @return The full information of the user as comma-separated values.
+     */
+    public String getFullUserInfo(String username) {
+        String lastName = null;
+        String firstName = null;
+        String contactNo = null;
+        List<User> userList = getUserList();
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                lastName = user.getLastName();
+                firstName = user.getFirstName();
+                contactNo = user.getPhoneNumber();
+            }
+        }
+        return lastName + "," + firstName + "," + username + "," + contactNo;
+    }
+
     public boolean isAdmin(String username) {
         String name = null;
         List<User> userList = getUserList();

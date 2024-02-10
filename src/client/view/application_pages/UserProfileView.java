@@ -48,6 +48,18 @@ public class UserProfileView extends JPanel {
      * The panel that holds different component panels.
      */
     private JPanel pnlCards;
+    /**
+     * The panel for edit profile.
+     */
+    private EditProfile pnlEditProfile;
+    /**
+     * The panel for profile options (account navigation)
+     */
+    private ProfileOptionsPanel pnlProfileOptions;
+    /**
+     * The panel for edit cars.
+     */
+    private EditCars pnlEditCars;
 
     /**
      * Constructs a panel of UserProfileView.
@@ -62,14 +74,18 @@ public class UserProfileView extends JPanel {
         // pnlCards.setBounds(220,0,750,560);
         add(pnlCards, BorderLayout.EAST);
 
-        pnlCards.add(new EditProfile(), "editProfile");
-        pnlCards.add(new EditCars(), "editCars");
+        // edit profile page
+        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
+
+        // edit cars page
+        pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
 
         //shows edit profile first
-        cardLayout.show(pnlCards, "editProfile");
+        cardLayout.show(pnlCards, "profile");
 
-        ProfileOptionsPanel profileOptionsPanel = new ProfileOptionsPanel(cardLayout, pnlCards);
-        add(profileOptionsPanel, BorderLayout.WEST);
+        // account navigation panel
+        pnlProfileOptions = new ProfileOptionsPanel(cardLayout, pnlCards);
+        add(pnlProfileOptions, BorderLayout.WEST);
 
         this.setPreferredSize(new Dimension(1100,700));
     }
@@ -112,7 +128,7 @@ public class UserProfileView extends JPanel {
             buttonsPanel.add(btnNavEditProfile);
 
             ImageIcon editCars = new ImageIcon("res/drawable/icons/edit-cars.png");
-            btnNavEditCars = res.createBtnTxtOnly("Edit Cars", res.gray);
+            btnNavEditCars = res.createBtnTxtOnly("Edit Vehicles", res.gray);
             btnNavEditCars.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editCarsResized = new ImageIcon(editCars.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavEditCars.setIcon(editCarsResized);
@@ -156,7 +172,7 @@ public class UserProfileView extends JPanel {
      * The panel that contains pertinent information of the user. The user can edit or simply view their information
      * on this page.
      */
-    class EditProfile extends JPanel {
+    public class EditProfile extends JPanel {
         /**
          * The text field where the first name of the user can be viewed and edited.
          */
@@ -236,7 +252,7 @@ public class UserProfileView extends JPanel {
             lblContact.setBorder(new EmptyBorder(30,0,0,0));
             this.add(lblContact);
 
-            JTextField txtContact = res.createTxtRounded("+63 917 790 0153", res.white, res.gray,20);
+            txtContact = res.createTxtRounded("+63 917 790 0153", res.white, res.gray,20);
             this.add(txtContact);
 
             JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.LEADING));
@@ -438,7 +454,47 @@ public class UserProfileView extends JPanel {
     public void setNavHistoryListener(ActionListener actionListener) {
         btnNavHistory.addActionListener(actionListener);
     }
-    
+
+    public JButton getBtnNavEditProfile() {
+        return btnNavEditProfile;
+    }
+
+    public JButton getBtnNavEditCars() {
+        return btnNavEditCars;
+    }
+
+    public JButton getBtnNavSecurity() {
+        return btnNavSecurity;
+    }
+
+    public JButton getBtnNavHistory() {
+        return btnNavHistory;
+    }
+
+    public JButton getBtnNavExit() {
+        return btnNavExit;
+    }
+
+    public CardLayout getCardLayout() {
+        return cardLayout;
+    }
+
+    public JPanel getPnlCards() {
+        return pnlCards;
+    }
+
+    public EditProfile getPnlEditProfile() {
+        return pnlEditProfile;
+    }
+
+    public ProfileOptionsPanel getPnlProfileOptions() {
+        return pnlProfileOptions;
+    }
+
+    public EditCars getPnlEditCars() {
+        return pnlEditCars;
+    }
+
     public static void main(String[] args) {
         UserProfileView obj = new UserProfileView();
     }

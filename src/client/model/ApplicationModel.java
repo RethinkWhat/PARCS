@@ -29,7 +29,7 @@ public class ApplicationModel {
     public ApplicationModel(Client client) {
         this.client = client;
         reservationPageModel = new ReservationPageModel(this.client);
-        userProfileModel = new UserProfileModel();
+        userProfileModel = new UserProfileModel(this.client);
     }
 
     /**

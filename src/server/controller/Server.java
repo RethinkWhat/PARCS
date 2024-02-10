@@ -40,6 +40,10 @@ public class Server{
         return userParser.getUserFullName(username);
     }
 
+    public String getUserCredentials(String username) {
+        return userParser.getFullUserInfo(username);
+    }
+
 
     public ServerSocket getServer() {
         return server;

@@ -64,6 +64,11 @@ public class ClientHandler implements Runnable {
                             case "disconnect":
                                 handleDisconnect();
                                 break;
+                            case "account":
+                                System.out.println("account page starting");
+                                account();
+                                System.out.println("account page finished");
+                                break;
                         }
                     }
                 }
@@ -145,6 +150,17 @@ public class ClientHandler implements Runnable {
             writer.println(server.getUserFullName(username));
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    public void account() {
+        System.out.println("---------ACCOUNT---------");
+        try {
+            String username = reader.readLine();
+            System.out.println("Printing: " + username);
+            writer.println(server.getUserCredentials(username));
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 }
