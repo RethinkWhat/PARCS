@@ -3,6 +3,10 @@ package utilities;
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.awt.font.ImageGraphicAttribute;
 import java.awt.geom.RoundRectangle2D;
 import java.awt.image.BufferedImage;
@@ -460,17 +464,86 @@ public class Resources {
         }
     }
 
-    // Temporary method to scale the dimensions of an image. Omit before production.
-    private Image getScaledImage(Image srcImg, int w, int h){
-        BufferedImage resizedImg = new BufferedImage(w, h, BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g2 = resizedImg.createGraphics();
+    /**
+     * Changes the Cursor when hovered to a specific UI component.
+     */
+    public static class CursorChanger extends MouseAdapter {
+        /**
+         * The specified button.
+         */
+        private JButton button;
 
-        g2.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
-        g2.drawImage(srcImg, 0, 0, w, h, null);
-        g2.dispose();
+        /**
+         * Constructs an object of CursorChanger with a specified JButton.
+         * @param button The specified button.
+         */
+        public CursorChanger(JButton button) {
+            this.button = button;
+        }
 
-        return resizedImg;
+        /**
+         * When the mouse hovers inside the vicinity of the UI component.
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseEntered(MouseEvent e) {
+            button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
+        }
+
+        /**
+         * When the mouse hovers outside the UI component.
+         * @param e the event to be processed
+         */
+        @Override
+        public void mouseExited(MouseEvent e) {
+            button.setCursor(Cursor.getDefaultCursor());
+        }
     }
 
+    /**
+     * Clears the text in a specified JTextField when it is focused, and inserts a specified placeholder
+     * text when unfocused.
+     */
+    public static class TextFieldFocus implements FocusListener {
+        /**
+         * The specified text field.
+         */
+        private JTextField textField;
+        /**
+         * The specified placeholder text.
+         */
+        private String placeholder;
 
+        /**
+         * Constructs an object of TextFieldFocus with a specified text field and placeholder text.
+         * @param textField The specified text field.
+         * @param placeholder The specified placeholder text.
+         */
+        public TextFieldFocus(JTextField textField, String placeholder) {
+            this.textField = textField;
+            this.placeholder = placeholder;
+        }
+
+        /**
+         * Processes the event when focused. The text field contents are cleared to accommodate user input.
+         * @param e the event to be processed
+         */
+        @Override
+        public void focusGained(FocusEvent e) {
+            if (textField.getText().equals(placeholder)) {
+                textField.setText("");
+            }
+        }
+
+        /**
+         * Processes the event when unfocused. A placeholder text is inserted in the text field.
+         * @param e the event to be processed
+         */
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (textField.getText().isEmpty()) {
+                textField.setText(placeholder);
+            }
+        }
+    }
 }
