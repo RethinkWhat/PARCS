@@ -161,6 +161,14 @@ public class ApplicationView extends JFrame {
         return reservationPageView;
     }
 
+    /**
+     * Retrieves the current panel of UserProfileView.
+     * @return The current panel of UserProfileView.
+     */
+    public UserProfileView getUserProfileView() {
+        return userProfileView;
+    }
+
     // Temporary main method for testing. Omit before production.
     public static void main(String[] args) {
         SwingUtilities.invokeLater(new Runnable() {

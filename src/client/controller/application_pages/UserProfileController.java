@@ -1,13 +1,20 @@
 package client.controller.application_pages;
 
+import client.model.application_pages.UserProfileModel;
 import client.view.application_pages.HistoryPageView;
 import client.view.application_pages.UserProfileView;
 
 import javax.swing.*;
 
 public class UserProfileController {
-
-    UserProfileView gui;
+    /**
+     * TODO: Documentation
+     */
+    UserProfileView view;
+    /**
+     * TODO: Documentation
+     */
+    UserProfileModel model;
     Object userAccount;
     JPanel pnlMain;
 
@@ -51,6 +58,30 @@ public class UserProfileController {
         }
     }
     */
+
+    public UserProfileController(UserProfileView view, UserProfileModel model) {
+        this.view = view;
+        this.model = model;
+
+        // constants / variable
+        model.getCredentials();
+
+        // Name
+        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
+        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
+
+        // Username
+        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
+        view.getPnlEditProfile().getTxtUsername().setEditable(false);
+
+        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+
+        // action listeners
+        view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
+        view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
+
+        // mouse listeners
+    }
 
     public static void main(String[] args) {
                 UserProfileView userProfileView = new UserProfileView();
