@@ -129,13 +129,13 @@ public class ReservationPageView extends JPanel {
                 motorButtons = new JButton[NUM_MOTOR_SLOTS];
 
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    String carLabel = "CP " + String.format("%02d", i + 1); // CP (Car Parking)
+                    String carLabel = "C" + String.format("%2d", i + 1); // C (Car Parking)
                     carButtons[i] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
                     add(carButtons[i]);
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    String motorLabel = "MP " + String.format("%02d", i + 1); // MP (Motor Parking)
+                    String motorLabel = "M" + String.format("%2d", i + 1); // M (Motor Parking)
                     motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
                     add(motorButtons[i]);
                 }
@@ -166,8 +166,8 @@ public class ReservationPageView extends JPanel {
                     // Draw rectangles to represent car slots
                     g.drawRect(x, y, slotWidth, slotHeight);
 
-                    // Buttons for the car slots
-                    carButtons[i].setBounds(x, y, slotWidth, slotHeight);
+                    // Buttons for the car slots (added bounds for positioning)
+                    carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
 
                 }
 
@@ -180,7 +180,7 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    motorButtons[i].setBounds(x, y, motorSlotWidth, slotHeight);
+                    motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 4, motorSlotWidth / 2, slotHeight / 2);
                 }
 
                 // Draw Car Slots (Bottom Row)
@@ -191,8 +191,8 @@ public class ReservationPageView extends JPanel {
                     // Draw rectangles to represent car slots
                     g.drawRect(x, y, slotWidth, slotHeight);
 
-                    // Buttons for the car slots
-                    carButtons[i].setBounds(x, y + slotHeight, slotWidth, slotHeight);
+                    // Buttons for the car slots (added bounds for positioning)
+                    //carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
                 }
 
                 // Draw Motor Slots (Bottom Row)
@@ -204,7 +204,7 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    motorButtons[i].setBounds(x, y + slotHeight, motorSlotWidth, slotHeight);
+                    //motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 8, motorSlotWidth / 2, slotHeight / 2);
                 }
             }
         }
