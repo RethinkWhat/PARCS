@@ -3,7 +3,7 @@ package server.model;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParkingSlot {
+public class ParkingSpot {
 
     /**
      * The identifier and means to reference the parking spot
@@ -13,12 +13,12 @@ public class ParkingSlot {
     /** A list to hold the different dates of reservations */
     private List<Reservations> reservationsList;
 
-    public ParkingSlot(String identifier, List<Reservations> reservationsList) {
+    public ParkingSpot(String identifier, List<Reservations> reservationsList) {
         this.identifier = identifier;
         this.reservationsList = reservationsList;
     }
 
-    public ParkingSlot(String identifier) {
+    public ParkingSpot(String identifier) {
         this.identifier = identifier;
         this.reservationsList = new ArrayList<>();
     }
