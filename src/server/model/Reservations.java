@@ -25,6 +25,11 @@ public class Reservations {
         TimeAndUserMap = null;
     }
 
+    public Reservations(Date date, HashMap<TimeRange,String> timeRangeStringHashMap) {
+        this.date = date;
+        TimeAndUserMap = timeRangeStringHashMap;
+    }
+
     /**
      * Getter for the date
      * @return date

@@ -7,6 +7,7 @@ record TimeRange(Time startTime, Time endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
+
     @Override
     public Time endTime() {
         return endTime;
