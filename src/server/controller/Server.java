@@ -72,10 +72,25 @@ public class Server{
         }
     }
 
+    public void runServer() {
+        SocketAddress address = new InetSocketAddress(2020);
+        try {
+            Server server = new Server(address);
+
+            while (true) {
+                Socket clientSocket = server.getServer().accept();
+
+                new Thread(new ClientHandler(server, clientSocket)).start();
+
+            }
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
 
     public static void main(String[] args) {
         SocketAddress address = new InetSocketAddress(2020);
-        ExecutorService executor = Executors.newFixedThreadPool(10);
         try {
             Server server = new Server(address);
 
