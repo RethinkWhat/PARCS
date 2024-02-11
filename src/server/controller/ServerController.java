@@ -4,6 +4,7 @@ import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
 
@@ -42,9 +43,10 @@ public class ServerController {
         }
     }
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws IOException {
         ServerStatusView view = new ServerStatusView();
-    //    ServerController controller = new ServerController(server, view);
+        Server server = new Server(new InetSocketAddress(2020));
+        ServerController controller = new ServerController(server, view);
 
     }
 }
