@@ -3,8 +3,6 @@ package client.model.application_pages;
 import client.model.Client;
 import client.model.LiveDateTime;
 
-import javax.swing.*;
-import java.util.Calendar;
 
 /**
  * Template for ReservationPageModel object.
@@ -18,7 +16,7 @@ public class ReservationPageModel {
     /**
      * The formatter for the current date and time.
      */
-    private LiveDateTime liveDateTime = new LiveDateTime();
+    private  LiveDateTime liveDateTime = new LiveDateTime();
     /**
      * The number of currently available car parking slots
      */
