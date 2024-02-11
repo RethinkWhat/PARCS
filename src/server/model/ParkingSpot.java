@@ -58,8 +58,12 @@ public class ParkingSpot {
     /**
      * Method to add reservation to reservationsList
      */
-    public void addReservationsList(Reservations reservations) {
+    public void addReservation(Reservations reservations) {
         reservationsList.add(reservations);
+    }
+
+    public void addReservationsList(List<Reservations> reservations) {
+        reservationsList = reservations;
     }
 
     @Override

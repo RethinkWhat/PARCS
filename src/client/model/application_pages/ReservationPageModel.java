@@ -16,7 +16,7 @@ public class ReservationPageModel {
     /**
      * The formatter for the current date and time.
      */
-    private LiveDateTime liveDateTime = new LiveDateTime();
+    private  LiveDateTime liveDateTime = new LiveDateTime();
     /**
      * The number of currently available car parking slots
      */

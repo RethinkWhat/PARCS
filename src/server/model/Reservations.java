@@ -1,5 +1,7 @@
 package server.model;
 
+import client.model.DateTime;
+
 import java.sql.Time;
 import java.util.ArrayList;
 import java.util.Date;
@@ -8,14 +10,14 @@ import java.util.HashMap;
 public class Reservations {
 
     /** Holds the date of the reservations */
-    private Date date;
+    private DateTime date;
 
     /** StartTime,Endtime : Rickardo
      *    Map of start and finish of time to username
      */
     private HashMap<TimeRange, String> TimeAndUserMap;
 
-    public Reservations(Date date) {
+    public Reservations(DateTime date) {
         this.date = date;
         TimeAndUserMap = new HashMap<>();
     }
@@ -25,16 +27,16 @@ public class Reservations {
         TimeAndUserMap = null;
     }
 
-    public Reservations(Date date, HashMap<TimeRange,String> timeRangeStringHashMap) {
+    public Reservations(DateTime date, HashMap<TimeRange,String> timeRangeStringHashMap) {
         this.date = date;
         TimeAndUserMap = timeRangeStringHashMap;
     }
 
     /**
      * Getter for the date
-     * @return date
+     * @return DateTime
      */
-    public Date getDate() {
+    public DateTime getDate() {
         return date;
     }
 
@@ -42,7 +44,7 @@ public class Reservations {
      * Setter for the date
      * @param date
      */
-    public void setDate(Date date) {
+    public void setDate(DateTime date) {
         this.date = date;
     }
 
@@ -79,5 +81,11 @@ public class Reservations {
      */
     public void addReservation(TimeRange timeRange, String reserver) {
         TimeAndUserMap.put(timeRange,reserver);
+    }
+
+    @Override
+    public String toString() {
+        return date + ": " + TimeAndUserMap;
+
     }
 }

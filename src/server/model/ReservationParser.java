@@ -13,10 +13,7 @@ import java.io.File;
 import java.io.IOException;
 
 import java.sql.Time;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
+import java.util.*;
 
 public class ReservationParser {
 
@@ -41,19 +38,23 @@ public class ReservationParser {
     /**
      * Method to retrieve parking information
      */
-    public ParkingSpot getParkingInformation() {
+    public List<ParkingSpot> getParkingInformation() {
 
         // Set the file to be read
         getReservationsFile();
 
-        ParkingSpot parkingSpot;
 
+        List<ParkingSpot> parkingSpotList = new ArrayList<>();
 
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
+
         for (int x = 0 ; x < nodeList.getLength(); x++) {
             Node currNode = nodeList.item(x);
 
+
             String parkingIdentifier = currNode.getAttributes().item(0).getTextContent();
+
+            ParkingSpot parkingSpot = new ParkingSpot(parkingIdentifier);
 
             // Create a reservationsList associated with the parkingIdentifier
             List<Reservations> reservationsList = new ArrayList<>();
@@ -65,20 +66,19 @@ public class ReservationParser {
                 Node reservationNode = infoPerIdentifier.item(y);
                 if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
 
-                    System.out.println("TEXT CONTENT: " + reservationNode.getTextContent());
                     NodeList reservationInfo = reservationNode.getChildNodes();
 
                     ArrayList<String> reservationParticulars = new ArrayList<>();
                     for (int z = 0; z < reservationInfo.getLength(); z++) {
-                        reservationParticulars.add(reservationInfo.item(z).getTextContent());
+                        Node reservationChildNode = reservationInfo.item(z);
+                        if (reservationChildNode.getNodeType() == Node.ELEMENT_NODE)
+                            reservationParticulars.add(reservationInfo.item(z).getTextContent());
                     }
+                    String[] start = reservationParticulars.get(0).split(":");
+                    Time startTime = new Time(Integer.valueOf(start[0]), Integer.valueOf(start[1]),Integer.valueOf(start[2]));
 
-                    String start[] =  reservationParticulars.get(0).split(":");
-                    String end[] =  reservationParticulars.get(1).split(":");
-
-                    Time startTime = new Time(Integer.valueOf(start[0]), Integer.valueOf(start[1]), Integer.valueOf(start[2]));
-                    Time endTime = new Time(Integer.valueOf(end[0]), Integer.valueOf(end[1]), Integer.valueOf(end[2]));
-
+                    String[] end = reservationParticulars.get(1).split(":");
+                    Time endTime = new Time(Integer.valueOf(end[0]), Integer.valueOf(end[1]),Integer.valueOf(end[2]));
 
 
                     String[] reservationDate = reservationNode.getAttributes().item(0).getTextContent().split("/");
@@ -87,6 +87,7 @@ public class ReservationParser {
                             Integer.valueOf(reservationDate[1]),
                             Integer.valueOf(reservationDate[2])
                     );
+                    System.out.println(dateFromFile);
                     boolean dateExists = false;
                     for (Reservations reservation : reservationsList) {
                         if (reservation.getDate() == dateFromFile) {
@@ -100,12 +101,15 @@ public class ReservationParser {
                         timeRangeStringHashMap.put(new TimeRange(startTime,endTime),reservationParticulars.get(2));
                         Reservations newReservation = new Reservations(dateFromFile, timeRangeStringHashMap);
                         reservationsList.add(newReservation);
+                        //System.out.println(newReservation);
                     }
 
                 }
             }
+            parkingSpot.addReservationsList(reservationsList);
+            parkingSpotList.add(parkingSpot);
         }
-        return null;
+        return parkingSpotList;
     }
 
     public static void main(String[] args) {
