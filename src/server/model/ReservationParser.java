@@ -45,7 +45,6 @@ public class ReservationParser {
         // Set the file to be read
         getReservationsFile();
 
-
         List<ParkingSpot> parkingSpotList = new ArrayList<>();
 
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
@@ -83,7 +82,7 @@ public class ReservationParser {
 
                     boolean dateExists = false;
                     for (Reservations reservation : reservationsList) {
-                        if (reservation.getDate() == dateFromFile) {
+                        if (reservation.getDate().equals(dateFromFile)) {
                             reservation.addReservation(startTime,endTime,reservationParticulars.get(2));
                             dateExists = true;
                         }
@@ -96,7 +95,6 @@ public class ReservationParser {
                         reservationsList.add(newReservation);
                         //System.out.println(newReservation);
                     }
-
                 }
             }
             parkingSpot.addReservationsList(reservationsList);
@@ -104,6 +102,8 @@ public class ReservationParser {
         }
         return parkingSpotList;
     }
+
+
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
