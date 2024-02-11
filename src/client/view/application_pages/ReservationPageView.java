@@ -93,10 +93,120 @@ public class ReservationPageView extends JPanel {
         public MainBottomPanel() {
             setLayout(new BorderLayout());
 
-            container = res.createPnlRounded(1300,510, res.white, res.lightGray);
+            container = res.createPnlRounded(1300, 510, res.white, res.lightGray);
+            container.setLayout(new BorderLayout());
+
+            JLabel lblParkingTitle = res.createLblH1("SLU Maryheights Parking", res.eerieBlack);
+            lblParkingTitle.setBorder(new EmptyBorder(20, 40, 0, 0));
+            container.add(lblParkingTitle, BorderLayout.NORTH);
+
+            ParkingSlotsPanel parkingSlotsPanel = new ParkingSlotsPanel();
+            parkingSlotsPanel.setPreferredSize(new Dimension(1100, 350));
+            parkingSlotsPanel.setOpaque(false);
+            container.add(parkingSlotsPanel, BorderLayout.CENTER);
+
             add(container, BorderLayout.CENTER);
 
-            setPreferredSize(new Dimension(1300,510));
+            setPreferredSize(new Dimension(1300, 510));
+        }
+
+        /**
+         * The panel that contains the parking slots.
+         */
+        class ParkingSlotsPanel extends JPanel {
+            private static final int NUM_CAR_SLOTS = 5;
+            private static final int NUM_MOTOR_SLOTS = 2;
+
+            private JButton[] carButtons;
+            private JButton[] motorButtons;
+
+            public ParkingSlotsPanel() {
+                initializeButtons();
+            }
+
+            private void initializeButtons() {
+                carButtons = new JButton[NUM_CAR_SLOTS];
+                motorButtons = new JButton[NUM_MOTOR_SLOTS];
+
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    String carLabel = "C" + String.format("%2d", i + 1); // C (Car Parking)
+                    carButtons[i] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
+                    add(carButtons[i]);
+                }
+
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    String motorLabel = "M" + String.format("%2d", i + 1); // M (Motor Parking)
+                    motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+                    add(motorButtons[i]);
+                }
+            }
+
+            @Override
+            protected void paintComponent(Graphics g) {
+                super.paintComponent(g);
+
+                int panelWidth = getWidth();
+                int panelHeight = getHeight();
+
+                int slotWidth = 1000 / (NUM_CAR_SLOTS + NUM_MOTOR_SLOTS);
+                int slotHeight = 300 / 2;
+
+                int motorSlotWidth = 90; // int motorSlotWidth = slotWidth / 2;
+
+                int xOffset = (panelWidth - 1000) / 2;
+                int yOffset = (panelHeight - 300) / 2;
+
+                g.setColor(Color.black);
+
+                // Draw Car Slots (Top Row)
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    int x = xOffset + i * slotWidth;
+                    int y = yOffset;
+
+                    // Draw rectangles to represent car slots
+                    g.drawRect(x, y, slotWidth, slotHeight);
+
+                    // Buttons for the car slots (added bounds for positioning)
+                    carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
+
+                }
+
+                // Draw Motor Slots (Top Row)
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int y = yOffset;
+
+                    // Draw rectangles to represent motor slots
+                    g.drawRect(x, y, motorSlotWidth, slotHeight);
+
+                    // Buttons for the motor slot
+                    motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 4, motorSlotWidth / 2, slotHeight / 2);
+                }
+
+                // Draw Car Slots (Bottom Row)
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    int x = xOffset + i * slotWidth;
+                    int y = yOffset + slotHeight;
+
+                    // Draw rectangles to represent car slots
+                    g.drawRect(x, y, slotWidth, slotHeight);
+
+                    // Buttons for the car slots (added bounds for positioning)
+                    //carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
+                }
+
+                // Draw Motor Slots (Bottom Row)
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int y = yOffset + slotHeight;
+
+                    // Draw rectangles to represent motor slots
+                    g.drawRect(x, y, motorSlotWidth, slotHeight);
+
+                    // Buttons for the motor slot
+                    //motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 8, motorSlotWidth / 2, slotHeight / 2);
+                }
+            }
         }
     }
 
@@ -264,20 +374,18 @@ public class ReservationPageView extends JPanel {
             pnlContainer.setLayout(new GridLayout(3, 1)); // Divided into 3 rows, 1 column
             add(pnlContainer, BorderLayout.CENTER);
 
-            //TODO: Change icon to iconClose
-            btnClose = res.createBtnIconOnly(res.iconHome, 20,20);
-            // TODO: Add close button
-
-            // pnlSlot
-            JPanel pnlSlotNumber = new JPanel();
-            pnlSlotNumber.setLayout(new FlowLayout(FlowLayout.CENTER));
+            // pnlSlotNumber
+            JPanel pnlSlotNumber = new JPanel(new BorderLayout());
             pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
-            pnlSlotNumber.setBackground(Color.white);
+            pnlSlotNumber.setBackground(res.white);
+
+            // Button for closing the panel
+            btnClose = res.createBtnIconOnly(res.iconClose, 20,20);
+            pnlSlotNumber.add(btnClose, BorderLayout.WEST);
 
             // Label for the slot number
             lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
-            pnlSlotNumber.add(lblSlotNumber);
-
+            pnlSlotNumber.add(lblSlotNumber, BorderLayout.CENTER);
             pnlContainer.add(pnlSlotNumber);
 
             // pnlSlotInformation
