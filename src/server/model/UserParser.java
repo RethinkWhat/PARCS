@@ -44,8 +44,10 @@ public class UserParser {
             builder = DocumentBuilderFactory.newInstance().newDocumentBuilder();
             document = builder.parse(userAccountsFile);
             document.getDocumentElement().normalize();
-        } catch (Exception ex) {
+        } catch (IOException | SAXException ex) {
             ex.printStackTrace();
+        } catch (ParserConfigurationException e) {
+            throw new RuntimeException(e);
         }
 
     }
