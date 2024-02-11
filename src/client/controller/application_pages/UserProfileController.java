@@ -74,49 +74,8 @@ public class UserProfileController {
         this.view = view;
         this.model = model;
 
+        // constants / variables
         populateFields();
-
-        // action listeners
-        view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
-        view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
-
-        // editProfileListener
-        view.getPnlEditProfile().setContinueListener(new editListener());
-        view.getPnlEditProfile().setCancelListener(new cancelListener());
-
-        // mouse listeners
-    }
-
-    public static void main(String[] args) {
-                UserProfileView userProfileView = new UserProfileView();
-    }
-
-    public class editListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            model.editUserInformation(
-                    view.getPnlEditProfile().getFirstName(),
-                    view.getPnlEditProfile().getLastName(),
-                    view.getPnlEditProfile().getContact()
-            );
-            //TODO: Display message indicating edit was successful
-        }
-    }
-
-    public void populateFields() {
-        // constants / variable
-        model.getCredentials();
-
-        // Name
-        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
-        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
-
-        // Username
-        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
-        view.getPnlEditProfile().getTxtUsername().setEditable(false);
-
-        // Contact Number
-        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
 
         // action listeners
 
@@ -127,7 +86,7 @@ public class UserProfileController {
         // view.setNavExitListener();
 
         // edit profile page
-        view.getPnlEditProfile().setContinueListener(new ContinueListener());
+        view.getPnlEditProfile().setContinueListener(new EditListener());
         view.getPnlEditProfile().setCancelListener(new CancelListener());
 
         // edit cars page
@@ -172,8 +131,42 @@ public class UserProfileController {
 
         // edit cars page
 
-        view.repaint();
+        // mouse listeners
+
         view.revalidate();
+        view.repaint();
+    }
+
+    public static void main(String[] args) {
+                UserProfileView userProfileView = new UserProfileView();
+    }
+
+    public class EditListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.editUserInformation(
+                    view.getPnlEditProfile().getFirstName(),
+                    view.getPnlEditProfile().getLastName(),
+                    view.getPnlEditProfile().getContact()
+            );
+            //TODO: Display message indicating edit was successful
+        }
+    }
+
+    public void populateFields() {
+        // constants / variable
+        model.getCredentials();
+
+        // Name
+        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
+        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
+
+        // Username
+        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
+        view.getPnlEditProfile().getTxtUsername().setEditable(false);
+
+        // Contact Number
+        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
     }
 
     /**
