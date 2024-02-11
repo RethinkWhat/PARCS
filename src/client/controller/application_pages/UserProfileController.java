@@ -24,50 +24,10 @@ public class UserProfileController {
     Object userAccount;
     JPanel pnlMain;
 
-    /*
-    public UserProfileController(UserProfileView view, Object userLoggedIn) {
-        this.gui = view;
-        this.userAccount = userLoggedIn;
-
-        pnlMain = gui.pnlMain;
-
-        view.btnEditProfile.addActionListener(e -> editProfile());
-        view.btnEditCars.addActionListener(e -> showEditCars());
-        view.historyButton.addActionListener(e -> showHistory());
-//        gui.btnExit.addActionListener(new exit());
-
-    }
-
-    private void editProfile() {
-        gui.cardLayout.show(gui.pnlMain, "editProfile");
-    }
-
-
-    private void showEditCars() {
-        gui.cardLayout.show(gui.pnlMain, "editCars");
-    }
-
-
-    private void showHistory() {
-        // Dispose the current window and show the history page
-        gui.dispose();
-        HistoryPageView historyPageView = new HistoryPageView();
-        historyPageView.setVisible(true);
-    }
-
-    /*
-    public class exit implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            LoginRegisterController loginObj = new LoginRegisterController();
-            loginObj.run();
-        }
-    }
-    */
-
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
-     * @param view The specified view.
+     *
+     * @param view  The specified view.
      * @param model The specified model.
      */
     public UserProfileController(UserProfileView view, UserProfileModel model) {
@@ -81,26 +41,10 @@ public class UserProfileController {
         view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
 
         // editProfileListener
-        view.getPnlEditProfile().setContinueListener(new editListener());
-        view.getPnlEditProfile().setCancelListener(new cancelListener());
+        view.getPnlEditProfile().setContinueListener(new EditListener());
+        view.getPnlEditProfile().setCancelListener(new CancelListener());
 
         // mouse listeners
-    }
-
-    public static void main(String[] args) {
-                UserProfileView userProfileView = new UserProfileView();
-    }
-
-    public class editListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            model.editUserInformation(
-                    view.getPnlEditProfile().getFirstName(),
-                    view.getPnlEditProfile().getLastName(),
-                    view.getPnlEditProfile().getContact()
-            );
-            //TODO: Display message indicating edit was successful
-        }
     }
 
     public void populateFields() {
@@ -127,7 +71,7 @@ public class UserProfileController {
         // view.setNavExitListener();
 
         // edit profile page
-        view.getPnlEditProfile().setContinueListener(new ContinueListener());
+        view.getPnlEditProfile().setContinueListener(new EditListener());
         view.getPnlEditProfile().setCancelListener(new CancelListener());
 
         // edit cars page
@@ -182,27 +126,26 @@ public class UserProfileController {
     class CancelListener implements ActionListener {
         /**
          * TODO: Documentation
+         *
          * @param e the event to be processed
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
-            view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
-            view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+            populateFields();
         }
     }
 
-    /**
-     * TODO: Documentation
-     */
-    class ContinueListener implements ActionListener {
-        /**
-         * TODO: Documentation
-         * @param e the event to be processed
-         */
+    public class EditListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO: implementation
+            model.editUserInformation(
+                    view.getPnlEditProfile().getFirstName(),
+                    view.getPnlEditProfile().getLastName(),
+                    view.getPnlEditProfile().getContact()
+            );
+            populateFields();
+            //TODO: Display message indicating edit was successful
         }
     }
 }
+
