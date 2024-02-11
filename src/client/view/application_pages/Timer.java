@@ -1,11 +1,11 @@
-package client.view.application_pages;//imported packages that help display items in graphical form
-
+package client.view.application_pages;
+//imported packages that help display items in graphical form
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class Timer extends JFrame {
+public class Timer extends JPanel{
     //a class that will show the client on how much time left before his or her
     //reservation will end.
     //integer variables that represent the hour, minute and second left for the said session.

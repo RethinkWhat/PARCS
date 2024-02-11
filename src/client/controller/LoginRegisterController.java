@@ -7,6 +7,7 @@ import client.model.VehicleAdderModel;
 import client.view.ApplicationView;
 import client.view.LoginRegisterView;
 import client.view.VehicleAdderView;
+import utilities.Resources;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,19 +52,19 @@ public class LoginRegisterController {
         view.setCreateAccountListener(new CreateAccountListener());
 
         // mouse listeners
-        view.getBtnSignup().addMouseListener(new CursorChanger(view.getBtnSignup()));
-        view.getBtnLogin().addMouseListener(new CursorChanger(view.getBtnLogin()));
-        view.getBtnBack().addMouseListener(new CursorChanger(view.getBtnBack()));
-        view.getBtnCreateAccount().addMouseListener(new CursorChanger(view.getBtnCreateAccount()));
+        view.getBtnSignup().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
+        view.getBtnLogin().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
+        view.getBtnBack().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
+        view.getBtnCreateAccount().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
 
         // focus listeners
-        view.getTxtUsername().addFocusListener(new TextFieldFocus(view.getTxtUsername(), "Username"));
+        view.getTxtUsername().addFocusListener(new LoginTextFieldFocus(view.getTxtUsername(), "Username"));
         view.getTxtPassword().addFocusListener(new PasswordFocus(view.getTxtPassword(),
                 view.getChkShowPassword(), "Password"));
-        view.getTxtFirstName().addFocusListener(new TextFieldFocus(view.getTxtFirstName(), "First Name"));
-        view.getTxtLastName().addFocusListener(new TextFieldFocus(view.getTxtLastName(), "Last Name"));
-        view.getTxtSignupUsername().addFocusListener(new TextFieldFocus(view.getTxtSignupUsername(), "Username"));
-        view.getTxtPhoneNo().addFocusListener(new TextFieldFocus(view.getTxtPhoneNo(), "Phone Number"));
+        view.getTxtFirstName().addFocusListener(new LoginTextFieldFocus(view.getTxtFirstName(), "First Name"));
+        view.getTxtLastName().addFocusListener(new LoginTextFieldFocus(view.getTxtLastName(), "Last Name"));
+        view.getTxtSignupUsername().addFocusListener(new LoginTextFieldFocus(view.getTxtSignupUsername(), "Username"));
+        view.getTxtPhoneNo().addFocusListener(new LoginTextFieldFocus(view.getTxtPhoneNo(), "Phone Number"));
         view.getTxtSignupPassword().addFocusListener(new PasswordFocus(view.getTxtSignupPassword(),
                 view.getChkShowSignupPassword(), "Password"));
         view.getTxtConfirmPassword().addFocusListener(new PasswordFocus(view.getTxtConfirmPassword(),
@@ -158,46 +159,10 @@ public class LoginRegisterController {
     }
 
     /**
-     * Changes the Cursor when hovered to a specific UI component.
-     */
-    class CursorChanger extends MouseAdapter {
-        /**
-         * The specified button.
-         */
-        private JButton button;
-
-        /**
-         * Constructs an object of CursorChanger with a specified JButton.
-         * @param button The specified button.
-         */
-        public CursorChanger(JButton button) {
-            this.button = button;
-        }
-
-        /**
-         * When the mouse hovers inside the vicinity of the UI component.
-         * @param e the event to be processed
-         */
-        @Override
-        public void mouseEntered(MouseEvent e) {
-            button.setCursor(Cursor.getPredefinedCursor(Cursor.HAND_CURSOR));
-        }
-
-        /**
-         * When the mouse hovers outside the UI component.
-         * @param e the event to be processed
-         */
-        @Override
-        public void mouseExited(MouseEvent e) {
-            button.setCursor(Cursor.getDefaultCursor());
-        }
-    }
-
-    /**
      * Clears the text in a specified JTextField when it is focused, and inserts a specified placeholder
      * text when unfocused.
      */
-    class TextFieldFocus implements FocusListener {
+    class LoginTextFieldFocus implements FocusListener {
         /**
          * The specified text field.
          */
@@ -212,7 +177,7 @@ public class LoginRegisterController {
          * @param textField The specified text field.
          * @param placeholder The specified placeholder text.
          */
-        public TextFieldFocus(JTextField textField, String placeholder) {
+        public LoginTextFieldFocus(JTextField textField, String placeholder) {
             this.textField = textField;
             this.placeholder = placeholder;
         }
