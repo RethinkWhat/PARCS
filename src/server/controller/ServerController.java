@@ -43,6 +43,5 @@ public class ServerController {
         ServerStatusView view = new ServerStatusView();
         Server server = new Server(new InetSocketAddress(2020));
         ServerController controller = new ServerController(server, view);
-
     }
 }
