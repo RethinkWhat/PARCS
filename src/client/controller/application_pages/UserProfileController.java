@@ -74,8 +74,38 @@ public class UserProfileController {
         this.view = view;
         this.model = model;
 
-        // constants / variables
-        model.getCredentials(); // retrieves the credentials from the server
+        populateFields();
+
+        // action listeners
+        view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
+        view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
+
+        // editProfileListener
+        view.getPnlEditProfile().setContinueListener(new editListener());
+        view.getPnlEditProfile().setCancelListener(new cancelListener());
+
+        // mouse listeners
+    }
+
+    public static void main(String[] args) {
+                UserProfileView userProfileView = new UserProfileView();
+    }
+
+    public class editListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            model.editUserInformation(
+                    view.getPnlEditProfile().getFirstName(),
+                    view.getPnlEditProfile().getLastName(),
+                    view.getPnlEditProfile().getContact()
+            );
+            //TODO: Display message indicating edit was successful
+        }
+    }
+
+    public void populateFields() {
+        // constants / variable
+        model.getCredentials();
 
         // Name
         view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());

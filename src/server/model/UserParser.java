@@ -126,6 +126,7 @@ public class UserParser {
                 }
             }
         }
+        transform();
     }
 
     /** Method to create a user node to add to xml file */
@@ -276,6 +277,7 @@ public class UserParser {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
+        obj.editUserInfo("basti", "lastName", "SicSic");
         //obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",
            //     null);
         //obj.addVehicle("ri", new Vehicle("Car", "Civic", "A4949329"));

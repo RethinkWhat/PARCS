@@ -75,4 +75,25 @@ public class UserProfileModel {
     public String getContactNo() {
         return contactNo;
     }
+
+    public boolean editUserInformation(String firstName, String lastName, String contactNo) {
+        client.openSocket();
+        client.writeString("editInfo");
+
+        if (!getFirstName().equalsIgnoreCase(firstName))
+            client.writeString(username + ",firstName," + firstName);
+
+        if (!getLastName().equalsIgnoreCase(lastName))
+            client.writeString(username + ",lastName," + lastName);
+
+        if (!getContactNo().equalsIgnoreCase(contactNo))
+            client.writeString(username + ",phoneNumber," + contactNo);
+
+        client.writeString("complete");
+
+        boolean editConfirmed = client.readString().equals("true");
+        client.closeSocket();
+
+        return editConfirmed;
+    }
 }
