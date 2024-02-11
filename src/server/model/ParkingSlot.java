@@ -10,7 +10,7 @@ public class ParkingSlot {
      */
     private String identifier;
 
-    // A list to hold the different dates of reservations
+    /** A list to hold the different dates of reservations */
     private List<Reservations> reservationsList;
 
     public ParkingSlot(String identifier, List<Reservations> reservationsList) {
@@ -53,5 +53,17 @@ public class ParkingSlot {
      */
     public void setReservationsList(List<Reservations> reservationsList) {
         this.reservationsList = reservationsList;
+    }
+
+    /**
+     * Method to add reservation to reservationsList
+     */
+    public void addReservationsList(Reservations reservations) {
+        reservationsList.add(reservations);
+    }
+
+    @Override
+    public String toString() {
+        return identifier + ": " + reservationsList;
     }
 }
