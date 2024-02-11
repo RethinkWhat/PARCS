@@ -6,18 +6,13 @@ public class ParkingSlot {
      * C for car, M for motorcycle
      */
     private char type;
-    /**
-     * The reservation status of the parking slot.
-     * True if taken, false if not.
-     */
-    private boolean status;
+
 
     /**
      * Constructs a ParkingSlot object with default values.
      */
     public ParkingSlot() {
         type = 'c';
-        status = false;
     }
 
     /**
@@ -27,7 +22,6 @@ public class ParkingSlot {
      */
     public ParkingSlot(char type, boolean status) {
         this.type = type;
-        this.status = status;
     }
 
     /**
@@ -46,21 +40,4 @@ public class ParkingSlot {
         this.type = type;
     }
 
-    /**
-     * Retrieves the current reservation status of the parking slot.
-     * @return The current reservation status of the parking slot.
-     */
-    public boolean isReserved() {
-        return status;
-    }
-
-    /**
-     * Mutates the new status of the parking slot.
-     * @param status The new status of the parking slot.
-     */
-    public void setStatus(boolean status) {
-        this.status = status;
-    }
-
-    // TODO: toString method
 }
