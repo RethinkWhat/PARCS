@@ -90,6 +90,7 @@ public class UserProfileModel {
             client.writeString(username + ",phoneNumber," + contactNo);
 
         client.writeString("complete");
+
         boolean editConfirmed = client.readString().equals("true");
         client.closeSocket();
 

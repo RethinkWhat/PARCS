@@ -179,9 +179,9 @@ public class ClientHandler implements Runnable {
                 if (lineRead.equals("complete"))
                     break;
                 String[] tagAndUpdate = lineRead.split(",");
-                boolean editInfo = server.editInfo(tagAndUpdate[0], tagAndUpdate[1], tagAndUpdate[2]);
-                writer.println(editInfo);
+                server.editInfo(tagAndUpdate[0], tagAndUpdate[1], tagAndUpdate[2]);
             }
+            writer.println("true");
         } catch (IOException ex) {
             ex.printStackTrace();
         }

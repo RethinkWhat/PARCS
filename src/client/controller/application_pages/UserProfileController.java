@@ -95,7 +95,7 @@ public class UserProfileController {
     public class editListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            boolean processEdit = model.editUserInformation(
+            model.editUserInformation(
                     view.getPnlEditProfile().getFirstName(),
                     view.getPnlEditProfile().getLastName(),
                     view.getPnlEditProfile().getContact()

@@ -37,40 +37,10 @@
     </user>
 
     <user username="ri">
-
         <type>user</type>
-
         <password>OWoUqyBuK0TgPE4AOT6UjM42prDw10ictG2USzOtUcg=</password>
-
         <lastName>ri</lastName>
-
         <firstName>ri</firstName>
-
         <phoneNumber>ri</phoneNumber>
-
-    </user>
-
-    <user username="laclac">
-
-        <type>user</type>
-
-        <password>rtsX6Klw1tuZKCsGqIFjjPQ064L0T1hJnHyX/7p7wWI=</password>
-
-        <lastName>Lacanilao</lastName>
-
-        <firstName>Patrick</firstName>
-
-        <phoneNumber>+6493939494</phoneNumber>
-
-        <vehicle>Motorcycle,Honda City,AAA 9339</vehicle>
-
-    </user>
-
-    <user username="a">
-        <type>user</type>
-        <password>ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=</password>
-        <lastName>s</lastName>
-        <firstName>a</firstName>
-        <phoneNumber>a</phoneNumber>
     </user>
 </userClass>
