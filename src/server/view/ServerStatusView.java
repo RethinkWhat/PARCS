@@ -146,7 +146,8 @@ public class ServerStatusView extends JFrame {
 
             gbc.gridy = 1;
             gbc.gridwidth = 3;
-            String date = "I love you";
+            //Date to be dynamically changed based on the system
+            String date = "February 1, 2024";
             lblDate = res.createLblH4(date, res.eerieBlack);
             pnlInformation.add(lblDate,gbc);
 
