@@ -4,12 +4,31 @@ import client.model.application_pages.ReservationPageModel;
 import client.view.application_pages.ReservationPageView;
 
 import javax.swing.*;
-import java.sql.Time;
 
+/**
+ * The ReservationPageController processes the user requests for reserving a parking slot.
+ * Based on the user request, the ReservationPageController defines methods and invokes methods in the View and Model
+ * to accomplish the requested action.
+ */
 public class ReservationPageController {
+    /**
+     * The view ReservationPageView.
+     */
     private ReservationPageView view;
+    /**
+     * The model ReservationPageModel.
+     */
     private ReservationPageModel model;
+    /**
+     * The timer to delay UI components.
+     */
     private Timer timer;
+
+    /**
+     * Constructs a ReservationPageController with a specified view and model.
+     * @param view The specified view.
+     * @param model The specified model.
+     */
     public ReservationPageController(ReservationPageView view, ReservationPageModel model) {
         this.view = view;
         this.model = model;
@@ -23,6 +42,7 @@ public class ReservationPageController {
         timer.start();
 
         // action listeners
+
 
         // mouse listeners
 

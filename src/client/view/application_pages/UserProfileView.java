@@ -7,6 +7,10 @@ import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The UserProfileView is where the user views pertinent information regarding their account
+ * and transaction in the client application.
+ */
 public class UserProfileView extends JPanel {
     /**
      * The stylesheet
@@ -60,6 +64,10 @@ public class UserProfileView extends JPanel {
      * The panel for edit cars.
      */
     private EditCars pnlEditCars;
+    /**
+     * The panel for history.
+     */
+    private HistoryPage pnlHistoryPage;
 
     /**
      * Constructs a panel of UserProfileView.
@@ -83,6 +91,12 @@ public class UserProfileView extends JPanel {
 
         // edit cars page
         pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
+
+        // security page
+        // TODO: instantiate security page
+
+        // history page
+        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
 
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
@@ -458,6 +472,95 @@ public class UserProfileView extends JPanel {
     }
 
     /**
+     * The panel that contains the booking history of the user.
+     */
+    class HistoryPage extends JPanel {
+        /**
+         * The panel that holds the first transaction details of the user.
+         */
+        private JPanel pnlHistoryOne;
+        /**
+         * The panel that holds the second transaction details of the user.
+         */
+        private JPanel pnlHistoryTwo;
+        /**
+         * The panel that holds the third transaction details of the user.
+         */
+        private JPanel pnlHistoryThree;
+        /**
+         * The panel that holds the fourth transaction details of the user.
+         */
+        private JPanel pnlHistoryFour;
+        /**
+         * The next button.
+         */
+        private JButton btnNext;
+        /**
+         * The previous button.
+         */
+        private JButton btnPrev;
+
+        /**
+         * Constructs a panel of HistoryPage.
+         */
+        public HistoryPage() {
+            setBackground(res.lightGray);
+            setLayout(new BorderLayout());
+            setPreferredSize(new Dimension(1100,700));
+
+            // Center panel for main content
+            JPanel whitePanel = new JPanel(new GridBagLayout());
+            whitePanel.setPreferredSize(new Dimension(1100, 700));
+            whitePanel.setBackground(res.white);
+            add(whitePanel, BorderLayout.CENTER);
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.insets = new Insets(10, 10, 10, 10); // Add insets for spacing
+
+            pnlHistoryOne = new JPanel();
+            pnlHistoryOne.setBackground(Color.lightGray);
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            gbc.weightx = 1; // Allow panel to resize horizontally
+            gbc.weighty = 1; // Allow panel to resize vertically
+            gbc.fill = GridBagConstraints.BOTH; // Allow panel to resize in both directions
+            whitePanel.add(pnlHistoryOne, gbc);
+
+            pnlHistoryTwo = new JPanel();
+            pnlHistoryTwo.setBackground(Color.lightGray);
+            gbc.gridx = 1;
+            pnlHistoryTwo.setPreferredSize(new Dimension(100,100));
+            whitePanel.add(pnlHistoryTwo, gbc);
+
+            pnlHistoryThree = new JPanel();
+            pnlHistoryThree.setBackground(Color.lightGray);
+            pnlHistoryThree.setPreferredSize(new Dimension(100,100));
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            whitePanel.add(pnlHistoryThree, gbc);
+
+            pnlHistoryFour = new JPanel();
+            pnlHistoryFour.setBackground(Color.lightGray);
+            pnlHistoryFour.setPreferredSize(new Dimension(100,100));
+            gbc.gridx = 1;
+            whitePanel.add(pnlHistoryFour, gbc);
+
+            JPanel pnlButtons = new JPanel(new FlowLayout());
+            pnlButtons.setBackground(res.lightGray);
+            add(pnlButtons, BorderLayout.SOUTH);
+
+            // Previous and Next buttons
+            btnPrev = res.createBtnRounded("PREV", res.gray, res.eerieBlack, 3);
+            pnlButtons.add(btnPrev);
+
+            btnNext = res.createBtnRounded("NEXT", res.celadon, res.eerieBlack, 3);
+            pnlButtons.add(btnNext);
+
+            setVisible(true);
+        }
+    }
+
+    /**
      * Sets a specified action listener for btnNavEditProfile.
      * @param actionListener The specified action listener.
      */
@@ -489,47 +592,83 @@ public class UserProfileView extends JPanel {
         btnNavExit.addActionListener(actionListener);
     }
 
+    /**
+     * Retrieves the current JButton of btnNavEditProfile.
+     * @return The current btnNavEditProfile.
+     */
     public JButton getBtnNavEditProfile() {
         return btnNavEditProfile;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavEditCars.
+     * @return The current btnNavEditCars.
+     */
     public JButton getBtnNavEditCars() {
         return btnNavEditCars;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavSecurity.
+     * @return The current btnNavSecurity.
+     */
     public JButton getBtnNavSecurity() {
         return btnNavSecurity;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavHistory.
+     * @return The current btnNavHistory.
+     */
     public JButton getBtnNavHistory() {
         return btnNavHistory;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavExit.
+     * @return The current btnNavExit.
+     */
     public JButton getBtnNavExit() {
         return btnNavExit;
     }
 
+    /**
+     * TODO: Documentation
+     * @return
+     */
     public CardLayout getCardLayout() {
         return cardLayout;
     }
 
+    /**
+     * TODO: Documentation
+     * @return
+     */
     public JPanel getPnlCards() {
         return pnlCards;
     }
 
+    /**
+     * TODO: Documentation
+     * @return
+     */
     public EditProfile getPnlEditProfile() {
         return pnlEditProfile;
     }
 
+    /**
+     * TODO: Documentation
+     * @return
+     */
     public ProfileOptionsPanel getPnlProfileOptions() {
         return pnlProfileOptions;
     }
 
+    /**
+     * TODO: Documentation
+     * @return
+     */
     public EditCars getPnlEditCars() {
         return pnlEditCars;
-    }
-
-    public static void main(String[] args) {
-        UserProfileView obj = new UserProfileView();
     }
 }
