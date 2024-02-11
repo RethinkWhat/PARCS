@@ -1,6 +1,7 @@
 package server.model;
 
 import java.sql.Time;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 
@@ -19,7 +20,10 @@ public class Reservations {
         TimeAndUserMap = new HashMap<>();
     }
 
-
+    public Reservations() {
+        this.date = null;
+        TimeAndUserMap = null;
+    }
 
     /**
      * Getter for the date
