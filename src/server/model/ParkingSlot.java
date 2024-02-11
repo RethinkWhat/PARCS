@@ -1,43 +1,14 @@
 package server.model;
 
+import java.util.List;
+
 public class ParkingSlot {
-    /**
-     * The type of parking slot.
-     * C for car, M for motorcycle
-     */
-    private char type;
-
 
     /**
-     * Constructs a ParkingSlot object with default values.
+     * The identifier and means to reference the parking spot
      */
-    public ParkingSlot() {
-        type = 'c';
-    }
+    private String identifier;
 
-    /**
-     * Constructs a ParkingSlot object with a specified type and status.
-     * @param type The specified parking slot type.
-     * @param status The specified status.
-     */
-    public ParkingSlot(char type, boolean status) {
-        this.type = type;
-    }
-
-    /**
-     * Retrieves the current type of the parking slot.
-     * @return The current type of the parking slot.
-     */
-    public char getType() {
-        return type;
-    }
-
-    /**
-     * Mutates the new type of the parking slot.
-     * @param type The new type of the parking slot.
-     */
-    public void setType(char type) {
-        this.type = type;
-    }
-
+    // A list to hold the different dates of reservations
+    private List<Reservations> reservationsList;
 }

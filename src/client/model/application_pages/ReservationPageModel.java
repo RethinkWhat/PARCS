@@ -3,8 +3,6 @@ package client.model.application_pages;
 import client.model.Client;
 import client.model.LiveDateTime;
 
-import javax.swing.*;
-import java.util.Calendar;
 
 /**
  * Template for ReservationPageModel object.

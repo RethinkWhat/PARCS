@@ -24,7 +24,7 @@ public class UserParser {
     DocumentBuilder builder;
     Document document;
 
-    final File userAccountsFile = new File("src/server/model/userAccounts.xml");
+    final File userAccountsFile = new File("src/server/res/userAccounts.xml");
 
 
     /**
