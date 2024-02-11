@@ -146,7 +146,8 @@ public class ServerStatusView extends JFrame {
 
             gbc.gridy = 1;
             gbc.gridwidth = 3;
-            String date = "I love you";
+            //Date to be dynamically changed based on the system
+            String date = "February 1, 2024";
             lblDate = res.createLblH4(date, res.eerieBlack);
             pnlInformation.add(lblDate,gbc);
 
@@ -264,7 +265,8 @@ public class ServerStatusView extends JFrame {
         serverStatus.setForeground(res.celadon);
 
         serverSwitch.setText("Terminate Server");
-        serverSwitch.setBackground(res.red);
+        serverSwitch.setBackground(res.white);
+        serverSwitch.setForeground(res.red);
     }
 
     public void setOffline(){
@@ -272,7 +274,8 @@ public class ServerStatusView extends JFrame {
         serverStatus.setForeground(res.red);
 
         serverSwitch.setText("Start Server");
-        serverSwitch.setBackground(res.celadon);
+        serverSwitch.setBackground(res.white);
+        serverSwitch.setForeground(res.celadon);
     }
 
     public static void main(String[] args) {
