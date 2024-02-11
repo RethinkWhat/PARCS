@@ -1,5 +1,7 @@
 package client.controller.application_pages;
 
+import client.controller.LoginRegisterController;
+import client.model.LoginRegisterModel;
 import client.model.application_pages.UserProfileModel;
 import client.view.application_pages.HistoryPageView;
 import client.view.application_pages.UserProfileView;
@@ -10,19 +12,38 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 /**
- * TODO: Documentation
+ * The UserProfileController processes the user requests for editing user account information, vehicle information,
+ * editing user's password, viewing the booking history of the history, and logging out.
+ * Based on the user request, the UserProfileController defines methods and invokes methods in the View and Model
+ * to accomplish the requested action.
  */
 public class UserProfileController {
     /**
-     * TODO: Documentation
+     * The view LoginRegisterView object.
      */
-    UserProfileView view;
+    private final UserProfileView view;
     /**
-     * TODO: Documentation
+     * The model LoginRegisterModel object.
      */
-    UserProfileModel model;
-    Object userAccount;
-    JPanel pnlMain;
+    private final UserProfileModel model;
+
+    /*
+    private void showHistory() {
+        // Dispose the current window and show the history page
+        gui.dispose();
+        HistoryPageView historyPageView = new HistoryPageView();
+        historyPageView.setVisible(true);
+    }
+
+    /*
+    public class exit implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            LoginRegisterController loginObj = new LoginRegisterController();
+            loginObj.run();
+        }
+    }
+    */
 
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
@@ -34,41 +55,16 @@ public class UserProfileController {
         this.view = view;
         this.model = model;
 
+        // constants / variables
         populateFields();
-
-        // action listeners
-        view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
-        view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
-
-        // editProfileListener
-        view.getPnlEditProfile().setContinueListener(new EditListener());
-        view.getPnlEditProfile().setCancelListener(new CancelListener());
-
-        // mouse listeners
-    }
-
-    public void populateFields() {
-        // constants / variable
-        model.getCredentials();
-
-        // Name
-        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
-        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
-
-        // Username
-        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
-        view.getPnlEditProfile().getTxtUsername().setEditable(false);
-
-        // Contact Number
-        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
 
         // action listeners
 
         // navigation
         view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
         view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
-        view.setNavHistoryListener(e -> new HistoryPageView());
-        // view.setNavExitListener();
+        view.setNavHistoryListener(e -> view.getCardLayout().show(view.getPnlCards(), "history"));
+        // view.setNavExitListener(new LoginRegisterController());
 
         // edit profile page
         view.getPnlEditProfile().setContinueListener(new EditListener());
@@ -116,8 +112,33 @@ public class UserProfileController {
 
         // edit cars page
 
-        view.repaint();
+        // mouse listeners
+
         view.revalidate();
+        view.repaint();
+    }
+
+    public static void main(String[] args) {
+                UserProfileView userProfileView = new UserProfileView();
+    }
+
+    /**
+     * Populates the respective fields of the user.
+     */
+    public void populateFields() {
+        // constants / variable
+        model.getCredentials();
+
+        // Name
+        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
+        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
+
+        // Username
+        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
+        view.getPnlEditProfile().getTxtUsername().setEditable(false);
+
+        // Contact Number
+        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
     }
 
     /**
@@ -131,11 +152,21 @@ public class UserProfileController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            populateFields();
+            view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
+            view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
+            view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+            populateFields(); // updates the information
         }
     }
 
+    /**
+     * TODO: Documentation
+     */
     public class EditListener implements ActionListener {
+        /**
+         * TODO: Documentation
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             model.editUserInformation(
@@ -143,7 +174,7 @@ public class UserProfileController {
                     view.getPnlEditProfile().getLastName(),
                     view.getPnlEditProfile().getContact()
             );
-            populateFields();
+            populateFields(); // updates the information
             //TODO: Display message indicating edit was successful
         }
     }
