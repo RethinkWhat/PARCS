@@ -1,20 +1,21 @@
 package server.model;
 
+
 import java.sql.Time;
 
-record TimeRange(Time startTime, Time endTime) {
-    public TimeRange(Time startTime, Time endTime) {
+record TimeRange(String startTime, String endTime) {
+    public TimeRange(String startTime, String endTime) {
         this.startTime = startTime;
         this.endTime = endTime;
     }
 
     @Override
-    public Time endTime() {
+    public String endTime() {
         return endTime;
     }
 
     @Override
-    public Time startTime() {
+    public String startTime() {
         return startTime;
     }
 

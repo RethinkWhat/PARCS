@@ -10,29 +10,23 @@ import java.util.Date;
  */
 public class DateTime {
     /**
-     * The format for the time (HH:MM AM/PM MARKER)
+     * Format for time following the format: "hh:mm:ss"
      */
     private SimpleDateFormat timeFormat;
-    /**
-     * The format for the day that specifies the whole text.
-     */
-    private SimpleDateFormat dayFormat;
-    /**
-     * The format for date in MMMM dd, YYYY format (e.g., February 19, 2024).
-     */
-    private SimpleDateFormat dateFormat;
-    /**
-     * The time
-     */
-    private volatile String time;
+
 
     /**
-     * Constructs an object of LiveDate Time with default values.
+     * Format for date following the format: "mm/dd/yy"
+     */
+    private SimpleDateFormat dateFormat;
+
+
+    /**
+     * Default constructor for dateTime
      */
     public DateTime() {
         timeFormat = new SimpleDateFormat("hh:mm:ss");
-        dayFormat = new SimpleDateFormat("EEEE");
-        dateFormat = new SimpleDateFormat("MM/dd/yy");
+        dateFormat = new SimpleDateFormat("mm/dd/yy");
     }
 
     public String getDateTime() {

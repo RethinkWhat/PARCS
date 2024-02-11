@@ -10,14 +10,14 @@ import java.util.HashMap;
 public class Reservations {
 
     /** Holds the date of the reservations */
-    private DateTime date;
+    private String date;
 
     /** StartTime,Endtime : Rickardo
      *    Map of start and finish of time to username
      */
     private HashMap<TimeRange, String> TimeAndUserMap;
 
-    public Reservations(DateTime date) {
+    public Reservations(String date) {
         this.date = date;
         TimeAndUserMap = new HashMap<>();
     }
@@ -27,7 +27,7 @@ public class Reservations {
         TimeAndUserMap = null;
     }
 
-    public Reservations(DateTime date, HashMap<TimeRange,String> timeRangeStringHashMap) {
+    public Reservations(String date, HashMap<TimeRange,String> timeRangeStringHashMap) {
         this.date = date;
         TimeAndUserMap = timeRangeStringHashMap;
     }
@@ -36,7 +36,7 @@ public class Reservations {
      * Getter for the date
      * @return DateTime
      */
-    public DateTime getDate() {
+    public String getDate() {
         return date;
     }
 
@@ -44,7 +44,7 @@ public class Reservations {
      * Setter for the date
      * @param date
      */
-    public void setDate(DateTime date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
@@ -66,11 +66,11 @@ public class Reservations {
 
     /**
      * Method to add a reservation
-     * @param startTime : Time
-     * @param endTime : Time
+     * @param startTime : String
+     * @param endTime : String
      * @param reserver : String
      */
-    public void addReservation(Time startTime, Time endTime, String reserver) {
+    public void addReservation(String startTime, String endTime, String reserver) {
         TimeAndUserMap.put(new TimeRange(startTime,endTime), reserver);
     }
 

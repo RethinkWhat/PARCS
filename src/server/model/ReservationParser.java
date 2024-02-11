@@ -1,6 +1,7 @@
 package server.model;
 
 
+import client.model.DateTime;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
@@ -12,7 +13,6 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
-import java.sql.Time;
 import java.util.*;
 
 public class ReservationParser {
@@ -22,6 +22,8 @@ public class ReservationParser {
     Document document;
 
     final File reservationsFile = new File("src/server/res/reservations.xml");
+
+    DateTime dateTimeFormatter = new DateTime();
 
     private void getReservationsFile() {
         try {
@@ -74,20 +76,11 @@ public class ReservationParser {
                         if (reservationChildNode.getNodeType() == Node.ELEMENT_NODE)
                             reservationParticulars.add(reservationInfo.item(z).getTextContent());
                     }
-                    String[] start = reservationParticulars.get(0).split(":");
-                    Time startTime = new Time(Integer.valueOf(start[0]), Integer.valueOf(start[1]),Integer.valueOf(start[2]));
+                    String startTime = dateTimeFormatter.createTime(reservationParticulars.get(0));
+                    String endTime = dateTimeFormatter.createTime(reservationParticulars.get(1));
 
-                    String[] end = reservationParticulars.get(1).split(":");
-                    Time endTime = new Time(Integer.valueOf(end[0]), Integer.valueOf(end[1]),Integer.valueOf(end[2]));
+                    String dateFromFile = dateTimeFormatter.createDate(reservationNode.getAttributes().item(0).getTextContent());
 
-
-                    String[] reservationDate = reservationNode.getAttributes().item(0).getTextContent().split("/");
-                    Date dateFromFile = new Date(
-                            Integer.valueOf(reservationDate[0]),
-                            Integer.valueOf(reservationDate[1]),
-                            Integer.valueOf(reservationDate[2])
-                    );
-                    System.out.println(dateFromFile);
                     boolean dateExists = false;
                     for (Reservations reservation : reservationsList) {
                         if (reservation.getDate() == dateFromFile) {
@@ -114,7 +107,12 @@ public class ReservationParser {
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
-        parser.getParkingInformation();
+        List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+
+        for (int x = 0 ; x < parkingSpotList.size(); x++) {
+            System.out.println(parkingSpotList.get(x));
+        }
+
     }
 
 
