@@ -47,7 +47,8 @@ public class UserProfileController {
 
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
-     * @param view The specified view.
+     *
+     * @param view  The specified view.
      * @param model The specified model.
      */
     public UserProfileController(UserProfileView view, UserProfileModel model) {
@@ -146,6 +147,7 @@ public class UserProfileController {
     class CancelListener implements ActionListener {
         /**
          * TODO: Documentation
+         *
          * @param e the event to be processed
          */
         @Override
@@ -177,3 +179,4 @@ public class UserProfileController {
         }
     }
 }
+
