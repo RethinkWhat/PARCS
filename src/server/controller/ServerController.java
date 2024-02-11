@@ -28,14 +28,10 @@ public class ServerController {
 
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
-
             if (!serverStatus){
                 serverStatusView.setOnline();
                 serverStatus = true;
             }else {
-
                 serverStatusView.setOffline();
                 serverStatus= false;
             }
