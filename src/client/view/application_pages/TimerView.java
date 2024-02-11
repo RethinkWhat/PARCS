@@ -1,9 +1,12 @@
 package client.view.application_pages;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
+import java.awt.image.BufferStrategy;
 import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
@@ -15,6 +18,19 @@ public class TimerView extends javax.swing.JFrame {
     // declare variables to store X and Y coordinates values.
     int positionX = 0;
     int positionY = 0;
+    //declare variables to incorporate with Timer class
+    private int hour;
+    private int minute;
+    private int second;
+    private static final int CIRCLE_RADIUS = 152;
+    private static final int ARC_START_ANGLE = 90;
+    private int arcExtent;
+    double init;
+    double current;
+    private javax.swing.Timer t;
+    //declaring other variables to perform buffer, dealing with flickering "stopwatch" graphics
+    private BufferStrategy bufferStrategy;
+
     public TimerView() {
         setUndecorated(true);
         initComponents();
@@ -54,8 +70,56 @@ public class TimerView extends javax.swing.JFrame {
             });
         }
 
+        createBufferStrategy(2);
+        bufferStrategy = getBufferStrategy();
+        setIgnoreRepaint(true);
+
+        //instantiation of variables for the "stopwatch"
+        arcExtent = 360;
+        hour = 1;
+        minute = 0;
+        second = 0;
+        init = hour * 3600 + minute * 60 + second;
+        current = init;
+
+        t = new javax.swing.Timer(1000, new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateTime();
+                repaint();
+            }
+        });
+        t.start();
+    }
+    public void draw() {
+        // Get the graphics context from the buffer strategy
+        Graphics g = bufferStrategy.getDrawGraphics();
+
+        // Clear the screen
+        g.clearRect(0, 0, getWidth(), getHeight());
+
+        // Dispose the graphics context
+        g.dispose();
+
+        // Show the buffer
+        bufferStrategy.show();
     }
 
+    private void updateTime() {
+        if (hour == 0 && minute == 0 && second == 0) {
+            t.stop();
+            setVisible(false);
+        } else if (minute == 0 && second == 0) {
+            hour--;
+            minute = 59;
+            second = 59;
+        } else if (second == 0) {
+            minute--;
+            second = 59;
+        } else {
+            second--;
+        }
+    }
 
     private void initComponents() {
 
@@ -196,7 +260,6 @@ public class TimerView extends javax.swing.JFrame {
                                 .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
-
         endTimerBtn.setBackground(new java.awt.Color(230, 92, 92));
         endTimerBtn.setFont(new java.awt.Font("Inter", 0, 14));
         endTimerBtn.setText("End Timer");
@@ -446,4 +509,36 @@ public class TimerView extends javax.swing.JFrame {
     private javax.swing.JLabel vehicleInfo;
     private javax.swing.JLabel vehicleLabel;
     // End of variables declaration
+
+    public void paint(Graphics g) {
+        super.paint(g);
+        drawArc(g);
+        drawStopwatch(g);
+    }
+
+    private void drawArc(Graphics g) {
+       /* int centerX = getWidth() / 2;
+        int centerY = getHeight() / 2;
+        int x = centerX - CIRCLE_RADIUS;
+        int y = centerY - CIRCLE_RADIUS;*/
+        if (arcExtent >= 0) {
+            g.setColor(Color.green);
+            g.fillArc(150, 150, 2 * CIRCLE_RADIUS, 2 * CIRCLE_RADIUS, ARC_START_ANGLE, arcExtent);
+            g.setColor(Color.white);
+            g.fillArc(162,162,280, 280, 0, 360);
+        }
+        current--;
+        arcExtent = (int) ((current / init) * 360.0);
+    }
+
+    private void drawStopwatch(Graphics g) {
+        g.setColor(Color.RED);
+        g.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        String timeString = String.format("%02d:%02d:%02d", hour, minute, second);
+
+        FontMetrics fm = g.getFontMetrics();
+        int x = 260;
+        int y = (getHeight() - fm.getHeight()) / 2 + fm.getAscent();
+        g.drawString(timeString, x, y);
+    }
 }
