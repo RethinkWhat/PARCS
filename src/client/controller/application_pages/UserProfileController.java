@@ -65,18 +65,7 @@ public class UserProfileController {
         this.view = view;
         this.model = model;
 
-        // constants / variable
-        model.getCredentials();
-
-        // Name
-        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
-        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
-
-        // Username
-        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
-        view.getPnlEditProfile().getTxtUsername().setEditable(false);
-
-        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+        populateFields();
 
         // action listeners
         view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
@@ -84,6 +73,7 @@ public class UserProfileController {
 
         // editProfileListener
         view.getPnlEditProfile().setContinueListener(new editListener());
+        view.getPnlEditProfile().setCancelListener(new cancelListener());
 
         // mouse listeners
     }
@@ -101,6 +91,29 @@ public class UserProfileController {
                     view.getPnlEditProfile().getContact()
             );
             //TODO: Display message indicating edit was successful
+        }
+    }
+
+    public void populateFields() {
+        // constants / variable
+        model.getCredentials();
+
+        // Name
+        view.getPnlEditProfile().getTxtFirstName().setText(model.getFirstName());
+        view.getPnlEditProfile().getTxtLastName().setText(model.getLastName());
+
+        // Username
+        view.getPnlEditProfile().getTxtUsername().setText(model.getUsername());
+        view.getPnlEditProfile().getTxtUsername().setEditable(false);
+
+        view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+    }
+
+    public class cancelListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            populateFields();
+            //TODO: Display message indicating edit was canceled
         }
     }
 }
