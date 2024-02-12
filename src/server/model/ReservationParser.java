@@ -124,12 +124,16 @@ public class ReservationParser {
 
                 if (currParkingSpotIdentifier.equalsIgnoreCase(identifier)) {
 
+                    //Get the reservation nodes
                     NodeList reservationList = parkingSpotElement.getElementsByTagName("reservation");
 
                     for (int j = 0; j < reservationList.getLength(); j++) {
+                        //Getting the current reservation node with respect to j
                         Node reservationNode = reservationList.item(j);
 
                         if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                            //Casting reservation node to an Element object
                             Element reservationElement = (Element) reservationNode;
 
                             String date = reservationElement.getAttribute("day");
@@ -139,18 +143,16 @@ public class ReservationParser {
 
                             TimeRange currReservationTimeRange = new TimeRange(startTime, endTime);
                             Reservations currReservation = new Reservations();
+
                             currReservation.setDate(date);
                             currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
                             parkingSpot.getReservationsList().add(currReservation);
                         }
                     }
-
                     break;
                 }
             }
         }
-
-
         return parkingSpot;
     }
 
