@@ -87,10 +87,6 @@ public class Server implements Runnable{
         }
     }
 
-    public boolean isServerRunning() {
-        return serverRunning;
-    }
-
     public void setServerRunning(boolean serverRunning) {
         this.serverRunning = serverRunning;
     }
@@ -98,27 +94,33 @@ public class Server implements Runnable{
     public void run() {
         while (true) {
             try {
-                while (this.isServerRunning()) {
-                    System.out.println("server started");
-                    try {
+                boolean flag = this.serverRunning();
+                while (flag) {
                         Socket clientSocket = server.accept();
                         new Thread(new ClientHandler(this, clientSocket)).start();
-                    } catch (NullPointerException ignore) {
-                    }
+
                 }
-            } catch (IOException ex) {
-                ex.printStackTrace();
+            } catch (IOException ignore) {
             }
         }
     }
 
     public void stopAccepting() {
-        System.out.println("Stop Accepting Method");
-        this.setServerRunning(false);
+        try {
+            this.setServerRunning(false);
+            server.close();
+        } catch (IOException ex) {
+            ex.printStackTrace( );
+        }
     }
 
     public void startAccepting() {
-        this.setServerRunning(serverRunning = true);
+        try {
+            server = new ServerSocket(socketAddress);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        this.setServerRunning(true);
     }
 
 

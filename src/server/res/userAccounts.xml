@@ -1,33 +1,5 @@
 <userClass>
 
-
-    <user username="basti">
-
-
-        <type>user</type>
-
-
-        <password>siccuan123</password>
-
-
-        <lastName>Siccuan</lastName>
-
-
-        <firstName>Basti</firstName>
-
-
-        <phoneNumber>6334934393</phoneNumber>
-
-
-        <vehicle>car,Honda Civic,NWA 911 </vehicle>
-
-
-        <vehicle>car,Mitsubishi Mirage,N99 399 </vehicle>
-
-
-    </user>
-
-
     <user username="rickardo">
 
 
@@ -58,7 +30,7 @@
     <user username="ri">
 
 
-        <type>user</type>
+        <type>admin</type>
 
 
         <password>OWoUqyBuK0TgPE4AOT6UjM42prDw10ictG2USzOtUcg=</password>

@@ -23,9 +23,12 @@ public class ServerController {
     final int address = 2020;
 
 
-    public ServerController(ServerStatusView serverStatusView) throws Exception{
-        this.server = new Server(address);
-        server.startServer();
+    public ServerController(ServerStatusView serverStatusView){
+        try {
+            this.server = new Server(address);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         Thread thread = new Thread(server);
         thread.start();
@@ -54,7 +57,7 @@ public class ServerController {
         }
     }
 
-    public static void main(String[] args) throws Exception {
+    public static void main(String[] args) {
         ServerStatusView view = new ServerStatusView();
         ServerController controller = new ServerController(view);
     }
