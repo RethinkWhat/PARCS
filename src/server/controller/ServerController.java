@@ -7,6 +7,8 @@ import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetSocketAddress;
 import java.net.SocketAddress;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Controller for server
  * Assigned to @Ramon Jasmin
@@ -31,9 +33,19 @@ public class ServerController {
             if (!serverStatus){
                 serverStatusView.setOnline();
                 serverStatus = true;
+                try {
+                    System.out.println("Set online");
+                    Server server =new Server(new InetSocketAddress(2069));
+                    ExecutorService executor = Executors.newSingleThreadExecutor();
+                    //executor.submit(server);
+                } catch (IOException ex) {
+                    throw new RuntimeException(ex);
+                }
             }else {
+                System.out.println("Set offline");
                 serverStatusView.setOffline();
                 serverStatus= false;
+                //server.terminate();
             }
 
         }
