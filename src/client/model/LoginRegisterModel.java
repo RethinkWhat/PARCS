@@ -121,6 +121,7 @@ public class LoginRegisterModel {
             new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel(client));
         }
         return signUpSuccess;
+
     }
 
 
