@@ -156,50 +156,51 @@ public class ReservationParser {
         return parkingSpot;
     }
 
-    public Map<String, Reservations> getUserReservations(String userName){
+    public Map<String, Reservations> getUserReservations(String userName) {
         getReservationsFile();
 
-        /**
-         * Key: Parking Slot identifier
-         * Value: Reservations
-         */
         Map<String, Reservations> userReservations = new HashMap<>();
 
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
 
-        for (int i = 0; i < nodeList.getLength(); i++){
+        for (int i = 0; i < nodeList.getLength(); i++) {
             Element currParkingSpotNode = (Element) nodeList.item(i);
 
             NodeList reservationList = currParkingSpotNode.getChildNodes();
 
-            for (int j = 0; j < reservationList.getLength(); j++){
-                Element currReservationNode = (Element) reservationList.item(j);
+            for (int j = 0; j < reservationList.getLength(); j++) {
+                Node reservationNode = reservationList.item(j);
 
-                NodeList reservationDetails = currReservationNode.getChildNodes();
+                // Check if the child node is an element
+                if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                    Element currReservationNode = (Element) reservationNode;
 
-                String currUsername = reservationDetails.item(2).getTextContent();
+                    NodeList reservationDetails = currReservationNode.getChildNodes();
 
-                if (userName.equalsIgnoreCase(currUsername)){
+                    String currUsername = reservationDetails.item(2).getTextContent();
 
-                    TimeRange currTimeRange = new TimeRange(reservationDetails.item(0).getTextContent(), reservationDetails.item(1).getTextContent());
-                    String date = currReservationNode.getAttribute("day");
+                    if (userName.equalsIgnoreCase(currUsername)) {
+                        String day = currReservationNode.getAttribute("day");
+                        String startTime = reservationDetails.item(0).getTextContent();
+                        String endTime = reservationDetails.item(1).getTextContent();
 
-                    Reservations reservations = new Reservations();
+                        TimeRange currTimeRange = new TimeRange(startTime, endTime);
 
-                    reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
-                    reservations.setDate(date);
+                        Reservations reservations = new Reservations();
+                        reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
+                        reservations.setDate(day);
 
-                    String parkingSpotIdentifier = currReservationNode.getAttribute("identifier");
+                        String parkingSpotIdentifier = currParkingSpotNode.getAttribute("identifier");
 
-                    userReservations.put(parkingSpotIdentifier, reservations);
-                }else {
-                    continue;
+                        userReservations.put(parkingSpotIdentifier, reservations);
+                    }
                 }
             }
         }
 
         return userReservations;
     }
+
 
 
 
