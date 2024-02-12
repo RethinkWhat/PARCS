@@ -6,6 +6,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -19,12 +20,24 @@ public class ServerController {
 
     boolean serverStatus = false;
 
-    public ServerController(Server server, ServerStatusView serverStatusView){
-        this.server = server;
-        this.serverStatusView = serverStatusView;
+    final int address = 2020;
 
+
+    public ServerController(ServerStatusView serverStatusView){
+        try {
+            this.server = new Server(address);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        Thread thread = new Thread(server);
+        thread.start();
+
+        this.serverStatusView = serverStatusView;
         serverStatusView.setServerListener(new serverListener());
     }
+
+
 
     class serverListener implements ActionListener{
 
@@ -33,27 +46,19 @@ public class ServerController {
             if (!serverStatus){
                 serverStatusView.setOnline();
                 serverStatus = true;
-                try {
-                    System.out.println("Set online");
-                    Server server =new Server(new InetSocketAddress(2069));
-                    ExecutorService executor = Executors.newSingleThreadExecutor();
-                    //executor.submit(server);
-                } catch (IOException ex) {
-                    throw new RuntimeException(ex);
-                }
+                server.startAccepting();
+
             }else {
-                System.out.println("Set offline");
                 serverStatusView.setOffline();
                 serverStatus= false;
-                //server.terminate();
+                server.stopAccepting();
             }
 
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ServerStatusView view = new ServerStatusView();
-        Server server = new Server(new InetSocketAddress(2020));
-        ServerController controller = new ServerController(server, view);
+        ServerController controller = new ServerController(view);
     }
 }

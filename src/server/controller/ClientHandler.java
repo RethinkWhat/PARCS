@@ -3,6 +3,7 @@ package server.controller;
 
 import client.model.Client;
 import server.model.Vehicle;
+import server.view.ServerStatusView;
 
 import java.io.*;
 import java.net.InetAddress;
@@ -138,7 +139,6 @@ public class ClientHandler implements Runnable {
         String password = reader.readLine();
         System.out.println("read password attempt: " + password);
 
-
         authenticateLogin = server.validateAccount(username, password);
 
         if (authenticateLogin)
@@ -146,6 +146,7 @@ public class ClientHandler implements Runnable {
         else
             writer.println("false");
     }
+
 
     public void signUp() {
         try {
