@@ -132,22 +132,46 @@ public class ReservationPageView extends JPanel {
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
                     String carLabel = "C" + String.format("%2d", i + 1);
                     carButtons[i] = res.createBtnRounded(carLabel, res.celadon, res.white, 10);
+
+                    //for buttons with image
+                    carButtons[i] = new JButton(carLabel, res.iconTakenCar);
+                    carButtons[i].setOpaque(false);
+                    carButtons[i].setContentAreaFilled(false);
+                    carButtons[i].setBorderPainted(false);
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
                     String motorLabel = "M" + String.format("%2d", i + 1);
                     motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+
+                    //for buttons with image
+                    motorButtons[i] = new JButton(motorLabel, res.iconAvailableMotor);
+                    motorButtons[i].setOpaque(false);
+                    motorButtons[i].setContentAreaFilled(false);
+                    motorButtons[i].setBorderPainted(false);
                 }
 
                 // Initialize buttons for the bottom row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
                     String carLabel = "C" + String.format("%2d", i + 6);
                     carButtons[i + NUM_CAR_SLOTS] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
+
+                    //for buttons with image
+                    carButtons[i+ NUM_CAR_SLOTS] = new JButton(carLabel, res.iconAvailableCar);
+                    carButtons[i+ NUM_CAR_SLOTS].setOpaque(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setContentAreaFilled(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setBorderPainted(false);
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
                     String motorLabel = "M" + String.format("%2d", i + 3);
                     motorButtons[i + NUM_MOTOR_SLOTS] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+
+                    //for buttons with image
+                    motorButtons[i+ NUM_MOTOR_SLOTS] = new JButton(motorLabel, res.iconTakenMotor);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setOpaque(false);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setContentAreaFilled(false);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setBorderPainted(false);
                 }
             }
 

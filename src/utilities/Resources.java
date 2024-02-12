@@ -78,7 +78,7 @@ public class Resources {
     /**
      * The colored icon for the available motorcycle parking slots.
      */
-    public ImageIcon iconAvailableMotor = new ImageIcon("res/drawable/icons/motor-celadon-solid.png");
+    public ImageIcon iconAvailableMotor = new ImageIcon("res/drawable/icons/motorcycle-celadon-solid.png");
     /**
      * The colored icon for the taken car parking slots.
      */
@@ -86,7 +86,7 @@ public class Resources {
     /**
      * The colored icon for the taken motorcycle parking slots.
      */
-    public ImageIcon iconTakenMotor = new ImageIcon("res/drawable/icons/motor-red-solid.png");
+    public ImageIcon iconTakenMotor = new ImageIcon("res/drawable/icons/motorcycle-red-solid.png");
     /**
      * The icon for the total bookings of the user panel.
      */
