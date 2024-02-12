@@ -80,6 +80,9 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Add Vehicle");
                                 addVehicle();
                                 break;
+                            case "logout":
+                                System.out.println("LOGOUT");
+                                handleDisconnect();
                         }
                     }
                 }

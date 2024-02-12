@@ -53,8 +53,8 @@ public class ApplicationController {
             view.getMainCardLayout().show(view.getPnlCards(), "account");
         });
         view.setNavLogoutListener(e -> {
-            // TODO: add functions here to save user actions and send to server.
             view.dispose();
+            model.getClient().logout();
         });
 
         // mouse listeners
