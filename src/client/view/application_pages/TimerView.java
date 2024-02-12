@@ -446,6 +446,14 @@ public class TimerView extends javax.swing.JFrame {
         positionY = evt.getY();
     }
 
+    private void userBtnActionPerformed(java.awt.event.MouseEvent evt){
+        dispose();
+    }
+
+    private void homeBtnActionPerformed(java.awt.event.MouseEvent evt){
+        dispose();
+    }
+
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {
         // set JFrame animation
         setLocation(evt.getXOnScreen()-positionX, evt.getYOnScreen()-positionY);
