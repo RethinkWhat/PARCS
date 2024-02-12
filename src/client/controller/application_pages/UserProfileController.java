@@ -66,6 +66,7 @@ public class UserProfileController {
         view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
         view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
         view.setNavHistoryListener(e -> view.getCardLayout().show(view.getPnlCards(), "history"));
+        view.setNavSecurityListener(e -> view.getCardLayout().show(view.getPnlCards(), "security"));
         view.setNavExitListener(e -> {
             parent.dispose();
             model.getClient().logout();
@@ -87,12 +88,18 @@ public class UserProfileController {
 
         // mouse listeners
 
-        // edit profile page
+        // navigation
         view.getBtnNavEditProfile().addMouseListener(new Resources.CursorChanger(view.getBtnNavEditProfile()));
         view.getBtnNavEditCars().addMouseListener(new Resources.CursorChanger(view.getBtnNavEditCars()));
         view.getBtnNavHistory().addMouseListener(new Resources.CursorChanger(view.getBtnNavHistory()));
         view.getBtnNavSecurity().addMouseListener(new Resources.CursorChanger(view.getBtnNavSecurity()));
         view.getBtnNavExit().addMouseListener(new Resources.CursorChanger(view.getBtnNavExit()));
+
+        // edit profile page
+        view.getPnlEditProfile().getBtnContinue().
+                addMouseListener(new Resources.CursorChanger(view.getPnlEditProfile().getBtnContinue()));
+        view.getPnlEditProfile().getBtnCancel().
+                addMouseListener(new Resources.CursorChanger(view.getPnlEditProfile().getBtnCancel()));
 
         // edit cars page
         // TODO: mouse listeners for edit cars page
