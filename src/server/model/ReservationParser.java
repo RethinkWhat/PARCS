@@ -105,7 +105,7 @@ public class ReservationParser {
     }
 
     public ParkingSpot getParkingSlotInformation(String identifier){
-        ParkingSpot parkingSpot = null;
+        ParkingSpot parkingSpot = new ParkingSpot();
         getReservationsFile();
 
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
@@ -121,6 +121,7 @@ public class ReservationParser {
                 NodeList parkingSpotChildren = currParkingSpotNode.getChildNodes();
 
                 Reservations currReservation = new Reservations();
+                currReservation.setDate(parkingSpotChildren.item(0).getAttributes().item(0).getTextContent());
 
                 for (int j = 0; j < parkingSpotChildren.getLength(); j++){
                     Node currReservationNode = parkingSpotChildren.item(j);
@@ -131,8 +132,6 @@ public class ReservationParser {
 
                     currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
                 }
-
-
 
             }else {
                 break;
