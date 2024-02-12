@@ -46,7 +46,7 @@ public class ApplicationController {
         });
         view.setNavTicketListener(e -> {
             view.getLblLocation().setText("Ticket");
-            // TODO: change panel
+            view.getMainCardLayout().show(view.getPnlCards(), "ticket");
         });
         view.setNavAccountListener(e -> {
             view.getLblLocation().setText("Account");
