@@ -18,6 +18,8 @@ public class LoginRegisterModel {
 
     private Client client;
 
+    private String errorMessage;
+
     /**
      * Constructs a LoginRegisterModel with null values.
      */
@@ -65,7 +67,16 @@ public class LoginRegisterModel {
         client.writeString("login");
         client.writeString(username);
         client.writeString(password);
-        boolean validated =  client.readString().equals("true");
+
+        String validationMessage = client.readString();
+        boolean validated =  validationMessage.equals("true");
+
+        if (!validated) {
+            if (validationMessage.equals("userExists"))
+                errorMessage = "Account already logged in.";
+            else
+                errorMessage = "Wrong credentials or the account does not exist. Try again.";
+        }
 
         if (validated) {
             client.writeString("disconnect");
@@ -74,6 +85,10 @@ public class LoginRegisterModel {
             new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }
         return validated;
+    }
+
+    public String getErrorMessage() {
+        return errorMessage;
     }
 
     public boolean createAccount(String firstName, String lastName,

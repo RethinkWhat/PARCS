@@ -10,6 +10,8 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ClientHandler implements Runnable {
@@ -25,6 +27,7 @@ public class ClientHandler implements Runnable {
 
     boolean disconnect = false;
     InetAddress address;
+
 
     public ClientHandler(Server server, Socket client) {
         this.client = client;
@@ -144,8 +147,14 @@ public class ClientHandler implements Runnable {
 
         authenticateLogin = server.validateAccount(username, password);
 
-        if (authenticateLogin)
-            writer.println("true");
+        if (authenticateLogin) {
+            if (server.getUserLog().contains(username)) {
+                writer.println("userExists");
+            }else {
+                server.accountLogin(username);
+                writer.println("true");
+            }
+        }
         else
             writer.println("false");
     }
