@@ -113,17 +113,17 @@ public class UserProfileView extends JPanel {
         pnlRight.add(pnlCards, BorderLayout.NORTH);
 
         // edit profile page
-        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
-
-        // edit cars page
-        pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
+//        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
+//
+//        // edit cars page
+//        pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
 
         // security page
         pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
 
 
         // history page
-        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
+//        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
 
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
@@ -522,7 +522,7 @@ public class UserProfileView extends JPanel {
 
         public SecurityPage() {
             // this.setPreferredSize(new Dimension(650,490));
-            this.setLayout(new GridLayout(8, 1));
+            this.setLayout(new GridLayout(8, 2));
             this.setBorder(new EmptyBorder(10, 20, 10, 60));
 
             JLabel lblChangePassword = res.createLblH1("Change Password", res.eerieBlack);
@@ -530,19 +530,22 @@ public class UserProfileView extends JPanel {
             lblChangePassword.setFont(new Font("Arial", Font.BOLD, 32));
             this.add(lblChangePassword);
 
-            JPanel pnlNameLabels = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
+            JPanel pnlNameLabels = new JPanel(new FlowLayout(FlowLayout.LEFT));
 
             JLabel currentPassword = res.createLblH3("Current Password", res.eerieBlack);
             currentPassword.setBorder(new EmptyBorder(30, 0, 0, 0));
-
             pnlNameLabels.add(currentPassword);
-
             this.add(pnlNameLabels);
 
+            //CurrentPassword textField
             JPanel pnlCurrentPasswordField = new JPanel(new FlowLayout(FlowLayout.LEFT));
             pnlCurrentPasswordField.setPreferredSize(new Dimension(750,50));
             this.add(pnlCurrentPasswordField);
+            txtCurrentPassword = res.createPwdRounded(res.white, res.gray, 50);
+            txtCurrentPassword.setPreferredSize(new Dimension(750,50));
+            pnlCurrentPasswordField.add(txtCurrentPassword);
+
 
             JLabel newPassword = res.createLblH3("New Password", res.eerieBlack);
             newPassword.setBorder(new EmptyBorder(30, 0, 0, 0));
@@ -550,6 +553,9 @@ public class UserProfileView extends JPanel {
 
             JPanel pnlNewPasswordField = new JPanel(new FlowLayout(FlowLayout.LEFT));
             this.add(pnlNewPasswordField);
+            txtNewPassword = res.createPwdRounded(res.white, res.gray, 50);
+            txtNewPassword.setPreferredSize(new Dimension(750,50));
+            pnlNewPasswordField.add(txtNewPassword);
 
             JLabel confirmNewPassword = res.createLblH3("Confirm New Password", res.eerieBlack);
             confirmNewPassword.setBorder(new EmptyBorder(30, 0, 0, 0));
@@ -558,33 +564,18 @@ public class UserProfileView extends JPanel {
             JPanel pnlConfirmNewPasswordField = new JPanel(new FlowLayout(FlowLayout.LEFT));
             this.add(pnlConfirmNewPasswordField);
 
-
-            txtCurrentPassword = res.createPwdRounded(res.gray, res.white, 20);
-            txtCurrentPassword.setPreferredSize(new Dimension(500, 35)); // Adjusted height to 35 pixels
-            pnlCurrentPasswordField.add(txtCurrentPassword);
-
-
-            txtNewPassword = res.createPwdRounded(res.gray, res.white,  20);
-            txtNewPassword.setPreferredSize(new Dimension(50, 50));
-
-            pnlNewPasswordField.add(txtNewPassword);
-
-            txtConfirmNewPassword = res.createPwdRounded(res.gray, res.white,  20);
-            txtConfirmNewPassword.setPreferredSize(new Dimension(500, 50));
-
+            txtConfirmNewPassword = res.createPwdRounded(res.white, res.gray, 50);
+            txtConfirmNewPassword.setPreferredSize(new Dimension(750,50));
             pnlConfirmNewPasswordField.add(txtConfirmNewPassword);
 
-
-            JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.LEADING));
+            JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
             pnlButtons.setBorder(new EmptyBorder(10, 0, 7, 0));
             confirmButton = res.createBtnRounded("Change Account Password" , res.celadon, res.eerieBlack, 40);
 
-            confirmButton.setPreferredSize(new Dimension(280,35 ));
+            confirmButton.setPreferredSize(new Dimension(250,35 ));
             pnlButtons.add(confirmButton);
             this.add(pnlButtons);
-
-        }
-    }
+        }    }
 
     /**
      * The panel that contains the booking history of the user.
