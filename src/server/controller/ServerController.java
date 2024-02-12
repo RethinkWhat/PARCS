@@ -18,7 +18,7 @@ import java.util.concurrent.Executors;
 public class ServerController {
 
     /** The View associated with the ServerStatusController */
-    ServerStatusView serverStatusView;
+    ServerStatusView view;
 
     /** The model of the ServerStatusController */
     ServerStatusModel model;
@@ -30,15 +30,21 @@ public class ServerController {
     Server server;
 
 
-    public ServerController(ServerStatusView serverStatusView, ServerStatusModel model){
+    public ServerController(ServerStatusView view, ServerStatusModel model){
             this.model = model;
             this.server = model.getServer();
+            this.view = view;
 
         Thread thread = new Thread(server);
         thread.start();
 
-        this.serverStatusView = serverStatusView;
-        serverStatusView.setServerListener(new serverListener());
+
+        /** Populate elements*/
+
+        this.view.getPnlMainTop().setPnlTotalBookings(String.valueOf(server.getNumberOfBookings()));
+
+        /** Class listeners */
+        view.setServerListener(new serverListener());
     }
 
 
@@ -48,12 +54,12 @@ public class ServerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!serverStatus){
-                serverStatusView.setOnline();
+                view.setOnline();
                 serverStatus = true;
                 server.startAccepting();
 
             }else {
-                serverStatusView.setOffline();
+                view.setOffline();
                 serverStatus= false;
                 server.stopAccepting();
             }
