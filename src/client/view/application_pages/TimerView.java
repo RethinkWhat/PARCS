@@ -229,6 +229,7 @@ public class TimerView extends javax.swing.JFrame {
         exitBtn.setIcon(exit); // Change Directory
         exitBtn.setBorder(null);
 
+        // Sidebar buttons
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -435,6 +436,7 @@ public class TimerView extends javax.swing.JFrame {
         pack();
     }
 
+    // TODO: add the methods below to the controller.
     private void endTimerBtnActionPerformed(java.awt.event.ActionEvent evt) {
         // TODO add your handling code here:\
 
@@ -533,7 +535,7 @@ public class TimerView extends javax.swing.JFrame {
 
     private void drawStopwatch(Graphics g) {
         g.setColor(Color.RED);
-        g.setFont(new Font("Times New Roman", Font.PLAIN, 24));
+        g.setFont(new Font("Arial", Font.PLAIN, 24));
         String timeString = String.format("%02d:%02d:%02d", hour, minute, second);
 
         FontMetrics fm = g.getFontMetrics();
