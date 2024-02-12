@@ -123,6 +123,18 @@ public class Client {
         }
     }
 
+    public void logout() {
+        openSocket();
+        try {
+            writeString("logout");
+            client.close();
+            startGUI();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        closeSocket();
+    }
+
     public void closeSocket() {
         try {
             client.close();

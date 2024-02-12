@@ -3,6 +3,7 @@ package client.controller.application_pages;
 import client.controller.LoginRegisterController;
 import client.model.LoginRegisterModel;
 import client.model.application_pages.UserProfileModel;
+import client.view.ApplicationView;
 import client.view.application_pages.HistoryPageView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
@@ -52,7 +53,7 @@ public class UserProfileController {
      * @param view  The specified view.
      * @param model The specified model.
      */
-    public UserProfileController(UserProfileView view, UserProfileModel model) {
+    public UserProfileController(UserProfileView view, UserProfileModel model, ApplicationView parent) {
         this.view = view;
         this.model = model;
 
@@ -65,6 +66,10 @@ public class UserProfileController {
         view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
         view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
         view.setNavHistoryListener(e -> view.getCardLayout().show(view.getPnlCards(), "history"));
+        view.setNavExitListener(e -> {
+            parent.dispose();
+            model.getClient().logout();
+        });
         // view.setNavExitListener(new LoginRegisterController());
 
         // edit profile page

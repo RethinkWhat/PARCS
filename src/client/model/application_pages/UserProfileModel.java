@@ -96,4 +96,8 @@ public class UserProfileModel {
 
         return editConfirmed;
     }
+
+    public Client getClient() {
+        return client;
+    }
 }

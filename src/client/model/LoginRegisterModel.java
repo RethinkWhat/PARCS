@@ -15,10 +15,7 @@ import java.util.Base64;
  * TODO: Documentation (describe this class)
  */
 public class LoginRegisterModel {
-    /**
-     * The status of the user.
-     * True if logged in, false if otherwise.
-     */
+
     private Client client;
 
     /**
@@ -111,14 +108,5 @@ public class LoginRegisterModel {
         return signUpSuccess;
     }
 
-    /*
-    public boolean isAdmin(){
-        client.readString();
-        boolean validated =  client.readString().equals("admin");
-        client.closeSocket();
-        return validated;
-    }
-
-     */
 
 }
