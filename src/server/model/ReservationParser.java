@@ -13,6 +13,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+import java.sql.Time;
 import java.util.*;
 
 public class ReservationParser {
@@ -111,11 +112,27 @@ public class ReservationParser {
 
 
         for (int i = 0; i < nodeList.getLength(); i++){
-            Node currNode = nodeList.item(i);
+            Node currParkingSpotNode = nodeList.item(i);
 
-            String currIdentifier = currNode.getAttributes().item(0).getTextContent();
+            String currParkingSpotIdentifier = currParkingSpotNode.getAttributes().item(0).getTextContent();
 
-            if (currIdentifier.equalsIgnoreCase(identifier)){
+            if (currParkingSpotIdentifier.equalsIgnoreCase(identifier)){
+
+                NodeList parkingSpotChildren = currParkingSpotNode.getChildNodes();
+
+                Reservations currReservation = new Reservations();
+
+                for (int j = 0; j < parkingSpotChildren.getLength(); j++){
+                    Node currReservationNode = parkingSpotChildren.item(j);
+
+                    TimeRange currReservationTimeRange = new TimeRange(currReservationNode.getChildNodes().item(0).getTextContent(), currReservationNode.getChildNodes().item(1).getTextContent());
+                    String user = currReservationNode.getChildNodes().item(2).getTextContent();
+                    String date = currReservationNode.getAttributes().item(0).getTextContent();
+
+                    currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
+                }
+
+
 
             }else {
                 break;
