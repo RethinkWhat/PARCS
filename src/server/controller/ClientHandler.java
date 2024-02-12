@@ -54,6 +54,10 @@ public class ClientHandler implements Runnable {
                     String page = reader.readLine();
                     if (page != null) {
                         switch (page) {
+                            case "logout":
+                                System.out.println("reached client handler");
+                                handleLogout();
+                                break;
                             case "login":
                                 login();
                                 System.out.println("page: " + page);
@@ -66,6 +70,7 @@ public class ClientHandler implements Runnable {
                             case "signUp" :
                                 System.out.println("Sign Up");
                                 signUp();
+                                break;
                             case "disconnect":
                                 handleDisconnect();
                                 break;
@@ -83,9 +88,6 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Add Vehicle");
                                 addVehicle();
                                 break;
-                            case "logout":
-                                System.out.println("LOGOUT");
-                                handleDisconnect();
                         }
                     }
                 }
@@ -103,6 +105,18 @@ public class ClientHandler implements Runnable {
         System.out.println("---------------");
         closeResources();
         openResources();
+    }
+
+    public void handleLogout() {
+        try {
+            System.out.println("-----LOGOUT-----");
+            writer.println("MESSAGE SENT");
+            String username = reader.readLine();
+            server.accountLogout(username);
+            handleDisconnect();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void closeResources() {

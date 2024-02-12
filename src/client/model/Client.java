@@ -127,6 +127,7 @@ public class Client {
         openSocket();
         try {
             writeString("logout");
+            this.writeString(this.getUsername());
             client.close();
             startGUI();
         } catch (IOException ex) {
