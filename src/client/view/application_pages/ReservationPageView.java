@@ -155,6 +155,7 @@ public class ReservationPageView extends JPanel {
                 }
             }
 
+
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -187,7 +188,7 @@ public class ReservationPageView extends JPanel {
 
                 // Draw Motor Slots (Top Row)
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    int x = xOffset + (NUM_CAR_SLOTS + i) * slotWidth;
+                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth;
                     int y = yOffset;
 
                     // Draw rectangles to represent motor slots
@@ -198,29 +199,28 @@ public class ReservationPageView extends JPanel {
                 }
 
                 // Draw Car Slots (Bottom Row)
-                for (int j = 0; j < NUM_CAR_SLOTS; j++) {
-                    int x = xOffset + j * slotWidth;
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    int x = xOffset + i * slotWidth;
                     int y = yOffset + slotHeight;
 
                     // Draw rectangles to represent car slots
                     g.drawRect(x, y, slotWidth, slotHeight);
 
                     // Buttons for the car slots (added bounds for positioning)
-                    carButtons[j].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
+                    carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
                 }
 
                 // Draw Motor Slots (Bottom Row)
-                for (int j = 0; j < NUM_MOTOR_SLOTS; j++) {
-                    int x = xOffset + (NUM_CAR_SLOTS + j) * slotWidth; // Adjusted calculation
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    int x = xOffset + (NUM_CAR_SLOTS + i) * slotWidth;
                     int y = yOffset + slotHeight;
 
                     // Draw rectangles to represent motor slots
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    motorButtons[j].setBounds(x + motorSlotWidth / 4, y + slotHeight / 4, motorSlotWidth / 2, slotHeight / 2);
+                    motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 4, motorSlotWidth / 2, slotHeight / 2);
                 }
-
             }
         }
     }
