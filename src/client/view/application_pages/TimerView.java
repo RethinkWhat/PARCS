@@ -235,20 +235,79 @@ public class TimerView extends JPanel {
         lblParkingSpot.setFont(new java.awt.Font("Inter", 0, 12));
         lblParkingSpot.setText("Parking Spot");
 
-        lblDate.setFont(new java.awt.Font("Inter", 0, 12));
-        lblDate.setText("Date");
+        ImageIcon home = new ImageIcon("res/drawable/icons/home-white-outline.png");
+        Image scaledHome = home.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        home = new ImageIcon(scaledHome);
+        homeBtn.setBackground(new java.awt.Color(76, 102, 99));
+        homeBtn.setIcon(home);
+        homeBtn.setBorder(null);
 
-        lblDuration.setFont(new java.awt.Font("Inter", 0, 12));
-        lblDuration.setText("Duration");
 
-        lblHours.setFont(new java.awt.Font("Inter", 0, 12));
-        lblHours.setText("Hours");
+        ImageIcon ticket = new ImageIcon("res/drawable/icons/ticket-white-outline.png");
+        Image scaledTicket = ticket.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        ticket = new ImageIcon(scaledTicket);
+        ticketBtn.setBackground(new java.awt.Color(76, 102, 99));
+        ticketBtn.setSize(50,50);
+        ticketBtn.setIcon(ticket); // Change Directory
+        ticketBtn.setBorder(null);
 
-        lblParkingAreaInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        lblParkingAreaInfo.setText("Info");
+        ImageIcon user = new ImageIcon("res/drawable/icons/user-white-outline.png");
+        Image scaledUser = user.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        user = new ImageIcon(scaledUser);
+        userBtn.setBackground(new java.awt.Color(76, 102, 99));
+        userBtn.setSize(50,50);
+        userBtn.setIcon(user);
+        userBtn.setBorder(null);
 
-        lblParkingTypeInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        lblParkingTypeInfo.setText("Info");
+        ImageIcon exit= new ImageIcon("res/drawable/icons/exit-white-outline.png");
+        Image scaledExit = exit.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        exit = new ImageIcon(scaledExit);
+        exitBtn.setBackground(new java.awt.Color(76, 102, 99));
+        exitBtn.setSize(50,50);
+        exitBtn.setIcon(exit); // Change Directory
+        exitBtn.setBorder(null);
+
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addGroup(jPanel3Layout.createSequentialGroup()
+                                                .addComponent(ticketBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addGap(0, 0, Short.MAX_VALUE))
+                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                                .addGap(0, 0, Short.MAX_VALUE)
+                                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(exitBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                        .addComponent(userBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+                jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                                .addContainerGap()
+                                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(ticketBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addContainerGap())
+        );
+        endTimerBtn.setBackground(new java.awt.Color(230, 92, 92));
+        endTimerBtn.setFont(new java.awt.Font("Inter", 0, 14));
+        endTimerBtn.setText("End Timer");
+        endTimerBtn.setBorder(null);
+        endTimerBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                endTimerBtnActionPerformed(evt);
+            }
+        });
 
         lblVehicleInfo.setFont(new java.awt.Font("Inter", 1, 12));
         lblVehicleInfo.setText("Info");
@@ -382,16 +441,32 @@ public class TimerView extends JPanel {
 
     }
 
-    // TODO: add the methods below to the controller.
-    private void setBtnEndTimerListener(ActionListener actionListener) {
-        // TODO add your handling code here:\
+    private void endTimerBtnActionPerformed(java.awt.event.ActionEvent evt) {
+        new TicketCancelDialog(null,false);
 
     }
 
-    /**
-     * TODO: Documentation
-     * @param args
-     */
+    private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {
+        // get x and y coordinates values
+        positionX = evt.getX();
+        positionY = evt.getY();
+    }
+
+    private void userBtnActionPerformed(java.awt.event.MouseEvent evt){
+        // connect to User Page
+        dispose();
+    }
+
+    private void homeBtnActionPerformed(java.awt.event.MouseEvent evt){
+        // connect to Home Page
+        dispose();
+    }
+
+    private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {
+        // set JFrame animation
+        setLocation(evt.getXOnScreen()-positionX, evt.getYOnScreen()-positionY);
+    }
+
     public static void main(String args[]) {
 
         try {
