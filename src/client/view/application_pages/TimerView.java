@@ -11,10 +11,10 @@ import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
- *
+ * TODO: Documentation
  * @author MIzuchi
  */
-public class TimerView extends javax.swing.JFrame {
+public class TimerView extends JPanel {
     // declare variables to store X and Y coordinates values.
     int positionX = 0;
     int positionY = 0;
@@ -32,11 +32,9 @@ public class TimerView extends javax.swing.JFrame {
     private BufferStrategy bufferStrategy;
 
     public TimerView() {
-        setUndecorated(true);
         initComponents();
-        setLocationRelativeTo(null);
-        setShape(new RoundRectangle2D.Double(0, 0, getWidth(), getHeight(), 30, 30));
 
+        // TODO: create factory methods for action listeners
         JButton [] btns = {homeBtn,ticketBtn,userBtn,exitBtn};
         for (JButton btn : btns){
             btn.setBackground(new Color(76,102,99));
@@ -70,9 +68,12 @@ public class TimerView extends javax.swing.JFrame {
             });
         }
 
+        /*
         createBufferStrategy(2);
         bufferStrategy = getBufferStrategy();
         setIgnoreRepaint(true);
+
+         */
 
         //instantiation of variables for the "stopwatch"
         arcExtent = 360;
@@ -151,8 +152,6 @@ public class TimerView extends javax.swing.JFrame {
         timerHours = new javax.swing.JLabel();
         timerMinutesLabel = new javax.swing.JLabel();
         timerSeconds = new javax.swing.JLabel();
-
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -431,9 +430,8 @@ public class TimerView extends javax.swing.JFrame {
                                                 .addGap(80, 80, 80))))
         );
 
-        getContentPane().add(jPanel1, java.awt.BorderLayout.CENTER);
+        add(jPanel1, java.awt.BorderLayout.CENTER);
 
-        pack();
     }
 
     // TODO: add the methods below to the controller.
