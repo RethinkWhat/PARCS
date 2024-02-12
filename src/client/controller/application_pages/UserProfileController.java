@@ -18,6 +18,7 @@ import java.awt.event.ActionListener;
  * to accomplish the requested action.
  */
 public class UserProfileController {
+
     /**
      * The view LoginRegisterView object.
      */
@@ -118,9 +119,7 @@ public class UserProfileController {
         view.repaint();
     }
 
-    public static void main(String[] args) {
-                UserProfileView userProfileView = new UserProfileView();
-    }
+
 
     /**
      * Populates the respective fields of the user.
