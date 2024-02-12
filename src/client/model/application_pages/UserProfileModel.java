@@ -54,6 +54,7 @@ public class UserProfileModel {
         firstName = tokens[1];
         username = tokens[2];
         contactNo = tokens[3];
+        password = tokens[4];
     }
 
     public String getFirstName() {
@@ -95,6 +96,14 @@ public class UserProfileModel {
         client.closeSocket();
 
         return editConfirmed;
+    }
+
+    // TODO: Create method to edit password
+    public boolean editPassword(String password) {
+        client.openSocket();
+        client.writeString("editPassword");
+        // TODO: add code here
+        return true;
     }
 
     public Client getClient() {

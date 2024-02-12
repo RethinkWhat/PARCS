@@ -233,15 +233,31 @@ public class UserParser {
         String lastName = null;
         String firstName = null;
         String contactNo = null;
+        String password = null;
         List<User> userList = getUserList();
         for (User user : userList) {
             if (user.getUsername().equals(username)) {
                 lastName = user.getLastName();
                 firstName = user.getFirstName();
                 contactNo = user.getPhoneNumber();
+                password = user.getPassword();
             }
         }
-        return lastName + "," + firstName + "," + username + "," + contactNo;
+        return lastName + "," + firstName + "," + username + "," + contactNo + "," + password;
+    }
+
+    /**
+     * Changes the user's password.
+     * @param username The specified username of the user.
+     * @param password The specified password of the user.
+     */
+    public void changePassword(String username, String password) {
+        List<User> userList = getUserList();
+        for (User user : userList) {
+            if (user.getUsername().equals(username)) {
+                user.setPassword(password);
+            }
+        }
     }
 
     public boolean isAdmin(String username) {
