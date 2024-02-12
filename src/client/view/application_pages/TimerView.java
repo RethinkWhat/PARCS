@@ -13,6 +13,92 @@ import javax.swing.*;
  */
 public class TimerView extends JPanel {
     /**
+     * The label that holds the information of date.
+     */
+    private JLabel lblDateInfo;
+    /**
+     * The label of date.
+     */
+    private JLabel lblDate;
+    /**
+     * The label that holds the information of the duration.
+     */
+    private JLabel lblDurationInfo;
+    /**
+     * The label of duration.
+     */
+    private JLabel lblDuration;
+    /**
+     * The button to end the timer.
+     */
+    private JButton btnEndTimer;
+    /**
+     * The label that holds the information of the timer's hours.
+     */
+    private JLabel lblHoursInfo;
+    /**
+     * The label of hours.
+     */
+    private JLabel lblHours;
+    /**
+     * The title of the panel.
+     */
+    private JLabel lblTitle;
+    /**
+     * The panel that holds the components
+     */
+    private JPanel pnlMain;
+
+    private JPanel jPanel2;
+    /**
+     * The label that holds the information of the parking area.
+     */
+    private JLabel lblParkingAreaInfo;
+    /**
+     * The label of parking area.
+     */
+    private JLabel lblParkingArea;
+    /**
+     * The label that holds the information of the parking spot.
+     */
+    private JLabel lblParkingSpotInfo;
+    /**
+     * The label of parking spot.
+     */
+    private JLabel lblParkingSpot;
+    /**
+     * The label that holds the information of the parking type.
+     */
+    private JLabel lblParkingTypeInfo;
+    /**
+     * The label of parking type.
+     */
+    private JLabel lblParkingType;
+    /**
+     * The label of the ticket.
+     */
+    private JLabel lblTicketText;
+    /**
+     * The label of the hours left in the timer.
+     */
+    private JLabel lblTimerHours;
+    /**
+     * The label of the minutes left in the timer.
+     */
+    private JLabel lblTimerMinutes;
+    /**
+     * The label of the seconds left in the timer.
+     */
+    private JLabel lblTimerSeconds;
+    /**
+     * The label that holds the information of the vehicle.
+     */
+    private JLabel lblVehicleInfo;
+    /**
+     * The label of vehicle.
+     */
+    private JLabel lblVehicle;
+    /**
      * The hour of the timer object.
      */
     private int hour;
@@ -32,10 +118,25 @@ public class TimerView extends JPanel {
      * The starting angle of the countdown timer.
      */
     private static final int ARC_START_ANGLE = 90;
+    /**
+     * The extent of the arc.
+     */
     private int arcExtent;
+    /**
+     * The components inside the timer.
+     */
     double init;
+    /**
+     * The current time of the timer.
+     */
     double current;
+    /**
+     * Instanc variable of the timer.
+     */
     private javax.swing.Timer t;
+    /**
+     * The stylesheet.
+     */
     private Resources res = new Resources();
 
     /**
@@ -66,6 +167,9 @@ public class TimerView extends JPanel {
         this.setPreferredSize(new Dimension(1100,700));
     }
 
+    /**
+     * Updates the time left.
+     */
     private void updateTime() {
         if (hour == 0 && minute == 0 && second == 0) {
             t.stop();
@@ -82,106 +186,96 @@ public class TimerView extends JPanel {
         }
     }
 
+    /**
+     * Instantiates and populates the components of the TimerView panel.
+     */
     private void initComponents() {
 
         pnlMain = res.createPnlRounded(1100,700,res.white,res.lightGray);
         jPanel2 = new JPanel();
-        parcsLogo = new JLabel();
-        ticketText = new JLabel();
-        homeBtn = new JButton();
-        ticketBtn = new JButton();
-        userBtn = new JButton();
-        exitBtn = new JButton();
-        endTimerBtn = new JButton();
-        jLabel2 = new JLabel();
-        parkingAreaLabel = new JLabel();
-        parkingTypeLabel = new JLabel();
-        vehicleLabel = new JLabel();
-        parkingSpotLabel = new JLabel();
-        dateLabel = new JLabel();
-        durationLabel = new JLabel();
-        hoursLabel = new JLabel();
-        parkingAreaInfo = new JLabel();
-        parkingTypeInfo = new JLabel();
-        vehicleInfo = new JLabel();
-        parkingSpotInfo = new JLabel();
-        dateInfo = new JLabel();
-        durationInfo = new JLabel();
-        hoursInfo = new JLabel();
-        timerHours = new JLabel();
-        timerMinutesLabel = new JLabel();
-        timerSeconds = new JLabel();
+        lblTicketText = new JLabel();
+        btnEndTimer = res.createBtnRounded("End Timer", res.red, res.eerieBlack, 10);
+        lblTitle = new JLabel();
+        lblParkingArea = new JLabel();
+        lblParkingType = new JLabel();
+        lblVehicle = new JLabel();
+        lblParkingSpot = new JLabel();
+        lblDate = new JLabel();
+        lblDuration = new JLabel();
+        lblHours = new JLabel();
+        lblParkingAreaInfo = new JLabel();
+        lblParkingTypeInfo = new JLabel();
+        lblVehicleInfo = new JLabel();
+        lblParkingSpotInfo = new JLabel();
+        lblDateInfo = new JLabel();
+        lblDurationInfo = new JLabel();
+        lblHoursInfo = new JLabel();
+        lblTimerHours = new JLabel();
+        lblTimerMinutes = new JLabel();
+        lblTimerSeconds = new JLabel();
 
-        pnlMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlMain.setPreferredSize(new Dimension(1100,700));
 
-        parcsLogo.setIcon(new ImageIcon("res/drawable/parcs-logo.png")); // Change Directory
+        lblTicketText.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
+        lblTicketText.setForeground(res.eerieBlack);
+        lblTicketText.setText("Ticket");
 
-        ticketText.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
-        ticketText.setForeground(new java.awt.Color(255, 255, 255));
-        ticketText.setText("Ticket");
+        lblTitle.setFont(new java.awt.Font("Inter", 1, 25));
+        lblTitle.setText("CURRENT TICKET");
 
-        endTimerBtn.setBackground(new java.awt.Color(230, 92, 92));
-        endTimerBtn.setFont(new java.awt.Font("Inter", 0, 14));
-        endTimerBtn.setText("End Timer");
-        endTimerBtn.setBorder(null);
+        lblParkingArea.setFont(new java.awt.Font("Inter", 0, 12));
+        lblParkingArea.setText("Parking Area");
 
-        jLabel2.setFont(new java.awt.Font("Inter", 1, 25));
-        jLabel2.setText("CURRENT TICKET");
+        lblParkingType.setFont(new java.awt.Font("Inter", 0, 12));
+        lblParkingType.setText("Parking Type");
 
-        parkingAreaLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        parkingAreaLabel.setText("Parking Area");
+        lblVehicle.setFont(new java.awt.Font("Inter", 0, 12));
+        lblVehicle.setText("Vehicle");
 
-        parkingTypeLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        parkingTypeLabel.setText("Parking Type");
+        lblParkingSpot.setFont(new java.awt.Font("Inter", 0, 12));
+        lblParkingSpot.setText("Parking Spot");
 
-        vehicleLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        vehicleLabel.setText("Vehicle");
+        lblDate.setFont(new java.awt.Font("Inter", 0, 12));
+        lblDate.setText("Date");
 
-        parkingSpotLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        parkingSpotLabel.setText("Parking Spot");
+        lblDuration.setFont(new java.awt.Font("Inter", 0, 12));
+        lblDuration.setText("Duration");
 
-        dateLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        dateLabel.setText("Date");
+        lblHours.setFont(new java.awt.Font("Inter", 0, 12));
+        lblHours.setText("Hours");
 
-        durationLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        durationLabel.setText("Duration");
+        lblParkingAreaInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblParkingAreaInfo.setText("Info");
 
-        hoursLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        hoursLabel.setText("Hours");
+        lblParkingTypeInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblParkingTypeInfo.setText("Info");
 
-        parkingAreaInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        parkingAreaInfo.setText("Info");
+        lblVehicleInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblVehicleInfo.setText("Info");
 
-        parkingTypeInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        parkingTypeInfo.setText("Info");
+        lblParkingSpotInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblParkingSpotInfo.setText("Info");
 
-        vehicleInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        vehicleInfo.setText("Info");
+        lblDateInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblDateInfo.setText("Info");
 
-        parkingSpotInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        parkingSpotInfo.setText("Info");
+        lblDurationInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblDurationInfo.setText("Info");
 
-        dateInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        dateInfo.setText("Info");
+        lblHoursInfo.setFont(new java.awt.Font("Inter", 1, 12));
+        lblHoursInfo.setText("Info");
 
-        durationInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        durationInfo.setText("Info");
+        lblTimerHours.setFont(new java.awt.Font("Inter", 0, 12));
+        lblTimerHours.setForeground(new java.awt.Color(102, 102, 102));
+        lblTimerHours.setText("Hours");
 
-        hoursInfo.setFont(new java.awt.Font("Inter", 1, 12));
-        hoursInfo.setText("Info");
+        lblTimerMinutes.setFont(new java.awt.Font("Inter", 0, 12));
+        lblTimerMinutes.setForeground(new java.awt.Color(102, 102, 102));
+        lblTimerMinutes.setText("Minutes");
 
-        timerHours.setFont(new java.awt.Font("Inter", 0, 12));
-        timerHours.setForeground(new java.awt.Color(102, 102, 102));
-        timerHours.setText("Hours");
-
-        timerMinutesLabel.setFont(new java.awt.Font("Inter", 0, 12));
-        timerMinutesLabel.setForeground(new java.awt.Color(102, 102, 102));
-        timerMinutesLabel.setText("Minutes");
-
-        timerSeconds.setFont(new java.awt.Font("Inter", 0, 12));
-        timerSeconds.setForeground(new java.awt.Color(102, 102, 102));
-        timerSeconds.setText("Seconds");
+        lblTimerSeconds.setFont(new java.awt.Font("Inter", 0, 12));
+        lblTimerSeconds.setForeground(new java.awt.Color(102, 102, 102));
+        lblTimerSeconds.setText("Seconds");
 
         GroupLayout pnlMainLayout = new GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
@@ -192,51 +286,51 @@ public class TimerView extends JPanel {
                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(pnlMainLayout.createSequentialGroup()
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                .addComponent(timerMinutesLabel)
+                                                .addComponent(lblTimerMinutes)
                                                 .addGap(29, 29, 29)
-                                                .addComponent(timerSeconds)
+                                                .addComponent(lblTimerSeconds)
                                                 .addGap(281, 281, 281)
                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(hoursLabel)
+                                                                .addComponent(lblHours)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(hoursInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblHoursInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(durationLabel)
+                                                                .addComponent(lblDuration)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(durationInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblDurationInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(dateLabel)
+                                                                .addComponent(lblDate)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(dateInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblDateInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(parkingSpotLabel)
+                                                                .addComponent(lblParkingSpot)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(parkingSpotInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblParkingSpotInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(vehicleLabel)
+                                                                .addComponent(lblVehicle)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(vehicleInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblVehicleInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(parkingTypeLabel)
+                                                                .addComponent(lblParkingType)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
-                                                                .addComponent(parkingTypeInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(lblParkingTypeInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(parkingAreaLabel)
+                                                                .addComponent(lblParkingArea)
                                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(parkingAreaInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
+                                                                .addComponent(lblParkingAreaInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(99, 99, 99))
                                         .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                                         .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                                 .addGap(161, 161, 161)
-                                                                .addComponent(timerHours))
+                                                                .addComponent(lblTimerHours))
                                                         .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                                 .addGap(170, 170, 170)
-                                                                .addComponent(endTimerBtn, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
+                                                                .addComponent(btnEndTimer, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
                                                         .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                                 .addGap(413, 413, 413)
-                                                                .addComponent(jLabel2)))
+                                                                .addComponent(lblTitle)))
                                                 .addContainerGap(414, Short.MAX_VALUE))))
         );
         pnlMainLayout.setVerticalGroup(
@@ -246,41 +340,41 @@ public class TimerView extends JPanel {
                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(pnlMainLayout.createSequentialGroup()
                                                 .addGap(37, 37, 37)
-                                                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(lblTitle, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(parkingAreaLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(lblParkingArea, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(parkingTypeLabel)
-                                                                        .addComponent(parkingTypeInfo))
+                                                                        .addComponent(lblParkingType)
+                                                                        .addComponent(lblParkingTypeInfo))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(vehicleLabel)
-                                                                        .addComponent(vehicleInfo))
+                                                                        .addComponent(lblVehicle)
+                                                                        .addComponent(lblVehicleInfo))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(parkingSpotLabel)
-                                                                        .addComponent(parkingSpotInfo))
+                                                                        .addComponent(lblParkingSpot)
+                                                                        .addComponent(lblParkingSpotInfo))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(dateLabel)
-                                                                        .addComponent(dateInfo)
-                                                                        .addComponent(timerSeconds)
-                                                                        .addComponent(timerMinutesLabel)
-                                                                        .addComponent(timerHours))
+                                                                        .addComponent(lblDate)
+                                                                        .addComponent(lblDateInfo)
+                                                                        .addComponent(lblTimerSeconds)
+                                                                        .addComponent(lblTimerMinutes)
+                                                                        .addComponent(lblTimerHours))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(durationLabel)
-                                                                        .addComponent(durationInfo))
+                                                                        .addComponent(lblDuration)
+                                                                        .addComponent(lblDurationInfo))
                                                                 .addGap(18, 18, 18)
                                                                 .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
-                                                                        .addComponent(hoursLabel)
-                                                                        .addComponent(hoursInfo)))
-                                                        .addComponent(parkingAreaInfo))
+                                                                        .addComponent(lblHours)
+                                                                        .addComponent(lblHoursInfo)))
+                                                        .addComponent(lblParkingAreaInfo))
                                                 .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(endTimerBtn, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(btnEndTimer, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(80, 80, 80))))
         );
 
@@ -294,6 +388,10 @@ public class TimerView extends JPanel {
 
     }
 
+    /**
+     * TODO: Documentation
+     * @param args
+     */
     public static void main(String args[]) {
 
         try {
@@ -322,42 +420,20 @@ public class TimerView extends JPanel {
         });
     }
 
-    // Variables declaration - do not modify
-    private JLabel dateInfo;
-    private JLabel dateLabel;
-    private JLabel durationInfo;
-    private JLabel durationLabel;
-    private JButton endTimerBtn;
-    private JButton exitBtn;
-    private JButton homeBtn;
-    private JLabel hoursInfo;
-    private JLabel hoursLabel;
-    private JLabel jLabel2;
-    private JPanel pnlMain;
-    private JPanel jPanel2;
-    private JLabel parcsLogo;
-    private JLabel parkingAreaInfo;
-    private JLabel parkingAreaLabel;
-    private JLabel parkingSpotInfo;
-    private JLabel parkingSpotLabel;
-    private JLabel parkingTypeInfo;
-    private JLabel parkingTypeLabel;
-    private JButton ticketBtn;
-    private JLabel ticketText;
-    private JLabel timerHours;
-    private JLabel timerMinutesLabel;
-    private JLabel timerSeconds;
-    private JButton userBtn;
-    private JLabel vehicleInfo;
-    private JLabel vehicleLabel;
-    // End of variables declaration
-
+    /**
+     * TODO: Documentation
+     * @param g  the <code>Graphics</code> context in which to paint
+     */
     public void paint(Graphics g) {
         super.paint(g);
         drawArc(g);
         drawStopwatch(g);
     }
 
+    /**
+     * TODO: Documentation
+     * @param g
+     */
     private void drawArc(Graphics g) {
        /* int centerX = getWidth() / 2;
         int centerY = getHeight() / 2;
@@ -373,6 +449,10 @@ public class TimerView extends JPanel {
         arcExtent = (int) ((current / init) * 360.0);
     }
 
+    /**
+     * TODO: Documentation
+     * @param g
+     */
     private void drawStopwatch(Graphics g) {
         g.setColor(Color.RED);
         g.setFont(new Font("Arial", Font.PLAIN, 24));
