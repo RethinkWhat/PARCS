@@ -15,14 +15,17 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server{
+public class Server implements Runnable{
     private ServerSocket server;
 
     private UserParser userParser;
 
-    public Server(SocketAddress socketAddress) throws IOException {
-        server = new ServerSocket();
-        server.bind(socketAddress);
+    private int socketAddress;
+
+    private volatile boolean serverRunning;
+
+    public Server(int socketAddress)throws IOException {
+        this.socketAddress = socketAddress;
         userParser = new UserParser();
     }
 
@@ -72,38 +75,53 @@ public class Server{
         }
     }
 
-    public void runServer() {
-        SocketAddress address = new InetSocketAddress(2020);
+    public boolean serverRunning() {
+        return serverRunning;
+    }
+
+    public void startServer() {
         try {
-            Server server = new Server(address);
-
-            while (true) {
-                Socket clientSocket = server.getServer().accept();
-
-                new Thread(new ClientHandler(server, clientSocket)).start();
-
-            }
+            server = new ServerSocket(socketAddress);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
+    public boolean isServerRunning() {
+        return serverRunning;
+    }
 
-    public static void main(String[] args) {
-        SocketAddress address = new InetSocketAddress(2020);
-        try {
-            Server server = new Server(address);
+    public void setServerRunning(boolean serverRunning) {
+        this.serverRunning = serverRunning;
+    }
 
-            while (true) {
-                Socket clientSocket = server.getServer().accept();
-
-                new Thread(new ClientHandler(server, clientSocket)).start();
-
+    public void run() {
+        while (true) {
+            try {
+                while (this.isServerRunning()) {
+                    System.out.println("server started");
+                    try {
+                        Socket clientSocket = server.accept();
+                        new Thread(new ClientHandler(this, clientSocket)).start();
+                    } catch (NullPointerException ignore) {
+                    }
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
             }
-        } catch (IOException ex) {
-            ex.printStackTrace();
         }
     }
+
+    public void stopAccepting() {
+        System.out.println("Stop Accepting Method");
+        this.setServerRunning(false);
+    }
+
+    public void startAccepting() {
+        this.setServerRunning(serverRunning = true);
+    }
+
+
 
 }
 
