@@ -105,6 +105,11 @@ public class ReservationParser {
         return parkingSpotList;
     }
 
+    /**
+     * This method will return a ParkingSpot's current information
+     * @param identifier
+     * @return
+     */
     public ParkingSpot getParkingSlotInformationByIdentifier(String identifier){
         ParkingSpot parkingSpot = new ParkingSpot();
         parkingSpot.setIdentifier(identifier);
@@ -156,9 +161,21 @@ public class ReservationParser {
         return parkingSpot;
     }
 
+    /**
+     * This method will return the reservation details of a specified user
+     * @param userName
+     * @return
+     */
     public Map<String, Reservations> getUserReservations(String userName) {
         getReservationsFile();
 
+        /**
+         * Key: Parking Slot Identifier
+         * Value: Reservations object
+         *
+         * EXAMPLE:
+         * {"C1", Reservations}
+         */
         Map<String, Reservations> userReservations = new HashMap<>();
 
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
@@ -190,12 +207,14 @@ public class ReservationParser {
 
                             TimeRange currTimeRange = new TimeRange(startTime, endTime);
 
+                            //Creating a new reservation and adding the current reservation's time range and username to the map of Reservation object
                             Reservations reservations = new Reservations();
                             reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
                             reservations.setDate(day);
 
                             String parkingSpotIdentifier = currParkingSpotElement.getAttribute("identifier");
 
+                            //Adding the reservations of the user to the userReservations map
                             userReservations.put(parkingSpotIdentifier, reservations);
                         }else {
                             continue;
