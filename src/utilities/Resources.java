@@ -72,6 +72,22 @@ public class Resources {
      */
     public ImageIcon iconSolidMotor = new ImageIcon("res/drawable/icons/motorcycle-black-solid.png");
     /**
+     * The colored icon for the available car parking slots.
+     */
+    public ImageIcon iconAvailableCar = new ImageIcon("res/drawable/icons/car-celadon-solid.png");
+    /**
+     * The colored icon for the available motorcycle parking slots.
+     */
+    public ImageIcon iconAvailableMotor = new ImageIcon("res/drawable/icons/motorcycle-celadon-solid.png");
+    /**
+     * The colored icon for the taken car parking slots.
+     */
+    public ImageIcon iconTakenCar = new ImageIcon("res/drawable/icons/car-red-solid.png");
+    /**
+     * The colored icon for the taken motorcycle parking slots.
+     */
+    public ImageIcon iconTakenMotor = new ImageIcon("res/drawable/icons/motorcycle-red-solid.png");
+    /**
      * The icon for the total bookings of the user panel.
      */
     public ImageIcon iconSolidTicket = new ImageIcon("res/drawable/icons/ticket-black-solid.png");
