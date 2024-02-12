@@ -24,9 +24,13 @@ public class Server implements Runnable{
 
     private volatile boolean serverRunning;
 
+    // List of users logged in to the system
+    List<String> userLog;
+
     public Server(int socketAddress)throws IOException {
         this.socketAddress = socketAddress;
         userParser = new UserParser();
+        userLog = new ArrayList<>();
     }
 
     public boolean validateAccount(String username, String password) {
@@ -123,8 +127,17 @@ public class Server implements Runnable{
         this.setServerRunning(true);
     }
 
+    public List<String> getUserLog() {
+        return userLog;
+    }
 
+    public void accountLogin(String username) {
+        userLog.add(username);
+    }
 
+    public void accountLogout(String username) {
+        userLog.remove(username);
+    }
 }
 
 
