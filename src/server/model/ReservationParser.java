@@ -3,6 +3,7 @@ package server.model;
 
 import client.model.DateTime;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -113,33 +114,42 @@ public class ReservationParser {
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
 
 
-        for (int i = 0; i < nodeList.getLength(); i++){
+        for (int i = 0; i < nodeList.getLength(); i++) {
             Node currParkingSpotNode = nodeList.item(i);
 
-            String currParkingSpotIdentifier = currParkingSpotNode.getAttributes().item(0).getTextContent();
+            // Check if the current node is an element node
+            if (currParkingSpotNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element parkingSpotElement = (Element) currParkingSpotNode;
+                String currParkingSpotIdentifier = parkingSpotElement.getAttribute("identifier");
 
-            if (currParkingSpotIdentifier.equalsIgnoreCase(identifier)){
+                if (currParkingSpotIdentifier.equalsIgnoreCase(identifier)) {
 
-                NodeList parkingSpotChildren = currParkingSpotNode.getChildNodes();
+                    NodeList reservationList = parkingSpotElement.getElementsByTagName("reservation");
 
-                Reservations currReservation = new Reservations();
-                currReservation.setDate(parkingSpotChildren.item(0).getAttributes().item(0).getTextContent());
+                    for (int j = 0; j < reservationList.getLength(); j++) {
+                        Node reservationNode = reservationList.item(j);
 
-                for (int j = 0; j < parkingSpotChildren.getLength(); j++){
-                    Node currReservationNode = parkingSpotChildren.item(j);
+                        if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                            Element reservationElement = (Element) reservationNode;
 
-                    TimeRange currReservationTimeRange = new TimeRange(currReservationNode.getChildNodes().item(0).getTextContent(), currReservationNode.getChildNodes().item(1).getTextContent());
-                    String user = currReservationNode.getChildNodes().item(2).getTextContent();
+                            String date = reservationElement.getAttribute("day");
+                            String startTime = reservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                            String endTime = reservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+                            String user = reservationElement.getElementsByTagName("user").item(0).getTextContent();
 
-                    currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
-                    parkingSpot.getReservationsList().add(currReservation);
+                            TimeRange currReservationTimeRange = new TimeRange(startTime, endTime);
+                            Reservations currReservation = new Reservations();
+                            currReservation.setDate(date);
+                            currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
+                            parkingSpot.getReservationsList().add(currReservation);
+                        }
+                    }
+
+                    break;
                 }
-
-                break;
-            }else {
-                continue;
             }
         }
+
 
         return parkingSpot;
     }
@@ -154,7 +164,8 @@ public class ReservationParser {
             System.out.println(parkingSpotList.get(x));
         }
 
-
+        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformation("C1").getReservationsList().toString());
+        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformation("C2").getReservationsList().toString());
     }
 
 
