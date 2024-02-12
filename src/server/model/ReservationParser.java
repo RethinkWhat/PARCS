@@ -3,6 +3,7 @@ package server.model;
 
 import client.model.DateTime;
 import org.w3c.dom.Document;
+import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 import org.w3c.dom.NodeList;
 import org.xml.sax.SAXException;
@@ -13,6 +14,7 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 
+import java.sql.Time;
 import java.util.*;
 
 public class ReservationParser {
@@ -103,6 +105,57 @@ public class ReservationParser {
         return parkingSpotList;
     }
 
+    public ParkingSpot getParkingSlotInformation(String identifier){
+        ParkingSpot parkingSpot = new ParkingSpot();
+        parkingSpot.setIdentifier(identifier);
+
+        getReservationsFile();
+
+        NodeList nodeList = document.getElementsByTagName("parkingSpot");
+
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node currParkingSpotNode = nodeList.item(i);
+
+            // Check if the current node is an element node
+            if (currParkingSpotNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element parkingSpotElement = (Element) currParkingSpotNode;
+                String currParkingSpotIdentifier = parkingSpotElement.getAttribute("identifier");
+
+                if (currParkingSpotIdentifier.equalsIgnoreCase(identifier)) {
+
+                    //Get the reservation nodes
+                    NodeList reservationList = parkingSpotElement.getElementsByTagName("reservation");
+
+                    for (int j = 0; j < reservationList.getLength(); j++) {
+                        //Getting the current reservation node with respect to j
+                        Node reservationNode = reservationList.item(j);
+
+                        if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+
+                            //Casting reservation node to an Element object
+                            Element reservationElement = (Element) reservationNode;
+
+                            String date = reservationElement.getAttribute("day");
+                            String startTime = reservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                            String endTime = reservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+                            String user = reservationElement.getElementsByTagName("user").item(0).getTextContent();
+
+                            TimeRange currReservationTimeRange = new TimeRange(startTime, endTime);
+                            Reservations currReservation = new Reservations();
+
+                            currReservation.setDate(date);
+                            currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
+                            parkingSpot.getReservationsList().add(currReservation);
+                        }
+                    }
+                    break;
+                }
+            }
+        }
+        return parkingSpot;
+    }
+
 
 
     public static void main(String[] args) {
@@ -113,6 +166,8 @@ public class ReservationParser {
             System.out.println(parkingSpotList.get(x));
         }
 
+        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformation("C1").getReservationsList().toString());
+        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformation("C2").getReservationsList().toString());
     }
 
 

@@ -24,7 +24,7 @@ public class Reservations {
 
     public Reservations() {
         this.date = null;
-        TimeAndUserMap = null;
+        TimeAndUserMap = new HashMap<>();
     }
 
     public Reservations(String date, HashMap<TimeRange,String> timeRangeStringHashMap) {
