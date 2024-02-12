@@ -15,23 +15,6 @@ import java.util.concurrent.Flow;
  * and transaction in the client application.
  */
 public class UserProfileView extends JPanel {
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                // Create an instance of UserProfileView
-                UserProfileView userProfileView = new UserProfileView();
-
-                // Create a JFrame to hold the UserProfileView
-                JFrame frame = new JFrame("User Profile");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.getContentPane().add(userProfileView);
-                frame.pack();
-                frame.setLocationRelativeTo(null); // Center the frame on the screen
-                frame.setVisible(true);
-            }
-        });
-    }
-
 
     /**
      * The stylesheet
@@ -74,7 +57,7 @@ public class UserProfileView extends JPanel {
      */
     private JPanel pnlCards;
     /**
-     * The panel for edit profile.
+     * The panel for Edit profile.
      */
     private EditProfile pnlEditProfile;
     /**
@@ -82,22 +65,21 @@ public class UserProfileView extends JPanel {
      */
     private ProfileOptionsPanel pnlProfileOptions;
     /**
-     * The panel for edit cars.
+     * The panel for Edit cars.
      */
     private EditCars pnlEditCars;
 
     /**
-     * The panel for history.
+     * The panel for History.
      */
     private HistoryPage pnlHistoryPage;
-
-
+    /**
+     * The panel for Security.
+     */
     private SecurityPage pnlSecurityPage;
     /**
      * Constructs a panel of UserProfileView.
      */
-
-
     public UserProfileView() {
         setLayout(new BorderLayout());
 
@@ -112,19 +94,13 @@ public class UserProfileView extends JPanel {
         // pnlCards.setBounds(220,0,750,560);
         pnlRight.add(pnlCards, BorderLayout.NORTH);
 
-        // edit profile page
-//        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
-//
-//        // edit cars page
-//        pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
-
+        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
+        // edit cars page
+        pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
         // security page
         pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
-
-
         // history page
-//        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
-
+        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
 
@@ -146,62 +122,58 @@ public class UserProfileView extends JPanel {
          * @param pnlCards   The specified main panel.
          */
         public ProfileOptionsPanel(CardLayout cardLayout, JPanel pnlCards) {
-            this.setLayout(null);
+            this.setLayout(new BorderLayout()); // Use BorderLayout for easier component placement
             this.setBackground(res.white);
-            this.setVisible(true);
 
-            btnHome = new JLabel();
-            btnHome.setIcon(new ImageIcon("res/drawable/icons/return.png"));
-            btnHome.setBounds(40, 5, 100, 100);
-            this.add(btnHome);
-
-            ImageIcon profilePicture = new ImageIcon("res/drawable/icons/pfp.png");
-            ImageIcon profileImage = new ImageIcon(profilePicture.getImage().getScaledInstance(100, 100, Image.SCALE_SMOOTH));
-            JLabel lblPFP = new JLabel(profileImage);
-            lblPFP.setBounds(75, 25, 100, 100);
-            this.add(lblPFP);
-
-            JPanel buttonsPanel = new JPanel(new GridLayout(5, 1));
+            JPanel buttonsPanel = new JPanel(new GridLayout(5, 1, 0, 0));
             buttonsPanel.setBackground(res.white);
-            buttonsPanel.setBounds(50, 150, 150, 300);
-            this.add(buttonsPanel);
+
+            Font buttonFont = new Font("Arial", Font.BOLD, 20);
 
             ImageIcon editProfile = new ImageIcon("res/drawable/icons/edit.png");
-            btnNavEditProfile = res.createBtnTxtOnly("Edit Profile", res.gray);
+            btnNavEditProfile = res.createBtnTxtOnly(" Edit Profile", res.gray);
+            btnNavEditProfile.setFont(buttonFont);
             btnNavEditProfile.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editProfileResized = new ImageIcon(editProfile.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavEditProfile.setIcon(editProfileResized);
             buttonsPanel.add(btnNavEditProfile);
 
             ImageIcon editCars = new ImageIcon("res/drawable/icons/edit-cars.png");
-            btnNavEditCars = res.createBtnTxtOnly("Edit Vehicles", res.gray);
+            btnNavEditCars = res.createBtnTxtOnly(" Edit Vehicles", res.gray);
+            btnNavEditCars.setFont(buttonFont);
             btnNavEditCars.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon editCarsResized = new ImageIcon(editCars.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavEditCars.setIcon(editCarsResized);
             buttonsPanel.add(btnNavEditCars);
 
             ImageIcon security = new ImageIcon("res/drawable/icons/security.png");
-            btnNavSecurity = res.createBtnTxtOnly("Security", res.gray);
+            btnNavSecurity = res.createBtnTxtOnly(" Security", res.gray);
+            btnNavSecurity.setFont(buttonFont);
             btnNavSecurity.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon securityResized = new ImageIcon(security.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavSecurity.setIcon(securityResized);
             buttonsPanel.add(btnNavSecurity);
 
             ImageIcon historyIcon = new ImageIcon("res/drawable/icons/history.png");
-            btnNavHistory = res.createBtnTxtOnly("History", res.gray);
+            btnNavHistory = res.createBtnTxtOnly(" History", res.gray);
+            btnNavHistory.setFont(buttonFont);
             btnNavHistory.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon helpResized = new ImageIcon(historyIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavHistory.setIcon(helpResized);
             buttonsPanel.add(btnNavHistory);
 
             ImageIcon exitIcon = new ImageIcon("res/drawable/icons/exit-grey-outline.png");
-            btnNavExit = res.createBtnTxtOnly("Logout", res.gray);
+            btnNavExit = res.createBtnTxtOnly(" Logout", res.gray);
+            btnNavExit.setFont(buttonFont);
             btnNavExit.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon exitResized = new ImageIcon(exitIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavExit.setIcon(exitResized);
             buttonsPanel.add(btnNavExit);
 
-            this.setPreferredSize(new Dimension(350, 700));
+            // Add buttons panel to the center of the layout with some padding
+            this.add(buttonsPanel, BorderLayout.CENTER);
+            this.setBorder(new EmptyBorder(20, 20, 20, 20)); // Add padding to the panel
+            this.setPreferredSize(new Dimension(300, 700)); // Set preferred size
         }
     }
 
@@ -511,34 +483,37 @@ public class UserProfileView extends JPanel {
     }
 
     /**
-     * the panel that contains change password (Security Page)
+     * This class represents a panel for changing account passwords.
+     * It provides fields for entering current password, new password, and confirming the new password.
      */
-
     class SecurityPage extends JPanel {
         private JPasswordField txtCurrentPassword;
         private JPasswordField txtNewPassword;
         private JPasswordField txtConfirmNewPassword;
         private JButton confirmButton;
 
+        /**
+         * This constructs a new SecurityPage panel with fields for changing account passwords.
+         * Initializes layout and components such as labels, text fields, and buttons.
+         */
         public SecurityPage() {
-            // this.setPreferredSize(new Dimension(650,490));
+            //sets a layout and borders
             this.setLayout(new GridLayout(8, 2));
             this.setBorder(new EmptyBorder(10, 20, 10, 60));
 
+            //creates and adds labels for the password change section
             JLabel lblChangePassword = res.createLblH1("Change Password", res.eerieBlack);
             lblChangePassword.setBorder(new EmptyBorder(25, 0, 0, 0));
             lblChangePassword.setFont(new Font("Arial", Font.BOLD, 32));
             this.add(lblChangePassword);
 
-
+            //adds label and text field for entering the current password
             JPanel pnlNameLabels = new JPanel(new FlowLayout(FlowLayout.LEFT));
-
             JLabel currentPassword = res.createLblH3("Current Password", res.eerieBlack);
             currentPassword.setBorder(new EmptyBorder(30, 0, 0, 0));
             pnlNameLabels.add(currentPassword);
             this.add(pnlNameLabels);
 
-            //CurrentPassword textField
             JPanel pnlCurrentPasswordField = new JPanel(new FlowLayout(FlowLayout.LEFT));
             pnlCurrentPasswordField.setPreferredSize(new Dimension(750,50));
             this.add(pnlCurrentPasswordField);
@@ -546,36 +521,35 @@ public class UserProfileView extends JPanel {
             txtCurrentPassword.setPreferredSize(new Dimension(750,50));
             pnlCurrentPasswordField.add(txtCurrentPassword);
 
-
+            //adds a label and text field for entering the new password
             JLabel newPassword = res.createLblH3("New Password", res.eerieBlack);
             newPassword.setBorder(new EmptyBorder(30, 0, 0, 0));
             this.add(newPassword);
-
             JPanel pnlNewPasswordField = new JPanel(new FlowLayout(FlowLayout.LEFT));
             this.add(pnlNewPasswordField);
             txtNewPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtNewPassword.setPreferredSize(new Dimension(750,50));
             pnlNewPasswordField.add(txtNewPassword);
 
+            //adds a label and text field for confirming the new password
             JLabel confirmNewPassword = res.createLblH3("Confirm New Password", res.eerieBlack);
             confirmNewPassword.setBorder(new EmptyBorder(30, 0, 0, 0));
             this.add(confirmNewPassword);
-
             JPanel pnlConfirmNewPasswordField = new JPanel(new FlowLayout(FlowLayout.LEFT));
             this.add(pnlConfirmNewPasswordField);
-
             txtConfirmNewPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtConfirmNewPassword.setPreferredSize(new Dimension(750,50));
             pnlConfirmNewPasswordField.add(txtConfirmNewPassword);
 
+            //adds a button for confirming the password change
             JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
             pnlButtons.setBorder(new EmptyBorder(10, 0, 7, 0));
-            confirmButton = res.createBtnRounded("Change Account Password" , res.celadon, res.eerieBlack, 40);
-
+            confirmButton = res.createBtnRounded("Change Account Password", res.celadon, res.eerieBlack, 40);
             confirmButton.setPreferredSize(new Dimension(250,35 ));
             pnlButtons.add(confirmButton);
             this.add(pnlButtons);
-        }    }
+        }
+    }
 
     /**
      * The panel that contains the booking history of the user.
@@ -668,7 +642,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Sets a specified action listener for btnNavEditProfile.
-     *
      * @param actionListener The specified action listener.
      */
     public void setNavEditProfileListener(ActionListener actionListener) {
@@ -677,7 +650,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Sets a specified action listener for btnNavEditCars.
-     *
      * @param actionListener The specified action listener.
      */
     public void setNavEditCarsListener(ActionListener actionListener) {
@@ -686,7 +658,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Sets a specified action listener for btnNavHistory.
-     *
      * @param actionListener The specified action listener.
      */
     public void setNavHistoryListener(ActionListener actionListener) {
@@ -695,7 +666,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Sets a specified action listener for btnNavExit.
-     *
      * @param actionListener The specified action listener.
      */
     public void setNavExitListener(ActionListener actionListener) {
@@ -704,7 +674,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Retrieves the current JButton of btnNavEditProfile.
-     *
      * @return The current btnNavEditProfile.
      */
     public JButton getBtnNavEditProfile() {
@@ -713,7 +682,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Retrieves the current JButton of btnNavEditCars.
-     *
      * @return The current btnNavEditCars.
      */
     public JButton getBtnNavEditCars() {
@@ -722,7 +690,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Retrieves the current JButton of btnNavSecurity.
-     *
      * @return The current btnNavSecurity.
      */
     public JButton getBtnNavSecurity() {
@@ -731,7 +698,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Retrieves the current JButton of btnNavHistory.
-     *
      * @return The current btnNavHistory.
      */
     public JButton getBtnNavHistory() {
@@ -740,7 +706,6 @@ public class UserProfileView extends JPanel {
 
     /**
      * Retrieves the current JButton of btnNavExit.
-     *
      * @return The current btnNavExit.
      */
     public JButton getBtnNavExit() {
@@ -748,53 +713,69 @@ public class UserProfileView extends JPanel {
     }
 
     /**
-     * TODO: Documentation
-     *
-     * @return
+     * Provides access to the CardLayout used for managing the panels.
+     * @return The CardLayout object used for managing panels.
      */
     public CardLayout getCardLayout() {
         return cardLayout;
     }
 
     /**
-     * TODO: Documentation
-     *
-     * @return
+     * Provides access to the main panel containing cards managed by the CardLayout.
+     * @return The JPanel containing cards managed by the CardLayout.
      */
     public JPanel getPnlCards() {
         return pnlCards;
     }
 
     /**
-     * TODO: Documentation
-     *
-     * @return
+     * Provides access to the panel for editing profile information.
+     * @return The EditProfile panel for editing profile information.
      */
     public EditProfile getPnlEditProfile() {
         return pnlEditProfile;
     }
 
     /**
-     * TODO: Documentation
-     *
-     * @return
+     * Provides access to the panel containing profile options.
+     * @return The ProfileOptionsPanel containing profile options buttons.
      */
     public ProfileOptionsPanel getPnlProfileOptions() {
         return pnlProfileOptions;
     }
 
     /**
-     * TODO: Documentation
-     *
-     * @return
+     * Provides access to the panel for editing cars information.
+     * @return The EditCars panel for editing cars information.
      */
     public EditCars getPnlEditCars() {
         return pnlEditCars;
     }
 
+    /**
+     * Provides access to the panel for managing security settings.
+     * @return The SecurityPage panel for managing security settings.
+     */
     public SecurityPage getPnlSecurityPage(){
         return pnlSecurityPage;
     }
 
+    //This is for testing the GUI.
+    public static void main(String[] args) {
+        SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                // Create an instance of UserProfileView
+                UserProfileView userProfileView = new UserProfileView();
+
+                // Create a JFrame to hold the UserProfileView
+                JFrame frame = new JFrame("User Profile");
+                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+                frame.getContentPane().add(userProfileView);
+                frame.pack();
+                frame.setLocationRelativeTo(null); // Center the frame on the screen
+                frame.setVisible(true);
+            }
+        });
+    }
 }
 
