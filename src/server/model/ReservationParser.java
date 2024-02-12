@@ -164,40 +164,47 @@ public class ReservationParser {
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
 
         for (int i = 0; i < nodeList.getLength(); i++) {
-            Element currParkingSpotNode = (Element) nodeList.item(i);
 
-            NodeList reservationList = currParkingSpotNode.getChildNodes();
+            Node currParkingSpotNode = nodeList.item(i);
 
-            for (int j = 0; j < reservationList.getLength(); j++) {
-                Node reservationNode = reservationList.item(j);
+            if (currParkingSpotNode.getNodeType() == Element.ELEMENT_NODE){
 
-                // Check if the child node is an element
-                if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
-                    Element currReservationNode = (Element) reservationNode;
+                //Getting the current parking spot
+                Element currParkingSpotElement = (Element) nodeList.item(i);
 
-                    NodeList reservationDetails = currReservationNode.getChildNodes();
+                NodeList reservationList = currParkingSpotNode.getChildNodes();
 
-                    String currUsername = reservationDetails.item(2).getTextContent();
+                for (int j = 0; j < reservationList.getLength(); j++) {
+                    Node reservationNode = reservationList.item(j);
 
-                    if (userName.equalsIgnoreCase(currUsername)) {
-                        String day = currReservationNode.getAttribute("day");
-                        String startTime = reservationDetails.item(0).getTextContent();
-                        String endTime = reservationDetails.item(1).getTextContent();
+                    if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element currReservationElement = (Element) reservationNode;
 
-                        TimeRange currTimeRange = new TimeRange(startTime, endTime);
+                        //Getting the username in a certain reservation
+                        String currUsername = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
 
-                        Reservations reservations = new Reservations();
-                        reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
-                        reservations.setDate(day);
+                        if (userName.equalsIgnoreCase(currUsername)) {
+                            String day = currReservationElement.getAttribute("day");
+                            String startTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                            String endTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
 
-                        String parkingSpotIdentifier = currParkingSpotNode.getAttribute("identifier");
+                            TimeRange currTimeRange = new TimeRange(startTime, endTime);
 
-                        userReservations.put(parkingSpotIdentifier, reservations);
+                            Reservations reservations = new Reservations();
+                            reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
+                            reservations.setDate(day);
+
+                            String parkingSpotIdentifier = currParkingSpotElement.getAttribute("identifier");
+
+                            userReservations.put(parkingSpotIdentifier, reservations);
+                        }else {
+                            continue;
+                        }
                     }
                 }
             }
-        }
 
+        }
         return userReservations;
     }
 
