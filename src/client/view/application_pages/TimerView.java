@@ -1,14 +1,11 @@
 package client.view.application_pages;
 
+import utilities.Resources;
+
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
-import java.awt.geom.RoundRectangle2D;
-import java.awt.image.BufferStrategy;
 import javax.swing.*;
-import javax.swing.plaf.basic.BasicButtonUI;
 
 /**
  * TODO: Documentation
@@ -39,13 +36,17 @@ public class TimerView extends JPanel {
     double init;
     double current;
     private javax.swing.Timer t;
+    private Resources res = new Resources();
 
+    /**
+     * Constructs a panel of TimerView.
+     */
     public TimerView() {
-        initComponents();
+        initComponents(); // invokes the components inside the TimerView.
 
         // TODO: create factory methods for action listeners
 
-        //instantiation of variables for the "stopwatch"
+        // instantiation of variables for the "stopwatch"
         arcExtent = 360;
         hour = 1;
         minute = 0;
@@ -83,38 +84,38 @@ public class TimerView extends JPanel {
 
     private void initComponents() {
 
-        pnlMain = new JPanel();
+        pnlMain = res.createPnlRounded(1100,700,res.white,res.lightGray);
         jPanel2 = new JPanel();
-        parcsLogo = new javax.swing.JLabel();
-        ticketText = new javax.swing.JLabel();
-        homeBtn = new javax.swing.JButton();
-        ticketBtn = new javax.swing.JButton();
-        userBtn = new javax.swing.JButton();
-        exitBtn = new javax.swing.JButton();
-        endTimerBtn = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
-        parkingAreaLabel = new javax.swing.JLabel();
-        parkingTypeLabel = new javax.swing.JLabel();
-        vehicleLabel = new javax.swing.JLabel();
-        parkingSpotLabel = new javax.swing.JLabel();
-        dateLabel = new javax.swing.JLabel();
-        durationLabel = new javax.swing.JLabel();
-        hoursLabel = new javax.swing.JLabel();
-        parkingAreaInfo = new javax.swing.JLabel();
-        parkingTypeInfo = new javax.swing.JLabel();
-        vehicleInfo = new javax.swing.JLabel();
-        parkingSpotInfo = new javax.swing.JLabel();
-        dateInfo = new javax.swing.JLabel();
-        durationInfo = new javax.swing.JLabel();
-        hoursInfo = new javax.swing.JLabel();
-        timerHours = new javax.swing.JLabel();
-        timerMinutesLabel = new javax.swing.JLabel();
-        timerSeconds = new javax.swing.JLabel();
+        parcsLogo = new JLabel();
+        ticketText = new JLabel();
+        homeBtn = new JButton();
+        ticketBtn = new JButton();
+        userBtn = new JButton();
+        exitBtn = new JButton();
+        endTimerBtn = new JButton();
+        jLabel2 = new JLabel();
+        parkingAreaLabel = new JLabel();
+        parkingTypeLabel = new JLabel();
+        vehicleLabel = new JLabel();
+        parkingSpotLabel = new JLabel();
+        dateLabel = new JLabel();
+        durationLabel = new JLabel();
+        hoursLabel = new JLabel();
+        parkingAreaInfo = new JLabel();
+        parkingTypeInfo = new JLabel();
+        vehicleInfo = new JLabel();
+        parkingSpotInfo = new JLabel();
+        dateInfo = new JLabel();
+        durationInfo = new JLabel();
+        hoursInfo = new JLabel();
+        timerHours = new JLabel();
+        timerMinutesLabel = new JLabel();
+        timerSeconds = new JLabel();
 
         pnlMain.setBackground(new java.awt.Color(255, 255, 255));
         pnlMain.setPreferredSize(new Dimension(1100,700));
 
-        parcsLogo.setIcon(new javax.swing.ImageIcon("res/drawable/parcs-logo.png")); // Change Directory
+        parcsLogo.setIcon(new ImageIcon("res/drawable/parcs-logo.png")); // Change Directory
 
         ticketText.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
         ticketText.setForeground(new java.awt.Color(255, 255, 255));
@@ -182,104 +183,104 @@ public class TimerView extends JPanel {
         timerSeconds.setForeground(new java.awt.Color(102, 102, 102));
         timerSeconds.setText("Seconds");
 
-        javax.swing.GroupLayout pnlMainLayout = new javax.swing.GroupLayout(pnlMain);
+        GroupLayout pnlMainLayout = new GroupLayout(pnlMain);
         pnlMain.setLayout(pnlMainLayout);
         pnlMainLayout.setHorizontalGroup(
-                pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                pnlMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
+                        .addComponent(jPanel2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(pnlMainLayout.createSequentialGroup()
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                                 .addComponent(timerMinutesLabel)
                                                 .addGap(29, 29, 29)
                                                 .addComponent(timerSeconds)
                                                 .addGap(281, 281, 281)
-                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING, false)
                                                         .addGroup(pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(hoursLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(hoursInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(hoursInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(durationLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(durationInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(durationInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(dateLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(dateInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(dateInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(parkingSpotLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(parkingSpotInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(parkingSpotInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(vehicleLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(vehicleInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(vehicleInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(parkingTypeLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
-                                                                .addComponent(parkingTypeInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 209, Short.MAX_VALUE)
+                                                                .addComponent(parkingTypeInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.TRAILING, pnlMainLayout.createSequentialGroup()
                                                                 .addComponent(parkingAreaLabel)
-                                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                                                .addComponent(parkingAreaInfo, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                                                .addComponent(parkingAreaInfo, GroupLayout.PREFERRED_SIZE, 36, GroupLayout.PREFERRED_SIZE)))
                                                 .addGap(99, 99, 99))
-                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
-                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
+                                        .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
+                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                                                        .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                                 .addGap(161, 161, 161)
                                                                 .addComponent(timerHours))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
+                                                        .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                                 .addGap(170, 170, 170)
-                                                                .addComponent(endTimerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
+                                                                .addComponent(endTimerBtn, GroupLayout.PREFERRED_SIZE, 160, GroupLayout.PREFERRED_SIZE))
+                                                        .addGroup(GroupLayout.Alignment.LEADING, pnlMainLayout.createSequentialGroup()
                                                                 .addGap(413, 413, 413)
                                                                 .addComponent(jLabel2)))
                                                 .addContainerGap(414, Short.MAX_VALUE))))
         );
         pnlMainLayout.setVerticalGroup(
-                pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                pnlMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                         .addGroup(pnlMainLayout.createSequentialGroup()
-                                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(jPanel2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.TRAILING)
                                         .addGroup(pnlMainLayout.createSequentialGroup()
                                                 .addGap(37, 37, 37)
-                                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 63, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
-                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                .addComponent(jLabel2, GroupLayout.PREFERRED_SIZE, 63, GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED, 128, Short.MAX_VALUE)
+                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.LEADING)
                                                         .addGroup(pnlMainLayout.createSequentialGroup()
-                                                                .addComponent(parkingAreaLabel, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                                .addComponent(parkingAreaLabel, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(parkingTypeLabel)
                                                                         .addComponent(parkingTypeInfo))
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(vehicleLabel)
                                                                         .addComponent(vehicleInfo))
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(parkingSpotLabel)
                                                                         .addComponent(parkingSpotInfo))
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(dateLabel)
                                                                         .addComponent(dateInfo)
                                                                         .addComponent(timerSeconds)
                                                                         .addComponent(timerMinutesLabel)
                                                                         .addComponent(timerHours))
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(durationLabel)
                                                                         .addComponent(durationInfo))
                                                                 .addGap(18, 18, 18)
-                                                                .addGroup(pnlMainLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                                                .addGroup(pnlMainLayout.createParallelGroup(GroupLayout.Alignment.BASELINE)
                                                                         .addComponent(hoursLabel)
                                                                         .addComponent(hoursInfo)))
                                                         .addComponent(parkingAreaInfo))
-                                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                                .addComponent(endTimerBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addPreferredGap(LayoutStyle.ComponentPlacement.RELATED)
+                                                .addComponent(endTimerBtn, GroupLayout.PREFERRED_SIZE, 27, GroupLayout.PREFERRED_SIZE)
                                                 .addGap(80, 80, 80))))
         );
 
@@ -296,9 +297,9 @@ public class TimerView extends JPanel {
     public static void main(String args[]) {
 
         try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+            for (UIManager.LookAndFeelInfo info : UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
+                    UIManager.setLookAndFeel(info.getClassName());
                     break;
                 }
             }
@@ -308,7 +309,7 @@ public class TimerView extends JPanel {
             java.util.logging.Logger.getLogger(TimerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
             java.util.logging.Logger.getLogger(TimerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
+        } catch (UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(TimerView.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
 
@@ -322,33 +323,33 @@ public class TimerView extends JPanel {
     }
 
     // Variables declaration - do not modify
-    private javax.swing.JLabel dateInfo;
-    private javax.swing.JLabel dateLabel;
-    private javax.swing.JLabel durationInfo;
-    private javax.swing.JLabel durationLabel;
-    private javax.swing.JButton endTimerBtn;
-    private javax.swing.JButton exitBtn;
-    private javax.swing.JButton homeBtn;
-    private javax.swing.JLabel hoursInfo;
-    private javax.swing.JLabel hoursLabel;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JPanel pnlMain;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel parcsLogo;
-    private javax.swing.JLabel parkingAreaInfo;
-    private javax.swing.JLabel parkingAreaLabel;
-    private javax.swing.JLabel parkingSpotInfo;
-    private javax.swing.JLabel parkingSpotLabel;
-    private javax.swing.JLabel parkingTypeInfo;
-    private javax.swing.JLabel parkingTypeLabel;
-    private javax.swing.JButton ticketBtn;
-    private javax.swing.JLabel ticketText;
-    private javax.swing.JLabel timerHours;
-    private javax.swing.JLabel timerMinutesLabel;
-    private javax.swing.JLabel timerSeconds;
-    private javax.swing.JButton userBtn;
-    private javax.swing.JLabel vehicleInfo;
-    private javax.swing.JLabel vehicleLabel;
+    private JLabel dateInfo;
+    private JLabel dateLabel;
+    private JLabel durationInfo;
+    private JLabel durationLabel;
+    private JButton endTimerBtn;
+    private JButton exitBtn;
+    private JButton homeBtn;
+    private JLabel hoursInfo;
+    private JLabel hoursLabel;
+    private JLabel jLabel2;
+    private JPanel pnlMain;
+    private JPanel jPanel2;
+    private JLabel parcsLogo;
+    private JLabel parkingAreaInfo;
+    private JLabel parkingAreaLabel;
+    private JLabel parkingSpotInfo;
+    private JLabel parkingSpotLabel;
+    private JLabel parkingTypeInfo;
+    private JLabel parkingTypeLabel;
+    private JButton ticketBtn;
+    private JLabel ticketText;
+    private JLabel timerHours;
+    private JLabel timerMinutesLabel;
+    private JLabel timerSeconds;
+    private JButton userBtn;
+    private JLabel vehicleInfo;
+    private JLabel vehicleLabel;
     // End of variables declaration
 
     public void paint(Graphics g) {
