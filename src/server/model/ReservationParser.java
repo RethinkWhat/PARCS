@@ -103,6 +103,28 @@ public class ReservationParser {
         return parkingSpotList;
     }
 
+    public ParkingSpot getParkingSlotInformation(String identifier){
+        ParkingSpot parkingSpot = null;
+        getReservationsFile();
+
+        NodeList nodeList = document.getElementsByTagName("parkingSpot");
+
+
+        for (int i = 0; i < nodeList.getLength(); i++){
+            Node currNode = nodeList.item(i);
+
+            String currIdentifier = currNode.getAttributes().item(0).getTextContent();
+
+            if (currIdentifier.equalsIgnoreCase(identifier)){
+
+            }else {
+                break;
+            }
+        }
+
+        return parkingSpot;
+    }
+
 
 
     public static void main(String[] args) {
