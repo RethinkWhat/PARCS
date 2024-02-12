@@ -1,5 +1,6 @@
 package server.controller;
 
+import server.model.ServerStatusModel;
 import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
@@ -15,20 +16,23 @@ import java.util.concurrent.Executors;
  * Assigned to @Ramon Jasmin
  * */
 public class ServerController {
-    Server server;
+
+    /** The View associated with the ServerStatusController */
     ServerStatusView serverStatusView;
+
+    /** The model of the ServerStatusController */
+    ServerStatusModel model;
 
     boolean serverStatus = false;
 
-    final int address = 2020;
+
+    /** The server object */
+    Server server;
 
 
-    public ServerController(ServerStatusView serverStatusView){
-        try {
-            this.server = new Server(address);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public ServerController(ServerStatusView serverStatusView, ServerStatusModel model){
+            this.model = model;
+            this.server = model.getServer();
 
         Thread thread = new Thread(server);
         thread.start();
@@ -59,6 +63,7 @@ public class ServerController {
 
     public static void main(String[] args) {
         ServerStatusView view = new ServerStatusView();
-        ServerController controller = new ServerController(view);
+        ServerStatusModel model = new ServerStatusModel();
+        ServerController controller = new ServerController(view, model);
     }
 }

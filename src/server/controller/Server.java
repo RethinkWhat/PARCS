@@ -1,6 +1,7 @@
 package server.controller;
 
 
+import server.model.ReservationParser;
 import server.model.UserParser;
 import server.model.Vehicle;
 
@@ -20,6 +21,8 @@ public class Server implements Runnable{
 
     private UserParser userParser;
 
+    private ReservationParser reservationParser;
+
     private int socketAddress;
 
     private volatile boolean serverRunning;
@@ -30,6 +33,7 @@ public class Server implements Runnable{
     public Server(int socketAddress)throws IOException {
         this.socketAddress = socketAddress;
         userParser = new UserParser();
+        reservationParser = new ReservationParser();
         userLog = new ArrayList<>();
     }
 
@@ -83,12 +87,9 @@ public class Server implements Runnable{
         return serverRunning;
     }
 
-    public void startServer() {
-        try {
-            server = new ServerSocket(socketAddress);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+
+    public int getNumberOfBookings() {
+        return reservationParser.countBookings();
     }
 
     public void setServerRunning(boolean serverRunning) {
