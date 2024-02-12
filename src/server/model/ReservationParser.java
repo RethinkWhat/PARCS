@@ -156,6 +156,16 @@ public class ReservationParser {
         return parkingSpot;
     }
 
+    public Map<String, Reservations> getUserReservations(String userName){
+        /**
+         * Key: Parking Slot identifier
+         * Value: Reservations
+         */
+        Map<String, Reservations> userReservations = new HashMap<>();
+
+        return userReservations;
+    }
+
 
 
     public static void main(String[] args) {
