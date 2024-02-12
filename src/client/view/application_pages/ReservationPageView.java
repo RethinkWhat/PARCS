@@ -125,9 +125,10 @@ public class ReservationPageView extends JPanel {
             }
 
             private void initializeButtons() {
-                carButtons = new JButton[NUM_CAR_SLOTS];
-                motorButtons = new JButton[NUM_MOTOR_SLOTS];
+                carButtons = new JButton[NUM_CAR_SLOTS * 2];
+                motorButtons = new JButton[NUM_MOTOR_SLOTS * 2];
 
+                // Initialize buttons for the top row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
                     String carLabel = "C" + String.format("%2d", i + 1); // C (Car Parking)
                     carButtons[i] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
@@ -138,6 +139,19 @@ public class ReservationPageView extends JPanel {
                     String motorLabel = "M" + String.format("%2d", i + 1); // M (Motor Parking)
                     motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
                     add(motorButtons[i]);
+                }
+
+                // Initialize buttons for the bottom row
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    String carLabel = "C" + String.format("%2d", i + 6);
+                    carButtons[i + NUM_CAR_SLOTS] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
+                    add(carButtons[i + NUM_CAR_SLOTS]);
+                }
+
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    String motorLabel = "M" + String.format("%2d", i + 3);
+                    motorButtons[i + NUM_MOTOR_SLOTS] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+                    add(motorButtons[i + NUM_MOTOR_SLOTS]);
                 }
             }
 
