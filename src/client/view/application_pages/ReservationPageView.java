@@ -192,7 +192,7 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, slotWidth, slotHeight);
 
                     // Buttons for the car slots (added bounds for positioning)
-                    //carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
+                    carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 8, slotHeight / 2);
                 }
 
                 // Draw Motor Slots (Bottom Row)
@@ -204,7 +204,7 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    //motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 8, motorSlotWidth / 2, slotHeight / 2);
+                    motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 8, motorSlotWidth / 8, slotHeight / 2);
                 }
             }
         }
