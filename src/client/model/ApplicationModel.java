@@ -47,4 +47,8 @@ public class ApplicationModel {
     public UserProfileModel getUserProfileModel() {
         return userProfileModel;
     }
+
+    public Client getClient() {
+        return client;
+    }
 }

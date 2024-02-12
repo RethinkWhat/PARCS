@@ -37,8 +37,16 @@ public class Client {
             host = fileReader.nextLine();
 
             // attempt to connect to server
-            client = new Socket(host, port);
-            client.close();
+            try {
+                client = new Socket(host, port);
+                client.close();
+            } catch (ConnectException ex) {
+                System.out.println();
+                System.out.println("-----------------");
+                System.out.println("Server is closed.");
+                System.out.println("-----------------");
+                System.exit(0);
+            }
 
             // if no exception occurs in connecting to server
             socketAddress = new InetSocketAddress(host, port);
@@ -86,7 +94,11 @@ public class Client {
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
         } catch (IOException ex) {
-            ex.printStackTrace();
+            System.out.println();
+            System.out.println("-----------------");
+            System.out.println("Server is closed.");
+            System.out.println("-----------------");
+            System.exit(0);
         }
     }
 
@@ -109,6 +121,19 @@ public class Client {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    public void logout() {
+        openSocket();
+        try {
+            writeString("logout");
+            this.writeString(this.getUsername());
+            client.close();
+            startGUI();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        closeSocket();
     }
 
     public void closeSocket() {

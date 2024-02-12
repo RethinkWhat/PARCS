@@ -91,7 +91,7 @@ public class LoginRegisterController {
                     view.dispose();
                 //}
             } else {
-                view.displayLoginErrorMessage("Wrong credentials or the account does not exist. Try again.");
+                view.displayLoginErrorMessage(model.getErrorMessage());
             }
             // add else where option pane message is displayed if server is offline.
         }

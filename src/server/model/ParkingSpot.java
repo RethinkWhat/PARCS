@@ -13,6 +13,11 @@ public class ParkingSpot {
     /** A list to hold the different dates of reservations */
     private List<Reservations> reservationsList;
 
+    public ParkingSpot(){
+        this.identifier = null;
+        this.reservationsList = new ArrayList<>();
+    }
+
     public ParkingSpot(String identifier, List<Reservations> reservationsList) {
         this.identifier = identifier;
         this.reservationsList = reservationsList;

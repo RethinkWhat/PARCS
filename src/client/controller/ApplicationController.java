@@ -37,7 +37,7 @@ public class ApplicationController {
         // constants / variables
         view.getLblLocation().setText("Home");
         new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
-        new UserProfileController(view.getUserProfileView(), model.getUserProfileModel());
+        new UserProfileController(view.getUserProfileView(), model.getUserProfileModel(), this.view);
 
         // action listeners
         view.setNavHomeListener(e -> {
@@ -53,8 +53,8 @@ public class ApplicationController {
             view.getMainCardLayout().show(view.getPnlCards(), "account");
         });
         view.setNavLogoutListener(e -> {
-            // TODO: add functions here to save user actions and send to server.
             view.dispose();
+            model.getClient().logout();
         });
 
         // mouse listeners

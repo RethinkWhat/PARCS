@@ -6,7 +6,10 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /** Controller for server
  * Assigned to @Ramon Jasmin
@@ -17,12 +20,24 @@ public class ServerController {
 
     boolean serverStatus = false;
 
-    public ServerController(Server server, ServerStatusView serverStatusView){
-        this.server = server;
-        this.serverStatusView = serverStatusView;
+    final int address = 2020;
 
+
+    public ServerController(ServerStatusView serverStatusView){
+        try {
+            this.server = new Server(address);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+        Thread thread = new Thread(server);
+        thread.start();
+
+        this.serverStatusView = serverStatusView;
         serverStatusView.setServerListener(new serverListener());
     }
+
+
 
     class serverListener implements ActionListener{
 
@@ -31,18 +46,19 @@ public class ServerController {
             if (!serverStatus){
                 serverStatusView.setOnline();
                 serverStatus = true;
+                server.startAccepting();
+
             }else {
                 serverStatusView.setOffline();
                 serverStatus= false;
+                server.stopAccepting();
             }
 
         }
     }
 
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) {
         ServerStatusView view = new ServerStatusView();
-        Server server = new Server(new InetSocketAddress(2020));
-        ServerController controller = new ServerController(server, view);
-
+        ServerController controller = new ServerController(view);
     }
 }

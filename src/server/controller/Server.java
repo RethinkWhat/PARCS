@@ -15,15 +15,22 @@ import java.util.Map;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-public class Server{
+public class Server implements Runnable{
     private ServerSocket server;
 
     private UserParser userParser;
 
-    public Server(SocketAddress socketAddress) throws IOException {
-        server = new ServerSocket();
-        server.bind(socketAddress);
+    private int socketAddress;
+
+    private volatile boolean serverRunning;
+
+    // List of users logged in to the system
+    List<String> userLog;
+
+    public Server(int socketAddress)throws IOException {
+        this.socketAddress = socketAddress;
         userParser = new UserParser();
+        userLog = new ArrayList<>();
     }
 
     public boolean validateAccount(String username, String password) {
@@ -72,24 +79,65 @@ public class Server{
         }
     }
 
+    public boolean serverRunning() {
+        return serverRunning;
+    }
 
-    public static void main(String[] args) {
-        SocketAddress address = new InetSocketAddress(2020);
-        ExecutorService executor = Executors.newFixedThreadPool(10);
+    public void startServer() {
         try {
-            Server server = new Server(address);
-
-            while (true) {
-                Socket clientSocket = server.getServer().accept();
-
-                new Thread(new ClientHandler(server, clientSocket)).start();
-
-            }
+            server = new ServerSocket(socketAddress);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
+    public void setServerRunning(boolean serverRunning) {
+        this.serverRunning = serverRunning;
+    }
+
+    public void run() {
+        while (true) {
+            try {
+                boolean flag = this.serverRunning();
+                while (flag) {
+                        Socket clientSocket = server.accept();
+                        new Thread(new ClientHandler(this, clientSocket)).start();
+
+                }
+            } catch (IOException ignore) {
+            }
+        }
+    }
+
+    public void stopAccepting() {
+        try {
+            this.setServerRunning(false);
+            server.close();
+        } catch (IOException ex) {
+            ex.printStackTrace( );
+        }
+    }
+
+    public void startAccepting() {
+        try {
+            server = new ServerSocket(socketAddress);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        this.setServerRunning(true);
+    }
+
+    public List<String> getUserLog() {
+        return userLog;
+    }
+
+    public void accountLogin(String username) {
+        userLog.add(username);
+    }
+
+    public void accountLogout(String username) {
+        userLog.remove(username);
+    }
 }
 
 

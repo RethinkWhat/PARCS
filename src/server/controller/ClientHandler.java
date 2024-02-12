@@ -3,12 +3,15 @@ package server.controller;
 
 import client.model.Client;
 import server.model.Vehicle;
+import server.view.ServerStatusView;
 
 import java.io.*;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
 import java.net.SocketAddress;
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class ClientHandler implements Runnable {
@@ -24,6 +27,7 @@ public class ClientHandler implements Runnable {
 
     boolean disconnect = false;
     InetAddress address;
+
 
     public ClientHandler(Server server, Socket client) {
         this.client = client;
@@ -50,6 +54,10 @@ public class ClientHandler implements Runnable {
                     String page = reader.readLine();
                     if (page != null) {
                         switch (page) {
+                            case "logout":
+                                System.out.println("reached client handler");
+                                handleLogout();
+                                break;
                             case "login":
                                 login();
                                 System.out.println("page: " + page);
@@ -62,6 +70,7 @@ public class ClientHandler implements Runnable {
                             case "signUp" :
                                 System.out.println("Sign Up");
                                 signUp();
+                                break;
                             case "disconnect":
                                 handleDisconnect();
                                 break;
@@ -96,6 +105,18 @@ public class ClientHandler implements Runnable {
         System.out.println("---------------");
         closeResources();
         openResources();
+    }
+
+    public void handleLogout() {
+        try {
+            System.out.println("-----LOGOUT-----");
+            writer.println("MESSAGE SENT");
+            String username = reader.readLine();
+            server.accountLogout(username);
+            handleDisconnect();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     private void closeResources() {
@@ -138,14 +159,20 @@ public class ClientHandler implements Runnable {
         String password = reader.readLine();
         System.out.println("read password attempt: " + password);
 
-
         authenticateLogin = server.validateAccount(username, password);
 
-        if (authenticateLogin)
-            writer.println("true");
+        if (authenticateLogin) {
+            if (server.getUserLog().contains(username)) {
+                writer.println("userExists");
+            }else {
+                server.accountLogin(username);
+                writer.println("true");
+            }
+        }
         else
             writer.println("false");
     }
+
 
     public void signUp() {
         try {
