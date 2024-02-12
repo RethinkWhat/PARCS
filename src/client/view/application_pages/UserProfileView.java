@@ -25,10 +25,6 @@ public class UserProfileView extends JPanel {
      */
     GridBagConstraints gbc = new GridBagConstraints();
     /**
-     * The
-     */
-    private JLabel btnHome;
-    /**
      * The edit profile button.
      */
     private JButton btnNavEditProfile;
@@ -68,7 +64,6 @@ public class UserProfileView extends JPanel {
      * The panel for Edit cars.
      */
     private EditCars pnlEditCars;
-
     /**
      * The panel for History.
      */
@@ -365,6 +360,22 @@ public class UserProfileView extends JPanel {
         public String getContact() {
             return txtContact.getText();
         }
+
+        /**
+         * Retrieves the current JButton of btnCancel.
+         * @return The current btnCancel.
+         */
+        public JButton getBtnCancel() {
+            return btnCancel;
+        }
+
+        /**
+         * Retrieves the current JButton of btnContinue.
+         * @return The current btnContinue.
+         */
+        public JButton getBtnContinue() {
+            return btnContinue;
+        }
     }
 
     /**
@@ -486,11 +497,27 @@ public class UserProfileView extends JPanel {
      * This class represents a panel for changing account passwords.
      * It provides fields for entering current password, new password, and confirming the new password.
      */
-    class SecurityPage extends JPanel {
+    public class SecurityPage extends JPanel {
+        /**
+         * The password field where the current password is inputted.
+         */
         private JPasswordField txtCurrentPassword;
+        /**
+         * The password field where the new password is entered.
+         */
         private JPasswordField txtNewPassword;
+        /**
+         * The password field where the new password is confirmed.
+         */
         private JPasswordField txtConfirmNewPassword;
-        private JButton confirmButton;
+        /**
+         * The continue button.
+         */
+        private JButton btnConfirm;
+        /**
+         * The success or error message.
+         */
+        private JLabel lblMessage;
 
         /**
          * This constructs a new SecurityPage panel with fields for changing account passwords.
@@ -498,7 +525,7 @@ public class UserProfileView extends JPanel {
          */
         public SecurityPage() {
             //sets a layout and borders
-            this.setLayout(new GridLayout(8, 2));
+            this.setLayout(new GridLayout(9, 2));
             this.setBorder(new EmptyBorder(10, 20, 10, 60));
 
             //creates and adds labels for the password change section
@@ -519,6 +546,7 @@ public class UserProfileView extends JPanel {
             this.add(pnlCurrentPasswordField);
             txtCurrentPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtCurrentPassword.setPreferredSize(new Dimension(750,50));
+            txtCurrentPassword.setEchoChar((char)0);
             pnlCurrentPasswordField.add(txtCurrentPassword);
 
             //adds a label and text field for entering the new password
@@ -529,6 +557,7 @@ public class UserProfileView extends JPanel {
             this.add(pnlNewPasswordField);
             txtNewPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtNewPassword.setPreferredSize(new Dimension(750,50));
+            txtNewPassword.setEchoChar((char)0);
             pnlNewPasswordField.add(txtNewPassword);
 
             //adds a label and text field for confirming the new password
@@ -539,15 +568,59 @@ public class UserProfileView extends JPanel {
             this.add(pnlConfirmNewPasswordField);
             txtConfirmNewPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtConfirmNewPassword.setPreferredSize(new Dimension(750,50));
+            txtConfirmNewPassword.setEchoChar((char)0);
             pnlConfirmNewPasswordField.add(txtConfirmNewPassword);
 
             //adds a button for confirming the password change
             JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
             pnlButtons.setBorder(new EmptyBorder(10, 0, 7, 0));
-            confirmButton = res.createBtnRounded("Change Account Password", res.celadon, res.eerieBlack, 40);
-            confirmButton.setPreferredSize(new Dimension(250,35 ));
-            pnlButtons.add(confirmButton);
+            btnConfirm = res.createBtnRounded("Change Password", res.celadon, res.eerieBlack, 40);
+            btnConfirm.setPreferredSize(new Dimension(250,35 ));
+            pnlButtons.add(btnConfirm);
             this.add(pnlButtons);
+            
+            lblMessage = res.createLblP("", res.red); // empty message
+            this.add(lblMessage);
+        }
+
+        /**
+         * Retrieves the current JPasswordField of txtCurrentPassword in the security page.
+         * @return The current txtCurrentPassword.
+         */
+        public JPasswordField getTxtCurrentPassword() {
+            return txtCurrentPassword;
+        }
+
+        /**
+         * Retrieves the current JPasswordField of txtNewPassword in the security page.
+         * @return The current txtNewPassword.
+         */
+        public JPasswordField getTxtNewPassword() {
+            return txtNewPassword;
+        }
+
+        /**
+         * Retrieves the current txtConfirmNewPassword in the security page.
+         * @return The current txtConfirmPassword.
+         */
+        public JPasswordField getTxtConfirmNewPassword() {
+            return txtConfirmNewPassword;
+        }
+
+        /**
+         * Retrieves the current JButton of btnConfirm.
+         * @return The current btnConfirm.
+         */
+        public JButton getBtnConfirm() {
+            return btnConfirm;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblMessage.
+         * @return The current lblMessage.
+         */
+        public JLabel getLblMessage() {
+            return lblMessage;
         }
     }
 
@@ -670,6 +743,14 @@ public class UserProfileView extends JPanel {
      */
     public void setNavExitListener(ActionListener actionListener) {
         btnNavExit.addActionListener(actionListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnNavSecurity.
+     * @param actionListener The specified action listener.
+     */
+    public void setNavSecurityListener(ActionListener actionListener) {
+        btnNavSecurity.addActionListener(actionListener);
     }
 
     /**
