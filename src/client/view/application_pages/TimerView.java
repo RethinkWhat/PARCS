@@ -197,15 +197,16 @@ public class TimerView extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(76, 102, 99));
-
-        ImageIcon home = new ImageIcon("res/drawable/icons/exit-white-outline.png");
+        
+        ImageIcon home = new ImageIcon("res/drawable/icons/home-white-outline.png");
         Image scaledHome = home.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
         home = new ImageIcon(scaledHome);
         homeBtn.setBackground(new java.awt.Color(76, 102, 99));
         homeBtn.setIcon(home);
         homeBtn.setBorder(null);
 
-        ImageIcon ticket = new ImageIcon("res/drawable/icons/home-white-outline.png");
+
+        ImageIcon ticket = new ImageIcon("res/drawable/icons/ticket-white-outline.png");
         Image scaledTicket = ticket.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
         ticket = new ImageIcon(scaledTicket);
         ticketBtn.setBackground(new java.awt.Color(76, 102, 99));
@@ -213,7 +214,7 @@ public class TimerView extends javax.swing.JFrame {
         ticketBtn.setIcon(ticket); // Change Directory
         ticketBtn.setBorder(null);
 
-        ImageIcon user = new ImageIcon("res/drawable/icons/ticket-white-outline.png");
+        ImageIcon user = new ImageIcon("res/drawable/icons/user-white-outline.png");
         Image scaledUser = user.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
         user = new ImageIcon(scaledUser);
         userBtn.setBackground(new java.awt.Color(76, 102, 99));
@@ -221,13 +222,14 @@ public class TimerView extends javax.swing.JFrame {
         userBtn.setIcon(user);
         userBtn.setBorder(null);
 
-        ImageIcon exit = new ImageIcon("res/drawable/icons/user-white-outline.png");
+        ImageIcon exit= new ImageIcon("res/drawable/icons/exit-white-outline.png");
         Image scaledExit = exit.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
         exit = new ImageIcon(scaledExit);
         exitBtn.setBackground(new java.awt.Color(76, 102, 99));
         exitBtn.setSize(50,50);
         exitBtn.setIcon(exit); // Change Directory
         exitBtn.setBorder(null);
+
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -237,27 +239,27 @@ public class TimerView extends javax.swing.JFrame {
                                 .addContainerGap()
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                         .addGroup(jPanel3Layout.createSequentialGroup()
-                                                .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                                .addComponent(ticketBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                 .addGap(0, 0, Short.MAX_VALUE))
                                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                                 .addGap(0, 0, Short.MAX_VALUE)
                                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                                        .addComponent(exitBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                         .addComponent(homeBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(ticketBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                                        .addComponent(exitBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                                        .addComponent(userBtn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
                                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
                 jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                                 .addContainerGap()
+                                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(ticketBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(userBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(homeBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(exitBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addContainerGap())
         );
         endTimerBtn.setBackground(new java.awt.Color(230, 92, 92));
