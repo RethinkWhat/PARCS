@@ -105,7 +105,7 @@ public class ReservationParser {
         return parkingSpotList;
     }
 
-    public ParkingSpot getParkingSlotInformation(String identifier){
+    public ParkingSpot getParkingSlotInformationByIdentifier(String identifier){
         ParkingSpot parkingSpot = new ParkingSpot();
         parkingSpot.setIdentifier(identifier);
 
@@ -166,8 +166,8 @@ public class ReservationParser {
             System.out.println(parkingSpotList.get(x));
         }
 
-        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformation("C1").getReservationsList().toString());
-        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformation("C2").getReservationsList().toString());
+        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
+        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
     }
 
 
