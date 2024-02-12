@@ -1,21 +1,16 @@
 package client.view.application_pages;
 
-import client.model.application_pages.UserProfileModel;
-import com.sun.source.tree.EmptyStatementTree;
 import utilities.Resources;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Flow;
 
 /**
  * The UserProfileView is where the user views pertinent information regarding their account
  * and transaction in the client application.
  */
 public class UserProfileView extends JPanel {
-
     /**
      * The stylesheet
      */
@@ -621,6 +616,38 @@ public class UserProfileView extends JPanel {
          */
         public JLabel getLblMessage() {
             return lblMessage;
+        }
+
+        /**
+         * Retrieves the current value of txtCurrentPassword.
+         * @return The current value of current password.
+         */
+        public String getCurrentPassword() {
+            return String.valueOf(txtCurrentPassword.getPassword());
+        }
+
+        /**
+         * Retrieves the current value of txtNewPassword.
+         * @return The current new password.
+         */
+        public String getNewPassword() {
+            return String.valueOf(txtNewPassword.getPassword());
+        }
+
+        /**
+         * Retrieves the current value of txtConfirmNewPassword.
+         * @return The current confirm new password input.
+         */
+        public String getConfirmNewPassword() {
+            return String.valueOf(txtConfirmNewPassword.getPassword());
+        }
+
+        /**
+         * Sets a specified action listener for btnConfirm.
+         * @param actionListener The specified action listener.
+         */
+        public void setConfirmListener(ActionListener actionListener) {
+            btnConfirm.addActionListener(actionListener);
         }
     }
 

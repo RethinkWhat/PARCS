@@ -9,6 +9,7 @@ import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
 import javax.swing.*;
+import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -85,6 +86,7 @@ public class UserProfileController {
 
         // security page
         // TODO: action listeners for security page
+        view.getPnlSecurityPage().setConfirmListener(new ConfirmListener());
 
         // mouse listeners
 
@@ -109,7 +111,8 @@ public class UserProfileController {
         // TODO: mouse listeners for history page
 
         // security page
-        // TODO: mouse listeners for security page
+        view.getPnlSecurityPage().getBtnConfirm().addMouseListener(
+                new Resources.CursorChanger(view.getPnlSecurityPage().getBtnConfirm()));
 
         // focus listeners
 
@@ -125,7 +128,21 @@ public class UserProfileController {
 
         // edit cars page
 
-        // mouse listeners
+        // security page
+        view.getPnlSecurityPage().getTxtCurrentPassword().
+                addFocusListener(new Resources.PasswordFocus(
+                        view.getPnlSecurityPage().getTxtCurrentPassword(), "Current Password"
+                ));
+        view.getPnlSecurityPage().getTxtNewPassword().
+                addFocusListener(new Resources.PasswordFocus(
+                        view.getPnlSecurityPage().getTxtNewPassword(), "New Password"
+                ));
+        view.getPnlSecurityPage().getTxtConfirmNewPassword().
+                addFocusListener(new Resources.PasswordFocus(
+                        view.getPnlSecurityPage().getTxtConfirmNewPassword(), "Confirm New Password"
+                ));
+
+        // history page
 
         view.revalidate();
         view.repaint();
@@ -187,6 +204,35 @@ public class UserProfileController {
             );
             populateFields(); // updates the information
             //TODO: Display message indicating edit was successful
+        }
+    }
+
+    /**
+     * Updates the user's password.
+     */
+    class ConfirmListener implements ActionListener {
+        /**
+         * 1. Verifies if the input equates to the original password.
+         * 2. Verifies if the new password and the confirmed new password matches.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (!LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getCurrentPassword()).equals(model.getPassword())) {
+                view.getPnlSecurityPage().getLblMessage().setText("Current password does not match. Try again.");
+                view.getPnlSecurityPage().getLblMessage().setForeground(Color.RED);
+            } else {
+                if (!LoginRegisterModel.verifySignupPassword(
+                        view.getPnlSecurityPage().getNewPassword(), view.getPnlSecurityPage().getConfirmNewPassword())) {
+                    view.getPnlSecurityPage().getLblMessage().setText("New passwords do not match. Try again.");
+                    view.getPnlSecurityPage().getLblMessage().setForeground(Color.RED);
+                } else {
+                    model.editPassword(LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
+                    view.getPnlSecurityPage().getLblMessage().setText("Your password has been successful changed.");
+                    view.getPnlSecurityPage().getLblMessage().setForeground(Color.green);
+                }
+            }
         }
     }
 }
