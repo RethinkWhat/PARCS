@@ -124,6 +124,8 @@ public class ServerStatusView extends JFrame {
 
 
     class MainTopPanel extends JPanel{
+
+        ButtonPanel pnlTotalBookings;
         public MainTopPanel(){
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
@@ -182,7 +184,7 @@ public class ServerStatusView extends JFrame {
             );
             pnlButtons.add(pnlAvailMotor);
 
-            ButtonPanel pnlTotalBookings = new ButtonPanel(
+            pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket,50,50),
                     res.createLblH1("3",res.eerieBlack),
                     res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
@@ -191,7 +193,15 @@ public class ServerStatusView extends JFrame {
 
             this.setPreferredSize(new Dimension(1300,150));
         }
+
+        public void setPnlTotalBookings(String totalBookings) {
+            pnlTotalBookings = new ButtonPanel(
+                btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket,50,50),
+                res.createLblH1(totalBookings,res.eerieBlack),
+                res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack));
+        }
     }
+
 
 
     class MainBottomPanel extends JPanel{
@@ -269,7 +279,7 @@ public class ServerStatusView extends JFrame {
         serverSwitch.setForeground(res.red);
     }
 
-    public void setOffline(){
+    public void setOffline() {
         serverStatus.setText("OFFLINE");
         serverStatus.setForeground(res.red);
 

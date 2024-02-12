@@ -156,6 +156,21 @@ public class ReservationParser {
         return parkingSpot;
     }
 
+    public int countBookings() {
+        ReservationParser parser = new ReservationParser();
+        List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+        int size = 0;
+        for (int x = 0 ; x < parkingSpotList.size(); x++) {
+            for (int y = 0; y < parkingSpotList.get(x).getReservationsList().size(); y++) {
+                HashMap<TimeRange, String> map = parkingSpotList.get(x).getReservationsList().get(y).getTimeAndUserMap();
+                for (int z = 0; z < map.size(); z++) {
+                    size++;
+                }
+            }
+        }
+        return size;
+    }
+
     public Map<String, Reservations> getUserReservations(String userName){
         /**
          * Key: Parking Slot identifier
@@ -176,8 +191,11 @@ public class ReservationParser {
             System.out.println(parkingSpotList.get(x));
         }
 
-        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
-        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
+
+
+
+      //  System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
+      //  System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
     }
 
 
