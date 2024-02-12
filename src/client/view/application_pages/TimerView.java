@@ -197,7 +197,7 @@ public class TimerView extends javax.swing.JFrame {
         );
 
         jPanel3.setBackground(new java.awt.Color(76, 102, 99));
-        
+
         ImageIcon home = new ImageIcon("res/drawable/icons/home-white-outline.png");
         Image scaledHome = home.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
         home = new ImageIcon(scaledHome);
@@ -438,7 +438,7 @@ public class TimerView extends javax.swing.JFrame {
     }
 
     private void endTimerBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        // TODO add your handling code here:\
+        new TicketCancelDialog(null,false);
 
     }
 
@@ -449,10 +449,12 @@ public class TimerView extends javax.swing.JFrame {
     }
 
     private void userBtnActionPerformed(java.awt.event.MouseEvent evt){
+        // connect to User Page
         dispose();
     }
 
     private void homeBtnActionPerformed(java.awt.event.MouseEvent evt){
+        // connect to Home Page
         dispose();
     }
 
