@@ -197,6 +197,7 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    // TODO: add method to update the password
     public void editInfo() {
         try {
             System.out.println("---EDIT INFO METHOD---");
