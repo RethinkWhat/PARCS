@@ -157,11 +157,46 @@ public class ReservationParser {
     }
 
     public Map<String, Reservations> getUserReservations(String userName){
+        getReservationsFile();
+
         /**
          * Key: Parking Slot identifier
          * Value: Reservations
          */
         Map<String, Reservations> userReservations = new HashMap<>();
+
+        NodeList nodeList = document.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < nodeList.getLength(); i++){
+            Element currParkingSpotNode = (Element) nodeList.item(i);
+
+            NodeList reservationList = currParkingSpotNode.getChildNodes();
+
+            for (int j = 0; j < reservationList.getLength(); j++){
+                Element currReservationNode = (Element) reservationList.item(j);
+
+                NodeList reservationDetails = currReservationNode.getChildNodes();
+
+                String currUsername = reservationDetails.item(2).getTextContent();
+
+                if (userName.equalsIgnoreCase(currUsername)){
+
+                    TimeRange currTimeRange = new TimeRange(reservationDetails.item(0).getTextContent(), reservationDetails.item(1).getTextContent());
+                    String date = currReservationNode.getAttribute("day");
+
+                    Reservations reservations = new Reservations();
+
+                    reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
+                    reservations.setDate(date);
+
+                    String parkingSpotIdentifier = currReservationNode.getAttribute("identifier");
+
+                    userReservations.put(parkingSpotIdentifier, reservations);
+                }else {
+                    continue;
+                }
+            }
+        }
 
         return userReservations;
     }
@@ -178,6 +213,8 @@ public class ReservationParser {
 
         System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
         System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
+
+        System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
     }
 
 
