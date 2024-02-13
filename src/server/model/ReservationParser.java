@@ -198,6 +198,7 @@ public class ReservationParser {
                         //Getting the username in a certain reservation
                         String currUsername = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
 
+                        //Checks if the passed username is equals to the current reservation's username
                         if (userName.equalsIgnoreCase(currUsername)) {
                             String day = currReservationElement.getAttribute("day");
                             String startTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
