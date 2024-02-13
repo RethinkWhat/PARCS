@@ -220,7 +220,43 @@ public class ReservationParser {
         return userReservations;
     }
 
+    public List<TimeRange> getParkingSpotAvailability(String date, String identifier){
+        getReservationsFile();
 
+        //This will have a list of time ranges that is booked in a certain date and a certain parking spot identifier
+        List<TimeRange> bookedTimeRange = new ArrayList<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(0);
+
+            if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
+
+                NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+                for (int j = 0; j < reservationNodes.getLength(); j++){
+                    Element currReservationNode = (Element) reservationNodes.item(j);
+
+                    if (currReservationNode.getAttribute("day").equalsIgnoreCase(date)){
+
+                        TimeRange currTimeRange =
+                    }
+                }
+
+            } else {
+                continue;
+            }
+
+
+        }
+
+
+        return bookedTimeRange;
+    }
 
 
     public static void main(String[] args) {
