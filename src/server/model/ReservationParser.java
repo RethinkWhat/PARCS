@@ -226,6 +226,12 @@ public class ReservationParser {
         return userReservations;
     }
 
+    /**
+     * Returns a list of time range based on the passed date and parking spot
+     * @param date
+     * @param identifier
+     * @return
+     */
     public List<TimeRange> getParkingSpotAvailability(String date, String identifier){
         getReservationsFile();
 
@@ -260,10 +266,7 @@ public class ReservationParser {
                 }
 
             }
-
-
         }
-
         return bookedTimeRange;
     }
 
