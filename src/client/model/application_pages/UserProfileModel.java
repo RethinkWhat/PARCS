@@ -102,7 +102,11 @@ public class UserProfileModel {
     public boolean editPassword(String password) {
         client.openSocket();
         client.writeString("editPassword");
-        // TODO: add code here
+
+        client.writeString(client.getUsername());
+        client.writeString(password);
+
+        client.closeSocket();
         return true;
     }
 
