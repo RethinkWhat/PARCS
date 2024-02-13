@@ -96,6 +96,11 @@ public class ClientHandler implements Runnable {
                             case "spotInfo":
                                 System.out.println("Spot info");
                                 spotInfo();
+                                break;
+                            case "book":
+                                System.out.println("book");
+                                bookReservation();
+                                break;
                         }
                     }
                 }
@@ -296,6 +301,21 @@ public class ClientHandler implements Runnable {
         } catch (IOException ex) {
             ex.printStackTrace();
 
+        }
+    }
+
+    public void bookReservation() {
+        System.out.println("Book reservation");
+        try {
+            String identifier = reader.readLine();
+            String date = reader.readLine();
+            String startTime = reader.readLine();
+            String duration = reader.readLine();
+            String username = reader.readLine();
+
+            boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
 
     }
