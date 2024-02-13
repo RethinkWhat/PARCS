@@ -30,10 +30,15 @@ public class ServerStatusView extends JFrame {
     private JLabel serverPrompt;
     private JLabel serverStatus;
 
+    JPanel pnlButtons;
+
     private GridBagConstraints gbc;
 
 
     Resources res = new Resources();
+
+    MainTopPanel pnlMainTop;
+    MainBottomPanel pnlMainBottom;
 
 
     public ServerStatusView(){
@@ -57,11 +62,11 @@ public class ServerStatusView extends JFrame {
         contentArea.add(pnlMain, BorderLayout.CENTER);
 
 
-        MainTopPanel pnlMainTop = new MainTopPanel();
+        pnlMainTop = new MainTopPanel();
         pnlMain.add(pnlMainTop, BorderLayout.NORTH);
 
 
-        MainBottomPanel pnlMainBottom = new MainBottomPanel();
+        pnlMainBottom = new MainBottomPanel();
         pnlMain.add(pnlMainBottom, BorderLayout.SOUTH);
 
 
@@ -73,7 +78,6 @@ public class ServerStatusView extends JFrame {
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
-
 
 
 
@@ -110,20 +114,20 @@ public class ServerStatusView extends JFrame {
             btnNavTicket.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavTicket);
 
-            btnNavAccount = res.createBtnIconOnly(res.iconAccount,30,30);
-            btnNavAccount.setHorizontalAlignment(SwingConstants.LEFT);
-            add(btnNavAccount);
-
             btnNavLogout = res.createBtnIconOnly(res.iconLogout,30,30);
             btnNavLogout.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavLogout);
+
+           // btnNavLogout.setActionLister(e -> System.exit(0));
 
             this.setPreferredSize(new Dimension(60,800));
         }
     }
 
 
-    class MainTopPanel extends JPanel{
+    public class MainTopPanel extends JPanel{
+
+        ButtonPanel pnlTotalBookings;
         public MainTopPanel(){
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
@@ -162,7 +166,7 @@ public class ServerStatusView extends JFrame {
             GridLayout gridLayout = new GridLayout(0,3);
             gridLayout.setHgap(10);
 
-            JPanel pnlButtons = new JPanel(gridLayout);
+            pnlButtons = new JPanel(gridLayout);
             pnlButtons.setPreferredSize(new Dimension(1300,100));
             pnlButtons.setBorder(new EmptyBorder(10,0,10,0));
             pnlButtons.setBackground(res.lightGray);
@@ -182,16 +186,21 @@ public class ServerStatusView extends JFrame {
             );
             pnlButtons.add(pnlAvailMotor);
 
-            ButtonPanel pnlTotalBookings = new ButtonPanel(
+            pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket,50,50),
                     res.createLblH1("3",res.eerieBlack),
-                    res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
+                    res.createLblP("<html>Total<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
         }
+
+        public void setPnlTotalBookings(String totalBookings) {
+            pnlTotalBookings.setText(totalBookings);
+        }
     }
+
 
 
     class MainBottomPanel extends JPanel{
@@ -227,6 +236,7 @@ public class ServerStatusView extends JFrame {
     class ButtonPanel extends JPanel{
 
         private JPanel container;
+        private JLabel number;
 
         public ButtonPanel(JButton button, JLabel number, JLabel title){
             setBackground(res.white);
@@ -236,12 +246,25 @@ public class ServerStatusView extends JFrame {
             container.setLayout(new GridLayout(0,3));
             add(container, BorderLayout.NORTH);
 
+            this.number = number;
             container.add(button);
-            container.add(number);
+            container.add(this.number);
             container.add(title);
 
             this.setPreferredSize(new Dimension(100,100));
         }
+
+        public void setText(String number) {
+            this.number.setText(number);
+        }
+    }
+
+    public MainTopPanel getPnlMainTop() {
+        return pnlMainTop;
+    }
+
+    public MainBottomPanel getPnlMainBottom() {
+        return pnlMainBottom;
     }
 
     public JButton getServerSwitch() {
@@ -269,17 +292,13 @@ public class ServerStatusView extends JFrame {
         serverSwitch.setForeground(res.red);
     }
 
-    public void setOffline(){
+    public void setOffline() {
         serverStatus.setText("OFFLINE");
         serverStatus.setForeground(res.red);
 
         serverSwitch.setText("Start Server");
         serverSwitch.setBackground(res.white);
         serverSwitch.setForeground(res.celadon);
-    }
-
-    public static void main(String[] args) {
-        new ServerStatusView();
     }
 
 }

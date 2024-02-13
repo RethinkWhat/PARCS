@@ -1,5 +1,6 @@
 package server.controller;
 
+import server.model.ServerStatusModel;
 import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
@@ -15,26 +16,35 @@ import java.util.concurrent.Executors;
  * Assigned to @Ramon Jasmin
  * */
 public class ServerController {
-    Server server;
-    ServerStatusView serverStatusView;
+
+    /** The View associated with the ServerStatusController */
+    ServerStatusView view;
+
+    /** The model of the ServerStatusController */
+    ServerStatusModel model;
 
     boolean serverStatus = false;
 
-    final int address = 2020;
+
+    /** The server object */
+    Server server;
 
 
-    public ServerController(ServerStatusView serverStatusView){
-        try {
-            this.server = new Server(address);
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+    public ServerController(ServerStatusView view, ServerStatusModel model){
+            this.model = model;
+            this.server = model.getServer();
+            this.view = view;
 
         Thread thread = new Thread(server);
         thread.start();
 
-        this.serverStatusView = serverStatusView;
-        serverStatusView.setServerListener(new serverListener());
+
+        /** Populate elements*/
+
+        this.view.getPnlMainTop().setPnlTotalBookings(String.valueOf(server.getNumberOfBookings()));
+
+        /** Class listeners */
+        view.setServerListener(new serverListener());
     }
 
 
@@ -44,12 +54,12 @@ public class ServerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!serverStatus){
-                serverStatusView.setOnline();
+                view.setOnline();
                 serverStatus = true;
                 server.startAccepting();
 
             }else {
-                serverStatusView.setOffline();
+                view.setOffline();
                 serverStatus= false;
                 server.stopAccepting();
             }
@@ -59,6 +69,7 @@ public class ServerController {
 
     public static void main(String[] args) {
         ServerStatusView view = new ServerStatusView();
-        ServerController controller = new ServerController(view);
+        ServerStatusModel model = new ServerStatusModel();
+        ServerController controller = new ServerController(view, model);
     }
 }

@@ -31,8 +31,8 @@ public class DateTime {
 
     public String getDateTime() {
         Date currentTime = Calendar.getInstance().getTime();
-        return dateFormat.format(currentTime) + ", " +
-                timeFormat.format(currentTime);
+        return dateFormat.format(currentTime);// + ", " //+
+                //timeFormat.format(currentTime);
     }
 
     public String createDateTime(int year, int month, int day, int hour, int minute, int second) {
