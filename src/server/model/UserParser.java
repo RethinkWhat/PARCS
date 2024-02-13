@@ -299,7 +299,33 @@ public class UserParser {
     }
 
     public Map<String, List<String>> getUserVehicles(String username){
+        getUserAccountsFile();
+
         Map<String, List<String>> userVehicles = new HashMap<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList userNodes = root.getElementsByTagName("user");
+
+        for (int i = 0; i < userNodes.getLength(); i++){
+            Element currUserElement = (Element) userNodes.item(i);
+
+            if (currUserElement.getAttribute("username").equalsIgnoreCase(username)){
+
+                NodeList vehicleNodes = currUserElement.getElementsByTagName("vehicle");
+
+                for (int j = 0; j < vehicleNodes.getLength(); j++){
+
+                    Element currVehicle = (Element) vehicleNodes.item(j);
+
+                    String vehicleInformation = currVehicle.getTextContent();
+
+
+
+                }
+
+            }
+        }
 
 
         return userVehicles;
