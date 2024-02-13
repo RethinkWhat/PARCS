@@ -84,6 +84,11 @@ public class ClientHandler implements Runnable {
                                 editInfo();
                                 System.out.println("edit finished");
                                 break;
+                            case "editPassword":
+                                System.out.println("Editing password");
+                                editPassword();
+                                System.out.println("Editing password");
+                                break;
                             case "addVehicle":
                                 System.out.println("Add Vehicle");
                                 addVehicle();
@@ -216,7 +221,15 @@ public class ClientHandler implements Runnable {
     }
 
     public void editPassword(){
+        System.out.println("-----------EDIT PASSWORD-----------");
+        try {
+            String username = reader.readLine();
+            String newPassword = reader.readLine();
 
+            writer.println(server.editInfo(username, "password", newPassword));
+        }catch (IOException iox){
+            iox.printStackTrace();
+        }
     }
 
 

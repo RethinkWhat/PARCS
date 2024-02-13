@@ -231,6 +231,7 @@ public class UserProfileController {
                     model.editPassword(LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
                     view.getPnlSecurityPage().getLblMessage().setText("Your password has been successful changed.");
                     view.getPnlSecurityPage().getLblMessage().setForeground(Color.green);
+                    model.editPassword(view.getPnlSecurityPage().getNewPassword());
                 }
             }
         }
