@@ -7,6 +7,7 @@ import utilities.Resources;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 public class AdminApplicationView extends JFrame {
     /**
@@ -41,8 +42,13 @@ public class AdminApplicationView extends JFrame {
      * The stylesheet.
      */
     private Resources res = new Resources();
-
+    /**
+     * TODO: Documentation
+     */
     private ServerStatusView serverStatusView;
+    /**
+     * TODO: Documentation
+     */
     private DashboardView dashboardView;
 
     /**
@@ -113,19 +119,59 @@ public class AdminApplicationView extends JFrame {
         public NavbarPanel() {
             setBackground(res.feldgrau);
 
-            btnNavStatus = res.createBtnIconOnly(res.iconHome,30,30);
+            btnNavStatus = res.createBtnIconOnly(res.iconSwitch,30,30);
             btnNavStatus.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavStatus);
 
-            btnNavDashboard = res.createBtnIconOnly(res.iconTicket, 30,30);
+            btnNavDashboard = res.createBtnIconOnly(res.iconHistory, 30,30);
             btnNavDashboard.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavDashboard);
 
-            btnNavLogout = res.createBtnIconOnly(res.iconLogout,30,30);
-            btnNavLogout.setHorizontalAlignment(SwingConstants.LEFT);
-            add(btnNavLogout);
-
             this.setPreferredSize(new Dimension(60, 800));
         }
+    }
+
+    public JPanel getPnlCards() {
+        return pnlCards;
+    }
+
+    public JButton getBtnNavMenu() {
+        return btnNavMenu;
+    }
+
+    public JButton getBtnNavStatus() {
+        return btnNavStatus;
+    }
+
+    public JButton getBtnNavDashboard() {
+        return btnNavDashboard;
+    }
+
+    public JButton getBtnNavLogout() {
+        return btnNavLogout;
+    }
+
+    public JLabel getLblLocation() {
+        return lblLocation;
+    }
+
+    public CardLayout getMainCardLayout() {
+        return mainCardLayout;
+    }
+
+    public ServerStatusView getServerStatusView() {
+        return serverStatusView;
+    }
+
+    public DashboardView getDashboardView() {
+        return dashboardView;
+    }
+
+    public void setNavStatusListener(ActionListener actionListener) {
+        btnNavStatus.addActionListener(actionListener);
+    }
+
+    public void setNavDashboardListener(ActionListener actionListener) {
+        btnNavDashboard.addActionListener(actionListener);
     }
 }
