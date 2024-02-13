@@ -275,6 +275,14 @@ public class ReservationParser {
         return bookedTimeRange;
     }
 
+
+    private Node createReservationNode(String identifier, String date, String startTime, String duration, String username){
+        Element reservationElement = document.createElement("reservation");
+        reservationElement.setAttribute("day", date);
+
+        return reservationElement;
+    }
+
     public List<String> availableTime(String date, String identifier) {
         populateTime();
         ArrayList<String> toReturn = timeArray;
