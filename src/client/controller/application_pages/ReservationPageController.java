@@ -1,9 +1,12 @@
 package client.controller.application_pages;
 
+import client.model.application_pages.CarMotorButton;
 import client.model.application_pages.ReservationPageModel;
 import client.view.application_pages.ReservationPageView;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The ReservationPageController processes the user requests for reserving a parking slot.
@@ -24,6 +27,10 @@ public class ReservationPageController {
      */
     private Timer timer;
 
+    private String btnID;
+
+    private String[] timeAvailable;
+
     /**
      * Constructs a ReservationPageController with a specified view and model.
      * @param view The specified view.
@@ -41,6 +48,10 @@ public class ReservationPageController {
         timer = new Timer(1000,e -> updateTime());
         timer.start();
 
+        view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
+        view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
+
+
         // action listeners
 
 
@@ -57,6 +68,29 @@ public class ReservationPageController {
             String time = model.getTime();
             view.getLblDate().setText(time);
         });
+    }
+
+    class CarMotorListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.getTopCardLayout().show(view.getPnlCards(), "buttons");
+
+            CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
+            btnID = buttonClicked.getIdentifier();
+            //TODO: Fix date implementation
+            timeAvailable = model.getAvailableTime(btnID, "02/14/24");
+
+            view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
+            view.getParkingSlotButtonsView().setTimeList(timeAvailable);
+        }
+    }
+
+    class exitListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.getTopCardLayout().show(view.getPnlCards(), "dashboard");
+        }
     }
 }
 

@@ -57,7 +57,6 @@ public class ServerController {
                 view.setOnline();
                 serverStatus = true;
                 server.startAccepting();
-
             }else {
                 view.setOffline();
                 serverStatus= false;

@@ -2,16 +2,16 @@ package server.controller;
 
 
 import client.model.Client;
+import server.model.TimeRange;
 import server.model.Vehicle;
 import server.view.ServerStatusView;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class ClientHandler implements Runnable {
@@ -93,11 +93,14 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Add Vehicle");
                                 addVehicle();
                                 break;
+                            case "spotInfo":
+                                System.out.println("Spot info");
+                                spotInfo();
                         }
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+               // e.printStackTrace();
             }
         }
     }
@@ -239,6 +242,12 @@ public class ClientHandler implements Runnable {
             String username = reader.readLine();
             System.out.println("Printing: " + username);
             writer.println(server.getUserFullName(username));
+
+          //  HashMap<String, List<String>> vehicles = null;
+           // ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+           // outputStreamWriter.writeObject(vehicles);
+
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -272,4 +281,23 @@ public class ClientHandler implements Runnable {
             ex.printStackTrace();
         }
     }
+
+
+    public void spotInfo() {
+        System.out.println("----- SPOT INFO -----");
+        try {
+            String identifier = reader.readLine();
+            String date = reader.readLine();
+            List<String> availableTime = server.getParkingAvailability(identifier, date);
+            System.out.println("AVAILABLE TIME: " + availableTime);
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+            outputStreamWriter.writeObject(availableTime);
+            System.out.println("reached");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        }
+
+    }
+
 }

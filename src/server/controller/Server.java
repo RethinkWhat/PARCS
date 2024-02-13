@@ -1,9 +1,7 @@
 package server.controller;
 
 
-import server.model.ReservationParser;
-import server.model.UserParser;
-import server.model.Vehicle;
+import server.model.*;
 
 import java.io.IOException;
 import java.net.InetSocketAddress;
@@ -11,6 +9,7 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketAddress;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -81,6 +80,15 @@ public class Server implements Runnable{
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public List<String> getParkingAvailability(String identifier, String date) {
+        return reservationParser.availableTime(identifier,date);
+    }
+
+    public HashMap<String, List<String>> getUserVehicles(String username) {
+        //TODO:
+        return null;
     }
 
     public boolean serverRunning() {
