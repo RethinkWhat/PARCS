@@ -87,7 +87,14 @@ public class Resources {
      * The icon for closing a certain panel.
      */
     public ImageIcon iconClose = new ImageIcon("res/drawable/icons/close-black-solid.png");
+    /**
+     * The icon for history in the admin page.
+     */
     public ImageIcon iconHistory = new ImageIcon("res/drawable/icons/history-white-outline.png");
+    /**
+     * The icon for switch in the admin page.
+     */
+    public ImageIcon iconSwitch = new ImageIcon("res/drawable/icons/switch-white-outline.png");
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h1).

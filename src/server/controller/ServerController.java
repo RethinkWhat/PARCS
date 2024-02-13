@@ -1,5 +1,6 @@
 package server.controller;
 
+import server.view.AdminApplicationView;
 import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
@@ -15,15 +16,12 @@ import java.util.concurrent.Executors;
  * Assigned to @Ramon Jasmin
  * */
 public class ServerController {
-    Server server;
-    ServerStatusView serverStatusView;
-
+    private Server server;
+    private AdminApplicationView view;
     boolean serverStatus = false;
-
     final int address = 2020;
 
-
-    public ServerController(ServerStatusView serverStatusView){
+    public ServerController(AdminApplicationView view){
         try {
             this.server = new Server(address);
         } catch (IOException ex) {
@@ -33,10 +31,25 @@ public class ServerController {
         Thread thread = new Thread(server);
         thread.start();
 
-        this.serverStatusView = serverStatusView;
-        serverStatusView.setServerListener(new serverListener());
-    }
+        this.view = view;
 
+        // action listeners
+
+        // server status page
+        view.getServerStatusView().setServerListener(new serverListener());
+        view.setNavStatusListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "status"));
+        view.setNavDashboardListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "dashboard"));
+
+        // dashboard page
+
+        // mouse listeners
+
+        // server status page
+
+        // dashboard page
+
+        // focus listeners
+    }
 
 
     class serverListener implements ActionListener{
@@ -44,12 +57,12 @@ public class ServerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!serverStatus){
-                serverStatusView.setOnline();
+                view.getServerStatusView().setOnline();
                 serverStatus = true;
                 server.startAccepting();
 
             }else {
-                serverStatusView.setOffline();
+                view.getServerStatusView().setOffline();
                 serverStatus= false;
                 server.stopAccepting();
             }
@@ -58,7 +71,6 @@ public class ServerController {
     }
 
     public static void main(String[] args) {
-        ServerStatusView view = new ServerStatusView();
-        ServerController controller = new ServerController(view);
+        ServerController controller = new ServerController(new AdminApplicationView());
     }
 }
