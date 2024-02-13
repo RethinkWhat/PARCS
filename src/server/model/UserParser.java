@@ -345,5 +345,6 @@ public class UserParser {
            //     null);
         //obj.addVehicle("ri", new Vehicle("Car", "Civic", "A4949329"));
 
+        System.out.println(obj.getUserVehicles("rickardo").toString());
     }
 }
