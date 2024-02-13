@@ -298,6 +298,11 @@ public class UserParser {
         transform();
     }
 
+    /**
+     * Gets all the vehicle of a certain user returing a map with plate number as the key and vehicle/model as the value
+     * @param username
+     * @return
+     */
     public Map<String, List<String>> getUserVehicles(String username){
         getUserAccountsFile();
 
@@ -310,6 +315,7 @@ public class UserParser {
         for (int i = 0; i < userNodes.getLength(); i++){
             Element currUserElement = (Element) userNodes.item(i);
 
+            //Checks if the username of a user node is equals to the passed username
             if (currUserElement.getAttribute("username").equalsIgnoreCase(username)){
 
                 NodeList vehicleNodes = currUserElement.getElementsByTagName("vehicle");
@@ -318,6 +324,7 @@ public class UserParser {
 
                     Element currVehicle = (Element) vehicleNodes.item(j);
 
+                    //Splits the vehicle element value into 3
                     String[] vehicleInformation = currVehicle.getTextContent().split(",");
 
                     String vehicle = vehicleInformation[0];
