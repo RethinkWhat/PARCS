@@ -232,7 +232,7 @@ public class ReservationParser {
 
         for (int i = 0; i < parkingSpotNodes.getLength(); i++){
 
-            Element currParkingSpotElement = (Element) parkingSpotNodes.item(0);
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
 
             if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
 
@@ -273,6 +273,6 @@ public class ReservationParser {
 
         System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
 
-        System.out.println("BOOKED C1 TimeSlots: " + parser.getParkingSpotAvailability("03/07/03", "C1"));
+        System.out.println("BOOKED C1 TimeSlots for 03/07/03: " + parser.getParkingSpotAvailability("03/07/03", "C1"));
     }
 }
