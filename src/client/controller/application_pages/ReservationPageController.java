@@ -29,6 +29,8 @@ public class ReservationPageController {
 
     private String btnID;
 
+    private String date ="02/14/24";
+
     private String[] timeAvailable;
 
     /**
@@ -80,7 +82,7 @@ public class ReservationPageController {
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
             //TODO: Fix date implementation
-            timeAvailable = model.getAvailableTime(btnID, "02/14/24");
+            timeAvailable = model.getAvailableTime(btnID, date);
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
             view.getParkingSlotButtonsView().setTimeList(timeAvailable);
@@ -97,8 +99,11 @@ public class ReservationPageController {
     class reserveSlotListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("clicked");
-
+            String startTime = view.getParkingSlotButtonsView().getStartTime();
+            String duration = view.getParkingSlotButtonsView().getDuration();
+            if (startTime != null && duration != null) {
+                model.attemptBooking(btnID, date, startTime, duration);
+            }
         }
     }
 }

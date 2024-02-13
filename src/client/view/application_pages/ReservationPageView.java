@@ -573,13 +573,19 @@ public class ReservationPageView extends JPanel {
 
         public void setTimeList(String[] timeList) {
             cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(timeList));
+        }
 
+        public String getStartTime() {
+            return cmbTime.getItemAt(cmbTime.getSelectedIndex());
         }
 
         public void setDurationList(String[] durationList) {
         cmbDuration = new JComboBox<>(durationList);
         }
 
+        public String getDuration() {
+            return cmbDuration.getItemAt(cmbDuration.getSelectedIndex());
+        }
 
     }
 

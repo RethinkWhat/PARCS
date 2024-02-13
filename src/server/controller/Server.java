@@ -91,6 +91,12 @@ public class Server implements Runnable{
         return null;
     }
 
+    public boolean makeReservation(String identifier, String date, String startTime, String duration, String username) {
+        //TODO:
+        return false;
+
+    }
+
     public boolean serverRunning() {
         return serverRunning;
     }

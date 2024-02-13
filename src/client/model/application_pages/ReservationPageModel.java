@@ -101,6 +101,19 @@ public class ReservationPageModel {
         return arrayString;
     }
 
+    public boolean attemptBooking(String identifier, String date, String startTime, String duration) {
+        client.openSocket();
+        client.writeString("book");
+        client.writeString(identifier);
+        client.writeString(date);
+        client.writeString(startTime);
+        client.writeString(duration);
+        client.writeString(client.getUsername());
+
+        boolean confirmed = client.readString().equals("true");
+        return confirmed;
+    }
+
 
     public int getAvailCarSlots() {
         // get output from server
