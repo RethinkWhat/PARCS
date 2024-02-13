@@ -460,44 +460,62 @@ public class UserProfileView extends JPanel {
          * @param model       The specified model of the vehicle.
          * @return JPanel with vehicle information.
          */
-        public JPanel createCarsLayout(String plateNumber, String vehicleType, String model) {
+        public JPanel createCarsLayout(String plateNumber, String vehicleType, String model) {//String PlateNumber, String vehicle, String model){
             JPanel pnlCarInformation = res.createPnlRounded(290, 150, res.feldgrau, res.gray);
+            //pnlCarInformation.setBackground(res.feldgrau);
             pnlCarInformation.setLayout(new GridBagLayout());
 
-            GridBagConstraints gbc = new GridBagConstraints();
+            JPanel innerContent = new JPanel(new GridBagLayout());
+            innerContent.setBackground(res.feldgrau);
+            //innerContent.setBackground(res.feldgrau);
+
+            gbc = new GridBagConstraints();
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(5, 10, 5, 10);
 
-            JLabel lblPlateNumber = res.createLblP("Plate Number:", res.eerieBlack);
-            pnlCarInformation.add(lblPlateNumber, gbc);
+            gbc.insets = new Insets(0, 20, 0, 0);
+            JLabel lblPlateNumber = res.createLblP("Plate Number", res.eerieBlack);
+            lblPlateNumber.setMaximumSize(new Dimension(150, 20));
+            innerContent.add(lblPlateNumber, gbc);
 
-            gbc.gridx = 1;
-            gbc.anchor = GridBagConstraints.EAST;
-            JLabel lblPlateNumberInfo = res.createLblP(plateNumber, res.white);
-            pnlCarInformation.add(lblPlateNumberInfo, gbc);
-
-            gbc.gridx = 0;
             gbc.gridy = 1;
-            gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblVehicle = res.createLblP("Vehicle:", res.eerieBlack);
-            pnlCarInformation.add(lblVehicle, gbc);
+            JLabel lblPlateNumberInfo = res.createLblP2(plateNumber, res.white);
+            lblPlateNumberInfo.setMaximumSize(new Dimension(150, 30));
+            innerContent.add(lblPlateNumberInfo, gbc);
 
-            gbc.gridx = 1;
-            gbc.anchor = GridBagConstraints.EAST;
-            JLabel lblVehicleInfo = res.createLblP(vehicleType, res.white);
-            pnlCarInformation.add(lblVehicleInfo, gbc);
-
-            gbc.gridx = 0;
             gbc.gridy = 2;
-            gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblModel = res.createLblP("Model:", res.eerieBlack);
-            pnlCarInformation.add(lblModel, gbc);
+            JLabel lblEmpty = new JLabel(" ");
+            innerContent.add(lblEmpty, gbc);
 
-            gbc.gridx = 1;
+            gbc.gridy = 3;
+            gbc.anchor = GridBagConstraints.WEST;
+            JLabel lblVehicle = res.createLblP("Vehicle", res.eerieBlack);
+            lblVehicle.setMaximumSize(new Dimension(120, 12));
+            innerContent.add(lblVehicle, gbc);
+
+            gbc.gridy = 3;
+            gbc.anchor = GridBagConstraints.EAST;
+            gbc.insets = new Insets(0, 0, 0, 20);
+            JLabel lblModel = res.createLblP("Model", res.eerieBlack);
+            lblModel.setMaximumSize(new Dimension(110, 12));
+            innerContent.add(lblModel, gbc);
+
+            gbc.insets = new Insets(0, 20, 0, 0);
+            gbc.gridy = 4;
+            gbc.anchor = GridBagConstraints.WEST;
+            JLabel lblVehicleInfo = res.createLblP(vehicleType, res.white);
+            lblVehicleInfo.setMaximumSize(new Dimension(95, 12));
+            innerContent.add(lblVehicleInfo, gbc);
+
+            gbc.insets = new Insets(0, 0, 0, 20);
+            gbc.gridy = 4;
             gbc.anchor = GridBagConstraints.EAST;
             JLabel lblModelInfo = res.createLblP(model, res.white);
-            pnlCarInformation.add(lblModelInfo, gbc);
+            lblModelInfo.setMaximumSize(new Dimension(100, 20));
+            innerContent.add(lblModelInfo, gbc);
+
+            gbc.insets = new Insets(20, 30, 20, 30);
+            pnlCarInformation.add(innerContent);
 
             return pnlCarInformation;
         }
