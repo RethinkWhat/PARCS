@@ -298,7 +298,12 @@ public class UserParser {
         transform();
     }
 
+    public Map<String, List<String>> getUserVehicles(String username){
+        Map<String, List<String>> userVehicles = new HashMap<>();
 
+
+        return userVehicles;
+    }
 
     /** Will be deleted later */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
