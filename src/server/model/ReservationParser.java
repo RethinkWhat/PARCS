@@ -159,6 +159,11 @@ public class ReservationParser {
         return size;
     }
 
+    /**
+     * Returns all reservation of a user with its corresponding parking slot
+     * @param userName
+     * @return
+     */
     public Map<String, Reservations> getUserReservations(String userName) {
         getReservationsFile();
 
