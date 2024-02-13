@@ -4,6 +4,7 @@ import client.model.Client;
 import client.model.LiveDateTime;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 
@@ -44,12 +45,23 @@ public class ReservationPageModel {
     private String[] reservationTime = {"Select Time:", "6:00", "7:00", "8:00", "9:00",
             "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
 
+    private String fullName;
+
+    private HashMap<String, List<String>> vehicles;
     /**
      * Constructs a ReservationPageModel with a specified client.
      * @param client The specified client.
      */
     public ReservationPageModel(Client client) {
         this.client = client;
+
+        client.openSocket();
+        client.writeString("reservation");
+        client.writeString(client.getUsername());
+        this.fullName = client.readString();
+
+       // vehicles = ( HashMap<String, List<String>>) client.readObject();
+        client.closeSocket();
     }
 
     /**
@@ -65,12 +77,8 @@ public class ReservationPageModel {
      * @return The full name of the user.
      */
     public String getFullName() {
-        client.openSocket();
-        client.writeString("reservation");
-        client.writeString(client.getUsername());
-        String name = client.readString();
-        client.closeSocket();
-        return name;
+
+        return fullName;
     }
 
     public String[] getReservationTime() {
@@ -89,6 +97,7 @@ public class ReservationPageModel {
         for (int x =0 ; x< listOfTime.size(); x++) {
             arrayString[x] = listOfTime.get(x);
         }
+        client.closeSocket();
         return arrayString;
     }
 

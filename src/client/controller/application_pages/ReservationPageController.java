@@ -78,6 +78,7 @@ public class ReservationPageController {
 
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
+            //TODO: Fix date implementation
             timeAvailable = model.getAvailableTime(btnID, "02/14/24");
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);

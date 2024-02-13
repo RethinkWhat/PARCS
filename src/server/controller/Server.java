@@ -84,7 +84,11 @@ public class Server implements Runnable{
 
     public List<String> getParkingAvailability(String identifier, String date) {
         return reservationParser.availableTime(identifier,date);
+    }
 
+    public HashMap<String, List<String>> getUserVehicles(String username) {
+        //TODO:
+        return null;
     }
 
     public boolean serverRunning() {

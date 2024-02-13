@@ -225,6 +225,12 @@ public class ClientHandler implements Runnable {
             String username = reader.readLine();
             System.out.println("Printing: " + username);
             writer.println(server.getUserFullName(username));
+
+          //  HashMap<String, List<String>> vehicles = null;
+           // ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+           // outputStreamWriter.writeObject(vehicles);
+
+
         } catch (IOException ex) {
             ex.printStackTrace();
         }
