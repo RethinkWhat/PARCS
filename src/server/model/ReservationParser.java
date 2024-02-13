@@ -246,18 +246,13 @@ public class ReservationParser {
                         TimeRange validTimeRange = new TimeRange(currReservationElement.getElementsByTagName("startTime").item(0).getTextContent(), currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
 
                         bookedTimeRange.add(validTimeRange);
-                    }else {
-                        continue;
                     }
                 }
 
-            } else {
-                continue;
             }
 
 
         }
-
 
         return bookedTimeRange;
     }
@@ -277,5 +272,7 @@ public class ReservationParser {
         System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
 
         System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
+
+        System.out.println("BOOKED C1 TimeSlots: " + parser.getParkingSpotAvailability("03/07/03", "C1"));
     }
 }
