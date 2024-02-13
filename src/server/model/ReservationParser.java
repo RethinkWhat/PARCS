@@ -220,7 +220,46 @@ public class ReservationParser {
         return userReservations;
     }
 
+    public List<TimeRange> getParkingSpotAvailability(String date, String identifier){
+        getReservationsFile();
 
+        //This will have a list of time ranges that is booked in a certain date and a certain parking spot identifier
+        List<TimeRange> bookedTimeRange = new ArrayList<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        //Iterate to all parkingSpot nodes
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            //Checks if the current parking spot node has an identifier similar to the identifier passed as an argument
+            if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
+
+                NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+                for (int j = 0; j < reservationNodes.getLength(); j++){
+                    Element currReservationElement = (Element) reservationNodes.item(j);
+
+                    //Checks if current date of a reservation is equals to the date passed as an argument
+                    if (currReservationElement.getAttribute("day").equalsIgnoreCase(date)){
+
+                        TimeRange validTimeRange = new TimeRange(currReservationElement.getElementsByTagName("startTime").item(0).getTextContent(), currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
+
+                        //Adds the TimeRange of the reservation to the booked time ranges in a certain parking spot identifier
+                        bookedTimeRange.add(validTimeRange);
+                    }
+                }
+
+            }
+
+
+        }
+
+        return bookedTimeRange;
+    }
 
 
     public static void main(String[] args) {
@@ -237,5 +276,7 @@ public class ReservationParser {
         System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
 
         System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
+
+        System.out.println("BOOKED C1 TimeSlots for 03/07/03: " + parser.getParkingSpotAvailability("03/07/03", "C1"));
     }
 }
