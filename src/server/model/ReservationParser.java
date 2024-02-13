@@ -23,6 +23,8 @@ public class ReservationParser {
     DocumentBuilder builder;
     Document document;
 
+    DateTime dateTime = new DateTime();
+
     final File reservationsFile = new File("src/server/res/reservations.xml");
 
     DateTime dateTimeFormatter = new DateTime();
@@ -43,64 +45,46 @@ public class ReservationParser {
      * Method to retrieve parking information
      */
     public List<ParkingSpot> getParkingInformation() {
-
-        // Set the file to be read
         getReservationsFile();
 
         List<ParkingSpot> parkingSpotList = new ArrayList<>();
 
         NodeList nodeList = document.getElementsByTagName("parkingSpot");
 
-        for (int x = 0 ; x < nodeList.getLength(); x++) {
-            Node currNode = nodeList.item(x);
+        for (int x = 0; x < nodeList.getLength(); x++) {
+            // Will hold the parking spot object in each iteration
+            ParkingSpot currParkingSpot = new ParkingSpot();
+            Node currSpot = nodeList.item(x);
 
+            if (currSpot.getNodeType() == Node.ELEMENT_NODE) {
+                Element currSpotAsElement = (Element) currSpot;
+                String currParkingSpotIdentifier = currSpotAsElement.getAttribute("identifier");
 
-            String parkingIdentifier = currNode.getAttributes().item(0).getTextContent();
+                // Set the parking identifier for curr parking spot
+                currParkingSpot.setIdentifier(currParkingSpotIdentifier);
 
-            ParkingSpot parkingSpot = new ParkingSpot(parkingIdentifier);
+                NodeList reservationList = currSpotAsElement.getElementsByTagName("reservation");
+                for (int y = 0; y< reservationList.getLength(); y++) {
+                    Node currReservationNode = reservationList.item(y);
 
-            // Create a reservationsList associated with the parkingIdentifier
-            List<Reservations> reservationsList = new ArrayList<>();
+                    if (currReservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element currReservationAsElement = (Element) currReservationNode;
 
-            // StartTime, EndTime, User
-            NodeList infoPerIdentifier = currNode.getChildNodes();
+                        String date = currReservationAsElement.getAttribute("day");
+                        String startTime = currReservationAsElement.getElementsByTagName("startTime").item(0).getTextContent();
+                        String endTime = currReservationAsElement.getElementsByTagName("endTime").item(0).getTextContent();
+                        String user = currReservationAsElement.getElementsByTagName("user").item(0).getTextContent();
 
-            for (int y =0; y <infoPerIdentifier.getLength() ; y++) {
-                Node reservationNode = infoPerIdentifier.item(y);
-                if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                        TimeRange currReservationTimeRange = new TimeRange(startTime, endTime);
+                        Reservations currReservation = new Reservations();
 
-                    NodeList reservationInfo = reservationNode.getChildNodes();
-
-                    ArrayList<String> reservationParticulars = new ArrayList<>();
-                    for (int z = 0; z < reservationInfo.getLength(); z++) {
-                        Node reservationChildNode = reservationInfo.item(z);
-                        if (reservationChildNode.getNodeType() == Node.ELEMENT_NODE)
-                            reservationParticulars.add(reservationInfo.item(z).getTextContent());
-                    }
-                    String startTime = dateTimeFormatter.createTime(reservationParticulars.get(0));
-                    String endTime = dateTimeFormatter.createTime(reservationParticulars.get(1));
-
-                    String dateFromFile = dateTimeFormatter.createDate(reservationNode.getAttributes().item(0).getTextContent());
-
-                    boolean dateExists = false;
-                    for (Reservations reservation : reservationsList) {
-                        if (reservation.getDate().equals(dateFromFile)) {
-                            reservation.addReservation(startTime,endTime,reservationParticulars.get(2));
-                            dateExists = true;
-                        }
-                    }
-                    if (!dateExists) {
-                        // Create a reservation listing with the date
-                        HashMap<TimeRange, String> timeRangeStringHashMap = new HashMap<>();
-                        timeRangeStringHashMap.put(new TimeRange(startTime,endTime),reservationParticulars.get(2));
-                        Reservations newReservation = new Reservations(dateFromFile, timeRangeStringHashMap);
-                        reservationsList.add(newReservation);
-                        //System.out.println(newReservation);
+                        currReservation.setDate(date);
+                        currReservation.getTimeAndUserMap().put(currReservationTimeRange, user);
+                        currParkingSpot.getReservationsList().add(currReservation);
                     }
                 }
             }
-            parkingSpot.addReservationsList(reservationsList);
-            parkingSpotList.add(parkingSpot);
+            parkingSpotList.add(currParkingSpot);
         }
         return parkingSpotList;
     }
@@ -160,13 +144,25 @@ public class ReservationParser {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
         int size = 0;
+        System.out.println(parkingSpotList);
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
-            for (int y = 0; y < parkingSpotList.get(x).getReservationsList().size(); y++) {
-                HashMap<TimeRange, String> map = parkingSpotList.get(x).getReservationsList().get(y).getTimeAndUserMap();
-                for (int z = 0; z < map.size(); z++) {
-                    size++;
-                }
-            }
+            List<Reservations> reservations = parkingSpotList.get(x).getReservationsList();
+            System.out.println(reservations);
+
+
+
+//            for (int y = 0; y < parkingSpotList.get(x).getReservationsList().size(); y++) {
+//
+//                List<Reservations> reservations = parkingSpotList.get(x).getReservationsList();
+//                HashMap<TimeRange, String> map = reservations.get(y).getTimeAndUserMap();
+//                System.out.println(reservations);
+//                System.out.println("");
+//                for (int z = 0; z < reservations.size(); z++) {
+//                        if (reservations.get(z).getDate().compareTo(dateTime.getDateTime()) > 0) {
+//                            size += 1;
+//                        }
+//                }
+//            }
         }
         return size;
     }
@@ -186,6 +182,7 @@ public class ReservationParser {
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+        System.out.println(parkingSpotList);
 
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));

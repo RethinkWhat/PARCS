@@ -118,6 +118,8 @@ public class ServerStatusView extends JFrame {
             btnNavLogout.setHorizontalAlignment(SwingConstants.LEFT);
             add(btnNavLogout);
 
+           // btnNavLogout.setActionLister(e -> System.exit(0));
+
             this.setPreferredSize(new Dimension(60,800));
         }
     }
@@ -187,7 +189,7 @@ public class ServerStatusView extends JFrame {
             pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket,50,50),
                     res.createLblH1("3",res.eerieBlack),
-                    res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
+                    res.createLblP("<html>Total<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlTotalBookings);
 
@@ -297,10 +299,6 @@ public class ServerStatusView extends JFrame {
         serverSwitch.setText("Start Server");
         serverSwitch.setBackground(res.white);
         serverSwitch.setForeground(res.celadon);
-    }
-
-    public static void main(String[] args) {
-        new ServerStatusView();
     }
 
 }
