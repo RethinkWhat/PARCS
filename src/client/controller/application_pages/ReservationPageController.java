@@ -1,5 +1,6 @@
 package client.controller.application_pages;
 
+import client.model.application_pages.CarMotorButton;
 import client.model.application_pages.ReservationPageModel;
 import client.view.application_pages.ReservationPageView;
 
@@ -28,6 +29,8 @@ public class ReservationPageController {
 
     private String btnID;
 
+    private String[] timeAvailable;
+
     /**
      * Constructs a ReservationPageController with a specified view and model.
      * @param view The specified view.
@@ -45,7 +48,7 @@ public class ReservationPageController {
         timer = new Timer(1000,e -> updateTime());
         timer.start();
 
-        btnID = view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
+        view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
 
 
@@ -72,7 +75,11 @@ public class ReservationPageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.getTopCardLayout().show(view.getPnlCards(), "buttons");
-            //model.getReservationList();
+
+            CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
+            btnID = buttonClicked.getIdentifier();
+            timeAvailable = model.getAvailableTime(btnID);
+            view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
         }
     }
 

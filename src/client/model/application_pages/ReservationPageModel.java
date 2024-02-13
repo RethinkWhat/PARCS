@@ -38,6 +38,9 @@ public class ReservationPageModel {
      */
     private String[] motorcycles;
 
+    private String[] reservationTime = {"Select Time:", "6:00", "7:00", "8:00", "9:00",
+            "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
+
     /**
      * Constructs a ReservationPageModel with a specified client.
      * @param client The specified client.
@@ -65,6 +68,24 @@ public class ReservationPageModel {
         String name = client.readString();
         client.closeSocket();
         return name;
+    }
+
+    public String[] getReservationTime() {
+        return reservationTime;
+    }
+
+    public String[] getAvailableTime(String parkingIdentifier) {
+        String[] carBookings = getCarBookings(parkingIdentifier);
+
+        // TODO: Math of reservations
+        String[] reservations = new String[5];
+
+
+        return reservations;
+    }
+
+    public String[] getCarBookings(String parkingIdentifier) {
+
     }
 
     public int getAvailCarSlots() {

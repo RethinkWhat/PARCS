@@ -153,12 +153,12 @@ public class ReservationPageView extends JPanel {
                 // Initialize buttons for the top row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
                     String carLabel = "C" + String.format("%2d", i + 1);
-                    carButtons[i] = (CarMotorButton) res.createBtnRounded(carLabel, res.celadon, res.white, 10);
+                    carButtons[i] = new CarMotorButton(carLabel);
                     carButtons[i].setIdentifier(carLabel);
 
                     //TODO: Validate if it is taken
                     //for buttons with image
-                    carButtons[i] = (CarMotorButton) new JButton(carLabel, res.iconTakenCar);
+                    carButtons[i] = new CarMotorButton(carLabel, res.iconTakenCar);
                     carButtons[i].setOpaque(false);
                     carButtons[i].setContentAreaFilled(false);
                     carButtons[i].setBorderPainted(false);
@@ -166,11 +166,11 @@ public class ReservationPageView extends JPanel {
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
                     String motorLabel = "M" + String.format("%2d", i + 1);
-                    motorButtons[i] = (CarMotorButton) res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+                    motorButtons[i] = new CarMotorButton(motorLabel);
                     motorButtons[i].setIdentifier(motorLabel);
 
                     //for buttons with image
-                    motorButtons[i] = (CarMotorButton) new JButton(motorLabel, res.iconAvailableMotor);
+                    motorButtons[i] = new CarMotorButton(motorLabel, res.iconAvailableMotor);
                     motorButtons[i].setOpaque(false);
                     motorButtons[i].setContentAreaFilled(false);
                     motorButtons[i].setBorderPainted(false);
@@ -179,10 +179,10 @@ public class ReservationPageView extends JPanel {
                 // Initialize buttons for the bottom row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
                     String carLabel = "C" + String.format("%2d", i + 6);
-                    carButtons[i + NUM_CAR_SLOTS] = (CarMotorButton) res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
+                    carButtons[i + NUM_CAR_SLOTS] = new CarMotorButton(carLabel);
 
                     //for buttons with image
-                    carButtons[i+ NUM_CAR_SLOTS] = (CarMotorButton) new JButton(carLabel, res.iconAvailableCar);
+                    carButtons[i+ NUM_CAR_SLOTS] = new CarMotorButton(carLabel, res.iconAvailableCar);
                     carButtons[i+ NUM_CAR_SLOTS].setOpaque(false);
                     carButtons[i+ NUM_CAR_SLOTS].setContentAreaFilled(false);
                     carButtons[i+ NUM_CAR_SLOTS].setBorderPainted(false);
@@ -191,10 +191,10 @@ public class ReservationPageView extends JPanel {
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
                     String motorLabel = "M" + String.format("%2d", i + 3);
-                    motorButtons[i + NUM_MOTOR_SLOTS] = (CarMotorButton) res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+                    motorButtons[i + NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel);
 
                     //for buttons with image
-                    motorButtons[i+ NUM_MOTOR_SLOTS] = (CarMotorButton) new JButton(motorLabel, res.iconTakenMotor);
+                    motorButtons[i+ NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel, res.iconTakenMotor);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setOpaque(false);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setContentAreaFilled(false);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setBorderPainted(false);
@@ -270,14 +270,13 @@ public class ReservationPageView extends JPanel {
                     add(motorButtons[i + NUM_MOTOR_SLOTS]);
                 }
             }
-            public String setCarButtonsListener(ActionListener listener) {
+            public void setCarButtonsListener(ActionListener listener) {
                 for (JButton button : carButtons) {
                     button.addActionListener(listener);
                 }
                 for (JButton button : motorButtons) {
                     button.addActionListener(listener);
                 }
-                return "msg";
             }
         }
     }
@@ -539,6 +538,11 @@ public class ReservationPageView extends JPanel {
             pnlContainer.add(pnlReserve);
 
             this.setPreferredSize(new Dimension(1300, 130));
+
+        }
+
+        public void setLblSlotNumber(String label) {
+                lblSlotNumber.setText("SLOT " + label);
         }
         public void setBtnCloseListener(ActionListener listener) {
             btnClose.addActionListener(listener);

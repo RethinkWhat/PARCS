@@ -10,6 +10,11 @@ public class CarMotorButton extends JButton {
         this.identifier = identifier;
     }
 
+    public CarMotorButton(String identifier, Icon icon) {
+        this.identifier = identifier;
+        this.setIcon(icon);
+    }
+
     public boolean isCar() {
         return (identifier.contains("C"));
     }
