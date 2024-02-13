@@ -168,6 +168,11 @@ public class ReservationParser {
         return size;
     }
 
+    /**
+     * Returns all reservation of a user with its corresponding parking slot
+     * @param userName
+     * @return
+     */
     public Map<String, Reservations> getUserReservations(String userName) {
         getReservationsFile();
 
@@ -202,6 +207,7 @@ public class ReservationParser {
                         //Getting the username in a certain reservation
                         String currUsername = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
 
+                        //Checks if the passed username is equals to the current reservation's username
                         if (userName.equalsIgnoreCase(currUsername)) {
                             String day = currReservationElement.getAttribute("day");
                             String startTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
@@ -265,8 +271,6 @@ public class ReservationParser {
                 }
 
             }
-
-
         }
         return bookedTimeRange;
     }
@@ -295,12 +299,5 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
-
-        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
-        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
-
-        System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
-
-        System.out.println("BOOKED C1 TimeSlots for 03/07/03: " + parser.getParkingSpotAvailability("03/07/03", "C1"));
     }
 }
