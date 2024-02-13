@@ -3,6 +3,9 @@ package client.model.application_pages;
 import client.model.Client;
 import client.model.LiveDateTime;
 
+import java.util.ArrayList;
+import java.util.List;
+
 
 /**
  * Template for ReservationPageModel object.
@@ -74,25 +77,21 @@ public class ReservationPageModel {
         return reservationTime;
     }
 
-    public String[] getAvailableTime(String parkingIdentifier) {
-        String[] carBookings = getCarBookings(parkingIdentifier);
-
-        // TODO: Math of reservations
-        String[] reservations = new String[5];
-
-
-        return reservations;
-    }
-
-    public String[] getCarBookings(String parkingIdentifier) {
+    public String[] getAvailableTime(String parkingIdentifier, String date) {
         client.openSocket();
         client.writeString("spotInfo");
 
-        String statement = (String) client.readObject();
-        System.out.println("READ LINE: " + statement);
-      //  client.closeObjectSocket();
-        return null;
+        client.writeString(parkingIdentifier);
+        client.writeString(date);
+        ArrayList<String> listOfTime = (ArrayList<String>) client.readObject();
+
+        String[] arrayString = new String[listOfTime.size()];
+        for (int x =0 ; x< listOfTime.size(); x++) {
+            arrayString[x] = listOfTime.get(x);
+        }
+        return arrayString;
     }
+
 
     public int getAvailCarSlots() {
         // get output from server

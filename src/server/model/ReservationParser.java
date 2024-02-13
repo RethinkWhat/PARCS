@@ -23,12 +23,21 @@ public class ReservationParser {
     DocumentBuilder builder;
     Document document;
 
+    ArrayList<String> timeArray = new ArrayList<>();
+
     DateTime dateTime = new DateTime();
 
     final File reservationsFile = new File("src/server/res/reservations.xml");
 
     DateTime dateTimeFormatter = new DateTime();
 
+    public void populateTime() {
+        String[] time =  {"6:00", "7:00", "8:00", "9:00",
+                "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
+        for (String timeItem : time)
+            timeArray.add(timeItem);
+
+    }
     private void getReservationsFile() {
         try {
             builder = DocumentBuilderFactory.newNSInstance().newDocumentBuilder();
@@ -220,7 +229,9 @@ public class ReservationParser {
         return userReservations;
     }
 
-    public List<TimeRange> getParkingSpotAvailability(String date, String identifier){
+    public List<TimeRange> getParkingSpotAvailability(String identifier, String date){
+        System.out.println("DATE PASSED IN: " + date);
+        System.out.println("IDENTIFIER: " + identifier);
         getReservationsFile();
 
         //This will have a list of time ranges that is booked in a certain date and a certain parking spot identifier
@@ -257,8 +268,21 @@ public class ReservationParser {
 
 
         }
-
         return bookedTimeRange;
+    }
+
+    public List<String> availableTime(String date, String identifier) {
+        populateTime();
+        ArrayList<String> toReturn = timeArray;
+        List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date,identifier);
+        System.out.println("BOOKED TIME: " + bookedTimeRange);
+        for (TimeRange timeRange : bookedTimeRange) {
+            List<String> timeUnavailable = timeRange.getStartToEndTime();
+            for (int x = 0; x<timeUnavailable.size() -1; x++) {
+                toReturn.remove(timeUnavailable.get(x));
+            }
+        }
+        return toReturn;
     }
 
 

@@ -1,6 +1,7 @@
 package server.model;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 public class ParkingSpot {
@@ -65,6 +66,15 @@ public class ParkingSpot {
      */
     public void addReservation(Reservations reservations) {
         reservationsList.add(reservations);
+    }
+
+    public HashMap<TimeRange, String> getReservationsOnDate(String date) {
+        for (Reservations reservation : reservationsList) {
+            if (reservation.getDate().equals(date)) {
+                return reservation.getTimeAndUserMap();
+            }
+        }
+        return null;
     }
 
     public void addReservationsList(List<Reservations> reservations) {

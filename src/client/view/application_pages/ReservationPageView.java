@@ -152,7 +152,7 @@ public class ReservationPageView extends JPanel {
 
                 // Initialize buttons for the top row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    String carLabel = "C" + String.format("%2d", i + 1);
+                    String carLabel = "C" + (i + 1);
                     carButtons[i] = new CarMotorButton(carLabel);
                     carButtons[i].setIdentifier(carLabel);
 
@@ -165,7 +165,7 @@ public class ReservationPageView extends JPanel {
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    String motorLabel = "M" + String.format("%2d", i + 1);
+                    String motorLabel = "M" + (i + 1);
                     motorButtons[i] = new CarMotorButton(motorLabel);
                     motorButtons[i].setIdentifier(motorLabel);
 
@@ -538,7 +538,6 @@ public class ReservationPageView extends JPanel {
             pnlContainer.add(pnlReserve);
 
             this.setPreferredSize(new Dimension(1300, 130));
-
         }
 
         public void setLblSlotNumber(String label) {
@@ -553,7 +552,8 @@ public class ReservationPageView extends JPanel {
         }
 
         public void setTimeList(String[] timeList) {
-            cmbTime = new JComboBox<>(timeList);
+            cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(timeList));
+
         }
 
         public void setDurationList(String[] durationList) {

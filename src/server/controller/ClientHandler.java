@@ -2,12 +2,14 @@ package server.controller;
 
 
 import client.model.Client;
+import server.model.TimeRange;
 import server.model.Vehicle;
 import server.view.ServerStatusView;
 
 import java.io.*;
 import java.net.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Scanner;
 
@@ -261,8 +263,12 @@ public class ClientHandler implements Runnable {
     public void spotInfo() {
         System.out.println("----- SPOT INFO -----");
         try {
+            String identifier = reader.readLine();
+            String date = reader.readLine();
+            List<String> availableTime = server.getParkingAvailability(identifier, date);
+            System.out.println("AVAILABLE TIME: " + availableTime);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-            outputStreamWriter.writeObject("String");
+            outputStreamWriter.writeObject(availableTime);
             System.out.println("reached");
         } catch (IOException ex) {
             ex.printStackTrace();
