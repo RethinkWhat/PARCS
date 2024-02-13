@@ -50,6 +50,7 @@ public class ReservationPageController {
 
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
+        view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
 
 
         // action listeners
@@ -90,6 +91,14 @@ public class ReservationPageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.getTopCardLayout().show(view.getPnlCards(), "dashboard");
+        }
+    }
+
+    class reserveSlotListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("clicked");
+
         }
     }
 }

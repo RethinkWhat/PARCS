@@ -64,9 +64,24 @@ public class ReservationPageView extends JPanel {
 
     private ParkingSlotButtonsView parkingSlotButtonsView;
 
+    private Icon takenCar = res.iconTakenCar;
+
+    private Icon availCar = res.iconAvailableCar;
+
+    public Icon getTakenCar() {
+        return takenCar;
+    }
+
+
+    public Icon getAvailCar() {
+        return availCar;
+    }
+
     /**
      * Constructs a panel of ReservationPageView.
      */
+
+
     public ReservationPageView() {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(25,25,25,25));
@@ -528,7 +543,7 @@ public class ReservationPageView extends JPanel {
             pnlReserve.add(cmbDuration, gbc);
 
             // Reserve Slot Button (using createBtnRounded from Resources)
-            JButton btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
             gbc.gridx = 3;
             gbc.gridwidth = 2; // Set the button to span 2 columns
             btnReserve.setPreferredSize(new Dimension(140, 40));
@@ -546,6 +561,11 @@ public class ReservationPageView extends JPanel {
         public void setBtnCloseListener(ActionListener listener) {
             btnClose.addActionListener(listener);
         }
+
+        public void setReserveSlotListener(ActionListener listener) {
+            btnReserve.addActionListener(listener);
+        }
+
 
         public void setVehiclesList(String[] cars) {
             cmbVehicle = new JComboBox<>(cars);
