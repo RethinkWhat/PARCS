@@ -239,11 +239,15 @@ public class ReservationParser {
                 NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
 
                 for (int j = 0; j < reservationNodes.getLength(); j++){
-                    Element currReservationNode = (Element) reservationNodes.item(j);
+                    Element currReservationElement = (Element) reservationNodes.item(j);
 
-                    if (currReservationNode.getAttribute("day").equalsIgnoreCase(date)){
+                    if (currReservationElement.getAttribute("day").equalsIgnoreCase(date)){
 
-                        TimeRange currTimeRange =
+                        TimeRange validTimeRange = new TimeRange(currReservationElement.getElementsByTagName("startTime").item(0).getTextContent(), currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
+
+                        bookedTimeRange.add(validTimeRange);
+                    }else {
+                        continue;
                     }
                 }
 
