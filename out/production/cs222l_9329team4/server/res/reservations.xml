@@ -27,12 +27,7 @@
             <endTime>04:00:00</endTime>
             <user>basti</user>
         </reservation>
-
-        <reservation day= "13/3/07">
-            <startTime>03:00:00</startTime>
-            <endTime>04:00:00</endTime>
-            <user>basti</user>
-        </reservation>
+        
 
     </parkingSpot>
 </reservations>

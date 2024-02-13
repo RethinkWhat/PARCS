@@ -144,25 +144,12 @@ public class ReservationParser {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
         int size = 0;
-        System.out.println(parkingSpotList);
-        for (int x = 0 ; x < parkingSpotList.size(); x++) {
-            List<Reservations> reservations = parkingSpotList.get(x).getReservationsList();
-            System.out.println(reservations);
 
-
-
-//            for (int y = 0; y < parkingSpotList.get(x).getReservationsList().size(); y++) {
-//
-//                List<Reservations> reservations = parkingSpotList.get(x).getReservationsList();
-//                HashMap<TimeRange, String> map = reservations.get(y).getTimeAndUserMap();
-//                System.out.println(reservations);
-//                System.out.println("");
-//                for (int z = 0; z < reservations.size(); z++) {
-//                        if (reservations.get(z).getDate().compareTo(dateTime.getDateTime()) > 0) {
-//                            size += 1;
-//                        }
-//                }
-//            }
+        for (ParkingSpot parkingSpot : parkingSpotList) {
+            List<Reservations> reservationList =  parkingSpot.getReservationsList();
+            for (Reservations reservation : reservationList ) {
+                size++;
+            }
         }
         return size;
     }
@@ -183,13 +170,7 @@ public class ReservationParser {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
         System.out.println(parkingSpotList);
-
-        for (int x = 0 ; x < parkingSpotList.size(); x++) {
-            System.out.println(parkingSpotList.get(x));
-        }
-
-
-
+        System.out.println(parser.countBookings());
 
       //  System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
       //  System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
