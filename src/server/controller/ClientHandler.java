@@ -215,6 +215,10 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    public void editPassword(){
+
+    }
+
 
     public void reserve() {
         System.out.println("-----------RESERVE-----------");
