@@ -448,29 +448,29 @@ public class TimerView extends JPanel {
     }
 
     private void endTimerBtnActionPerformed(java.awt.event.ActionEvent evt) {
-        new TicketCancelDialog(null,false);
+       // new TicketCancelDialog(null,false);
 
     }
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {
         // get x and y coordinates values
-        positionX = evt.getX();
-        positionY = evt.getY();
+        //positionX = evt.getX();
+       // positionY = evt.getY();
     }
 
     private void userBtnActionPerformed(java.awt.event.MouseEvent evt){
         // connect to User Page
-        dispose();
+       // dispose();
     }
 
     private void homeBtnActionPerformed(java.awt.event.MouseEvent evt){
         // connect to Home Page
-        dispose();
+     //   dispose();
     }
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {
         // set JFrame animation
-        setLocation(evt.getXOnScreen()-positionX, evt.getYOnScreen()-positionY);
+       // setLocation(evt.getXOnScreen()-positionX, evt.getYOnScreen()-positionY);
     }
 
     public static void main(String args[]) {
