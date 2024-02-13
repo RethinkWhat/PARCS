@@ -89,6 +89,11 @@ public class ReservationParser {
         return parkingSpotList;
     }
 
+    /**
+     * This method will return a ParkingSpot's current information
+     * @param identifier
+     * @return
+     */
     public ParkingSpot getParkingSlotInformationByIdentifier(String identifier){
         ParkingSpot parkingSpot = new ParkingSpot();
         parkingSpot.setIdentifier(identifier);
@@ -154,15 +159,67 @@ public class ReservationParser {
         return size;
     }
 
-    public Map<String, Reservations> getUserReservations(String userName){
+    public Map<String, Reservations> getUserReservations(String userName) {
+        getReservationsFile();
+
         /**
-         * Key: Parking Slot identifier
-         * Value: Reservations
+         * Key: Parking Slot Identifier
+         * Value: Reservations object
+         *
+         * EXAMPLE:
+         * {"C1", Reservations}
          */
         Map<String, Reservations> userReservations = new HashMap<>();
 
+        NodeList nodeList = document.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < nodeList.getLength(); i++) {
+
+            Node currParkingSpotNode = nodeList.item(i);
+
+            if (currParkingSpotNode.getNodeType() == Element.ELEMENT_NODE){
+
+                //Getting the current parking spot
+                Element currParkingSpotElement = (Element) nodeList.item(i);
+
+                NodeList reservationList = currParkingSpotNode.getChildNodes();
+
+                for (int j = 0; j < reservationList.getLength(); j++) {
+                    Node reservationNode = reservationList.item(j);
+
+                    if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                        Element currReservationElement = (Element) reservationNode;
+
+                        //Getting the username in a certain reservation
+                        String currUsername = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
+
+                        if (userName.equalsIgnoreCase(currUsername)) {
+                            String day = currReservationElement.getAttribute("day");
+                            String startTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                            String endTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+
+                            TimeRange currTimeRange = new TimeRange(startTime, endTime);
+
+                            //Creating a new reservation and adding the current reservation's time range and username to the map of Reservation object
+                            Reservations reservations = new Reservations();
+                            reservations.getTimeAndUserMap().put(currTimeRange, currUsername);
+                            reservations.setDate(day);
+
+                            String parkingSpotIdentifier = currParkingSpotElement.getAttribute("identifier");
+
+                            //Adding the reservations of the user to the userReservations map
+                            userReservations.put(parkingSpotIdentifier, reservations);
+                        }else {
+                            continue;
+                        }
+                    }
+                }
+            }
+
+        }
         return userReservations;
     }
+
 
 
 
@@ -172,9 +229,13 @@ public class ReservationParser {
         System.out.println(parkingSpotList);
         System.out.println(parser.countBookings());
 
-      //  System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
-      //  System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
+        for (int x = 0 ; x < parkingSpotList.size(); x++) {
+            System.out.println(parkingSpotList.get(x));
+        }
+
+        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
+        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
+
+        System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
     }
-
-
 }

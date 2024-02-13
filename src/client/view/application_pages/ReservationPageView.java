@@ -125,19 +125,53 @@ public class ReservationPageView extends JPanel {
             }
 
             private void initializeButtons() {
-                carButtons = new JButton[NUM_CAR_SLOTS];
-                motorButtons = new JButton[NUM_MOTOR_SLOTS];
+                carButtons = new JButton[NUM_CAR_SLOTS * 2];
+                motorButtons = new JButton[NUM_MOTOR_SLOTS * 2];
 
+                // Initialize buttons for the top row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    String carLabel = "C" + String.format("%2d", i + 1); // C (Car Parking)
-                    carButtons[i] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
-                    add(carButtons[i]);
+                    String carLabel = "C" + String.format("%2d", i + 1);
+                    carButtons[i] = res.createBtnRounded(carLabel, res.celadon, res.white, 10);
+
+                    //for buttons with image
+                    carButtons[i] = new JButton(carLabel, res.iconTakenCar);
+                    carButtons[i].setOpaque(false);
+                    carButtons[i].setContentAreaFilled(false);
+                    carButtons[i].setBorderPainted(false);
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    String motorLabel = "M" + String.format("%2d", i + 1); // M (Motor Parking)
+                    String motorLabel = "M" + String.format("%2d", i + 1);
                     motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
-                    add(motorButtons[i]);
+
+                    //for buttons with image
+                    motorButtons[i] = new JButton(motorLabel, res.iconAvailableMotor);
+                    motorButtons[i].setOpaque(false);
+                    motorButtons[i].setContentAreaFilled(false);
+                    motorButtons[i].setBorderPainted(false);
+                }
+
+                // Initialize buttons for the bottom row
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    String carLabel = "C" + String.format("%2d", i + 6);
+                    carButtons[i + NUM_CAR_SLOTS] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
+
+                    //for buttons with image
+                    carButtons[i+ NUM_CAR_SLOTS] = new JButton(carLabel, res.iconAvailableCar);
+                    carButtons[i+ NUM_CAR_SLOTS].setOpaque(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setContentAreaFilled(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setBorderPainted(false);
+                }
+
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    String motorLabel = "M" + String.format("%2d", i + 3);
+                    motorButtons[i + NUM_MOTOR_SLOTS] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
+
+                    //for buttons with image
+                    motorButtons[i+ NUM_MOTOR_SLOTS] = new JButton(motorLabel, res.iconTakenMotor);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setOpaque(false);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setContentAreaFilled(false);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setBorderPainted(false);
                 }
             }
 
@@ -167,20 +201,21 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, slotWidth, slotHeight);
 
                     // Buttons for the car slots (added bounds for positioning)
-                    carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
-
+                    carButtons[i].setBounds(x + slotWidth / 8, y + slotHeight / 8, slotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(carButtons[i]);
                 }
 
                 // Draw Motor Slots (Top Row)
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int x = xOffset + (NUM_CAR_SLOTS + i) * slotWidth;
                     int y = yOffset;
 
                     // Draw rectangles to represent motor slots
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 4, motorSlotWidth / 2, slotHeight / 2);
+                    motorButtons[i].setBounds(x + motorSlotWidth / 8, y + slotHeight / 8, motorSlotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(motorButtons[i]);
                 }
 
                 // Draw Car Slots (Bottom Row)
@@ -192,19 +227,21 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, slotWidth, slotHeight);
 
                     // Buttons for the car slots (added bounds for positioning)
-                    //carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
+                    carButtons[i + NUM_CAR_SLOTS].setBounds(x + slotWidth / 8, y + slotHeight / 8, slotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(carButtons[i + NUM_CAR_SLOTS]);
                 }
 
                 // Draw Motor Slots (Bottom Row)
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int x = xOffset + (NUM_CAR_SLOTS + i) * slotWidth;
                     int y = yOffset + slotHeight;
 
                     // Draw rectangles to represent motor slots
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    //motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 8, motorSlotWidth / 2, slotHeight / 2);
+                    motorButtons[i + NUM_MOTOR_SLOTS].setBounds(x + motorSlotWidth / 8, y + slotHeight / 8, motorSlotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(motorButtons[i + NUM_MOTOR_SLOTS]);
                 }
             }
         }

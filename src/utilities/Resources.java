@@ -72,6 +72,22 @@ public class Resources {
      */
     public ImageIcon iconSolidMotor = new ImageIcon("res/drawable/icons/motorcycle-black-solid.png");
     /**
+     * The colored icon for the available car parking slots.
+     */
+    public ImageIcon iconAvailableCar = new ImageIcon("res/drawable/icons/car-celadon-solid.png");
+    /**
+     * The colored icon for the available motorcycle parking slots.
+     */
+    public ImageIcon iconAvailableMotor = new ImageIcon("res/drawable/icons/motorcycle-celadon-solid.png");
+    /**
+     * The colored icon for the taken car parking slots.
+     */
+    public ImageIcon iconTakenCar = new ImageIcon("res/drawable/icons/car-red-solid.png");
+    /**
+     * The colored icon for the taken motorcycle parking slots.
+     */
+    public ImageIcon iconTakenMotor = new ImageIcon("res/drawable/icons/motorcycle-red-solid.png");
+    /**
      * The icon for the total bookings of the user panel.
      */
     public ImageIcon iconSolidTicket = new ImageIcon("res/drawable/icons/ticket-black-solid.png");
@@ -543,6 +559,60 @@ public class Resources {
         public void focusLost(FocusEvent e) {
             if (textField.getText().isEmpty()) {
                 textField.setText(placeholder);
+            }
+        }
+    }
+
+    /**
+     * Clears the text in a specified JPasswordField when it is focused, and inserts a specified placeholder
+     * text when unfocused.
+     */
+    public static class PasswordFocus implements FocusListener {
+        /**
+         * The specified password field.
+         */
+        private JPasswordField passwordField;
+        /**
+         * The specified placeholder text.
+         */
+        private String placeholder;
+
+        /**
+         * Constructs an object of PasswordFocus with a specified password field, show password text box and
+         * placeholder text.
+         * @param passwordField The specified password field.
+         * @param placeholder The specified placeholder text.
+         */
+        public PasswordFocus(JPasswordField passwordField, String placeholder) {
+            this.passwordField = passwordField;
+            this.placeholder = placeholder;
+            this.passwordField.setText(placeholder);
+        }
+
+        /**
+         * Processes the event when focused. Clears the password field of its placeholder text.
+         * @param e the event to be processed
+         */
+        @Override
+        public void focusGained(FocusEvent e) {
+            passwordField.setEchoChar('●');
+            if (String.valueOf(passwordField.getPassword()).equals(placeholder)) {
+                passwordField.setText("");
+            }
+        }
+
+        /**
+         * Processes the event when focused. The checkbox is overridden and displays the password in plain text, and
+         * adds a placeholder text.
+         * @param e the event to be processed
+         */
+        @Override
+        public void focusLost(FocusEvent e) {
+            if (String.valueOf(passwordField.getPassword()).isEmpty()) {
+                passwordField.setText(placeholder);
+                passwordField.setEchoChar((char) 0);
+            } else {
+                passwordField.setEchoChar('●');
             }
         }
     }
