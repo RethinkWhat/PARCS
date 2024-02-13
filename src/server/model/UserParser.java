@@ -318,16 +318,21 @@ public class UserParser {
 
                     Element currVehicle = (Element) vehicleNodes.item(j);
 
-                    String vehicleInformation = currVehicle.getTextContent();
+                    String[] vehicleInformation = currVehicle.getTextContent().split(",");
 
+                    String vehicle = vehicleInformation[0];
+                    String model = vehicleInformation[1];
+                    String plateNumber = vehicleInformation[2];
 
+                    List<String> currVehicleModel = new ArrayList<>();
+                    currVehicleModel.add(vehicle);
+                    currVehicleModel.add(model);
 
+                    userVehicles.put(plateNumber, currVehicleModel);
                 }
 
             }
         }
-
-
         return userVehicles;
     }
 
