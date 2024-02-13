@@ -1,6 +1,5 @@
 package server.view;
 
-import client.view.ApplicationView;
 import client.view.application_pages.ReservationPageView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
@@ -9,6 +8,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The AdminApplicationView contains the server status page and dashboard of the admin application.
+ */
 public class AdminApplicationView extends JFrame {
     /**
      * The panel that holds different component panels.
@@ -26,10 +28,6 @@ public class AdminApplicationView extends JFrame {
      * The dashboard button in the navigation bar.
      */
     private JButton btnNavDashboard;
-    /**
-     * The logout button in the navigation.
-     */
-    private JButton btnNavLogout;
     /**
      * Location of the current user.
      */
@@ -145,10 +143,6 @@ public class AdminApplicationView extends JFrame {
 
     public JButton getBtnNavDashboard() {
         return btnNavDashboard;
-    }
-
-    public JButton getBtnNavLogout() {
-        return btnNavLogout;
     }
 
     public JLabel getLblLocation() {
