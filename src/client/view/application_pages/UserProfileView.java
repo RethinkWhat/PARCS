@@ -84,13 +84,13 @@ public class UserProfileView extends JPanel {
         // pnlCards.setBounds(220,0,750,560);
         pnlRight.add(pnlCards, BorderLayout.NORTH);
 
-        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
+//        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
         // edit cars page
         pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
         // security page
-        pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
+//        pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
         // history page
-        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
+//        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
 
@@ -377,112 +377,127 @@ public class UserProfileView extends JPanel {
      * The panel that contains the information on the vehicle of the users that can be edited or add new vehicles.
      */
     class EditCars extends JPanel {
+        JLabel plateNumber;
+        JLabel model;
+        JLabel vehicle;
+        JLabel plateNumberInfo;
+        JLabel modelInfo;
+        JLabel vehicleInfo;
+
+
         /**
          * Constructs a panel of EditCars.
          */
         public EditCars() {
-            this.setBounds(220, 0, 750, 560);
-            this.setVisible(true);
-            this.setLayout(new GridBagLayout());
+            this.setLayout(new BorderLayout());
+            this.setBorder(new EmptyBorder(80, 20, 10, 60));
 
+            JLabel myCars = res.createLblH1("My Cars", res.eerieBlack);
+            this.add(myCars, BorderLayout.NORTH);
+
+            JPanel whitePanel = new JPanel(new GridBagLayout());
+            whitePanel.setBackground(res.white);
+            whitePanel.setPreferredSize(new Dimension(300, 325));
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblEditProfile = res.createLblH1("Edit Cars", res.eerieBlack);
-            lblEditProfile.setBorder(new EmptyBorder(30, 20, 0, 0));
-            this.add(lblEditProfile, gbc);
+            gbc.insets = new Insets(5, 5, 5, 5);
 
-            gbc.gridy = 1;
-            gbc.anchor = GridBagConstraints.WEST;
+            Font labelFontBold = new Font("Arial", Font.BOLD, 20);
+            Font labelFont = new Font("Arial", Font.ITALIC, 20);
 
-            // TODO: Create method in UserProfileModel to create information of the cars.
-            JPanel pnlCar1 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            JPanel pnlCar2 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            this.add(pnlCar1, gbc);
-            this.add(pnlCar2, gbc);
+            plateNumber = new JLabel("Plate Number");
+            plateNumber.setFont(labelFontBold);
+            whitePanel.add(plateNumber, gbc);
 
-            JPanel pnlCar3 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            JPanel pnlCar4 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            gbc.gridy = 2;
-            gbc.insets = new Insets(20, 30, 0, 30);
-            this.add(pnlCar3, gbc);
-            this.add(pnlCar4, gbc);
+            gbc.gridy++; // Move to the next row
+            plateNumberInfo = new JLabel("WHF 6262");
+            plateNumberInfo.setFont(labelFont);
+            whitePanel.add(plateNumberInfo, gbc);
 
-            gbc.gridy = 5;
-            gbc.gridx = 1;
-            JButton btnBack = new JButton();
-            ImageIcon backIcon = new ImageIcon("res/drawable/icons/forward.png");
-            btnBack.setBorder(new EmptyBorder(0, 0, 0, 20));
-            ImageIcon resizedBackIcon = new ImageIcon(backIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-            btnBack.setIcon(resizedBackIcon);
-            this.add(btnBack, gbc);
+            gbc.gridy++; // Move to the next row
+            model = new JLabel("Model");
+            model.setFont(labelFontBold);
+            whitePanel.add(model, gbc);
 
-            this.setVisible(true);
+            gbc.gridy++; // Move to the next row
+            modelInfo = new JLabel("Toyota Mirage");
+            modelInfo.setFont(labelFont);
+            whitePanel.add(modelInfo, gbc);
+
+            gbc.gridy++; // Move to the next row
+            vehicle = new JLabel("Vehicle");
+            vehicle.setFont(labelFontBold);
+            whitePanel.add(vehicle, gbc);
+
+            gbc.gridy++; // Move to the next row
+            vehicleInfo = new JLabel("Sedan SUV");
+            vehicleInfo.setFont(labelFont);
+            whitePanel.add(vehicleInfo, gbc);
+
+            this.add(whitePanel, BorderLayout.CENTER);
+
+            JButton btnPrev;
+            JButton btnNext;
+            JPanel pnlButtons = new JPanel(new FlowLayout());
+            pnlButtons.setBackground(res.lightGray);
+            add(pnlButtons, BorderLayout.SOUTH);
+
+            btnPrev = res.createBtnRounded("PREV", res.gray, res.eerieBlack, 10); // Adjust the radius as needed
+            pnlButtons.add(btnPrev);
+
+            btnNext = res.createBtnRounded("NEXT", res.celadon, res.eerieBlack, 10); // Adjust the radius as needed
+            pnlButtons.add(btnNext);
         }
 
         /**
-         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehcile.
+         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehicle.
          *
          * @param plateNumber The specified license plate number.
          * @param vehicleType The specified type of vehicle.
          * @param model       The specified model of the vehicle.
          * @return JPanel with vehicle information.
          */
-        public JPanel createCarsLayout(String plateNumber, String vehicleType, String model) {//String PlateNumber, String vehicle, String model){
+        public JPanel createCarsLayout(String plateNumber, String vehicleType, String model) {
             JPanel pnlCarInformation = res.createPnlRounded(290, 150, res.feldgrau, res.gray);
-            //pnlCarInformation.setBackground(res.feldgrau);
             pnlCarInformation.setLayout(new GridBagLayout());
 
-            JPanel innerContent = new JPanel(new GridBagLayout());
-            innerContent.setBackground(res.feldgrau);
-            //innerContent.setBackground(res.feldgrau);
-
-            gbc = new GridBagConstraints();
+            GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
+            gbc.insets = new Insets(5, 10, 5, 10);
 
-            gbc.insets = new Insets(0, 20, 0, 0);
-            JLabel lblPlateNumber = res.createLblP("Plate Number", res.eerieBlack);
-            lblPlateNumber.setMaximumSize(new Dimension(150, 20));
-            innerContent.add(lblPlateNumber, gbc);
+            JLabel lblPlateNumber = res.createLblP("Plate Number:", res.eerieBlack);
+            pnlCarInformation.add(lblPlateNumber, gbc);
 
-            gbc.gridy = 1;
-            JLabel lblPlateNumberInfo = res.createLblP2(plateNumber, res.white);
-            lblPlateNumberInfo.setMaximumSize(new Dimension(150, 30));
-            innerContent.add(lblPlateNumberInfo, gbc);
-
-            gbc.gridy = 2;
-            JLabel lblEmpty = new JLabel(" ");
-            innerContent.add(lblEmpty, gbc);
-
-            gbc.gridy = 3;
-            gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblVehicle = res.createLblP("Vehicle", res.eerieBlack);
-            lblVehicle.setMaximumSize(new Dimension(120, 12));
-            innerContent.add(lblVehicle, gbc);
-
-            gbc.gridy = 3;
+            gbc.gridx = 1;
             gbc.anchor = GridBagConstraints.EAST;
-            gbc.insets = new Insets(0, 0, 0, 20);
-            JLabel lblModel = res.createLblP("Model", res.eerieBlack);
-            lblModel.setMaximumSize(new Dimension(110, 12));
-            innerContent.add(lblModel, gbc);
+            JLabel lblPlateNumberInfo = res.createLblP(plateNumber, res.white);
+            pnlCarInformation.add(lblPlateNumberInfo, gbc);
 
-            gbc.insets = new Insets(0, 20, 0, 0);
-            gbc.gridy = 4;
+            gbc.gridx = 0;
+            gbc.gridy = 1;
             gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblVehicleInfo = res.createLblP(vehicleType, res.white);
-            lblVehicleInfo.setMaximumSize(new Dimension(95, 12));
-            innerContent.add(lblVehicleInfo, gbc);
+            JLabel lblVehicle = res.createLblP("Vehicle:", res.eerieBlack);
+            pnlCarInformation.add(lblVehicle, gbc);
 
-            gbc.insets = new Insets(0, 0, 0, 20);
-            gbc.gridy = 4;
+            gbc.gridx = 1;
+            gbc.anchor = GridBagConstraints.EAST;
+            JLabel lblVehicleInfo = res.createLblP(vehicleType, res.white);
+            pnlCarInformation.add(lblVehicleInfo, gbc);
+
+            gbc.gridx = 0;
+            gbc.gridy = 2;
+            gbc.anchor = GridBagConstraints.WEST;
+            JLabel lblModel = res.createLblP("Model:", res.eerieBlack);
+            pnlCarInformation.add(lblModel, gbc);
+
+            gbc.gridx = 1;
             gbc.anchor = GridBagConstraints.EAST;
             JLabel lblModelInfo = res.createLblP(model, res.white);
-            lblModelInfo.setMaximumSize(new Dimension(100, 20));
-            innerContent.add(lblModelInfo, gbc);
-
-            gbc.insets = new Insets(20, 30, 20, 30);
-            pnlCarInformation.add(innerContent);
+            pnlCarInformation.add(lblModelInfo, gbc);
 
             return pnlCarInformation;
         }
@@ -573,7 +588,7 @@ public class UserProfileView extends JPanel {
             btnConfirm.setPreferredSize(new Dimension(250,35 ));
             pnlButtons.add(btnConfirm);
             this.add(pnlButtons);
-            
+
             lblMessage = res.createLblP("", res.red); // empty message
             this.add(lblMessage);
         }
