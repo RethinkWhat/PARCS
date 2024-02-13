@@ -6,12 +6,10 @@ import server.model.Vehicle;
 import server.view.ServerStatusView;
 
 import java.io.*;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
+import java.net.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 
 
 public class ClientHandler implements Runnable {
@@ -88,11 +86,14 @@ public class ClientHandler implements Runnable {
                                 System.out.println("Add Vehicle");
                                 addVehicle();
                                 break;
+                            case "spotInfo":
+                                System.out.println("Spot info");
+                                spotInfo();
                         }
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+               // e.printStackTrace();
             }
         }
     }
@@ -255,4 +256,19 @@ public class ClientHandler implements Runnable {
             ex.printStackTrace();
         }
     }
+
+
+    public void spotInfo() {
+        System.out.println("----- SPOT INFO -----");
+        try {
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+            outputStreamWriter.writeObject("String");
+            System.out.println("reached");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+
+        }
+
+    }
+
 }

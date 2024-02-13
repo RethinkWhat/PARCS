@@ -85,7 +85,13 @@ public class ReservationPageModel {
     }
 
     public String[] getCarBookings(String parkingIdentifier) {
+        client.openSocket();
+        client.writeString("spotInfo");
 
+        String statement = (String) client.readObject();
+        System.out.println("READ LINE: " + statement);
+      //  client.closeObjectSocket();
+        return null;
     }
 
     public int getAvailCarSlots() {
