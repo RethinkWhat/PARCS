@@ -130,6 +130,12 @@ public class TimerView extends JPanel {
      * The current time of the timer.
      */
     double current;
+
+
+    /** Button declarations */
+    private JButton homeBtn, ticketBtn, exitBtn, userBtn, endTimerBtn;
+
+    private JPanel jPanel3;
     /**
      * Instanc variable of the timer.
      */
