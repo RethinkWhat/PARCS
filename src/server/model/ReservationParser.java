@@ -280,12 +280,5 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
-
-        System.out.println("C1 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C1").getReservationsList().toString());
-        System.out.println("C2 Parking Slot: " + parser.getParkingSlotInformationByIdentifier("C2").getReservationsList().toString());
-
-        System.out.println("ramon: " + parser.getUserReservations("ramon").toString());
-
-        System.out.println("BOOKED C1 TimeSlots for 03/07/03: " + parser.getParkingSpotAvailability("03/07/03", "C1"));
     }
 }
