@@ -55,6 +55,7 @@ public class ReservationPageController {
         view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
 
 
+
         // action listeners
 
 
@@ -83,6 +84,19 @@ public class ReservationPageController {
             btnID = buttonClicked.getIdentifier();
             //TODO: Fix date implementation
             timeAvailable = model.getAvailableTime(btnID, date);
+
+            if (btnID.contains("C")) {
+                view.getParkingSlotButtonsView().setVehiclesList(model.getCars());
+                view.getParkingSlotButtonsView().setLblType("Car");
+               /* if (model.getCars() != null) {
+                    view.getParkingSlotButtonsView().setLblType("Available");
+                }
+
+                */
+            } else {
+                view.getParkingSlotButtonsView().setVehiclesList(model.getMotorcycles());
+                view.getParkingSlotButtonsView().setLblType("Motor");
+            }
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
             view.getParkingSlotButtonsView().setTimeList(timeAvailable);

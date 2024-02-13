@@ -19,10 +19,10 @@
         <phoneNumber>638484</phoneNumber>
                         
         
-        <vehicle>Hatchback,Mitsubishi Mirage,N99 399</vehicle>
+        <vehicle>car,Mitsubishi Mirage,N99 399</vehicle>
                         
         
-        <vehicle>SUV,Mitsubishi Montero,ILY 143</vehicle>
+        <vehicle>car,Mitsubishi Montero,ILY 143</vehicle>
                     
     
     </user>
@@ -61,7 +61,7 @@
                 
         <phoneNumber>+639177900153</phoneNumber>
             
-        <vehicle>Car,Honda Civic,NWA 991</vehicle>
+        <vehicle>Motor,Honda Civic,NWA 991</vehicle>
     </user>
     
 </userClass>

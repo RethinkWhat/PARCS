@@ -566,9 +566,17 @@ public class ReservationPageView extends JPanel {
             btnReserve.addActionListener(listener);
         }
 
+        public void setLblType(String type) {
+            lblType.setText(type);
+        }
 
-        public void setVehiclesList(String[] cars) {
-            cmbVehicle = new JComboBox<>(cars);
+        public void setLblStatus(String status) {
+            lblStatus.setText(status);
+        }
+
+
+        public void setVehiclesList(String[] vehicles) {
+            cmbVehicle.setModel(new javax.swing.DefaultComboBoxModel<>(vehicles));
         }
 
         public void setTimeList(String[] timeList) {
