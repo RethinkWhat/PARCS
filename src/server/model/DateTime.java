@@ -85,6 +85,18 @@ public class DateTime {
         return timeFormat.format(cal.getTime());
     }
 
+    public String addDuration(String time, int duration) {
+        // Assuming time is in "HH:mm" format
+        String[] parts = time.split(":");
+        int hours = Integer.parseInt(parts[0]);
+        int minutes = Integer.parseInt(parts[1]);
+
+        // Adjust hours and minutes
+        hours +=duration;
+        // Format the result
+        return String.format("%02d:%02d", hours, minutes);
+    }
+
 
     public static void main(String[] args) {
         DateTime dateTime = new DateTime();

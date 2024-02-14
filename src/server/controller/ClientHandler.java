@@ -289,8 +289,9 @@ public class ClientHandler implements Runnable {
         System.out.println("----- SPOT INFO -----");
         try {
             String identifier = reader.readLine();
+            String duration = reader.readLine();
             String date = reader.readLine();
-            List<String> availableTime = server.getParkingAvailability(identifier, date);
+            List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
             System.out.println("AVAILABLE TIME: " + availableTime);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(availableTime);

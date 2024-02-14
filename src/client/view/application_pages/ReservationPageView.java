@@ -603,19 +603,20 @@ public class ReservationPageView extends JPanel {
         }
 
         public String getDateChosen() {
-            //TODO: Create cmbDate
-            //return cmbDate.getItemAt(cmbDate.getSelectedIndex());
-            return "02/14/24";
+            return cmbDate.getItemAt(cmbDate.getSelectedIndex());
+        }
+
+        public String getDurationChosen() {
+            return String.valueOf(cmbDuration.getSelectedIndex());
+        }
+
+        public void setDurationListener(ActionListener listener) {
+            cmbDuration.addActionListener(listener);
         }
 
         public void setDurationList(String[] durationList) {
         cmbDuration = new JComboBox<>(durationList);
         }
-
-        public String getDuration() {
-            return cmbDuration.getItemAt(cmbDuration.getSelectedIndex());
-        }
-
     }
 
     public ParkingSlotButtonsView getParkingSlotButtonsView() {
