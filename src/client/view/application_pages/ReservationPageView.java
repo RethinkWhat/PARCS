@@ -522,8 +522,8 @@ public class ReservationPageView extends JPanel {
             pnlReserve.setBackground(Color.white);
 
             gbc = new GridBagConstraints();
-            gbc.insets = new Insets(5, 10, 5, 10); // Add space around components
-            gbc.anchor = GridBagConstraints.CENTER; // Center components horizontally
+            gbc.insets = new Insets(5, 10, 5, 10);
+            gbc.anchor = GridBagConstraints.CENTER;
 
             // Dropdown for Select Vehicle
             cmbVehicle = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
@@ -531,13 +531,6 @@ public class ReservationPageView extends JPanel {
             cmbVehicle.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(cmbVehicle, gbc);
 
-            // Dropdown for Select Time
-            cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "7:00", "8:00", "9:00",
-                    "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"});
-            cmbTime.setPreferredSize(new Dimension(200, 40));
-            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
-            gbc.gridx = 1;
-            pnlReserve.add(cmbTime, gbc);
 
             // Dropdown for Duration
             cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "2hr","3hr","4hr"});
@@ -546,13 +539,28 @@ public class ReservationPageView extends JPanel {
             gbc.gridx = 2;
             pnlReserve.add(cmbDuration, gbc);
 
-            // Reserve Slot Button (using createBtnRounded from Resources)
-            btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            // Dropdown for Select Time
+            cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "7:00", "8:00", "9:00",
+                    "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"});
+            cmbTime.setPreferredSize(new Dimension(200, 40));
+            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 3;
-            gbc.gridwidth = 2; // Set the button to span 2 columns
+            pnlReserve.add(cmbTime, gbc);
+
+            // Reserve Slot Button
+            btnReserve = new JButton("Reserve Slot");
+            gbc.gridx = 4;
+            gbc.gridwidth = 2;
             btnReserve.setPreferredSize(new Dimension(140, 40));
             btnReserve.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(btnReserve, gbc);
+
+            // Dropdown for Select Date
+            cmbDate = new JComboBox<>(new String[]{"Select Date:", "2024-02-15", "2024-02-16", "2024-02-17"});
+            cmbDate.setPreferredSize(new Dimension(200, 40));
+            cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
+            gbc.gridx = 1;
+            pnlReserve.add(cmbDate, gbc);
 
             pnlContainer.add(pnlReserve);
 
