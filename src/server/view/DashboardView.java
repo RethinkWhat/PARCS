@@ -12,10 +12,6 @@ import java.awt.*;
  */
 public class DashboardView extends JPanel {
     /**
-     * The panel that holds different component panels.
-     */
-    private JPanel pnlCards;
-    /**
      * The button that shows the current number of available car slots.
      */
     private JButton btnAvailCar;
@@ -55,12 +51,8 @@ public class DashboardView extends JPanel {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(25,25,25,25));
 
-        pnlCards = new JPanel(topCardLayout);
-        add(pnlCards, BorderLayout.NORTH);
-
         // Main Panel
-        pnlCards.add(new MainTopPanel(), "dashboard");
-        topCardLayout.show(pnlCards, "dashboard");
+        add(new MainTopPanel(), BorderLayout.NORTH);
         add(new MainBottomPanel(), BorderLayout.SOUTH);
 
         this.setPreferredSize(new Dimension(1100,700));
@@ -69,26 +61,163 @@ public class DashboardView extends JPanel {
     /**
      * The panel that contains the parking slots.
      */
-    class MainBottomPanel extends JPanel {
+    public class MainBottomPanel extends JPanel {
         /**
-         * The rounded panel.
+         * The panel that holds the different components.
          */
         private JPanel container;
+        /**
+         * The rounded panel for completed car bookings.
+         */
+        private CarPanel pnlCompletedCar;
+        /**
+         * The rounded panel for completed motorcycle bookings.
+         */
+        private MotorPanel pnlCompletedMotor;
 
         /**
          * Constructs a panel of MainBottomPanel.
          */
         public MainBottomPanel() {
             setLayout(new BorderLayout());
+            setBackground(res.lightGray);
 
-            container = res.createPnlRounded(1300, 510, res.white, res.lightGray);
-            container.setLayout(new BorderLayout());
+            GridLayout gridLayout = new GridLayout(0,2);
+            gridLayout.setHgap(25);
 
-            // TODO: create panel to hold the information of the bookings.
-
+            container = new JPanel(gridLayout);
+            container.setPreferredSize(new Dimension(1300,510));
+            container.setBackground(res.red);
             add(container, BorderLayout.CENTER);
 
+            pnlCompletedCar = new CarPanel();
+            container.add(pnlCompletedCar);
+
+            pnlCompletedMotor = new MotorPanel();
+            container.add(pnlCompletedMotor);
+
             setPreferredSize(new Dimension(1300, 510));
+            setVisible(true);
+        }
+
+        /**
+         * The CarPanel displays the completed car bookings.
+         */
+        public class CarPanel extends JPanel {
+            /**
+             * Holds the components.
+             */
+            private JPanel container;
+            /**
+             * The button for previous record.
+             */
+            private JButton btnPrev;
+            /**
+             * The button for next record.
+             */
+            private JButton btnNext;
+            /**
+             * The panel that holds different components panels of booking histories.
+             */
+            private JPanel pnlCards;
+            /**
+             * The CardLayout that controls the components of the bookings.
+             */
+            private CardLayout cardLayout = new CardLayout();
+
+            /**
+             * Constructs a panel of CarPanel.
+             */
+            public CarPanel() {
+                setLayout(new BorderLayout());
+
+                container = res.createPnlRounded(400, 500,res.white, res.lightGray);
+                container.setBorder(new EmptyBorder(10,10,10,10));
+                container.setLayout(new BorderLayout());
+                add(container,BorderLayout.CENTER);
+
+                JLabel lblTitle = res.createLblH1("Completed Car Bookings", res.eerieBlack);
+                lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+                container.add(lblTitle, BorderLayout.NORTH);
+
+                btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 25,25);
+                container.add(btnPrev, BorderLayout.WEST);
+
+                btnNext = res.createBtnIconOnly(res.iconRightArrow, 25,25);
+                container.add(btnNext, BorderLayout.EAST);
+
+                pnlCards = new JPanel(cardLayout);
+                pnlCards.setPreferredSize(new Dimension(400,300));
+                pnlCards.setBackground(res.red);
+                container.add(pnlCards, BorderLayout.CENTER);
+
+                this.setPreferredSize(new Dimension(400,500));
+            }
+        }
+
+        /**
+         * The MotorPanel displays the completed motorcycle bookings.
+         */
+        public class MotorPanel extends JPanel {
+            /**
+             * Holds the components.
+             */
+            private JPanel container;
+            /**
+             * The button for previous record.
+             */
+            private JButton btnPrev;
+            /**
+             * The button for next record.
+             */
+            private JButton btnNext;
+            /**
+             * The panel that holds different components panels of booking histories.
+             */
+            private JPanel pnlCards;
+            /**
+             * The CardLayout that controls the components of the bookings.
+             */
+            private CardLayout cardLayout = new CardLayout();
+
+            public MotorPanel() {
+                setLayout(new BorderLayout());
+
+                container = res.createPnlRounded(400, 500,res.white, res.lightGray);
+                container.setBorder(new EmptyBorder(10,10,10,10));
+                container.setLayout(new BorderLayout());
+                add(container,BorderLayout.CENTER);
+
+                JLabel lblTitle = res.createLblH1("Completed Motorcycle Bookings", res.eerieBlack);
+                lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
+                container.add(lblTitle, BorderLayout.NORTH);
+
+                btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 25,25);
+                container.add(btnPrev, BorderLayout.WEST);
+
+                btnNext = res.createBtnIconOnly(res.iconRightArrow, 25,25);
+                container.add(btnNext, BorderLayout.EAST);
+
+                pnlCards = new JPanel(cardLayout);
+                pnlCards.setPreferredSize(new Dimension(400,300));
+                pnlCards.setBackground(res.red);
+                container.add(pnlCards, BorderLayout.CENTER);
+
+                this.setPreferredSize(new Dimension(400,500));
+            }
+        }
+
+        /**
+         * The record panel holds one record of a booking. It displays the pertinent information about the particular
+         * completed booking.
+         */
+        public class RecordPanel extends JPanel {
+            private String username;
+            private String vehicle;
+            private String slot;
+            private String checkIn;
+            private String checkOut;
+            private String duration;
         }
     }
 
@@ -113,10 +242,10 @@ public class DashboardView extends JPanel {
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.gridwidth = 1;
-            gbc.ipadx = 475;
+            gbc.ipadx = 1100;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.anchor = GridBagConstraints.WEST;
-            lblName = res.createLblH2("Hello, " + "Ramon Jasmin"+ "!", res.eerieBlack);
+            lblName = res.createLblH2("Hello, " + "Admin"+ "!", res.eerieBlack);
             pnlInformation.add(lblName, gbc);
 
             gbc.gridy = 1;
