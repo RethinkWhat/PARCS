@@ -680,9 +680,27 @@ public class ReservationPageView extends JPanel {
             ImageIcon iconAvailableCar = res.iconAvailableCar; //change icon
             pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
+            // Create PnlConfirmation panel
+            JPanel pnlConfirmation = new JPanel(new GridBagLayout());
+            pnlConfirmation.setPreferredSize(new Dimension(600, 150));
+
+            // Create label for PnlConfirmation with font based on resources class
+            lblReserved = res.createLblH1("RESERVED!", res.celadon);
+            lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+
+            // Add labels to PnlConfirmation panel
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            pnlConfirmation.add(lblReserved, gbc);
+
+            gbc.gridy = 1;
+            pnlConfirmation.add(lblConfirmationMsg, gbc);
+
 
 
             this.add(pnlIcon);
+            this.add(pnlConfirmation);
 
 
             this.setPreferredSize(new Dimension(600,400));
