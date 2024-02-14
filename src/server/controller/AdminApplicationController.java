@@ -49,8 +49,14 @@ public class AdminApplicationController {
 
         // server status page
         view.getServerStatusView().setServerListener(new ServerListener());
-        view.setNavStatusListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "status"));
-        view.setNavDashboardListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "dashboard"));
+        view.setNavStatusListener(e -> {
+            view.getMainCardLayout().show(view.getPnlCards(), "status");
+            view.getLblLocation().setText("Server Status");
+        });
+        view.setNavDashboardListener(e -> {
+            view.getMainCardLayout().show(view.getPnlCards(), "dashboard");
+            view.getLblLocation().setText("Dashboard");
+        });
 
         // dashboard page
 
@@ -62,7 +68,6 @@ public class AdminApplicationController {
 
         // dashboard page
         // TODO
-
     }
 
     /**
