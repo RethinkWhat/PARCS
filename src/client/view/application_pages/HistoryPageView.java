@@ -1,12 +1,11 @@
 package client.view.application_pages;
 
 
-import java.awt.Color;
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
 import java.awt.geom.RoundRectangle2D;
-import javax.swing.JButton;
-import javax.swing.JPanel;
+import javax.swing.*;
 import javax.swing.plaf.basic.BasicButtonUI;
 
 
@@ -278,7 +277,10 @@ public class HistoryPageView extends javax.swing.JFrame {
             }
         });
 
-        parcsLogo.setIcon(new javax.swing.ImageIcon("C:\\Users\\MIzuchi\\Desktop\\icons\\parcs-logo-small.png")); // NOI18N
+        ImageIcon parcs = new ImageIcon("res/drawable/icons/parcs-logo-small.png");
+        Image scaledParcs = parcs.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        parcs = new ImageIcon(scaledParcs);
+        parcsLogo.setIcon(parcs);
 
         ticketText.setFont(new java.awt.Font("Inter", 1, 18)); // NOI18N
         ticketText.setForeground(new java.awt.Color(255, 255, 255));
@@ -308,8 +310,11 @@ public class HistoryPageView extends javax.swing.JFrame {
 
         jPanel3.setBackground(new java.awt.Color(76, 102, 99));
 
+        ImageIcon home = new ImageIcon("res/drawable/icons/home-white-outline.png");
+        Image scaledHome = home.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        home = new ImageIcon(scaledHome);
         homeBtn.setBackground(new java.awt.Color(76, 102, 99));
-        homeBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\MIzuchi\\Desktop\\icons\\home-white-outline.png")); // NOI18N
+        homeBtn.setIcon(home);
         homeBtn.setBorder(null);
         homeBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -317,8 +322,11 @@ public class HistoryPageView extends javax.swing.JFrame {
             }
         });
 
+        ImageIcon ticket = new ImageIcon("res/drawable/icons/ticket-white-outline.png");
+        Image scaledTicket = ticket.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        ticket = new ImageIcon(scaledTicket);
         ticketBtn.setBackground(new java.awt.Color(76, 102, 99));
-        ticketBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\MIzuchi\\Desktop\\icons\\ticket-white-outline.png")); // NOI18N
+        ticketBtn.setIcon(ticket); // NOI18N
         ticketBtn.setBorder(null);
         ticketBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -326,8 +334,11 @@ public class HistoryPageView extends javax.swing.JFrame {
             }
         });
 
+        ImageIcon exit = new ImageIcon("res/drawable/icons/exit-white-outline.png");
+        Image scaledExit = exit.getImage().getScaledInstance(40,40,Image.SCALE_SMOOTH);
+        exit = new ImageIcon(scaledExit);
         exitBtn.setBackground(new java.awt.Color(76, 102, 99));
-        exitBtn.setIcon(new javax.swing.ImageIcon("C:\\Users\\MIzuchi\\Desktop\\icons\\exit-white-outline.png")); // NOI18N
+        exitBtn.setIcon(exit); // NOI18N
         exitBtn.setBorder(null);
         exitBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -1856,4 +1867,3 @@ public class HistoryPageView extends javax.swing.JFrame {
     private javax.swing.JLabel vehicleInfo9;
     // End of variables declaration
 }
-
