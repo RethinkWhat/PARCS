@@ -44,7 +44,7 @@ public record TimeRange(String startTime, String endTime) {
 
             long interval = 60 * 60 * 1000; // 1 hour in milliseconds is 60 * 60 * 1000
 
-            for (long time = start.getTime(); time <= end.getTime(); time += interval) {
+            for (long time = start.getTime(); time < end.getTime(); time += interval) {
                 hourIncrements.add(sdf.format(new Date(time)));
             }
         } catch (ParseException e) {
