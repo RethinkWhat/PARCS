@@ -531,6 +531,12 @@ public class ReservationPageView extends JPanel {
             cmbVehicle.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(cmbVehicle, gbc);
 
+            // Dropdown for Select Date
+            cmbDate = new JComboBox<>(new String[]{"Select Date:", "2024-02-15", "2024-02-16", "2024-02-17"});
+            cmbDate.setPreferredSize(new Dimension(200, 40));
+            cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
+            gbc.gridx = 1;
+            pnlReserve.add(cmbDate, gbc);
 
             // Dropdown for Duration
             cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "2hr","3hr","4hr"});
@@ -554,13 +560,6 @@ public class ReservationPageView extends JPanel {
             btnReserve.setPreferredSize(new Dimension(140, 40));
             btnReserve.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(btnReserve, gbc);
-
-            // Dropdown for Select Date
-            cmbDate = new JComboBox<>(new String[]{"Select Date:", "2024-02-15", "2024-02-16", "2024-02-17"});
-            cmbDate.setPreferredSize(new Dimension(200, 40));
-            cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
-            gbc.gridx = 1;
-            pnlReserve.add(cmbDate, gbc);
 
             pnlContainer.add(pnlReserve);
 
