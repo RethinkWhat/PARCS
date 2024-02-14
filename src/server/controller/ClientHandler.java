@@ -104,7 +104,6 @@ public class ClientHandler implements Runnable {
 
     public void handleLogout() {
         try {
-            writer.println("MESSAGE SENT");
             String username = reader.readLine();
             server.accountLogout(username);
             handleDisconnect();
