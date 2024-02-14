@@ -193,7 +193,7 @@ public class ReservationPageView extends JPanel {
 
                 // Initialize buttons for the bottom row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    String carLabel = "C" + String.format("%2d", i + 6);
+                    String carLabel = "C" + (i + 6);
                     carButtons[i + NUM_CAR_SLOTS] = new CarMotorButton(carLabel);
 
                     //for buttons with image
@@ -205,7 +205,7 @@ public class ReservationPageView extends JPanel {
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    String motorLabel = "M" + String.format("%2d", i + 3);
+                    String motorLabel = "M" + (i + 3);
                     motorButtons[i + NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel);
 
                     //for buttons with image
@@ -556,7 +556,7 @@ public class ReservationPageView extends JPanel {
         }
 
         public void setLblSlotNumber(String label) {
-                lblSlotNumber.setText("SLOT " + label);
+                lblSlotNumber.setText("SPOT " + label);
         }
         public void setBtnCloseListener(ActionListener listener) {
             btnClose.addActionListener(listener);
