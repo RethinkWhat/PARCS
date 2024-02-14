@@ -671,6 +671,18 @@ public class ReservationPageView extends JPanel {
             this.setModal(true);
             this.setLayout(new GridLayout(3, 1));
 
+            // Create pnlIcon panel
+            JPanel pnlIcon = new JPanel();
+            pnlIcon.setLayout(new BorderLayout());
+            pnlIcon.setPreferredSize(new Dimension(600, 200));
+
+            // Create and set ImageIcon for pnlIcon
+            ImageIcon iconAvailableCar = res.iconAvailableCar; //change icon
+            pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
+
+
+
+            this.add(pnlIcon);
 
 
             this.setPreferredSize(new Dimension(600,400));
