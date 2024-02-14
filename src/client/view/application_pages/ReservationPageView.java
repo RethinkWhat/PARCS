@@ -697,11 +697,18 @@ public class ReservationPageView extends JPanel {
             gbc.gridy = 1;
             pnlConfirmation.add(lblConfirmationMsg, gbc);
 
+            // Create pnlCloseBtn panel
+            JPanel pnlCloseBtn = new JPanel(new FlowLayout());
+            pnlCloseBtn.setPreferredSize(new Dimension(600, 50));
 
+            // Close button
+            btnCloseConfirmation = res.createBtnRounded("CLOSE", res.red, res.eerieBlack, 20);
+
+            pnlCloseBtn.add(btnCloseConfirmation);
 
             this.add(pnlIcon);
             this.add(pnlConfirmation);
-
+            this.add(pnlCloseBtn);
 
             this.setPreferredSize(new Dimension(600,400));
             this.pack();
