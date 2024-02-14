@@ -1,67 +1,99 @@
 <userClass>
-            
+                
+    
     
     <user username="rickardo">
-                        
+                                
+        
         
         <type>user</type>
-                        
+                                
+        
         
         <password>Z4QRMo5v3ja99VBaAxrc8K7FWXyhqAt07EIFuGNIUTQ=</password>
-                        
+                                
+        
         
         <lastName>Ramonster</lastName>
-                        
+                                
+        
         
         <firstName>Johan</firstName>
-                        
+                                
+        
         
         <phoneNumber>638484</phoneNumber>
-                        
+                                
+        
         
         <vehicle>car,Mitsubishi Mirage,N99 399</vehicle>
-                        
+                                
+        
         
         <vehicle>car,Mitsubishi Montero,ILY 143</vehicle>
-                    
+                            
+    
     
     </user>
-            
+                
+    
     
     <user username="ri">
-                        
+                                
+        
         
         <type>admin</type>
-                        
+                                
+        
         
         <password>OWoUqyBuK0TgPE4AOT6UjM42prDw10ictG2USzOtUcg=</password>
-                        
+                                
+        
         
         <lastName>ri</lastName>
-                        
+                                
+        
         
         <firstName>ri</firstName>
-                        
+                                
+        
         
         <phoneNumber>ri</phoneNumber>
-                    
+                            
+    
     
     </user>
-        
+            
+    
     
     <user username="rethinkwhat">
-                
+                        
+        
         <type>user</type>
-                
+                        
+        
         <password>PcDe6jAFPFe8u3wf8Ym4zVZo7qQvr5sa/2UNGkp+sN4=</password>
-                
+                        
+        
         <lastName>Tank</lastName>
-                
+                        
+        
         <firstName>Rithik</firstName>
-                
+                        
+        
         <phoneNumber>+639177900153</phoneNumber>
-            
+                    
+        
         <vehicle>Motor,Honda Civic,NWA 991</vehicle>
+            
     </user>
-    
+        
+
+    <user username="testAcc">
+        <type>user</type>
+        <password>+Qi5CPZ0OfZNdWi5I3IC6l93qiicKo75iCIxmhSssvc=</password>
+        <lastName>tank</lastName>
+        <firstName>rithik</firstName>
+        <phoneNumber>+460534030</phoneNumber>
+    </user>
 </userClass>
