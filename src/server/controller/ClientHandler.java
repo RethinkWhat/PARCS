@@ -52,78 +52,58 @@ public class ClientHandler implements Runnable {
                     if (page != null) {
                         switch (page) {
                             case "logout":
-                                System.out.println("reached client handler");
                                 handleLogout();
                                 break;
                             case "login":
                                 login();
-                                System.out.println("page: " + page);
                                 break;
                             case "reservation":
-                                System.out.println("reservation page starting");
                                 reserve();
-                                System.out.println("reservation page finished");
                                 break;
                             case "signUp" :
-                                System.out.println("Sign Up");
                                 signUp();
                                 break;
                             case "disconnect":
                                 handleDisconnect();
                                 break;
                             case "account":
-                                System.out.println("account page starting");
                                 account();
-                                System.out.println("account page finished");
                                 break;
                             case "editInfo":
-                                System.out.println("editing");
                                 editInfo();
-                                System.out.println("edit finished");
                                 break;
                             case "editPassword":
-                                System.out.println("Editing password");
                                 editPassword();
-                                System.out.println("Editing password");
                                 break;
                             case "addVehicle":
-                                System.out.println("Add Vehicle");
                                 addVehicle();
                                 break;
                             case "spotInfo":
-                                System.out.println("Spot info");
                                 spotInfo();
                                 break;
                             case "book":
-                                System.out.println("book");
                                 bookReservation();
                                 break;
                             case "searchForSpot":
-                                System.out.println("reached");
                                 searchForSpot();
                                 break;
                         }
                     }
                 }
             } catch (IOException e) {
-               // e.printStackTrace();
+                e.printStackTrace();
             }
         }
     }
 
     public void handleDisconnect() {
-        System.out.println("---------------");
-        System.out.println("disconnecting");
         disconnect = true;
-        System.out.println("disconnected");
-        System.out.println("---------------");
         closeResources();
         openResources();
     }
 
     public void handleLogout() {
         try {
-            System.out.println("-----LOGOUT-----");
             writer.println("MESSAGE SENT");
             String username = reader.readLine();
             server.accountLogout(username);
@@ -164,15 +144,11 @@ public class ClientHandler implements Runnable {
 
 
     public void login() throws IOException {
-        System.out.println("login attempt");
-
         String username = null;
         while (username == null) {
             username = reader.readLine();
         }
-        System.out.println("read username attempt: " + username);
         String password = reader.readLine();
-        System.out.println("read password attempt: " + password);
 
         authenticateLogin = server.validateAccount(username, password);
 
@@ -191,7 +167,6 @@ public class ClientHandler implements Runnable {
 
     public void signUp() {
         try {
-            System.out.println("SIGN UP METHOD");
             String username = reader.readLine();
 
             System.out.println(username);
@@ -202,20 +177,15 @@ public class ClientHandler implements Runnable {
             String firstName = reader.readLine();
             String phoneNumber = reader.readLine();
 
-            System.out.println(username + ", " + password + ", " + lastName + ", " + firstName + ", " + phoneNumber);
-
             boolean createAccount = server.createAccount(username,"user",password,lastName,firstName,phoneNumber,null);
             writer.println(createAccount);
-
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    // TODO: add method to update the password
     public void editInfo() {
         try {
-            System.out.println("---EDIT INFO METHOD---");
             String lineRead = "";
             while (true) {
                 lineRead = reader.readLine();
@@ -231,7 +201,6 @@ public class ClientHandler implements Runnable {
     }
 
     public void editPassword(){
-        System.out.println("-----------EDIT PASSWORD-----------");
         try {
             String username = reader.readLine();
             String newPassword = reader.readLine();
@@ -244,35 +213,24 @@ public class ClientHandler implements Runnable {
 
 
     public void reserve() {
-        System.out.println("-----------RESERVE-----------");
         try {
             String username = reader.readLine();
-            System.out.println("Printing: " + username);
             writer.println(server.getUserFullName(username));
-
             writer.println(server.countCarSlots());
             writer.println(server.countMotorSpots());
             writer.println(server.countBookings());
-            //writer.println(5);
-            //writer.println(6);
-            //writer.println(7);
-
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(vehicles);
-
-
         } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
 
     public void account() {
-        System.out.println("---------ACCOUNT---------");
         try {
             String username = reader.readLine();
-            System.out.println("Printing: " + username);
             writer.println(server.getUserCredentials(username));
         } catch (IOException e) {
             e.printStackTrace();
@@ -280,17 +238,14 @@ public class ClientHandler implements Runnable {
     }
 
     public void addVehicle() {
-        System.out.println("----- ADD VEHICLE ----");
         try {
             String username = reader.readLine();
-            System.out.println("ADD VEHICLE: " + username);
             String type = reader.readLine();
             String model = reader.readLine();
             String plateNumber = reader.readLine();
             Vehicle newVehicle = new Vehicle(type,model,plateNumber);
 
             boolean addConfirmed = server.addVehicle(username, newVehicle);
-            System.out.println("Writing addConfirmed: " + addConfirmed);
             writer.println(addConfirmed);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -299,16 +254,13 @@ public class ClientHandler implements Runnable {
 
 
     public void spotInfo() {
-        System.out.println("----- SPOT INFO -----");
         try {
             String identifier = reader.readLine();
             String duration = reader.readLine();
             String date = reader.readLine();
             List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
-            System.out.println("AVAILABLE TIME: " + availableTime);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(availableTime);
-            System.out.println("reached");
         } catch (IOException ex) {
             ex.printStackTrace();
 
@@ -316,7 +268,6 @@ public class ClientHandler implements Runnable {
     }
 
     public void bookReservation() {
-        System.out.println("Book reservation");
         try {
             String identifier = reader.readLine();
             String date = reader.readLine();
