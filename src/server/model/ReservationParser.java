@@ -319,6 +319,7 @@ public class ReservationParser {
         Element parkingSpotElement = document.createElement("parkingSpot");
         parkingSpotElement.setAttribute("identifier", identifier);
         parkingSpotElement.appendChild(reservationElement);
+        root.appendChild(parkingSpotElement);
         transform();
     }
 
@@ -367,6 +368,6 @@ public class ReservationParser {
             System.out.println(parkingSpotList.get(x));
         }
 
-        parser.createReservationNode("C1", "03/09/04", "12:00", "3", "alimonem");
+        parser.createReservationNode("C7", "03/09/04", "12:00", "3", "alimonem");
     }
 }
