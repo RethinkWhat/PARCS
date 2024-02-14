@@ -176,6 +176,19 @@ public class Client {
         closeSocket();
     }
 
+    public int logoutAndExit() {
+        openSocket();
+        try {
+            writeString("logout");
+            this.writeString(this.getUsername());
+            client.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        closeSocket();
+        return 1;
+    }
+
     public void closeSocket() {
         try {
             client.close();
@@ -198,6 +211,7 @@ public class Client {
     public void startGUI() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
+        view.setDefaultCloseOperation(logoutAndExit());
         new LoginRegisterController(view, model);
     }
 

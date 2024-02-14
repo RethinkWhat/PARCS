@@ -86,9 +86,9 @@ public class Server implements Runnable{
         return reservationParser.availableTime(identifier,date);
     }
 
-    public HashMap<String, List<String>> getUserVehicles(String username) {
-        //TODO:
-        return null;
+    public Map<String, List<String>> getUserVehicles(String username) {
+
+        return userParser.getUserVehicles(username);
     }
 
     public boolean makeReservation(String identifier, String date, String startTime, String duration, String username) {
