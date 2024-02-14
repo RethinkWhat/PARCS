@@ -281,7 +281,16 @@ public class ReservationParser {
         return bookedTimeRange;
     }
 
-
+    /**
+     * This method will create a reservation node for the xml file
+     * If the passed identifier already exists, it will add a reservation under that identifier
+     * Else, it will create a new parking spot in the xml file with the new reservation
+     * @param identifier
+     * @param date
+     * @param startTime
+     * @param duration
+     * @param username
+     */
     private void createReservationNode(String identifier, String date, String startTime, String duration, String username){
         getReservationsFile();
 
@@ -306,9 +315,11 @@ public class ReservationParser {
         usernameElement.setTextContent(username);
         reservationElement.appendChild(usernameElement);
 
+        // Searching if the passed identifier already exists
         for (int i = 0; i < parkingSpotNodes.getLength(); i++){
             Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
 
+            //If the passed identifier already exists, it will add that reservation under the passed identifier
             if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
                 currParkingSpotElement.appendChild(reservationElement);
                 transform();
@@ -316,6 +327,7 @@ public class ReservationParser {
             }
         }
 
+        // This adds a new parking spot with the reservation node if the passed identifier does not exist
         Element parkingSpotElement = document.createElement("parkingSpot");
         parkingSpotElement.setAttribute("identifier", identifier);
         parkingSpotElement.appendChild(reservationElement);
@@ -323,6 +335,9 @@ public class ReservationParser {
         transform();
     }
 
+    /**
+     * A transformer that will write into the reservationsFile
+     */
     private void transform(){
         DOMSource source = new DOMSource(document);
 
