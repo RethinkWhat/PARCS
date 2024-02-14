@@ -11,6 +11,12 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 
@@ -305,7 +311,7 @@ public class ReservationParser {
 
             if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
                 currParkingSpotElement.appendChild(reservationElement);
-                //transform method
+                transform();
                 return;
             }
         }
@@ -313,10 +319,28 @@ public class ReservationParser {
         Element parkingSpotElement = document.createElement("parkingSpot");
         parkingSpotElement.setAttribute("identifier", identifier);
         parkingSpotElement.appendChild(reservationElement);
-
+        transform();
     }
 
+    private void transform(){
+        DOMSource source = new DOMSource(document);
 
+        try{
+
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+
+            StreamResult result = new StreamResult(reservationsFile);
+
+            transformer.transform(source,result);
+
+        }catch (TransformerException te){
+            te.printStackTrace();
+        }
+    }
 
     public List<String> availableTime(String date, String identifier) {
         populateTime();
