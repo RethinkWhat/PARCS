@@ -444,6 +444,10 @@ public class ReservationPageView extends JPanel {
          * TODO: Documentation
          */
         private JComboBox<String> cmbDuration;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbDate;
 
         /**
          * The stylesheet.
