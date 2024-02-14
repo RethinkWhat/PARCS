@@ -54,28 +54,30 @@ public class ServerStatusView extends JPanel {
          * Construct a panel of MainPanel.
          */
         public MainPanel(){
-            setBackground(res.white);
-            setForeground(res.white);
-            setLayout(new GridBagLayout());
+            setLayout(new BorderLayout());
+
+            JPanel container = res.createPnlRounded(1300,650,res.white, res.lightGray);
+            container.setLayout(new GridBagLayout());
+            add(container, BorderLayout.CENTER);
 
             gbc = new GridBagConstraints();
 
             gbc.gridy = 0;
             lblServerPrompt = res.createLblH1("SERVER STATUS", res.eerieBlack);
             lblServerPrompt.setHorizontalAlignment(SwingConstants.CENTER);
-            add(lblServerPrompt, gbc);
+            container.add(lblServerPrompt, gbc);
 
             //To be dynamically changed in the controller
             gbc.gridy = 1;
             lblServerStatus = res.createLblH1("OFFLINE",res.red);
             lblServerStatus.setHorizontalAlignment(SwingConstants.CENTER);
-            add(lblServerStatus,gbc);
+            container.add(lblServerStatus,gbc);
 
             gbc.gridy = 2;
             gbc.ipady = 10;
             btnServerSwitch = res.createBtnRounded("Start Server", res.white, res.celadon, 15);
             btnServerSwitch.setPreferredSize(new Dimension(200,50));
-            add(btnServerSwitch,gbc);
+            container.add(btnServerSwitch,gbc);
 
             setPreferredSize(new Dimension(1300,650));
         }
