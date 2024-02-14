@@ -465,17 +465,26 @@ public class ReservationPageView extends JPanel {
             add(pnlContainer, BorderLayout.CENTER);
 
             // pnlSlotNumber
-            JPanel pnlSlotNumber = new JPanel(new BorderLayout());
+            JPanel pnlSlotNumber = new JPanel(new GridBagLayout());
             pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
             pnlSlotNumber.setBackground(res.white);
 
+            GridBagConstraints gbcSlotNumber = new GridBagConstraints();
+            gbcSlotNumber.anchor = GridBagConstraints.WEST;
+            gbcSlotNumber.insets = new Insets(0, 10, 0, 0);
+
             // Button for closing the panel
-            btnClose = res.createBtnIconOnly(res.iconClose, 20,20);
-            pnlSlotNumber.add(btnClose, BorderLayout.WEST);
+            btnClose = res.createBtnIconOnly(res.iconClose, 20, 20);
+            pnlSlotNumber.add(btnClose, gbcSlotNumber);
 
             // Label for the slot number
             lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
-            pnlSlotNumber.add(lblSlotNumber, BorderLayout.CENTER);
+            gbcSlotNumber.gridx = 1;
+            gbcSlotNumber.weightx = 1.0;
+            gbcSlotNumber.anchor = GridBagConstraints.CENTER;
+            gbcSlotNumber.insets = new Insets(0, 10, 0, 0);
+            pnlSlotNumber.add(lblSlotNumber, gbcSlotNumber);
+
             pnlContainer.add(pnlSlotNumber);
 
             // pnlSlotInformation
