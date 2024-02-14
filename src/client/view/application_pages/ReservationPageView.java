@@ -465,17 +465,26 @@ public class ReservationPageView extends JPanel {
             add(pnlContainer, BorderLayout.CENTER);
 
             // pnlSlotNumber
-            JPanel pnlSlotNumber = new JPanel(new BorderLayout());
+            JPanel pnlSlotNumber = new JPanel(new GridBagLayout());
             pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
             pnlSlotNumber.setBackground(res.white);
 
+            GridBagConstraints gbcSlotNumber = new GridBagConstraints();
+            gbcSlotNumber.anchor = GridBagConstraints.WEST;
+            gbcSlotNumber.insets = new Insets(0, 10, 0, 0);
+
             // Button for closing the panel
-            btnClose = res.createBtnIconOnly(res.iconClose, 20,20);
-            pnlSlotNumber.add(btnClose, BorderLayout.WEST);
+            btnClose = res.createBtnIconOnly(res.iconClose, 20, 20);
+            pnlSlotNumber.add(btnClose, gbcSlotNumber);
 
             // Label for the slot number
             lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
-            pnlSlotNumber.add(lblSlotNumber, BorderLayout.CENTER);
+            gbcSlotNumber.gridx = 1;
+            gbcSlotNumber.weightx = 1.0;
+            gbcSlotNumber.anchor = GridBagConstraints.CENTER;
+            gbcSlotNumber.insets = new Insets(0, 10, 0, 0);
+            pnlSlotNumber.add(lblSlotNumber, gbcSlotNumber);
+
             pnlContainer.add(pnlSlotNumber);
 
             // pnlSlotInformation
@@ -532,7 +541,7 @@ public class ReservationPageView extends JPanel {
             pnlReserve.add(cmbVehicle, gbc);
 
             // Dropdown for Select Date
-            cmbDate = new JComboBox<>(new String[]{"Select Date:", "2024-02-15", "2024-02-16", "2024-02-17"});
+            cmbDate = new JComboBox<>(new String[]{"Select Date:", "02-15-24", "02-16-24", "02-17-24"});
             cmbDate.setPreferredSize(new Dimension(200, 40));
             cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 1;
@@ -554,7 +563,7 @@ public class ReservationPageView extends JPanel {
             pnlReserve.add(cmbTime, gbc);
 
             // Reserve Slot Button
-            btnReserve = new JButton("Reserve Slot");
+            btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
             gbc.gridx = 4;
             gbc.gridwidth = 2;
             btnReserve.setPreferredSize(new Dimension(140, 40));
