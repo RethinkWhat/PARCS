@@ -113,11 +113,12 @@ public class ReservationPageModel {
         return reservationTime;
     }
 
-    public String[] getAvailableTime(String parkingIdentifier, String date) {
+    public String[] getAvailableTime(String parkingIdentifier, String duration, String date) {
         client.openSocket();
         client.writeString("spotInfo");
 
         client.writeString(parkingIdentifier);
+        client.writeString(duration);
         client.writeString(date);
         ArrayList<String> listOfTime = (ArrayList<String>) client.readObject();
 

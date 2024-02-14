@@ -41,7 +41,8 @@ public record TimeRange(String startTime, String endTime) {
             Date start = sdf.parse(startTime);
             Date end = sdf.parse(endTime);
 
-            long interval = 60 * 60 * 1000; // 1 hour in milliseconds
+
+            long interval = 60 * 60 * 1000; // 1 hour in milliseconds is 60 * 60 * 1000
 
             for (long time = start.getTime(); time <= end.getTime(); time += interval) {
                 hourIncrements.add(sdf.format(new Date(time)));

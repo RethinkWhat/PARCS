@@ -27,6 +27,8 @@ public class ReservationParser {
 
     DateTime dateTime = new DateTime();
 
+    HashMap<String, Integer> timeHashMap;
+
     final File reservationsFile = new File("src/server/res/reservations.xml");
 
     DateTime dateTimeFormatter = new DateTime();
@@ -37,6 +39,11 @@ public class ReservationParser {
         for (String timeItem : time)
             timeArray.add(timeItem);
 
+        timeHashMap = new HashMap<>();
+
+        for (int x =6; x <=18; x++) {
+            timeHashMap.put((x+":00"),x);
+        }
     }
     private void getReservationsFile() {
         try {
@@ -275,18 +282,37 @@ public class ReservationParser {
         return bookedTimeRange;
     }
 
-    public List<String> availableTime(String date, String identifier) {
+    public List<String> availableTime(String date, String duration, String identifier) {
         populateTime();
-        ArrayList<String> toReturn = timeArray;
-        List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date,identifier);
+        DateTime dateTime = new DateTime();
+        int durationAsInt = Integer.parseInt(duration);
+        ArrayList<String> availableTime = new ArrayList<>();
+        List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date, identifier);
+
+        // List<TimeRange> bookedTimeRange = getParkingSpotAvailability("02/14/24", "C1");
+
         System.out.println("BOOKED TIME: " + bookedTimeRange);
+
+
+        ArrayList<String> allBookings = new ArrayList<>();
+        ArrayList<String> allTime = timeArray;
+        ArrayList<String> toReturnTime = new ArrayList<>();
         for (TimeRange timeRange : bookedTimeRange) {
-            List<String> timeUnavailable = timeRange.getStartToEndTime();
-            for (int x = 0; x<timeUnavailable.size() -1; x++) {
-                toReturn.remove(timeUnavailable.get(x));
+
+            // get the start time, the end time, and all the time in between
+            List<String> timeList = timeRange.getStartToEndTime();
+
+            // get all the time in the booking except the last where it ends
+            for (int x = 0; x < timeList.size() - 1; x++) {
+                allBookings.add(timeList.get(x));
             }
         }
-        return toReturn;
+
+        for (int x = 0; x < allTime.size(); x++) {
+            if (!(allBookings.contains(allTime.get(x))))
+                toReturnTime.add(allTime.get(x));
+        }
+        return toReturnTime;
     }
 
 
