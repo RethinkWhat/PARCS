@@ -147,6 +147,15 @@ public class ReservationPageModel {
         return confirmed;
     }
 
+    public String findAvailableSlotOnDay(String date) {
+        client.openSocket();
+        client.writeString("searchForSpot");
+        client.writeString(date);
+        String identifier = client.readString();
+        client.closeSocket();
+        return identifier;
+    }
+
 
     public int getAvailCarSlots() {
         // get output from server

@@ -56,6 +56,7 @@ public class ReservationPageController {
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
         view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
         view.getParkingSlotButtonsView().setDurationListener(new durationListener());
+        view.getMainTopPanel().setTxtSearchBarListener(new searchListener());
 
 
 
@@ -85,10 +86,6 @@ public class ReservationPageController {
 
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
-            //TODO: Fix date implementation
-
-
-            //timeAvailable = model.getAvailableTime(btnID, duration, date);
 
 
             if (timeAvailable != null) {
@@ -139,6 +136,26 @@ public class ReservationPageController {
                 if (startTime != null && duration != null) {
                     model.attemptBooking(btnID, date, startTime, duration);
                 }
+        }
+    }
+
+    class searchListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String search = ((JTextField) e.getSource()).getText();
+            String identifier = model.findAvailableSlotOnDay(search);
+            view.getTopCardLayout().show(view.getPnlCards(), "buttons");
+
+            if (identifier.contains("C")) {
+                view.getParkingSlotButtonsView().setVehiclesList(model.getCars());
+                view.getParkingSlotButtonsView().setLblType("Car");
+            } else {
+                view.getParkingSlotButtonsView().setVehiclesList(model.getMotorcycles());
+                view.getParkingSlotButtonsView().setLblType("Motor");
+            }
+
+            view.getParkingSlotButtonsView().setLblSlotNumber(identifier);
+
         }
     }
 }
