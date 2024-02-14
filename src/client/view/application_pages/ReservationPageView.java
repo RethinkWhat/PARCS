@@ -562,6 +562,10 @@ public class ReservationPageView extends JPanel {
             btnClose.addActionListener(listener);
         }
 
+        public void setLblDate(String date) {
+            lblDate.setText(date);
+        }
+
         public void setReserveSlotListener(ActionListener listener) {
             btnReserve.addActionListener(listener);
         }
@@ -585,6 +589,12 @@ public class ReservationPageView extends JPanel {
 
         public String getStartTime() {
             return cmbTime.getItemAt(cmbTime.getSelectedIndex());
+        }
+
+        public String getDateChosen() {
+            //TODO: Create cmbDate
+            //return cmbDate.getItemAt(cmbDate.getSelectedIndex());
+            return "02/14/24";
         }
 
         public void setDurationList(String[] durationList) {

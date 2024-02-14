@@ -83,16 +83,19 @@ public class ReservationPageController {
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
             //TODO: Fix date implementation
+
             timeAvailable = model.getAvailableTime(btnID, date);
+
+            if (timeAvailable != null) {
+                view.getParkingSlotButtonsView().setLblStatus("Available");
+            }
+
+            view.getParkingSlotButtonsView().setLblDate(date);
+
 
             if (btnID.contains("C")) {
                 view.getParkingSlotButtonsView().setVehiclesList(model.getCars());
                 view.getParkingSlotButtonsView().setLblType("Car");
-               /* if (model.getCars() != null) {
-                    view.getParkingSlotButtonsView().setLblType("Available");
-                }
-
-                */
             } else {
                 view.getParkingSlotButtonsView().setVehiclesList(model.getMotorcycles());
                 view.getParkingSlotButtonsView().setLblType("Motor");

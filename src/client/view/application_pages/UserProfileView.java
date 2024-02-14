@@ -84,13 +84,13 @@ public class UserProfileView extends JPanel {
         // pnlCards.setBounds(220,0,750,560);
         pnlRight.add(pnlCards, BorderLayout.NORTH);
 
-//        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
+        pnlCards.add(pnlEditProfile = new EditProfile(), "profile");
         // edit cars page
         pnlCards.add(pnlEditCars = new EditCars(), "vehicles");
         // security page
-//        pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
+        pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
         // history page
-//        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
+        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
 
