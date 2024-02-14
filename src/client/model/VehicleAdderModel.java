@@ -57,4 +57,11 @@ public class VehicleAdderModel {
         new ApplicationController(new ApplicationView(), new ApplicationModel(client));
     }
 
+    public Client getClient() {
+        return client;
+    }
+
+    public void setClient(Client client) {
+        this.client = client;
+    }
 }

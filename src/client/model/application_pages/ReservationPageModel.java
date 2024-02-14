@@ -48,6 +48,7 @@ public class ReservationPageModel {
     private String fullName;
 
     private HashMap<String, List<String>> vehicles;
+
     /**
      * Constructs a ReservationPageModel with a specified client.
      * @param client The specified client.
@@ -60,8 +61,35 @@ public class ReservationPageModel {
         client.writeString(client.getUsername());
         this.fullName = client.readString();
 
-       // vehicles = ( HashMap<String, List<String>>) client.readObject();
+        vehicles = (HashMap<String, List<String>>) client.readObject();
         client.closeSocket();
+
+        ArrayList<String> carsArrayList = new ArrayList();
+        ArrayList<String> motorArrayList = new ArrayList();
+
+        for (String vehicle : vehicles.keySet()) {
+            if (vehicles.get(vehicle).get(0).equals("car")) {
+                carsArrayList.add(vehicles.get(vehicle).get(1));
+            }
+            else {
+                motorArrayList.add(vehicles.get(vehicle).get(1));
+            }
+        }
+
+        cars = new String[carsArrayList.size()];
+        motorcycles = new String[motorArrayList.size()];
+
+        for (int x =0; x < carsArrayList.size(); x++) {
+            cars[x] = carsArrayList.get(x);
+        }
+
+        for (int x =0; x < motorArrayList.size(); x++) {
+            motorcycles[x] = motorArrayList.get(x);
+        }
+
+        for (String vehicle : cars) {
+            System.out.println(vehicle);
+        }
     }
 
     /**
@@ -85,16 +113,18 @@ public class ReservationPageModel {
         return reservationTime;
     }
 
-    public String[] getAvailableTime(String parkingIdentifier, String date) {
+    public String[] getAvailableTime(String parkingIdentifier, String duration, String date) {
         client.openSocket();
         client.writeString("spotInfo");
 
         client.writeString(parkingIdentifier);
+        client.writeString(duration);
         client.writeString(date);
         ArrayList<String> listOfTime = (ArrayList<String>) client.readObject();
 
         String[] arrayString = new String[listOfTime.size()];
-        for (int x =0 ; x< listOfTime.size(); x++) {
+        arrayString[0] = "Select Time:";
+        for (int x =1 ; x< listOfTime.size(); x++) {
             arrayString[x] = listOfTime.get(x);
         }
         client.closeSocket();
@@ -134,7 +164,7 @@ public class ReservationPageModel {
     // the parking spot. If the selected parking spot is for cars only, the user can only select from
     // their list of cars. Else, motorcycle list.
     public String[] getCars() {
-        // get output from server
+
         return cars;
     }
 

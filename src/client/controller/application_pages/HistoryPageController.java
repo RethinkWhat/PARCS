@@ -10,6 +10,7 @@ public class HistoryPageController {
         this.view = view;
         this.model = model;
 
+
         // constants / variables
 
         // action listeners

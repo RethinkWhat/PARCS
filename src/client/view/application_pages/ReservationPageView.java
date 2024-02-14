@@ -193,7 +193,7 @@ public class ReservationPageView extends JPanel {
 
                 // Initialize buttons for the bottom row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    String carLabel = "C" + String.format("%2d", i + 6);
+                    String carLabel = "C" + (i + 6);
                     carButtons[i + NUM_CAR_SLOTS] = new CarMotorButton(carLabel);
 
                     //for buttons with image
@@ -205,7 +205,7 @@ public class ReservationPageView extends JPanel {
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    String motorLabel = "M" + String.format("%2d", i + 3);
+                    String motorLabel = "M" + (i + 3);
                     motorButtons[i + NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel);
 
                     //for buttons with image
@@ -444,6 +444,10 @@ public class ReservationPageView extends JPanel {
          * TODO: Documentation
          */
         private JComboBox<String> cmbDuration;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbDate;
 
         /**
          * The stylesheet.
@@ -518,8 +522,8 @@ public class ReservationPageView extends JPanel {
             pnlReserve.setBackground(Color.white);
 
             gbc = new GridBagConstraints();
-            gbc.insets = new Insets(5, 10, 5, 10); // Add space around components
-            gbc.anchor = GridBagConstraints.CENTER; // Center components horizontally
+            gbc.insets = new Insets(5, 10, 5, 10);
+            gbc.anchor = GridBagConstraints.CENTER;
 
             // Dropdown for Select Vehicle
             cmbVehicle = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
@@ -527,13 +531,12 @@ public class ReservationPageView extends JPanel {
             cmbVehicle.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(cmbVehicle, gbc);
 
-            // Dropdown for Select Time
-            cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "7:00", "8:00", "9:00",
-                    "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"});
-            cmbTime.setPreferredSize(new Dimension(200, 40));
-            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
+            // Dropdown for Select Date
+            cmbDate = new JComboBox<>(new String[]{"Select Date:", "2024-02-15", "2024-02-16", "2024-02-17"});
+            cmbDate.setPreferredSize(new Dimension(200, 40));
+            cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 1;
-            pnlReserve.add(cmbTime, gbc);
+            pnlReserve.add(cmbDate, gbc);
 
             // Dropdown for Duration
             cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "2hr","3hr","4hr"});
@@ -542,10 +545,18 @@ public class ReservationPageView extends JPanel {
             gbc.gridx = 2;
             pnlReserve.add(cmbDuration, gbc);
 
-            // Reserve Slot Button (using createBtnRounded from Resources)
-            btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            // Dropdown for Select Time
+            cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "7:00", "8:00", "9:00",
+                    "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"});
+            cmbTime.setPreferredSize(new Dimension(200, 40));
+            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 3;
-            gbc.gridwidth = 2; // Set the button to span 2 columns
+            pnlReserve.add(cmbTime, gbc);
+
+            // Reserve Slot Button
+            btnReserve = new JButton("Reserve Slot");
+            gbc.gridx = 4;
+            gbc.gridwidth = 2;
             btnReserve.setPreferredSize(new Dimension(140, 40));
             btnReserve.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(btnReserve, gbc);
@@ -556,19 +567,31 @@ public class ReservationPageView extends JPanel {
         }
 
         public void setLblSlotNumber(String label) {
-                lblSlotNumber.setText("SLOT " + label);
+                lblSlotNumber.setText("SPOT " + label);
         }
         public void setBtnCloseListener(ActionListener listener) {
             btnClose.addActionListener(listener);
+        }
+
+        public void setLblDate(String date) {
+            lblDate.setText(date);
         }
 
         public void setReserveSlotListener(ActionListener listener) {
             btnReserve.addActionListener(listener);
         }
 
+        public void setLblType(String type) {
+            lblType.setText(type);
+        }
 
-        public void setVehiclesList(String[] cars) {
-            cmbVehicle = new JComboBox<>(cars);
+        public void setLblStatus(String status) {
+            lblStatus.setText(status);
+        }
+
+
+        public void setVehiclesList(String[] vehicles) {
+            cmbVehicle.setModel(new javax.swing.DefaultComboBoxModel<>(vehicles));
         }
 
         public void setTimeList(String[] timeList) {
@@ -579,14 +602,21 @@ public class ReservationPageView extends JPanel {
             return cmbTime.getItemAt(cmbTime.getSelectedIndex());
         }
 
+        public String getDateChosen() {
+            return cmbDate.getItemAt(cmbDate.getSelectedIndex());
+        }
+
+        public String getDurationChosen() {
+            return String.valueOf(cmbDuration.getSelectedIndex());
+        }
+
+        public void setDurationListener(ActionListener listener) {
+            cmbDuration.addActionListener(listener);
+        }
+
         public void setDurationList(String[] durationList) {
         cmbDuration = new JComboBox<>(durationList);
         }
-
-        public String getDuration() {
-            return cmbDuration.getItemAt(cmbDuration.getSelectedIndex());
-        }
-
     }
 
     public ParkingSlotButtonsView getParkingSlotButtonsView() {

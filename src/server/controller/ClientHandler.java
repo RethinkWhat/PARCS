@@ -8,10 +8,7 @@ import server.view.ServerStatusView;
 
 import java.io.*;
 import java.net.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Scanner;
+import java.util.*;
 
 
 public class ClientHandler implements Runnable {
@@ -248,9 +245,9 @@ public class ClientHandler implements Runnable {
             System.out.println("Printing: " + username);
             writer.println(server.getUserFullName(username));
 
-          //  HashMap<String, List<String>> vehicles = null;
-           // ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-           // outputStreamWriter.writeObject(vehicles);
+            Map<String, List<String>> vehicles = server.getUserVehicles(username);
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+            outputStreamWriter.writeObject(vehicles);
 
 
         } catch (IOException ex) {
@@ -292,8 +289,9 @@ public class ClientHandler implements Runnable {
         System.out.println("----- SPOT INFO -----");
         try {
             String identifier = reader.readLine();
+            String duration = reader.readLine();
             String date = reader.readLine();
-            List<String> availableTime = server.getParkingAvailability(identifier, date);
+            List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
             System.out.println("AVAILABLE TIME: " + availableTime);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(availableTime);

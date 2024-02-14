@@ -29,6 +29,8 @@ public class ReservationPageController {
 
     private String btnID;
 
+    private String btnDuration;
+
     private String date ="02/14/24";
 
     private String[] timeAvailable;
@@ -53,6 +55,8 @@ public class ReservationPageController {
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
         view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
+        view.getParkingSlotButtonsView().setDurationListener(new durationListener());
+
 
 
         // action listeners
@@ -82,10 +86,41 @@ public class ReservationPageController {
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
             //TODO: Fix date implementation
-            timeAvailable = model.getAvailableTime(btnID, date);
+
+
+            //timeAvailable = model.getAvailableTime(btnID, duration, date);
+
+
+            if (timeAvailable != null) {
+                view.getParkingSlotButtonsView().setLblStatus("Available");
+            }
+
+            view.getParkingSlotButtonsView().setLblDate(date);
+
+
+            if (btnID.contains("C")) {
+                view.getParkingSlotButtonsView().setVehiclesList(model.getCars());
+                view.getParkingSlotButtonsView().setLblType("Car");
+            } else {
+                view.getParkingSlotButtonsView().setVehiclesList(model.getMotorcycles());
+                view.getParkingSlotButtonsView().setLblType("Motor");
+            }
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
-            view.getParkingSlotButtonsView().setTimeList(timeAvailable);
+        }
+    }
+
+    class durationListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+
+
+            String duration = view.getParkingSlotButtonsView().getDurationChosen();
+            String[] timeAvailable1;
+            if (!duration.equals("Duration")) {
+                timeAvailable1 = model.getAvailableTime(btnID, duration, date);
+                view.getParkingSlotButtonsView().setTimeList(timeAvailable1);
+            }
         }
     }
 
@@ -100,10 +135,10 @@ public class ReservationPageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String startTime = view.getParkingSlotButtonsView().getStartTime();
-            String duration = view.getParkingSlotButtonsView().getDuration();
-            if (startTime != null && duration != null) {
-                model.attemptBooking(btnID, date, startTime, duration);
-            }
+            String duration = view.getParkingSlotButtonsView().getDurationChosen();
+                if (startTime != null && duration != null) {
+                    model.attemptBooking(btnID, date, startTime, duration);
+                }
         }
     }
 }
