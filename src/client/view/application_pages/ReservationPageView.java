@@ -65,6 +65,8 @@ public class ReservationPageView extends JPanel {
 
     private ParkingSlotButtonsView parkingSlotButtonsView;
 
+    private ReserveSlotConfirmationView reserveSlotConfirmationView;
+
     private Icon takenCar = res.iconTakenCar;
 
     private Icon availCar = res.iconAvailableCar;
@@ -125,9 +127,6 @@ public class ReservationPageView extends JPanel {
          */
 
         public MainBottomPanel() {
-
-
-
             setLayout(new BorderLayout());
 
             container = res.createPnlRounded(1300, 510, res.white, res.lightGray);
@@ -659,8 +658,19 @@ public class ReservationPageView extends JPanel {
         }
     }
 
+
+    public class ReserveSlotConfirmationView extends JFrame{
+        public ReserveSlotConfirmationView(){
+
+        }
+    }
+
     public ParkingSlotButtonsView getParkingSlotButtonsView() {
         return parkingSlotButtonsView;
+    }
+
+    public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
+        return reserveSlotConfirmationView;
     }
 
     public JPanel getPnlCards() {
