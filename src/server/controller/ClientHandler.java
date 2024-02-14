@@ -250,6 +250,14 @@ public class ClientHandler implements Runnable {
             System.out.println("Printing: " + username);
             writer.println(server.getUserFullName(username));
 
+            writer.println(server.countCarSlots());
+            writer.println(server.countMotorSpots());
+            writer.println(server.countBookings());
+            //writer.println(5);
+            //writer.println(6);
+            //writer.println(7);
+
+
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(vehicles);
@@ -332,5 +340,6 @@ public class ClientHandler implements Runnable {
             ex.printStackTrace();
         }
     }
+
 
 }

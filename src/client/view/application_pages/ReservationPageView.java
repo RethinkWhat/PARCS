@@ -2,6 +2,7 @@ package client.view.application_pages;
 
 import client.model.application_pages.CarMotorButton;
 import client.model.application_pages.CarMotorButton;
+import server.view.ServerStatusView;
 import utilities.Resources;
 
 import javax.swing.*;
@@ -307,6 +308,10 @@ public class ReservationPageView extends JPanel {
         /**
          * Constructs a panel of MainTopPanel.
          */
+
+        ButtonPanel pnlAvailCar;
+        ButtonPanel pnlAvailMotor;
+        ButtonPanel pnlTotalBookings;
         public MainTopPanel() {
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
@@ -352,21 +357,21 @@ public class ReservationPageView extends JPanel {
 
 
             // Update parameters as models from controller when backend has commenced.
-            ButtonPanel pnlAvailCar = new ButtonPanel(
+            pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     res.createLblH1("13", res.eerieBlack),
                     res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
-            ButtonPanel pnlAvailMotor = new ButtonPanel(
+            pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     res.createLblH1("10", res.eerieBlack),
                     res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
-            ButtonPanel pnlTotalBookings = new ButtonPanel(
+            pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
                     res.createLblH1("3", res.eerieBlack),
                     res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
@@ -374,6 +379,16 @@ public class ReservationPageView extends JPanel {
             pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
+        }
+
+        public void setPnlAvailCar(String availCar) {
+            pnlAvailCar.setText(availCar);
+        }
+        public void setPnlAvailMotor(String availMotor) {
+            pnlAvailMotor.setText(availMotor);
+        }
+        public void setPnlTotalBookings(String totalBookings) {
+            pnlTotalBookings.setText(totalBookings);
         }
 
         public void setTxtSearchBarListener(ActionListener listener) {
@@ -392,6 +407,7 @@ public class ReservationPageView extends JPanel {
          * The rounded panel.
          */
         private JPanel container;
+        private JLabel number;
 
         /**
          * Constructs a panel with a specified button, number label, and title label.
@@ -403,11 +419,15 @@ public class ReservationPageView extends JPanel {
             container.setLayout(new GridLayout(0, 3));
             add(container, BorderLayout.NORTH);
 
+            this.number = number;
             container.add(button);
-            container.add(number);
+            container.add(this.number);
             container.add(title);
 
             this.setPreferredSize(new Dimension(100, 100));
+        }
+        public void setText(String number) {
+            this.number.setText(number);
         }
     }
 
