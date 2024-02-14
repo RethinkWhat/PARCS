@@ -11,6 +11,12 @@ import org.xml.sax.SAXException;
 import javax.xml.parsers.DocumentBuilder;
 import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.parsers.ParserConfigurationException;
+import javax.xml.transform.OutputKeys;
+import javax.xml.transform.Transformer;
+import javax.xml.transform.TransformerException;
+import javax.xml.transform.TransformerFactory;
+import javax.xml.transform.dom.DOMSource;
+import javax.xml.transform.stream.StreamResult;
 import java.io.File;
 import java.io.IOException;
 
@@ -277,10 +283,93 @@ public class ReservationParser {
         return bookedTimeRange;
     }
 
+    /**
+     * This method will create a reservation node for the xml file
+     * If the passed identifier already exists, it will add a reservation under that identifier
+     * Else, it will create a new parking spot in the xml file with the new reservation
+     * @param identifier
+     * @param date
+     * @param startTime
+     * @param duration
+     * @param username
+     */
+    private void createReservationNode(String identifier, String date, String startTime, String duration, String username){
+        getReservationsFile();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        Element reservationElement = document.createElement("reservation");
+        reservationElement.setAttribute("day", date);
+
+        Element startTimeElement = document.createElement("startTime");
+        startTimeElement.setTextContent(startTime);
+        reservationElement.appendChild(startTimeElement);
+
+        Element endTimeElement = document.createElement("endTime");
+        String[] timeParts = startTime.split(":");
+        int endTime = Integer.parseInt(timeParts[0]) + Integer.parseInt(duration);
+        endTimeElement.setTextContent(Integer.toString(endTime));
+        reservationElement.appendChild(endTimeElement);
+
+        Element usernameElement = document.createElement("user");
+        usernameElement.setTextContent(username);
+        reservationElement.appendChild(usernameElement);
+
+        // Searching if the passed identifier already exists
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            //If the passed identifier already exists, it will add that reservation under the passed identifier
+            if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
+                currParkingSpotElement.appendChild(reservationElement);
+                transform();
+                return;
+            }
+        }
+
+        // This adds a new parking spot with the reservation node if the passed identifier does not exist
+        Element parkingSpotElement = document.createElement("parkingSpot");
+        parkingSpotElement.setAttribute("identifier", identifier);
+        parkingSpotElement.appendChild(reservationElement);
+        root.appendChild(parkingSpotElement);
+        transform();
+    }
+
+    /**
+     * A transformer that will write into the reservationsFile
+     */
+    private void transform(){
+        DOMSource source = new DOMSource(document);
+
+        try{
+
+            TransformerFactory factory = TransformerFactory.newInstance();
+            Transformer transformer = factory.newTransformer();
+
+            transformer.setOutputProperty(OutputKeys.INDENT, "yes");
+            transformer.setOutputProperty(OutputKeys.OMIT_XML_DECLARATION, "yes");
+
+            StreamResult result = new StreamResult(reservationsFile);
+
+            transformer.transform(source,result);
+
+        }catch (TransformerException te){
+            te.printStackTrace();
+        }
+    }
+
+    public List<String> availableTime(String date, String identifier) {
+        populateTime();
+        ArrayList<String> toReturn = timeArray;
+        List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date,identifier);
+
     public List<String> availableTime(String date, String duration, String identifier) {
         ArrayList<String> timeArray = populateTime();
         DateTime dateTime = new DateTime();
         List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date, identifier);
+
 
         System.out.println("BOOKED TIME: " + bookedTimeRange);
 
@@ -323,5 +412,7 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
+
+        parser.createReservationNode("C7", "03/09/04", "12:00", "3", "alimonem");
     }
 }
