@@ -92,8 +92,7 @@ public class DateTime {
         int minutes = Integer.parseInt(parts[1]);
 
         // Adjust hours and minutes
-        hours +=1;
-
+        hours +=duration;
         // Format the result
         return String.format("%02d:%02d", hours, minutes);
     }

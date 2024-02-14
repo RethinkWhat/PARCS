@@ -23,7 +23,6 @@ public class ReservationParser {
     DocumentBuilder builder;
     Document document;
 
-    ArrayList<String> timeArray = new ArrayList<>();
 
     DateTime dateTime = new DateTime();
 
@@ -33,17 +32,13 @@ public class ReservationParser {
 
     DateTime dateTimeFormatter = new DateTime();
 
-    public void populateTime() {
+    public ArrayList<String> populateTime() {
+        ArrayList<String> timeArray = new ArrayList<>();
         String[] time =  {"6:00", "7:00", "8:00", "9:00",
                 "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
         for (String timeItem : time)
             timeArray.add(timeItem);
-
-        timeHashMap = new HashMap<>();
-
-        for (int x =6; x <=18; x++) {
-            timeHashMap.put((x+":00"),x);
-        }
+        return timeArray;
     }
     private void getReservationsFile() {
         try {
@@ -283,37 +278,40 @@ public class ReservationParser {
     }
 
     public List<String> availableTime(String date, String duration, String identifier) {
-        populateTime();
+        ArrayList<String> timeArray = populateTime();
         DateTime dateTime = new DateTime();
-        int durationAsInt = Integer.parseInt(duration);
-        ArrayList<String> availableTime = new ArrayList<>();
         List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date, identifier);
-
-        // List<TimeRange> bookedTimeRange = getParkingSpotAvailability("02/14/24", "C1");
 
         System.out.println("BOOKED TIME: " + bookedTimeRange);
 
+        List<String> allBookings = new ArrayList<>();
+        List<String> allTime = new ArrayList<>(timeArray);
+        List<String> toReturnTime = new ArrayList<>();
+        int durationAsInt = Integer.parseInt(duration);
 
-        ArrayList<String> allBookings = new ArrayList<>();
-        ArrayList<String> allTime = timeArray;
-        ArrayList<String> toReturnTime = new ArrayList<>();
         for (TimeRange timeRange : bookedTimeRange) {
+            allBookings.addAll(timeRange.getStartToEndTime());
+        }
 
-            // get the start time, the end time, and all the time in between
-            List<String> timeList = timeRange.getStartToEndTime();
+        for (String time : allTime) {
+            boolean isAvailable = true;
 
-            // get all the time in the booking except the last where it ends
-            for (int x = 0; x < timeList.size() - 1; x++) {
-                allBookings.add(timeList.get(x));
+            for (int i = 0; i < durationAsInt; i++) {
+                if (allBookings.contains(dateTime.addDuration(time, i)) || Integer.parseInt(dateTime.addDuration(time, i).split(":")[0]) + durationAsInt > 18) {
+                    isAvailable = false;
+                    break;  // Break if any of the incremented times is booked
+                }
+            }
+
+            if (isAvailable) {
+                toReturnTime.add(time);
             }
         }
 
-        for (int x = 0; x < allTime.size(); x++) {
-            if (!(allBookings.contains(allTime.get(x))))
-                toReturnTime.add(allTime.get(x));
-        }
+        System.out.println("RETURNING: " + toReturnTime);
         return toReturnTime;
     }
+
 
 
     public static void main(String[] args) {
