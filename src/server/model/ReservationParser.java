@@ -293,7 +293,7 @@ public class ReservationParser {
      * @param duration
      * @param username
      */
-    private void createReservationNode(String identifier, String date, String startTime, String duration, String username){
+    public void createReservationNode(String identifier, String date, String startTime, String duration, String username){
         getReservationsFile();
 
         Element root = document.getDocumentElement();
