@@ -156,6 +156,20 @@ public class Server implements Runnable{
     public void accountLogout(String username) {
         userLog.remove(username);
     }
+
+    public String countCarSlots() {
+        //TODO: call method from user parser
+        return "19";
+    }
+    public String countMotorSpots() {
+        //TODO: call method from user parser
+        return "20";
+    }
+
+    public String countBookings() {
+        //TODO: call method from user parser
+        return "21";
+    }
 }
 
 

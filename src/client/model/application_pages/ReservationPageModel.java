@@ -24,15 +24,16 @@ public class ReservationPageModel {
     /**
      * The number of currently available car parking slots
      */
-    private int availCarSlots;
+    private String availCarSlots;
     /**
      * The number of currently available motorcycle parking slots.
      */
-    private int availMotorSlots;
+    private String availMotorSlots;
     /**
      * The number of current bookings the user has.
      */
-    private int totalBookings;
+
+    private String totalBookings;
     /**
      * The cars of the user.
      */
@@ -60,6 +61,10 @@ public class ReservationPageModel {
         client.writeString("reservation");
         client.writeString(client.getUsername());
         this.fullName = client.readString();
+
+        availCarSlots = client.readString();
+        availMotorSlots = client.readString();
+        totalBookings = client.readString();
 
         vehicles = (HashMap<String, List<String>>) client.readObject();
         client.closeSocket();
@@ -157,18 +162,15 @@ public class ReservationPageModel {
     }
 
 
-    public int getAvailCarSlots() {
-        // get output from server
+    public String getAvailCarSlots() {
         return availCarSlots;
     }
 
-    public int getAvailMotorSlots() {
-        // get output from server
+    public String getAvailMotorSlots() {
         return availMotorSlots;
     }
 
-    public int getTotalBookings() {
-        // get output from server
+    public String getTotalBookings() {
         return totalBookings;
     }
 

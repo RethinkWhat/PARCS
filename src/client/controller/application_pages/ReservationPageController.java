@@ -58,6 +58,10 @@ public class ReservationPageController {
         view.getParkingSlotButtonsView().setDurationListener(new durationListener());
         view.getMainTopPanel().setTxtSearchBarListener(new searchListener());
 
+        view.getMainTopPanel().setPnlAvailMotor(model.getAvailMotorSlots());
+        view.getMainTopPanel().setPnlAvailCar(model.getAvailCarSlots());
+        view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
+
 
 
         // action listeners
