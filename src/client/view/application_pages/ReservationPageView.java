@@ -659,9 +659,24 @@ public class ReservationPageView extends JPanel {
     }
 
 
-    public class ReserveSlotConfirmationView extends JFrame{
-        public ReserveSlotConfirmationView(){
+    public class ReserveSlotConfirmationView extends JDialog {
+        private Resources res = new Resources();
+        private JLabel lblReserved;
+        private JLabel lblConfirmationMsg;
+        private JButton btnCloseConfirmation;
 
+        public ReserveSlotConfirmationView() {
+
+            this.setTitle("PARCS Reservation Confirmation");
+            this.setModal(true);
+            this.setLayout(new GridLayout(3, 1));
+
+
+
+            this.setPreferredSize(new Dimension(600,400));
+            this.pack();
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
         }
     }
 
