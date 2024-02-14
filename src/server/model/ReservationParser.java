@@ -276,12 +276,47 @@ public class ReservationParser {
     }
 
 
-    private Node createReservationNode(String identifier, String date, String startTime, String duration, String username){
+    private void createReservationNode(String identifier, String date, String startTime, String duration, String username){
+        getReservationsFile();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
         Element reservationElement = document.createElement("reservation");
         reservationElement.setAttribute("day", date);
 
-        return reservationElement;
+        Element startTimeElement = document.createElement("startTime");
+        startTimeElement.setTextContent(startTime);
+        reservationElement.appendChild(startTimeElement);
+
+        Element endTimeElement = document.createElement("endTime");
+        String[] timeParts = startTime.split(":");
+        int endTime = Integer.parseInt(timeParts[0]) + Integer.parseInt(duration);
+        endTimeElement.setTextContent(Integer.toString(endTime));
+        reservationElement.appendChild(endTimeElement);
+
+        Element usernameElement = document.createElement("user");
+        usernameElement.setTextContent(username);
+        reservationElement.appendChild(usernameElement);
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
+                currParkingSpotElement.appendChild(reservationElement);
+                //transform method
+                return;
+            }
+        }
+
+        Element parkingSpotElement = document.createElement("parkingSpot");
+        parkingSpotElement.setAttribute("identifier", identifier);
+        parkingSpotElement.appendChild(reservationElement);
+
     }
+
+
 
     public List<String> availableTime(String date, String identifier) {
         populateTime();
