@@ -131,11 +131,19 @@ public class TimerView extends JPanel {
      */
     double current;
 
+    int positionX;
+    int positionY;
+
 
     /** Button declarations */
-    private JButton homeBtn, ticketBtn, exitBtn, userBtn, endTimerBtn;
+    private JButton homeBtn = new JButton();
+    private JButton ticketBtn = new JButton();
+    private JButton exitBtn = new JButton();
+    private JButton userBtn = new JButton();
+    private JButton endTimerBtn = new JButton();
 
-    private JPanel jPanel3;
+
+    private JPanel jPanel3 = new JPanel();
     /**
      * Instanc variable of the timer.
      */
@@ -454,8 +462,9 @@ public class TimerView extends JPanel {
 
     private void jPanel2MousePressed(java.awt.event.MouseEvent evt) {
         // get x and y coordinates values
-        //positionX = evt.getX();
-       // positionY = evt.getY();
+
+        positionX = evt.getX();
+        positionY = evt.getY();
     }
 
     private void userBtnActionPerformed(java.awt.event.MouseEvent evt){
@@ -470,7 +479,7 @@ public class TimerView extends JPanel {
 
     private void jPanel2MouseDragged(java.awt.event.MouseEvent evt) {
         // set JFrame animation
-       // setLocation(evt.getXOnScreen()-positionX, evt.getYOnScreen()-positionY);
+        setLocation(evt.getXOnScreen()-positionX, evt.getYOnScreen()-positionY);
     }
 
     public static void main(String args[]) {

@@ -93,7 +93,7 @@ public class ApplicationView extends JFrame {
         pnlCards.add(reservationPageView = new ReservationPageView(), "home");
 
         // Ticket Page
-      //  pnlCards.add(timerView = new TimerView(), "ticket");
+        pnlCards.add(timerView = new TimerView(), "ticket");
 
         // Account Page
         pnlCards.add(userProfileView = new UserProfileView(), "account");
