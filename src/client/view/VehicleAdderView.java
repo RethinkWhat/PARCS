@@ -91,7 +91,6 @@ public class VehicleAdderView extends JFrame {
         this.setLocationRelativeTo(null);
         this.setSize(600,400);
         this.setResizable(false);
-        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 

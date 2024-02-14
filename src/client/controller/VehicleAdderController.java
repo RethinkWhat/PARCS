@@ -34,6 +34,7 @@ public class VehicleAdderController {
     public VehicleAdderController(VehicleAdderView view, VehicleAdderModel model) {
         this.view = view;
         this.model = model;
+        view.setDefaultCloseOperation(model.getClient().logoutAndExit());
 
         // model map
         view.getCmbType().setModel(new DefaultComboBoxModel(model.getVehicleTypes()));

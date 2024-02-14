@@ -103,7 +103,6 @@ public class ApplicationView extends JFrame {
         this.pack();
         this.setSize(1300,800);
         this.setResizable(false);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
