@@ -1,19 +1,15 @@
-package server.controller;
+package server.model;
 
 
 import server.model.*;
+import server.utilities.ClientHandler;
 
 import java.io.IOException;
-import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.net.SocketAddress;
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 public class Server implements Runnable{
     private ServerSocket server;

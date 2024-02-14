@@ -1,10 +1,8 @@
-package server.controller;
+package server.utilities;
 
 
-import client.model.Client;
-import server.model.TimeRange;
+import server.model.Server;
 import server.model.Vehicle;
-import server.view.ServerStatusView;
 
 import java.io.*;
 import java.net.*;

@@ -1,7 +1,5 @@
 package server.model;
 
-import server.controller.Server;
-
 import java.io.IOException;
 
 public class ServerStatusModel {

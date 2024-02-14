@@ -1,16 +1,11 @@
 package server.controller;
 
+import server.model.Server;
 import server.model.ServerStatusModel;
 import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
-import java.net.InetSocketAddress;
-import java.net.Socket;
-import java.net.SocketAddress;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /** Controller for server
  * Assigned to @Ramon Jasmin
