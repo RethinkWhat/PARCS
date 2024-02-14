@@ -92,9 +92,12 @@ public class Server implements Runnable{
     }
 
     public boolean makeReservation(String identifier, String date, String startTime, String duration, String username) {
-        //TODO:
-        return false;
-
+        try {
+            reservationParser.createReservationNode(identifier, date, startTime, duration, username);
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
     }
 
     public boolean serverRunning() {

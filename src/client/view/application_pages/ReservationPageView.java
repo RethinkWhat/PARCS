@@ -68,6 +68,8 @@ public class ReservationPageView extends JPanel {
 
     private Icon availCar = res.iconAvailableCar;
 
+    private MainTopPanel mainTopPanel;
+
     public Icon getTakenCar() {
         return takenCar;
     }
@@ -90,8 +92,10 @@ public class ReservationPageView extends JPanel {
         add(pnlCards, BorderLayout.NORTH);
 
         parkingSlotButtonsView = new ParkingSlotButtonsView();
+
+        mainTopPanel = new MainTopPanel();
         // Top Panel
-        pnlCards.add(new MainTopPanel(), "dashboard");
+        pnlCards.add(mainTopPanel, "dashboard");
         pnlCards.add(parkingSlotButtonsView, "buttons");
         topCardLayout.show(pnlCards, "dashboard");
 
@@ -173,7 +177,7 @@ public class ReservationPageView extends JPanel {
 
                     //TODO: Validate if it is taken
                     //for buttons with image
-                    carButtons[i] = new CarMotorButton(carLabel, res.iconTakenCar);
+                    carButtons[i] = new CarMotorButton(carLabel, res.iconAvailableCar);
                     carButtons[i].setOpaque(false);
                     carButtons[i].setContentAreaFilled(false);
                     carButtons[i].setBorderPainted(false);
@@ -209,7 +213,7 @@ public class ReservationPageView extends JPanel {
                     motorButtons[i + NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel);
 
                     //for buttons with image
-                    motorButtons[i+ NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel, res.iconTakenMotor);
+                    motorButtons[i+ NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel, res.iconAvailableMotor);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setOpaque(false);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setContentAreaFilled(false);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setBorderPainted(false);
@@ -299,7 +303,7 @@ public class ReservationPageView extends JPanel {
     /**
      * The panel that contains multiple objects of the ButtonsPanel.
      */
-    class MainTopPanel extends JPanel {
+    public class MainTopPanel extends JPanel {
         /**
          * Constructs a panel of MainTopPanel.
          */
@@ -370,6 +374,13 @@ public class ReservationPageView extends JPanel {
             pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
+        }
+
+        public void setTxtSearchBarListener(ActionListener listener) {
+            txtSearchbar.addActionListener(listener);
+        }
+        public String getTxtSearchbar() {
+            return txtSearchbar.getText();
         }
     }
 
@@ -670,6 +681,10 @@ public class ReservationPageView extends JPanel {
 
     public MainBottomPanel getMainBottomPanel() {
         return mainBottomPanel;
+    }
+
+    public MainTopPanel getMainTopPanel() {
+        return mainTopPanel;
     }
 
 

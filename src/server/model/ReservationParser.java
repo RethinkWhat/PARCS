@@ -293,7 +293,7 @@ public class ReservationParser {
      * @param duration
      * @param username
      */
-    private void createReservationNode(String identifier, String date, String startTime, String duration, String username){
+    public void createReservationNode(String identifier, String date, String startTime, String duration, String username){
         getReservationsFile();
 
         Element root = document.getDocumentElement();
@@ -360,16 +360,10 @@ public class ReservationParser {
         }
     }
 
-    public List<String> availableTime(String date, String identifier) {
-        populateTime();
-        ArrayList<String> toReturn = timeArray;
-        List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date,identifier);
-
     public List<String> availableTime(String date, String duration, String identifier) {
         ArrayList<String> timeArray = populateTime();
         DateTime dateTime = new DateTime();
         List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date, identifier);
-
 
         System.out.println("BOOKED TIME: " + bookedTimeRange);
 
@@ -386,7 +380,7 @@ public class ReservationParser {
             boolean isAvailable = true;
 
             for (int i = 0; i < durationAsInt; i++) {
-                if (allBookings.contains(dateTime.addDuration(time, i)) || Integer.parseInt(dateTime.addDuration(time, i).split(":")[0]) + durationAsInt > 18) {
+                if (allBookings.contains(dateTime.addDuration(time, i)) || (Integer.parseInt(dateTime.addDuration(time, i).split(":")[0]) + durationAsInt) > 18) {
                     isAvailable = false;
                     break;  // Break if any of the incremented times is booked
                 }

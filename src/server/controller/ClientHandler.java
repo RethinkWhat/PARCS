@@ -98,6 +98,10 @@ public class ClientHandler implements Runnable {
                                 System.out.println("book");
                                 bookReservation();
                                 break;
+                            case "searchForSpot":
+                                System.out.println("reached");
+                                searchForSpot();
+                                break;
                         }
                     }
                 }
@@ -155,6 +159,7 @@ public class ClientHandler implements Runnable {
             e.printStackTrace();
         }
     }
+
 
 
 
@@ -315,7 +320,17 @@ public class ClientHandler implements Runnable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
 
+    public void searchForSpot() {
+        try {
+            String date = reader.readLine();
+            //TODO: Check which car spot avail
+
+            writer.println("C3");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
 }
