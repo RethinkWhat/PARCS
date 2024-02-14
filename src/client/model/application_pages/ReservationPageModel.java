@@ -122,7 +122,10 @@ public class ReservationPageModel {
         client.writeString(date);
         ArrayList<String> listOfTime = (ArrayList<String>) client.readObject();
 
-        String[] arrayString = new String[listOfTime.size()];
+        String[] arrayString = new String[1];
+        if (!listOfTime.isEmpty()) {
+            arrayString = new String[listOfTime.size()];
+        }
         arrayString[0] = "Select Time:";
         for (int x =1 ; x< listOfTime.size(); x++) {
             arrayString[x] = listOfTime.get(x);

@@ -173,7 +173,7 @@ public class ReservationPageView extends JPanel {
 
                     //TODO: Validate if it is taken
                     //for buttons with image
-                    carButtons[i] = new CarMotorButton(carLabel, res.iconTakenCar);
+                    carButtons[i] = new CarMotorButton(carLabel, res.iconAvailableCar);
                     carButtons[i].setOpaque(false);
                     carButtons[i].setContentAreaFilled(false);
                     carButtons[i].setBorderPainted(false);
@@ -209,7 +209,7 @@ public class ReservationPageView extends JPanel {
                     motorButtons[i + NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel);
 
                     //for buttons with image
-                    motorButtons[i+ NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel, res.iconTakenMotor);
+                    motorButtons[i+ NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel, res.iconAvailableMotor);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setOpaque(false);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setContentAreaFilled(false);
                     motorButtons[i+ NUM_MOTOR_SLOTS].setBorderPainted(false);
