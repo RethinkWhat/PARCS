@@ -65,6 +65,8 @@ public class ReservationPageView extends JPanel {
 
     private ParkingSlotButtonsView parkingSlotButtonsView;
 
+    private ReserveSlotConfirmationView reserveSlotConfirmationView;
+
     private Icon takenCar = res.iconTakenCar;
 
     private Icon availCar = res.iconAvailableCar;
@@ -125,9 +127,6 @@ public class ReservationPageView extends JPanel {
          */
 
         public MainBottomPanel() {
-
-
-
             setLayout(new BorderLayout());
 
             container = res.createPnlRounded(1300, 510, res.white, res.lightGray);
@@ -659,8 +658,71 @@ public class ReservationPageView extends JPanel {
         }
     }
 
+
+    public class ReserveSlotConfirmationView extends JDialog {
+        private Resources res = new Resources();
+        private JLabel lblReserved;
+        private JLabel lblConfirmationMsg;
+        private JButton btnCloseConfirmation;
+
+        public ReserveSlotConfirmationView() {
+
+            this.setTitle("PARCS Reservation Confirmation");
+            this.setModal(true);
+            this.setLayout(new GridLayout(3, 1));
+
+            // Create pnlIcon panel
+            JPanel pnlIcon = new JPanel();
+            pnlIcon.setLayout(new BorderLayout());
+            pnlIcon.setPreferredSize(new Dimension(600, 200));
+
+            // Create and set ImageIcon for pnlIcon
+            ImageIcon iconAvailableCar = res.iconAvailableCar; //change icon
+            pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
+
+            // Create PnlConfirmation panel
+            JPanel pnlConfirmation = new JPanel(new GridBagLayout());
+            pnlConfirmation.setPreferredSize(new Dimension(600, 150));
+
+            // Create label for PnlConfirmation with font based on resources class
+            lblReserved = res.createLblH1("RESERVED!", res.celadon);
+            lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+
+            // Add labels to PnlConfirmation panel
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            pnlConfirmation.add(lblReserved, gbc);
+
+            gbc.gridy = 1;
+            pnlConfirmation.add(lblConfirmationMsg, gbc);
+
+            // Create pnlCloseBtn panel
+            JPanel pnlCloseBtn = new JPanel(new FlowLayout());
+            pnlCloseBtn.setPreferredSize(new Dimension(600, 50));
+
+            // Close button
+            btnCloseConfirmation = res.createBtnRounded("CLOSE", res.red, res.eerieBlack, 20);
+
+            pnlCloseBtn.add(btnCloseConfirmation);
+
+            this.add(pnlIcon);
+            this.add(pnlConfirmation);
+            this.add(pnlCloseBtn);
+
+            this.setPreferredSize(new Dimension(600,400));
+            this.pack();
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+        }
+    }
+
     public ParkingSlotButtonsView getParkingSlotButtonsView() {
         return parkingSlotButtonsView;
+    }
+
+    public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
+        return reserveSlotConfirmationView;
     }
 
     public JPanel getPnlCards() {
