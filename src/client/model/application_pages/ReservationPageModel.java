@@ -3,9 +3,10 @@ package client.model.application_pages;
 import client.model.Client;
 import client.model.LiveDateTime;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
 
 
 /**
@@ -190,4 +191,21 @@ public class ReservationPageModel {
     public String getDate() {
         return LiveDateTime.getDate();
     }
+
+    public String[] getDateList() {
+        String[] dates = new String[3];
+
+        LocalDate dateToday = LocalDate.now();
+        LocalDate tomorrow = dateToday.plusDays(1);
+        LocalDate dayAfter = tomorrow.plusDays(1);
+
+        DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+
+        dates[0] = dateToday.format(formatter);
+        dates[1] = tomorrow.format(formatter);
+        dates[2] = dayAfter.format(formatter);
+        return dates;
+    }
+
 }
+

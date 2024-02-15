@@ -33,6 +33,8 @@ public record TimeRange(String startTime, String endTime) {
     }
 
 
+    /** 7:00-10:00
+     * 7:00, 8:00, 9:00*/
     public List<String> getStartToEndTime() {
         List<String> hourIncrements = new ArrayList<>();
 

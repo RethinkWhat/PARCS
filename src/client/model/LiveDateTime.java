@@ -66,6 +66,7 @@ public class LiveDateTime extends Thread {
     public static String getDate() {
         Date currentTime = Calendar.getInstance().getTime();
         dateFormat = new SimpleDateFormat("MM/dd/yy");
+        //currentTime.after(1)
         return dateFormat.format(currentTime);
     }
 

@@ -637,6 +637,11 @@ public class ReservationPageView extends JPanel {
             cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(timeList));
         }
 
+        public void setDateList(String[] dateList) {
+            cmbDate.setModel(new javax.swing.DefaultComboBoxModel<>(dateList));
+        }
+
+
         public String getStartTime() {
             return cmbTime.getItemAt(cmbTime.getSelectedIndex());
         }
@@ -647,6 +652,10 @@ public class ReservationPageView extends JPanel {
 
         public String getDurationChosen() {
             return String.valueOf(cmbDuration.getSelectedIndex());
+        }
+
+        public void resetDuration() {
+            cmbDuration.setSelectedIndex(0);
         }
 
         public void setDurationListener(ActionListener listener) {

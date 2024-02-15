@@ -37,6 +37,8 @@ public class ReservationPageController {
 
     private String dateChosen;
 
+    private String[] dateList;
+
     /**
      * Constructs a ReservationPageController with a specified view and model.
      * @param view The specified view.
@@ -46,7 +48,7 @@ public class ReservationPageController {
         this.view = view;
         this.model = model;
         date =model.getDate();
-
+        dateList = model.getDateList();
         view.setUserFullName(model.getFullName());
 
         // constants/variables
@@ -65,6 +67,9 @@ public class ReservationPageController {
         view.getMainTopPanel().setPnlAvailMotor(model.getAvailMotorSlots());
         view.getMainTopPanel().setPnlAvailCar(model.getAvailCarSlots());
         view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
+
+        view.getParkingSlotButtonsView().setDateList(dateList);
+
 
 
 
@@ -106,11 +111,6 @@ public class ReservationPageController {
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
 
-
-            if (timeAvailable != null) {
-                view.getParkingSlotButtonsView().setLblStatus("Available");
-            }
-
             view.getParkingSlotButtonsView().setLblDate(date);
 
 
@@ -132,10 +132,11 @@ public class ReservationPageController {
         public void actionPerformed(ActionEvent e) {
             view.getParkingSlotButtonsView().setLblDate(date);
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
-            String[] timeAvailable1;
             if (!duration.equals("Duration:")) {
-                timeAvailable1 = model.getAvailableTime(btnID, duration, date);
-                view.getParkingSlotButtonsView().setTimeList(timeAvailable1);
+                timeAvailable = model.getAvailableTime(btnID, duration, date);
+                view.getParkingSlotButtonsView().setTimeList(timeAvailable);
+                if (timeAvailable != null)
+                    view.getParkingSlotButtonsView().setLblStatus("Available");
             }
 
         }
@@ -155,6 +156,12 @@ public class ReservationPageController {
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
                 if (startTime != null && duration != null) {
                     model.attemptBooking(btnID, date, startTime, duration);
+                    view.getParkingSlotButtonsView().resetDuration();
+                    timeAvailable = model.getAvailableTime(btnID, duration, date);
+                    System.out.println(timeAvailable);
+                    view.getParkingSlotButtonsView().setTimeList(timeAvailable);
+                    if (timeAvailable != null)
+                        view.getParkingSlotButtonsView().setLblStatus("Available");
                     view.getReserveSlotConfirmationView();
                 }
         }
