@@ -163,8 +163,8 @@ public class ReservationParser {
     }
 
     public int countBookings() {
-        ReservationParser parser = new ReservationParser();
-        List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+        getReservationsFile();
+        List<ParkingSpot> parkingSpotList = getParkingInformation();
         int size = 0;
 
         for (ParkingSpot parkingSpot : parkingSpotList) {

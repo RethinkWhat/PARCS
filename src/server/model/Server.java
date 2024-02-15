@@ -162,8 +162,8 @@ public class Server implements Runnable{
         return "20";
     }
 
-    public int countBookings() {
-        return reservationParser.countTotalBookingsPerDay("rickardo", "02/14/24");
+    public int countBookings(String username, String date) {
+        return reservationParser.countTotalBookingsPerDay(username, date);
     }
 }
 
