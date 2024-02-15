@@ -1,47 +1,51 @@
 package server.controller;
 
 import server.model.Server;
-import server.model.ServerStatusModel;
+import server.view.AdminApplicationView;
 import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /** Controller for server
  * Assigned to @Ramon Jasmin
  * */
 public class ServerController {
-
-    /** The View associated with the ServerStatusController */
-    ServerStatusView view;
-
-    /** The model of the ServerStatusController */
-    ServerStatusModel model;
-
+    private Server server;
+    private AdminApplicationView view;
     boolean serverStatus = false;
+    final int address = 2020;
 
-
-    /** The server object */
-    Server server;
-
-
-    public ServerController(ServerStatusView view, ServerStatusModel model){
-            this.model = model;
-            this.server = model.getServer();
-            this.view = view;
+    public ServerController(AdminApplicationView view){
+        try {
+            this.server = new Server(address);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
 
         Thread thread = new Thread(server);
         thread.start();
 
+        this.view = view;
 
-        /** Populate elements*/
+        // action listeners
 
-        this.view.getPnlMainTop().setPnlTotalBookings(String.valueOf(server.getNumberOfBookings()));
+        // server status page
+        view.getServerStatusView().setServerListener(new serverListener());
+        view.setNavStatusListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "status"));
+        view.setNavDashboardListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "dashboard"));
 
-        /** Class listeners */
-        view.setServerListener(new serverListener());
+        // dashboard page
+
+        // mouse listeners
+
+        // server status page
+
+        // dashboard page
+
+        // focus listeners
     }
-
 
 
     class serverListener implements ActionListener{
@@ -49,11 +53,11 @@ public class ServerController {
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!serverStatus){
-                view.setOnline();
+                view.getServerStatusView().setOnline();
                 serverStatus = true;
                 server.startAccepting();
             }else {
-                view.setOffline();
+                view.getServerStatusView().setOffline();
                 serverStatus= false;
                 server.stopAccepting();
             }
@@ -62,8 +66,6 @@ public class ServerController {
     }
 
     public static void main(String[] args) {
-        ServerStatusView view = new ServerStatusView();
-        ServerStatusModel model = new ServerStatusModel();
-        ServerController controller = new ServerController(view, model);
+        ServerController controller = new ServerController(new AdminApplicationView());
     }
 }
