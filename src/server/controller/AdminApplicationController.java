@@ -2,22 +2,39 @@ package server.controller;
 
 import server.model.Server;
 import server.view.AdminApplicationView;
-import server.view.ServerStatusView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 
-/** Controller for server
- * Assigned to @Ramon Jasmin
- * */
-public class ServerController {
+/**
+ * Proc
+ *
+ */
+public class AdminApplicationController {
+    /**
+     * The object of server.
+     */
     private Server server;
+    /**
+     * The view
+     */
     private AdminApplicationView view;
+    /**
+     * The status of the server.
+     * True if online, false if offline.
+     */
     boolean serverStatus = false;
+    /**
+     * The default port of the server.
+     */
     final int address = 2020;
 
-    public ServerController(AdminApplicationView view){
+    /**
+     * Constructs a ServerController with a specified AdminApplicationView.
+     * @param view The specified AdminApplicationView.
+     */
+    public AdminApplicationController(AdminApplicationView view){
         try {
             this.server = new Server(address);
         } catch (IOException ex) {
@@ -32,7 +49,7 @@ public class ServerController {
         // action listeners
 
         // server status page
-        view.getServerStatusView().setServerListener(new serverListener());
+        view.getServerStatusView().setServerListener(new ServerListener());
         view.setNavStatusListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "status"));
         view.setNavDashboardListener(e -> view.getMainCardLayout().show(view.getPnlCards(), "dashboard"));
 
@@ -40,16 +57,23 @@ public class ServerController {
 
         // mouse listeners
 
+
         // server status page
+        // TODO
 
         // dashboard page
+        // TODO
 
-        // focus listeners
     }
 
-
-    class serverListener implements ActionListener{
-
+    /**
+     * TODO: Documentation
+     */
+    class ServerListener implements ActionListener{
+        /**
+         * TODO: Documentation
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!serverStatus){
@@ -61,11 +85,14 @@ public class ServerController {
                 serverStatus= false;
                 server.stopAccepting();
             }
-
         }
     }
 
+    /**
+     * Main entry point of the program.
+     * @param args The command line arguments.
+     */
     public static void main(String[] args) {
-        ServerController controller = new ServerController(new AdminApplicationView());
+        new AdminApplicationController(new AdminApplicationView());
     }
 }
