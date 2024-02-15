@@ -406,7 +406,5 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
-
-        parser.createReservationNode("C7", "03/09/04", "12:00", "3", "alimonem");
     }
 }
