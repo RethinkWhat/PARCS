@@ -410,6 +410,15 @@ public class ReservationParser {
         return duration;
     }
 
+    public List<String> getClosestReservation(String username){
+        List<String> reservationInformation = new ArrayList<>();
+
+
+
+
+        return reservationInformation;
+    }
+
 
 
     public static void main(String[] args) {
