@@ -528,6 +528,6 @@ public class ReservationParser {
 
         System.out.println(parser.getClosestReservation("aaliyah"));
 
-        System.out.println();
+        System.out.println(parser.checkScheduleConflicts("aaliyah", "13:00", "16:00"));
     }
 }
