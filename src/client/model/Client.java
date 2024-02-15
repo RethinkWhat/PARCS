@@ -23,6 +23,10 @@ public class Client {
 
     PrintWriter writer;
 
+    ObjectInputStream readerObject;
+
+    ObjectOutputStream writerObject;
+
     public Client(Socket client) {
         this.client = client;
     }

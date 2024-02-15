@@ -33,7 +33,7 @@ public class ReservationPageModel {
     /**
      * The number of current bookings the user has.
      */
-    private int totalBookings;
+    private String totalBookings;
     /**
      * The cars of the user.
      */
