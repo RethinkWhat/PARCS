@@ -51,7 +51,7 @@ public class Server implements Runnable{
     }
 
     public boolean createAccount(String username, String type, String password, String lastName, String firstName,
-                           String phoneNumber, ArrayList<Vehicle> vehicles) {
+                                 String phoneNumber, ArrayList<Vehicle> vehicles) {
         userParser.createUser(username,type,password,lastName,firstName,phoneNumber,vehicles);
         return true;
     }
@@ -114,8 +114,8 @@ public class Server implements Runnable{
             try {
                 boolean flag = this.serverRunning();
                 while (flag) {
-                        Socket clientSocket = server.accept();
-                        new Thread(new ClientHandler(this, clientSocket)).start();
+                    Socket clientSocket = server.accept();
+                    new Thread(new ClientHandler(this, clientSocket)).start();
 
                 }
             } catch (IOException ignore) {

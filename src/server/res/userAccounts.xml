@@ -8,10 +8,4 @@
         <vehicle>car,Mitsubishi Mirage,N99 399</vehicle>
         <vehicle>car,Mitsubishi Montero,ILY 143</vehicle>
     </user>
-    <user username="ri">
-        <type>admin</type>
-        <password>OWoUqyBuK0TgPE4AOT6UjM42prDw10ictG2USzOtUcg=</password>
-        <lastName>ri</lastName>
-        <firstName>ri</firstName>
-    </user>
 </userClass>
