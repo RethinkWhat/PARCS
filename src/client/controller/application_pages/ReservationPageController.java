@@ -139,6 +139,7 @@ public class ReservationPageController {
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
                 if (startTime != null && duration != null) {
                     model.attemptBooking(btnID, date, startTime, duration);
+                    view.getReserveSlotConfirmationView();
                 }
         }
     }
