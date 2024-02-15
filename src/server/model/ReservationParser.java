@@ -163,8 +163,8 @@ public class ReservationParser {
     }
 
     public int countBookings() {
-        ReservationParser parser = new ReservationParser();
-        List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+        getReservationsFile();
+        List<ParkingSpot> parkingSpotList = getParkingInformation();
         int size = 0;
 
         for (ParkingSpot parkingSpot : parkingSpotList) {
@@ -175,6 +175,25 @@ public class ReservationParser {
         }
         return size;
     }
+
+    public int countTotalBookingsPerDay(String username, String date) {
+        getReservationsFile();
+        int count = 0;
+        NodeList nodeList = document.getElementsByTagName("reservation");
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node reservationNode = nodeList.item(i);
+            if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element reservationElement = (Element) reservationNode;
+                String reservationDate = reservationElement.getAttribute("day");
+                String reservationUsername = reservationElement.getElementsByTagName("user").item(0).getTextContent();
+                if (reservationDate.equals(date) && reservationUsername.equals(username)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 
     /**
      * Returns all reservation of a user with its corresponding parking slot
@@ -480,7 +499,7 @@ public class ReservationParser {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
         System.out.println(parkingSpotList);
-        System.out.println(parser.countBookings());
+        System.out.println(parser.countTotalBookingsPerDay("rickardo","02/14/24"));
 
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
