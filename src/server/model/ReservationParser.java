@@ -414,6 +414,7 @@ public class ReservationParser {
         getReservationsFile();
 
         List<String> reservationInformation = new ArrayList<>();
+        reservationInformation.add("XX");
         reservationInformation.add("24:00");
         reservationInformation.add("00:00");
         reservationInformation.add("default");
@@ -432,19 +433,17 @@ public class ReservationParser {
                 Element currReservationElement = (Element) reservationNodes.item(j);
 
                 String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
-                int currStartHour = Integer.parseInt(currStartTimeParts[0]);
-
-                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username)){
 
 
-
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username) && compareStartTime(currStartTimeParts[0], reservationInformation.get(0))){
+                    reservationInformation.set(0, currReservationElement.getParentNode().getAttributes().item(0).getTextContent());
+                    reservationInformation.set(1, currReservationElement.getElementsByTagName("startTime").item(0).getTextContent());
+                    reservationInformation.set(2, currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
+                    reservationInformation.set(3, currReservationElement.getElementsByTagName("user").item(0).getTextContent());
                 }
 
             }
         }
-
-
-
 
         return reservationInformation;
     }
