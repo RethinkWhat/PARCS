@@ -215,7 +215,7 @@ public class ClientHandler implements Runnable {
             writer.println(server.getUserFullName(username));
             writer.println(server.countCarSlots());
             writer.println(server.countMotorSpots());
-            writer.println(server.countBookings());
+            writer.println(server.countBookings(username,"02/14/24"));
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());

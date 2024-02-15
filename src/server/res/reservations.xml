@@ -1,117 +1,79 @@
 <reservations>
-            
-    
     <parkingSpot identifier="C1">
-                        
-        
+                
         <reservation day="02/14/24">
-                                    
-            
+                        
             <startTime>8:00</startTime>
-                                    
-            
+                        
             <endTime>9:00</endTime>
-                                    
-            
+                        
             <user>chaeyoung</user>
-                                
-        
+                    
         </reservation>
-                        
-        
+                
         <reservation day="02/14/24">
-                                    
-            
+                        
             <startTime>10:00</startTime>
-                                    
-            
+                        
             <endTime>12:00</endTime>
-                                    
-            
+                        
             <user>aaliyah</user>
-                                
-        
+                    
         </reservation>
-                        
-        
+                
         <reservation day="03/09/03">
-                                    
-            
+                        
             <startTime>14:00</startTime>
-                                    
-            
+                        
             <endTime>15:00</endTime>
-                                    
-            
-            <user>ramon</user>
-                                
-        
-        </reservation>
                         
-        
+            <user>ramon</user>
+                    
+        </reservation>
+                
         <reservation day="02/14/24">
-                                    
-            
+                        
             <startTime>12:00</startTime>
-                                    
-            
+                        
             <endTime>14:00</endTime>
-                                    
-            
-            <user>rickardo</user>
-                                
-        
-        </reservation>
                         
-        
+            <user>rickardo</user>
+                    
+        </reservation>
+                
         <reservation day="02/14/24">
-                                    
-            
+                        
             <startTime>14:00</startTime>
-                                    
-            
+                        
             <endTime>16:00</endTime>
-                                    
-            
-            <user>rickardo</user>
-                                
-        
-        </reservation>
                         
-        
+            <user>rickardo</user>
+                    
+        </reservation>
+                
         <reservation day="02/14/24">
-                                    
-            
+                        
             <startTime>7:00</startTime>
-                                    
-            
-            <endTime>8:00</endTime>
-                                    
-            
-            <user>rickardo</user>
-                                
-        
-        </reservation>
                         
-        
+            <endTime>8:00</endTime>
+                        
+            <user>rickardo</user>
+                    
+        </reservation>
+                
         <reservation day="02/14/24">
-                                    
-            
+                        
             <startTime>9:00</startTime>
-                                    
-            
-            <endTime>10:00</endTime>
-                                    
-            
-            <user>rickardo</user>
-                                
-        
-        </reservation>
-                    
-        
-        <reservation day="02/15/24">
                         
-            <startTime>7:00</startTime>
+            <endTime>10:00</endTime>
+                        
+            <user>rickardo</user>
+                    
+        </reservation>
+                
+        <reservation day="02/14/24">
+                        
+            <startTime>16:00</startTime>
                         
             <endTime>9:00</endTime>
                         
@@ -125,93 +87,169 @@
             <user>rickardo</user>
         </reservation>
     </parkingSpot>
-            
-    
+        
     <parkingSpot identifier="C2">
-                        
-        
+                
         <reservation day="14/3/04">
-                                    
-            
+                        
             <startTime>01:00</startTime>
-                                    
-            
+                        
             <endTime>02:00</endTime>
-                                    
-            
-            <user>basti</user>
-                                
-        
-        </reservation>
                         
-        
+            <user>basti</user>
+                    
+        </reservation>
+                
         <reservation day="12/3/05">
-                                    
-            
+                        
             <startTime>03:00</startTime>
-                                    
-            
+                        
             <endTime>04:00</endTime>
-                                    
-            
+                        
             <user>ramon</user>
-                                
-        
         </reservation>
-                        
-        
-        <reservation day="13/3/07">
-                                    
-            
-            <startTime>03:00</startTime>
-                                    
-            
-            <endTime>04:00</endTime>
-                                    
-            
-            <user>basti</user>
-                                
-        
-        </reservation>
-                    
-    
     </parkingSpot>
-            
-    
-    <parkingSpot identifier="C3">
-                        
-        
-        <reservation day="02/14/24">
-                                    
-            
-            <startTime>8:00</startTime>
-                                    
-            
-            <endTime>9:00</endTime>
-                                    
-            
-            <user>rickardo</user>
-                                
-        
-        </reservation>
-                        
-        
-        <reservation day="02/14/24">
-                                    
-            
-            <startTime>11:00</startTime>
-                                    
-            
-            <endTime>13:00</endTime>
-                                    
-            
-            <user>rickardo</user>
-                                
-        
-        </reservation>
-                    
-    
-    </parkingSpot>
-        
 
+    <parkingSpot identifier="C1">
+
+        <reservation day="02/14/24">
+
+            <startTime>8:00</startTime>
+
+            <endTime>9:00</endTime>
+
+            <user>chaeyoung</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+
+            <startTime>10:00</startTime>
+
+            <endTime>12:00</endTime>
+
+            <user>aaliyah</user>
+
+        </reservation>
+
+        <reservation day="03/09/03">
+
+            <startTime>14:00</startTime>
+
+            <endTime>15:00</endTime>
+
+            <user>ramon</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+
+            <startTime>12:00</startTime>
+
+            <endTime>14:00</endTime>
+
+            <user>rickardo</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+
+            <startTime>14:00</startTime>
+
+            <endTime>16:00</endTime>
+
+            <user>rickardo</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+
+            <startTime>7:00</startTime>
+
+            <endTime>8:00</endTime>
+
+            <user>rickardo</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+
+            <startTime>9:00</startTime>
+
+            <endTime>10:00</endTime>
+
+            <user>rickardo</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+
+            <startTime>16:00</startTime>
+
+            <endTime>17:00</endTime>
+
+            <user>rickardo</user>
+
+        </reservation>
+
+        <reservation day="02/14/24">
+            <startTime>17:00</startTime>
+            <endTime>18:00</endTime>
+            <user>ri</user>
+        </reservation>
+    </parkingSpot>
+
+    <parkingSpot identifier="C2">
+
+        <reservation day="14/3/04">
+
+            <startTime>01:00</startTime>
+
+            <endTime>02:00</endTime>
+
+            <user>basti</user>
+
+        </reservation>
+
+        <reservation day="12/3/05">
+
+            <startTime>03:00</startTime>
+
+            <endTime>04:00</endTime>
+
+            <user>ramon</user>
+
+        </reservation>
+
+        <reservation day="13/3/07">
+
+            <startTime>03:00</startTime>
+
+            <endTime>04:00</endTime>
+
+            <user>basti</user>
+
+    <parkingSpot identifier="C3">
+                
+        <reservation day="02/14/24">
+                        
+            <startTime>8:00</startTime>
+                        
+            <endTime>9:00</endTime>
+                        
+            <user>rickardo</user>
+                    
+        </reservation>
+                
+        <reservation day="02/14/24">
+                        
+            <startTime>11:00</startTime>
+                        
+            <endTime>13:00</endTime>
+                        
+            <user>rickardo</user>
+                    
+        </reservation>
+            
+    </parkingSpot>
 </reservations>

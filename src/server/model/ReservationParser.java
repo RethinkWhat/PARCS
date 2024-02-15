@@ -163,8 +163,8 @@ public class ReservationParser {
     }
 
     public int countBookings() {
-        ReservationParser parser = new ReservationParser();
-        List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+        getReservationsFile();
+        List<ParkingSpot> parkingSpotList = getParkingInformation();
         int size = 0;
 
         for (ParkingSpot parkingSpot : parkingSpotList) {
@@ -175,6 +175,25 @@ public class ReservationParser {
         }
         return size;
     }
+
+    public int countTotalBookingsPerDay(String username, String date) {
+        getReservationsFile();
+        int count = 0;
+        NodeList nodeList = document.getElementsByTagName("reservation");
+        for (int i = 0; i < nodeList.getLength(); i++) {
+            Node reservationNode = nodeList.item(i);
+            if (reservationNode.getNodeType() == Node.ELEMENT_NODE) {
+                Element reservationElement = (Element) reservationNode;
+                String reservationDate = reservationElement.getAttribute("day");
+                String reservationUsername = reservationElement.getElementsByTagName("user").item(0).getTextContent();
+                if (reservationDate.equals(date) && reservationUsername.equals(username)) {
+                    count++;
+                }
+            }
+        }
+        return count;
+    }
+
 
     /**
      * Returns all reservation of a user with its corresponding parking slot
@@ -474,13 +493,64 @@ public class ReservationParser {
         return false;
     }
 
+    /**
+     * Checks if a passed startTime and endTime will have a conflict in the current reservations of a user
+     * true: if there are no conflicts
+     * false: if there are conflicts
+     * @param username
+     * @param startTime
+     * @param endTime
+     * @return
+     */
+    public boolean checkScheduleConflicts(String username, String startTime, String endTime){
+        getReservationsFile();
 
+        String[] startTimeParts = startTime.split(":");
+        String[] endTimeParts = endTime.split(":");
+
+        int passedStartTime = Integer.parseInt(startTimeParts[0]);
+        int passedEndTime = Integer.parseInt(endTimeParts[0]);
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        //Traverse all parking spot
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+            //Traverse all reservation nodes in the current parking spot
+            for (int j = 0; j < reservationNodes.getLength(); j++){
+
+                Element currReservationElement = (Element) reservationNodes.item(j);
+
+                // Checks if the current reservation's username is equals to the passed username
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username)){
+
+                    String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
+                    String[] currEndTimeParts = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent().split(":");
+
+                    int currStartTime = Integer.parseInt(currStartTimeParts[0]);
+                    int currEndTime = Integer.parseInt(currEndTimeParts[0]);
+
+                    //Checks if the startTime and endTime of the user is not in between the current start and end time of the current reservation
+                    if ((passedStartTime>=currStartTime && passedStartTime<= currEndTime) || (passedEndTime>=currStartTime && passedEndTime<=currEndTime)){
+                        return false;
+                    }
+
+                }
+            }
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
         System.out.println(parkingSpotList);
-        System.out.println(parser.countBookings());
+        System.out.println(parser.countTotalBookingsPerDay("rickardo","02/14/24"));
 
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
@@ -489,5 +559,7 @@ public class ReservationParser {
         System.out.println(parser.computeDuration("15:00","20:00"));
 
         System.out.println(parser.getClosestReservation("aaliyah"));
+
+        System.out.println(parser.checkScheduleConflicts("aaliyah", "13:00", "16:00"));
     }
 }
