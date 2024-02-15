@@ -18,13 +18,21 @@ public class TimerPageView extends JPanel {
      */
     private JPanel container;
     /**
-     * The panel for the timer
+     * The panel for the timer.
      */
     private final TimerPanel pnlTimer;
+    /**
+     * The panel for the timer graphics (stopwatch and arc).
+     */
+    private TimerGraphics pnlTimerGraphics;
     /**
      * The panel for information.
      */
     private final TicketInfoPanel pnlTicketInfo;
+    /**
+     * The dialog for dlgEndTimer.
+     */
+    private EndTimerDialog dlgEndTimer;
     /**
      * The stylesheet.
      */
@@ -37,6 +45,9 @@ public class TimerPageView extends JPanel {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(20, 20, 20, 20));
         setBackground(res.lightGray);
+
+        dlgEndTimer = new EndTimerDialog();
+        //dlgEndTimer.setVisible(false);
 
         container = res.createPnlRounded(1100, 700, res.white, res.white);
         container.setPreferredSize(new Dimension(1100, 700));
@@ -74,7 +85,7 @@ public class TimerPageView extends JPanel {
             setBorder(new EmptyBorder(20, 20, 20, 20));
             setBackground(res.white);
 
-            TimerGraphics pnlTimerGraphics = new TimerGraphics();
+            pnlTimerGraphics = new TimerGraphics();
             add(pnlTimerGraphics, BorderLayout.CENTER);
 
             JPanel pnlButtons = new JPanel(new FlowLayout());
@@ -93,6 +104,14 @@ public class TimerPageView extends JPanel {
          */
         public void setEndTimerListener(ActionListener actionListener) {
             btnEndTimer.addActionListener(actionListener);
+        }
+
+        /**
+         * Retrieves the current JButton of btnEndTimer.
+         * @return The current btnEndTimer.
+         */
+        public JButton getBtnEndTimer() {
+            return btnEndTimer;
         }
     }
 
@@ -164,6 +183,14 @@ public class TimerPageView extends JPanel {
             });
 
             this.setPreferredSize(new Dimension(150,100));
+        }
+
+        /**
+         * Retrieves the current swing timer.
+         * @return The current swing timer.
+         */
+        public Timer getSwingTimer() {
+            return swingTimer;
         }
 
         /**
@@ -421,22 +448,27 @@ public class TimerPageView extends JPanel {
          */
         private JButton btnCancel;
 
+
         /**
          * Constructs a dialog of EndTimerDialog.
          */
         public EndTimerDialog() {
-            setLayout(new BorderLayout());
+            setBorder(new EmptyBorder(20,20,20,20));
+
+            Container contentArea = new JPanel(new BorderLayout());
+            contentArea.setBackground(res.white);
 
             JLabel lblTitle = res.createLblH1("Ticket Cancellation", res.eerieBlack);
-            add(lblTitle, BorderLayout.NORTH);
+            contentArea.add(lblTitle, BorderLayout.NORTH);
 
             JLabel lblMessage = res.createLblP("<html>Are you sure you want to prematurely end your <br>" +
                     "reservation? Your ticket will be rendered as completed. <br>" +
                     "You cannot undo this action.", res.eerieBlack);
-            add(lblMessage, BorderLayout.CENTER);
+            contentArea.add(lblMessage, BorderLayout.CENTER);
 
             JPanel pnlButtons = new JPanel(new FlowLayout());
-            add(pnlButtons, BorderLayout.SOUTH);
+            pnlButtons.setBackground(res.white);
+            contentArea.add(pnlButtons, BorderLayout.SOUTH);
 
             btnConfirm = res.createBtnRounded("Yes", res.red, res.eerieBlack, 10);
             pnlButtons.add(btnConfirm);
@@ -444,7 +476,20 @@ public class TimerPageView extends JPanel {
             btnCancel = res.createBtnRounded("No", res.lightGray, res.eerieBlack, 10);
             pnlButtons.add(btnCancel);
 
-            this.setPreferredSize(new Dimension(400, 300));
+            this.setContentPane(contentArea);
+            this.setModal(true);
+            this.pack();
+            this.setSize(400, 200);
+            this.setResizable(false);
+            this.setVisible(false);
+        }
+
+        /**
+         * Sets a specified action listener to btnConfirm.
+         * @param actionListener The specified action listener.
+         */
+        public void setConfirmListener(ActionListener actionListener) {
+            btnConfirm.addActionListener(actionListener);
         }
 
         /**
@@ -461,6 +506,14 @@ public class TimerPageView extends JPanel {
          */
         public JButton getBtnCancel() {
             return btnCancel;
+        }
+
+        /**
+         * Sets a specified action listener to btnCancel.
+         * @param actionListener The specified btnCancel.
+         */
+        public void setCancelListener(ActionListener actionListener) {
+            btnCancel.addActionListener(actionListener);
         }
     }
 
@@ -480,5 +533,21 @@ public class TimerPageView extends JPanel {
      */
     public TicketInfoPanel getPnlTicketInfo() {
         return pnlTicketInfo;
+    }
+
+    /**
+     * Retrieves the current JPanel of pnlTimerGraphics.
+     * @return The current pnlTimerGraphics.
+     */
+    public TimerGraphics getPnlTimerGraphics() {
+        return pnlTimerGraphics;
+    }
+
+    /**
+     * Retrieves the current JDialog of dlgEndTimer.
+     * @return The current dlgEndTimer.
+     */
+    public EndTimerDialog getDlgEndTimer() {
+        return dlgEndTimer;
     }
 }
