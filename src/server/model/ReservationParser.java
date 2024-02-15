@@ -474,7 +474,45 @@ public class ReservationParser {
         return false;
     }
 
+    public boolean checkScheduleConflicts(String username, String startTime, String endTime){
+        getReservationsFile();
 
+        String[] startTimeParts = startTime.split(":");
+        String[] endTimeParts = endTime.split(":");
+
+        int passedStartTime = Integer.parseInt(startTimeParts[0]);
+        int passedEndTime = Integer.parseInt(endTimeParts[0]);
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+            for (int j = 0; j < reservationNodes.getLength(); j++){
+
+                Element currReservationElement = (Element) reservationNodes.item(j);
+
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username)){
+
+                    String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
+                    String[] currEndTimeParts = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent().split(":");
+
+                    int currStartTime = Integer.parseInt(currStartTimeParts[0]);
+                    int currEndTime = Integer.parseInt(currEndTimeParts[0]);
+
+                    if ((passedStartTime>=currStartTime && passedStartTime<= currEndTime) || (passedEndTime>=currStartTime && passedEndTime<=currEndTime)){
+                        return false;
+                    }
+
+                }
+            }
+        }
+        return true;
+    }
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
@@ -489,5 +527,7 @@ public class ReservationParser {
         System.out.println(parser.computeDuration("15:00","20:00"));
 
         System.out.println(parser.getClosestReservation("aaliyah"));
+
+        System.out.println();
     }
 }
