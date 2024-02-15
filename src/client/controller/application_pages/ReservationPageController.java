@@ -31,9 +31,13 @@ public class ReservationPageController {
 
     private String btnDuration;
 
-    private String date ="02/14/24";
+    private String date;
 
     private String[] timeAvailable;
+
+    private String dateChosen;
+
+    private String[] dateList;
 
     /**
      * Constructs a ReservationPageController with a specified view and model.
@@ -43,7 +47,8 @@ public class ReservationPageController {
     public ReservationPageController(ReservationPageView view, ReservationPageModel model) {
         this.view = view;
         this.model = model;
-
+        date =model.getDate();
+        dateList = model.getDateList();
         view.setUserFullName(model.getFullName());
 
         // constants/variables
@@ -55,12 +60,16 @@ public class ReservationPageController {
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
         view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
+        view.getParkingSlotButtonsView().setDateListener(new DateListener());
         view.getParkingSlotButtonsView().setDurationListener(new durationListener());
         view.getMainTopPanel().setTxtSearchBarListener(new searchListener());
 
         view.getMainTopPanel().setPnlAvailMotor(model.getAvailMotorSlots());
         view.getMainTopPanel().setPnlAvailCar(model.getAvailCarSlots());
         view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
+
+        view.getParkingSlotButtonsView().setDateList(dateList);
+
 
 
 
@@ -82,6 +91,17 @@ public class ReservationPageController {
         });
     }
 
+    class DateListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String tempDate = view.getParkingSlotButtonsView().getDateChosen();
+            if (!tempDate.equals("Select Date:")) {
+                date = tempDate;
+                view.getParkingSlotButtonsView().setLblDate(date);
+            }
+        }
+    }
+
     class CarMotorListener implements ActionListener {
 
         @Override
@@ -90,11 +110,6 @@ public class ReservationPageController {
 
             CarMotorButton buttonClicked = (CarMotorButton) e.getSource();
             btnID = buttonClicked.getIdentifier();
-
-
-            if (timeAvailable != null) {
-                view.getParkingSlotButtonsView().setLblStatus("Available");
-            }
 
             view.getParkingSlotButtonsView().setLblDate(date);
 
@@ -108,20 +123,22 @@ public class ReservationPageController {
             }
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
+            view.getParkingSlotButtonsView().setLblDate(date);
         }
     }
 
     class durationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
+            view.getParkingSlotButtonsView().setLblDate(date);
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
-            String[] timeAvailable1;
-            if (!duration.equals("Duration")) {
-                timeAvailable1 = model.getAvailableTime(btnID, duration, date);
-                view.getParkingSlotButtonsView().setTimeList(timeAvailable1);
+            if (!duration.equals("Duration:")) {
+                timeAvailable = model.getAvailableTime(btnID, duration, date);
+                view.getParkingSlotButtonsView().setTimeList(timeAvailable);
+                if (timeAvailable != null)
+                    view.getParkingSlotButtonsView().setLblStatus("Available");
             }
+
         }
     }
 
@@ -139,6 +156,12 @@ public class ReservationPageController {
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
                 if (startTime != null && duration != null) {
                     model.attemptBooking(btnID, date, startTime, duration);
+                    view.getParkingSlotButtonsView().resetDuration();
+                    timeAvailable = model.getAvailableTime(btnID, duration, date);
+                    System.out.println(timeAvailable);
+                    view.getParkingSlotButtonsView().setTimeList(timeAvailable);
+                    if (timeAvailable != null)
+                        view.getParkingSlotButtonsView().setLblStatus("Available");
                     view.getReserveSlotConfirmationView();
                 }
         }

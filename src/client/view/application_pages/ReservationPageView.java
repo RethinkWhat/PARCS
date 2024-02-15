@@ -571,7 +571,7 @@ public class ReservationPageView extends JPanel {
             pnlReserve.add(cmbVehicle, gbc);
 
             // Dropdown for Select Date
-            cmbDate = new JComboBox<>(new String[]{"Select Date:", "02-15-24", "02-16-24", "02-17-24"});
+            cmbDate = new JComboBox<>(new String[]{"Select Date:", "02/14/24", "02/16/24", "02/17/24"});
             cmbDate.setPreferredSize(new Dimension(200, 40));
             cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 1;
@@ -637,6 +637,11 @@ public class ReservationPageView extends JPanel {
             cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(timeList));
         }
 
+        public void setDateList(String[] dateList) {
+            cmbDate.setModel(new javax.swing.DefaultComboBoxModel<>(dateList));
+        }
+
+
         public String getStartTime() {
             return cmbTime.getItemAt(cmbTime.getSelectedIndex());
         }
@@ -649,9 +654,18 @@ public class ReservationPageView extends JPanel {
             return String.valueOf(cmbDuration.getSelectedIndex());
         }
 
+        public void resetDuration() {
+            cmbDuration.setSelectedIndex(0);
+        }
+
         public void setDurationListener(ActionListener listener) {
             cmbDuration.addActionListener(listener);
         }
+
+        public void setDateListener(ActionListener listener) {
+            cmbDate.addActionListener(listener);
+        }
+
 
         public void setDurationList(String[] durationList) {
         cmbDuration = new JComboBox<>(durationList);
