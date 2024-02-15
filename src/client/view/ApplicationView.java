@@ -1,6 +1,7 @@
 package client.view;
 
 import client.view.application_pages.ReservationPageView;
+import client.view.application_pages.TimerView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
@@ -54,11 +55,15 @@ public class ApplicationView extends JFrame {
      */
     private Resources res = new Resources();
     /**
-     * TODO: Documentation
+     * Panel of reservation page view.
      */
     private ReservationPageView reservationPageView;
     /**
-     * TODO: Documentation
+     * Panel of timer view.
+     */
+    private TimerView timerView;
+    /**
+     * Panel of user profile view.
      */
     private UserProfileView userProfileView;
 
@@ -88,7 +93,7 @@ public class ApplicationView extends JFrame {
         pnlCards.add(reservationPageView = new ReservationPageView(), "home");
 
         // Ticket Page
-        // TODO: card and panel
+        pnlCards.add(timerView = new TimerView(), "ticket");
 
         // Account Page
         pnlCards.add(userProfileView = new UserProfileView(), "account");
@@ -98,7 +103,6 @@ public class ApplicationView extends JFrame {
         this.pack();
         this.setSize(1300,800);
         this.setResizable(false);
-        this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -167,6 +171,14 @@ public class ApplicationView extends JFrame {
      */
     public UserProfileView getUserProfileView() {
         return userProfileView;
+    }
+
+    /**
+     * Retrieves the current panel of TimerView.
+     * @return The current panel of TimerView.
+     */
+    public TimerView getTimerView() {
+        return timerView;
     }
 
     // Temporary main method for testing. Omit before production.

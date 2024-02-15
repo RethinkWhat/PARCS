@@ -16,15 +16,16 @@ public class LiveDateTime extends Thread {
     /**
      * The format for the day that specifies the whole text.
      */
-    private SimpleDateFormat dayFormat;
+    private static SimpleDateFormat dayFormat;
     /**
      * The format for date in MMMM dd, YYYY format (e.g., February 19, 2024).
      */
-    private SimpleDateFormat dateFormat;
+    private static SimpleDateFormat dateFormat;
     /**
      * The time
      */
     private volatile String time;
+
 
     /**
      * Constructs an object of LiveDate Time with default values.
@@ -57,9 +58,18 @@ public class LiveDateTime extends Thread {
                 timeFormat.format(currentTime);
     }
 
+
     public String getTime() {
         return time;
     }
+
+    public static String getDate() {
+        Date currentTime = Calendar.getInstance().getTime();
+        dateFormat = new SimpleDateFormat("MM/dd/yy");
+        //currentTime.after(1)
+        return dateFormat.format(currentTime);
+    }
+
 
     /**
      * Retrieves the current format for time.
@@ -83,5 +93,11 @@ public class LiveDateTime extends Thread {
      */
     public SimpleDateFormat getDateFormat() {
         return dateFormat;
+    }
+
+    public static void main(String[] args) {
+        LiveDateTime dateTime = new LiveDateTime();
+        String c = dateTime.getDate();
+        System.out.println(c);
     }
 }

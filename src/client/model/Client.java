@@ -79,6 +79,25 @@ public class Client {
         return toReturn;
     }
 
+    public void writeObject(Object object) {
+        try {
+            writerObject.writeObject(object);
+        } catch (IOException ex ){
+            ex.printStackTrace();
+        }
+    }
+
+    public Object readObject() {
+        Object obj = null;
+        try {
+            readerObject = new ObjectInputStream(client.getInputStream());
+            obj = readerObject.readObject();
+        }catch (IOException | ClassNotFoundException ex) {
+            ex.printStackTrace();
+        }
+        return obj;
+    }
+
     public String getUsername() {
         return username;
     }
@@ -94,6 +113,23 @@ public class Client {
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
         } catch (IOException ex) {
+            ex.printStackTrace();
+            System.out.println();
+            System.out.println("-----------------");
+            System.out.println("Server is closed.");
+            System.out.println("-----------------");
+            System.exit(0);
+        }
+    }
+
+    public void openObjectSocket() {
+        try {
+            client = new Socket();
+            client.connect(socketAddress);
+            //readerObject = new ObjectInputStream(client.getInputStream());
+            //writerObject = new ObjectOutputStream(client.getOutputStream());
+        } catch (IOException ex) {
+            ex.printStackTrace();
             System.out.println();
             System.out.println("-----------------");
             System.out.println("Server is closed.");
@@ -136,6 +172,19 @@ public class Client {
         closeSocket();
     }
 
+    public int logoutAndExit() {
+        openSocket();
+        try {
+            writeString("logout");
+            this.writeString(this.getUsername());
+            client.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        closeSocket();
+        return 1;
+    }
+
     public void closeSocket() {
         try {
             client.close();
@@ -146,9 +195,19 @@ public class Client {
         }
     }
 
+    public void closeObjectSocket() {
+        try{
+            readerObject.close();
+            writerObject.close();
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
     public void startGUI() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
+        view.setDefaultCloseOperation(logoutAndExit());
         new LoginRegisterController(view, model);
     }
 

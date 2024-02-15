@@ -1,10 +1,14 @@
 package client.view.application_pages;
 
+import client.model.application_pages.CarMotorButton;
+import client.model.application_pages.CarMotorButton;
+import server.view.ServerStatusView;
 import utilities.Resources;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * Template for ReservationPageView object.
@@ -57,9 +61,32 @@ public class ReservationPageView extends JPanel {
      */
     private CardLayout topCardLayout = new CardLayout();
 
+    private MainBottomPanel mainBottomPanel;
+
+    private ParkingSlotButtonsView parkingSlotButtonsView;
+
+    private ReserveSlotConfirmationView reserveSlotConfirmationView;
+
+    private Icon takenCar = res.iconTakenCar;
+
+    private Icon availCar = res.iconAvailableCar;
+
+    private MainTopPanel mainTopPanel;
+
+    public Icon getTakenCar() {
+        return takenCar;
+    }
+
+
+    public Icon getAvailCar() {
+        return availCar;
+    }
+
     /**
      * Constructs a panel of ReservationPageView.
      */
+
+
     public ReservationPageView() {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(25,25,25,25));
@@ -67,13 +94,18 @@ public class ReservationPageView extends JPanel {
         pnlCards = new JPanel(topCardLayout);
         add(pnlCards, BorderLayout.NORTH);
 
+        parkingSlotButtonsView = new ParkingSlotButtonsView();
+
+        mainTopPanel = new MainTopPanel();
         // Top Panel
-        pnlCards.add(new MainTopPanel(), "dashboard");
-        pnlCards.add(new ParkingSlotButtonsView(), "buttons");
+        pnlCards.add(mainTopPanel, "dashboard");
+        pnlCards.add(parkingSlotButtonsView, "buttons");
         topCardLayout.show(pnlCards, "dashboard");
 
+        mainBottomPanel = new MainBottomPanel();
+
         // Bottom Panel
-        add(new MainBottomPanel(), BorderLayout.SOUTH);
+        add(mainBottomPanel, BorderLayout.SOUTH);
 
         this.setPreferredSize(new Dimension(1100,700));
     }
@@ -81,15 +113,19 @@ public class ReservationPageView extends JPanel {
     /**
      * The panel that contains the parking slots.
      */
-    class MainBottomPanel extends JPanel {
+    public class MainBottomPanel extends JPanel {
         /**
          * The rounded panel.
          */
         private JPanel container;
 
+        private ParkingSlotsPanel parkingSlotsPanel;
+
         /**
          * Constructs a panel of MainBottomPanel.
+         *
          */
+
         public MainBottomPanel() {
             setLayout(new BorderLayout());
 
@@ -100,7 +136,7 @@ public class ReservationPageView extends JPanel {
             lblParkingTitle.setBorder(new EmptyBorder(20, 40, 0, 0));
             container.add(lblParkingTitle, BorderLayout.NORTH);
 
-            ParkingSlotsPanel parkingSlotsPanel = new ParkingSlotsPanel();
+            parkingSlotsPanel = new ParkingSlotsPanel();
             parkingSlotsPanel.setPreferredSize(new Dimension(1100, 350));
             parkingSlotsPanel.setOpaque(false);
             container.add(parkingSlotsPanel, BorderLayout.CENTER);
@@ -108,36 +144,79 @@ public class ReservationPageView extends JPanel {
             add(container, BorderLayout.CENTER);
 
             setPreferredSize(new Dimension(1300, 510));
+
+        }
+
+        public ParkingSlotsPanel getParkingSlotsPanel() {
+            return parkingSlotsPanel;
         }
 
         /**
          * The panel that contains the parking slots.
          */
-        class ParkingSlotsPanel extends JPanel {
+        public class ParkingSlotsPanel extends JPanel {
             private static final int NUM_CAR_SLOTS = 5;
             private static final int NUM_MOTOR_SLOTS = 2;
 
-            private JButton[] carButtons;
-            private JButton[] motorButtons;
+            private CarMotorButton[] carButtons;
+            private CarMotorButton[] motorButtons;
 
             public ParkingSlotsPanel() {
                 initializeButtons();
             }
 
             private void initializeButtons() {
-                carButtons = new JButton[NUM_CAR_SLOTS];
-                motorButtons = new JButton[NUM_MOTOR_SLOTS];
+                carButtons = new CarMotorButton[NUM_CAR_SLOTS * 2];
+                motorButtons = new CarMotorButton[NUM_MOTOR_SLOTS * 2];
 
+                // Initialize buttons for the top row
                 for (int i = 0; i < NUM_CAR_SLOTS; i++) {
-                    String carLabel = "C" + String.format("%2d", i + 1); // C (Car Parking)
-                    carButtons[i] = res.createBtnRounded(carLabel, res.celadon, Color.WHITE, 10);
-                    add(carButtons[i]);
+                    String carLabel = "C" + (i + 1);
+                    carButtons[i] = new CarMotorButton(carLabel);
+                    carButtons[i].setIdentifier(carLabel);
+
+                    //TODO: Validate if it is taken
+                    //for buttons with image
+                    carButtons[i] = new CarMotorButton(carLabel, res.iconAvailableCar);
+                    carButtons[i].setOpaque(false);
+                    carButtons[i].setContentAreaFilled(false);
+                    carButtons[i].setBorderPainted(false);
                 }
 
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    String motorLabel = "M" + String.format("%2d", i + 1); // M (Motor Parking)
-                    motorButtons[i] = res.createBtnRounded(motorLabel, res.celadon, Color.WHITE, 10);
-                    add(motorButtons[i]);
+                    String motorLabel = "M" + (i + 1);
+                    motorButtons[i] = new CarMotorButton(motorLabel);
+                    motorButtons[i].setIdentifier(motorLabel);
+
+                    //for buttons with image
+                    motorButtons[i] = new CarMotorButton(motorLabel, res.iconAvailableMotor);
+                    motorButtons[i].setOpaque(false);
+                    motorButtons[i].setContentAreaFilled(false);
+                    motorButtons[i].setBorderPainted(false);
+                }
+
+                // Initialize buttons for the bottom row
+                for (int i = 0; i < NUM_CAR_SLOTS; i++) {
+                    String carLabel = "C" + (i + 6);
+                    carButtons[i + NUM_CAR_SLOTS] = new CarMotorButton(carLabel);
+
+                    //for buttons with image
+                    carButtons[i+ NUM_CAR_SLOTS] = new CarMotorButton(carLabel, res.iconAvailableCar);
+                    carButtons[i+ NUM_CAR_SLOTS].setOpaque(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setContentAreaFilled(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setBorderPainted(false);
+                    carButtons[i+ NUM_CAR_SLOTS].setFocusPainted(false);
+                }
+
+                for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
+                    String motorLabel = "M" + (i + 3);
+                    motorButtons[i + NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel);
+
+                    //for buttons with image
+                    motorButtons[i+ NUM_MOTOR_SLOTS] = new CarMotorButton(motorLabel, res.iconAvailableMotor);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setOpaque(false);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setContentAreaFilled(false);
+                    motorButtons[i+ NUM_MOTOR_SLOTS].setBorderPainted(false);
                 }
             }
 
@@ -167,20 +246,21 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, slotWidth, slotHeight);
 
                     // Buttons for the car slots (added bounds for positioning)
-                    carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
-
+                    carButtons[i].setBounds(x + slotWidth / 8, y + slotHeight / 8, slotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(carButtons[i]);
                 }
 
                 // Draw Motor Slots (Top Row)
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int x = xOffset + (NUM_CAR_SLOTS + i) * slotWidth;
                     int y = yOffset;
 
                     // Draw rectangles to represent motor slots
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 4, motorSlotWidth / 2, slotHeight / 2);
+                    motorButtons[i].setBounds(x + motorSlotWidth / 8, y + slotHeight / 8, motorSlotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(motorButtons[i]);
                 }
 
                 // Draw Car Slots (Bottom Row)
@@ -192,19 +272,29 @@ public class ReservationPageView extends JPanel {
                     g.drawRect(x, y, slotWidth, slotHeight);
 
                     // Buttons for the car slots (added bounds for positioning)
-                    //carButtons[i].setBounds(x + slotWidth / 4, y + slotHeight / 4, slotWidth / 2, slotHeight / 2);
+                    carButtons[i + NUM_CAR_SLOTS].setBounds(x + slotWidth / 8, y + slotHeight / 8, slotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(carButtons[i + NUM_CAR_SLOTS]);
                 }
 
                 // Draw Motor Slots (Bottom Row)
                 for (int i = 0; i < NUM_MOTOR_SLOTS; i++) {
-                    int x = xOffset + (NUM_CAR_SLOTS + i * 1) * slotWidth; // Adjusted calculation
+                    int x = xOffset + (NUM_CAR_SLOTS + i) * slotWidth;
                     int y = yOffset + slotHeight;
 
                     // Draw rectangles to represent motor slots
                     g.drawRect(x, y, motorSlotWidth, slotHeight);
 
                     // Buttons for the motor slot
-                    //motorButtons[i].setBounds(x + motorSlotWidth / 4, y + slotHeight / 8, motorSlotWidth / 2, slotHeight / 2);
+                    motorButtons[i + NUM_MOTOR_SLOTS].setBounds(x + motorSlotWidth / 8, y + slotHeight / 8, motorSlotWidth * 3 / 4, slotHeight * 3 / 4);
+                    add(motorButtons[i + NUM_MOTOR_SLOTS]);
+                }
+            }
+            public void setCarButtonsListener(ActionListener listener) {
+                for (JButton button : carButtons) {
+                    button.addActionListener(listener);
+                }
+                for (JButton button : motorButtons) {
+                    button.addActionListener(listener);
                 }
             }
         }
@@ -213,10 +303,14 @@ public class ReservationPageView extends JPanel {
     /**
      * The panel that contains multiple objects of the ButtonsPanel.
      */
-    class MainTopPanel extends JPanel {
+    public class MainTopPanel extends JPanel {
         /**
          * Constructs a panel of MainTopPanel.
          */
+
+        ButtonPanel pnlAvailCar;
+        ButtonPanel pnlAvailMotor;
+        ButtonPanel pnlTotalBookings;
         public MainTopPanel() {
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
@@ -262,21 +356,21 @@ public class ReservationPageView extends JPanel {
 
 
             // Update parameters as models from controller when backend has commenced.
-            ButtonPanel pnlAvailCar = new ButtonPanel(
+            pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     res.createLblH1("13", res.eerieBlack),
                     res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
-            ButtonPanel pnlAvailMotor = new ButtonPanel(
+            pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     res.createLblH1("10", res.eerieBlack),
                     res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
-            ButtonPanel pnlTotalBookings = new ButtonPanel(
+            pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
                     res.createLblH1("3", res.eerieBlack),
                     res.createLblP("<html>Your Total<br> Bookings</html>", res.eerieBlack)
@@ -284,6 +378,23 @@ public class ReservationPageView extends JPanel {
             pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
+        }
+
+        public void setPnlAvailCar(String availCar) {
+            pnlAvailCar.setText(availCar);
+        }
+        public void setPnlAvailMotor(String availMotor) {
+            pnlAvailMotor.setText(availMotor);
+        }
+        public void setPnlTotalBookings(String totalBookings) {
+            pnlTotalBookings.setText(totalBookings);
+        }
+
+        public void setTxtSearchBarListener(ActionListener listener) {
+            txtSearchbar.addActionListener(listener);
+        }
+        public String getTxtSearchbar() {
+            return txtSearchbar.getText();
         }
     }
 
@@ -295,6 +406,7 @@ public class ReservationPageView extends JPanel {
          * The rounded panel.
          */
         private JPanel container;
+        private JLabel number;
 
         /**
          * Constructs a panel with a specified button, number label, and title label.
@@ -306,18 +418,22 @@ public class ReservationPageView extends JPanel {
             container.setLayout(new GridLayout(0, 3));
             add(container, BorderLayout.NORTH);
 
+            this.number = number;
             container.add(button);
-            container.add(number);
+            container.add(this.number);
             container.add(title);
 
             this.setPreferredSize(new Dimension(100, 100));
+        }
+        public void setText(String number) {
+            this.number.setText(number);
         }
     }
 
     /**
      * TODO: Documentation
      */
-    class ParkingSlotButtonsView extends JPanel {
+    public class ParkingSlotButtonsView extends JPanel {
         /**
          * TODO: Documentation
          */
@@ -358,6 +474,10 @@ public class ReservationPageView extends JPanel {
          * TODO: Documentation
          */
         private JComboBox<String> cmbDuration;
+        /**
+         * TODO: Documentation
+         */
+        private JComboBox<String> cmbDate;
 
         /**
          * The stylesheet.
@@ -375,17 +495,26 @@ public class ReservationPageView extends JPanel {
             add(pnlContainer, BorderLayout.CENTER);
 
             // pnlSlotNumber
-            JPanel pnlSlotNumber = new JPanel(new BorderLayout());
+            JPanel pnlSlotNumber = new JPanel(new GridBagLayout());
             pnlSlotNumber.setPreferredSize(new Dimension(1300, 50));
             pnlSlotNumber.setBackground(res.white);
 
+            GridBagConstraints gbcSlotNumber = new GridBagConstraints();
+            gbcSlotNumber.anchor = GridBagConstraints.WEST;
+            gbcSlotNumber.insets = new Insets(0, 10, 0, 0);
+
             // Button for closing the panel
-            btnClose = res.createBtnIconOnly(res.iconClose, 20,20);
-            pnlSlotNumber.add(btnClose, BorderLayout.WEST);
+            btnClose = res.createBtnIconOnly(res.iconClose, 20, 20);
+            pnlSlotNumber.add(btnClose, gbcSlotNumber);
 
             // Label for the slot number
             lblSlotNumber = res.createLblH1("SLOT A 01", res.eerieBlack);
-            pnlSlotNumber.add(lblSlotNumber, BorderLayout.CENTER);
+            gbcSlotNumber.gridx = 1;
+            gbcSlotNumber.weightx = 1.0;
+            gbcSlotNumber.anchor = GridBagConstraints.CENTER;
+            gbcSlotNumber.insets = new Insets(0, 10, 0, 0);
+            pnlSlotNumber.add(lblSlotNumber, gbcSlotNumber);
+
             pnlContainer.add(pnlSlotNumber);
 
             // pnlSlotInformation
@@ -432,8 +561,8 @@ public class ReservationPageView extends JPanel {
             pnlReserve.setBackground(Color.white);
 
             gbc = new GridBagConstraints();
-            gbc.insets = new Insets(5, 10, 5, 10); // Add space around components
-            gbc.anchor = GridBagConstraints.CENTER; // Center components horizontally
+            gbc.insets = new Insets(5, 10, 5, 10);
+            gbc.anchor = GridBagConstraints.CENTER;
 
             // Dropdown for Select Vehicle
             cmbVehicle = new JComboBox<>(new String[]{"Select Vehicle:", "Honda Civic", "Toyota Raize", "Ford Everest"});
@@ -441,24 +570,32 @@ public class ReservationPageView extends JPanel {
             cmbVehicle.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(cmbVehicle, gbc);
 
-            // Dropdown for Select Time
-            JComboBox<String> cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "10:00", "15:00", "20:00"});
-            cmbTime.setPreferredSize(new Dimension(200, 40));
-            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
+            // Dropdown for Select Date
+            cmbDate = new JComboBox<>(new String[]{"Select Date:", "02/14/24", "02/16/24", "02/17/24"});
+            cmbDate.setPreferredSize(new Dimension(200, 40));
+            cmbDate.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 1;
-            pnlReserve.add(cmbTime, gbc);
+            pnlReserve.add(cmbDate, gbc);
 
             // Dropdown for Duration
-            cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "5hr", "10hr", "15hr", "19hr"});
+            cmbDuration = new JComboBox<>(new String[]{"Duration:", "1hr", "2hr","3hr","4hr"});
             cmbDuration.setPreferredSize(new Dimension(200, 40));
             cmbDuration.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 2;
             pnlReserve.add(cmbDuration, gbc);
 
-            // Reserve Slot Button (using createBtnRounded from Resources)
-            JButton btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            // Dropdown for Select Time
+            cmbTime = new JComboBox<>(new String[]{"Select Time:", "6:00", "7:00", "8:00", "9:00",
+                    "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"});
+            cmbTime.setPreferredSize(new Dimension(200, 40));
+            cmbTime.setFont(new Font("Arial", Font.BOLD, 16));
             gbc.gridx = 3;
-            gbc.gridwidth = 2; // Set the button to span 2 columns
+            pnlReserve.add(cmbTime, gbc);
+
+            // Reserve Slot Button
+            btnReserve = res.createBtnRounded("Reserve Slot", res.celadon, res.eerieBlack, 15);
+            gbc.gridx = 4;
+            gbc.gridwidth = 2;
             btnReserve.setPreferredSize(new Dimension(140, 40));
             btnReserve.setFont(new Font("Arial", Font.BOLD, 16));
             pnlReserve.add(btnReserve, gbc);
@@ -467,6 +604,140 @@ public class ReservationPageView extends JPanel {
 
             this.setPreferredSize(new Dimension(1300, 130));
         }
+
+        public void setLblSlotNumber(String label) {
+                lblSlotNumber.setText("SPOT " + label);
+        }
+        public void setBtnCloseListener(ActionListener listener) {
+            btnClose.addActionListener(listener);
+        }
+
+        public void setLblDate(String date) {
+            lblDate.setText(date);
+        }
+
+        public void setReserveSlotListener(ActionListener listener) {
+            btnReserve.addActionListener(listener);
+        }
+
+        public void setLblType(String type) {
+            lblType.setText(type);
+        }
+
+        public void setLblStatus(String status) {
+            lblStatus.setText(status);
+        }
+
+
+        public void setVehiclesList(String[] vehicles) {
+            cmbVehicle.setModel(new javax.swing.DefaultComboBoxModel<>(vehicles));
+        }
+
+        public void setTimeList(String[] timeList) {
+            cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(timeList));
+        }
+
+        public void setDateList(String[] dateList) {
+            cmbDate.setModel(new javax.swing.DefaultComboBoxModel<>(dateList));
+        }
+
+
+        public String getStartTime() {
+            return cmbTime.getItemAt(cmbTime.getSelectedIndex());
+        }
+
+        public String getDateChosen() {
+            return cmbDate.getItemAt(cmbDate.getSelectedIndex());
+        }
+
+        public String getDurationChosen() {
+            return String.valueOf(cmbDuration.getSelectedIndex());
+        }
+
+        public void resetDuration() {
+            cmbDuration.setSelectedIndex(0);
+        }
+
+        public void setDurationListener(ActionListener listener) {
+            cmbDuration.addActionListener(listener);
+        }
+
+        public void setDateListener(ActionListener listener) {
+            cmbDate.addActionListener(listener);
+        }
+
+
+        public void setDurationList(String[] durationList) {
+        cmbDuration = new JComboBox<>(durationList);
+        }
+    }
+
+
+    public class ReserveSlotConfirmationView extends JDialog {
+        private Resources res = new Resources();
+        private JLabel lblReserved;
+        private JLabel lblConfirmationMsg;
+        private JButton btnCloseConfirmation;
+
+        public ReserveSlotConfirmationView() {
+
+            this.setTitle("PARCS Reservation Confirmation");
+            this.setModal(true);
+            this.setLayout(new GridLayout(3, 1));
+
+            // Create pnlIcon panel
+            JPanel pnlIcon = new JPanel();
+            pnlIcon.setLayout(new BorderLayout());
+            pnlIcon.setPreferredSize(new Dimension(600, 200));
+
+            // Create and set ImageIcon for pnlIcon
+            ImageIcon iconAvailableCar = res.iconAvailableCar; //change icon
+            pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
+
+            // Create PnlConfirmation panel
+            JPanel pnlConfirmation = new JPanel(new GridBagLayout());
+            pnlConfirmation.setPreferredSize(new Dimension(600, 150));
+
+            // Create label for PnlConfirmation with font based on resources class
+            lblReserved = res.createLblH1("RESERVED!", res.celadon);
+            lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+
+            // Add labels to PnlConfirmation panel
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            pnlConfirmation.add(lblReserved, gbc);
+
+            gbc.gridy = 1;
+            pnlConfirmation.add(lblConfirmationMsg, gbc);
+
+            // Create pnlCloseBtn panel
+            JPanel pnlCloseBtn = new JPanel(new FlowLayout());
+            pnlCloseBtn.setPreferredSize(new Dimension(600, 50));
+
+            // Close button
+            btnCloseConfirmation = res.createBtnRounded("CLOSE", res.red, res.eerieBlack, 20);
+
+            pnlCloseBtn.add(btnCloseConfirmation);
+
+            this.add(pnlIcon);
+            this.add(pnlConfirmation);
+            this.add(pnlCloseBtn);
+
+            this.setPreferredSize(new Dimension(600,400));
+            this.pack();
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+        }
+    }
+
+    public ParkingSlotButtonsView getParkingSlotButtonsView() {
+        return parkingSlotButtonsView;
+    }
+
+    public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
+        reserveSlotConfirmationView = new ReserveSlotConfirmationView();
+        return reserveSlotConfirmationView;
     }
 
     public JPanel getPnlCards() {
@@ -503,5 +774,19 @@ public class ReservationPageView extends JPanel {
 
     public CardLayout getTopCardLayout() {
         return topCardLayout;
+    }
+
+    public MainBottomPanel getMainBottomPanel() {
+        return mainBottomPanel;
+    }
+
+    public MainTopPanel getMainTopPanel() {
+        return mainTopPanel;
+    }
+
+
+
+    public static void main(String[] args) {
+        ReservationPageView view = new ReservationPageView();
     }
 }

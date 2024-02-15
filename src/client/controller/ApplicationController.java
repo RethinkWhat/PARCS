@@ -33,6 +33,7 @@ public class ApplicationController {
     public ApplicationController(ApplicationView view, ApplicationModel model) {
         this.view = view;
         this.model = model;
+        view.setDefaultCloseOperation(model.getClient().logoutAndExit());
 
         // constants / variables
         view.getLblLocation().setText("Home");
@@ -46,7 +47,7 @@ public class ApplicationController {
         });
         view.setNavTicketListener(e -> {
             view.getLblLocation().setText("Ticket");
-            // TODO: change panel
+            view.getMainCardLayout().show(view.getPnlCards(), "ticket");
         });
         view.setNavAccountListener(e -> {
             view.getLblLocation().setText("Account");

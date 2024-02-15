@@ -1,21 +1,16 @@
 package client.view.application_pages;
 
-import client.model.application_pages.UserProfileModel;
-import com.sun.source.tree.EmptyStatementTree;
 import utilities.Resources;
 import javax.swing.*;
-import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
-import java.util.concurrent.Flow;
 
 /**
  * The UserProfileView is where the user views pertinent information regarding their account
  * and transaction in the client application.
  */
 public class UserProfileView extends JPanel {
-
     /**
      * The stylesheet
      */
@@ -24,10 +19,6 @@ public class UserProfileView extends JPanel {
      * Instance variable of grid bag constraints used in grid bag layout.
      */
     GridBagConstraints gbc = new GridBagConstraints();
-    /**
-     * The
-     */
-    private JLabel btnHome;
     /**
      * The edit profile button.
      */
@@ -68,7 +59,6 @@ public class UserProfileView extends JPanel {
      * The panel for Edit cars.
      */
     private EditCars pnlEditCars;
-
     /**
      * The panel for History.
      */
@@ -365,56 +355,105 @@ public class UserProfileView extends JPanel {
         public String getContact() {
             return txtContact.getText();
         }
+
+        /**
+         * Retrieves the current JButton of btnCancel.
+         * @return The current btnCancel.
+         */
+        public JButton getBtnCancel() {
+            return btnCancel;
+        }
+
+        /**
+         * Retrieves the current JButton of btnContinue.
+         * @return The current btnContinue.
+         */
+        public JButton getBtnContinue() {
+            return btnContinue;
+        }
     }
 
     /**
      * The panel that contains the information on the vehicle of the users that can be edited or add new vehicles.
      */
     class EditCars extends JPanel {
+        JLabel plateNumber;
+        JLabel model;
+        JLabel vehicle;
+        JLabel plateNumberInfo;
+        JLabel modelInfo;
+        JLabel vehicleInfo;
+
+
         /**
          * Constructs a panel of EditCars.
          */
         public EditCars() {
-            this.setBounds(220, 0, 750, 560);
-            this.setVisible(true);
-            this.setLayout(new GridBagLayout());
+            this.setLayout(new BorderLayout());
+            this.setBorder(new EmptyBorder(80, 20, 10, 60));
 
+            JLabel myCars = res.createLblH1("My Cars", res.eerieBlack);
+            this.add(myCars, BorderLayout.NORTH);
+
+            JPanel whitePanel = new JPanel(new GridBagLayout());
+            whitePanel.setBackground(res.white);
+            whitePanel.setPreferredSize(new Dimension(300, 325));
+
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblEditProfile = res.createLblH1("Edit Cars", res.eerieBlack);
-            lblEditProfile.setBorder(new EmptyBorder(30, 20, 0, 0));
-            this.add(lblEditProfile, gbc);
+            gbc.insets = new Insets(5, 5, 5, 5);
 
-            gbc.gridy = 1;
-            gbc.anchor = GridBagConstraints.WEST;
+            Font labelFontBold = new Font("Arial", Font.BOLD, 20);
+            Font labelFont = new Font("Arial", Font.ITALIC, 20);
 
-            // TODO: Create method in UserProfileModel to create information of the cars.
-            JPanel pnlCar1 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            JPanel pnlCar2 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            this.add(pnlCar1, gbc);
-            this.add(pnlCar2, gbc);
+            plateNumber = new JLabel("Plate Number");
+            plateNumber.setFont(labelFontBold);
+            whitePanel.add(plateNumber, gbc);
 
-            JPanel pnlCar3 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            JPanel pnlCar4 = createCarsLayout("A-0130934023", "Sedan", "Honda Civic");
-            gbc.gridy = 2;
-            gbc.insets = new Insets(20, 30, 0, 30);
-            this.add(pnlCar3, gbc);
-            this.add(pnlCar4, gbc);
+            gbc.gridy++; // Move to the next row
+            plateNumberInfo = new JLabel("WHF 6262");
+            plateNumberInfo.setFont(labelFont);
+            whitePanel.add(plateNumberInfo, gbc);
 
-            gbc.gridy = 5;
-            gbc.gridx = 1;
-            JButton btnBack = new JButton();
-            ImageIcon backIcon = new ImageIcon("res/drawable/icons/forward.png");
-            btnBack.setBorder(new EmptyBorder(0, 0, 0, 20));
-            ImageIcon resizedBackIcon = new ImageIcon(backIcon.getImage().getScaledInstance(20, 20, Image.SCALE_SMOOTH));
-            btnBack.setIcon(resizedBackIcon);
-            this.add(btnBack, gbc);
+            gbc.gridy++; // Move to the next row
+            model = new JLabel("Model");
+            model.setFont(labelFontBold);
+            whitePanel.add(model, gbc);
 
-            this.setVisible(true);
+            gbc.gridy++; // Move to the next row
+            modelInfo = new JLabel("Toyota Mirage");
+            modelInfo.setFont(labelFont);
+            whitePanel.add(modelInfo, gbc);
+
+            gbc.gridy++; // Move to the next row
+            vehicle = new JLabel("Vehicle");
+            vehicle.setFont(labelFontBold);
+            whitePanel.add(vehicle, gbc);
+
+            gbc.gridy++; // Move to the next row
+            vehicleInfo = new JLabel("Sedan SUV");
+            vehicleInfo.setFont(labelFont);
+            whitePanel.add(vehicleInfo, gbc);
+
+            this.add(whitePanel, BorderLayout.CENTER);
+
+            JButton btnPrev;
+            JButton btnNext;
+            JPanel pnlButtons = new JPanel(new FlowLayout());
+            pnlButtons.setBackground(res.lightGray);
+            add(pnlButtons, BorderLayout.SOUTH);
+
+            btnPrev = res.createBtnRounded("PREV", res.gray, res.eerieBlack, 10); // Adjust the radius as needed
+            pnlButtons.add(btnPrev);
+
+            btnNext = res.createBtnRounded("NEXT", res.celadon, res.eerieBlack, 10); // Adjust the radius as needed
+            pnlButtons.add(btnNext);
         }
 
         /**
-         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehcile.
+         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehicle.
          *
          * @param plateNumber The specified license plate number.
          * @param vehicleType The specified type of vehicle.
@@ -486,11 +525,27 @@ public class UserProfileView extends JPanel {
      * This class represents a panel for changing account passwords.
      * It provides fields for entering current password, new password, and confirming the new password.
      */
-    class SecurityPage extends JPanel {
+    public class SecurityPage extends JPanel {
+        /**
+         * The password field where the current password is inputted.
+         */
         private JPasswordField txtCurrentPassword;
+        /**
+         * The password field where the new password is entered.
+         */
         private JPasswordField txtNewPassword;
+        /**
+         * The password field where the new password is confirmed.
+         */
         private JPasswordField txtConfirmNewPassword;
-        private JButton confirmButton;
+        /**
+         * The continue button.
+         */
+        private JButton btnConfirm;
+        /**
+         * The success or error message.
+         */
+        private JLabel lblMessage;
 
         /**
          * This constructs a new SecurityPage panel with fields for changing account passwords.
@@ -498,7 +553,7 @@ public class UserProfileView extends JPanel {
          */
         public SecurityPage() {
             //sets a layout and borders
-            this.setLayout(new GridLayout(8, 2));
+            this.setLayout(new GridLayout(9, 2));
             this.setBorder(new EmptyBorder(10, 20, 10, 60));
 
             //creates and adds labels for the password change section
@@ -519,6 +574,7 @@ public class UserProfileView extends JPanel {
             this.add(pnlCurrentPasswordField);
             txtCurrentPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtCurrentPassword.setPreferredSize(new Dimension(750,50));
+            txtCurrentPassword.setEchoChar((char)0);
             pnlCurrentPasswordField.add(txtCurrentPassword);
 
             //adds a label and text field for entering the new password
@@ -529,6 +585,7 @@ public class UserProfileView extends JPanel {
             this.add(pnlNewPasswordField);
             txtNewPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtNewPassword.setPreferredSize(new Dimension(750,50));
+            txtNewPassword.setEchoChar((char)0);
             pnlNewPasswordField.add(txtNewPassword);
 
             //adds a label and text field for confirming the new password
@@ -539,15 +596,91 @@ public class UserProfileView extends JPanel {
             this.add(pnlConfirmNewPasswordField);
             txtConfirmNewPassword = res.createPwdRounded(res.white, res.gray, 50);
             txtConfirmNewPassword.setPreferredSize(new Dimension(750,50));
+            txtConfirmNewPassword.setEchoChar((char)0);
             pnlConfirmNewPasswordField.add(txtConfirmNewPassword);
 
             //adds a button for confirming the password change
             JPanel pnlButtons = new JPanel(new FlowLayout(FlowLayout.CENTER));
             pnlButtons.setBorder(new EmptyBorder(10, 0, 7, 0));
-            confirmButton = res.createBtnRounded("Change Account Password", res.celadon, res.eerieBlack, 40);
-            confirmButton.setPreferredSize(new Dimension(250,35 ));
-            pnlButtons.add(confirmButton);
+            btnConfirm = res.createBtnRounded("Change Password", res.celadon, res.eerieBlack, 40);
+            btnConfirm.setPreferredSize(new Dimension(250,35 ));
+            pnlButtons.add(btnConfirm);
             this.add(pnlButtons);
+
+            lblMessage = res.createLblP("", res.red); // empty message
+            this.add(lblMessage);
+        }
+
+        /**
+         * Retrieves the current JPasswordField of txtCurrentPassword in the security page.
+         * @return The current txtCurrentPassword.
+         */
+        public JPasswordField getTxtCurrentPassword() {
+            return txtCurrentPassword;
+        }
+
+        /**
+         * Retrieves the current JPasswordField of txtNewPassword in the security page.
+         * @return The current txtNewPassword.
+         */
+        public JPasswordField getTxtNewPassword() {
+            return txtNewPassword;
+        }
+
+        /**
+         * Retrieves the current txtConfirmNewPassword in the security page.
+         * @return The current txtConfirmPassword.
+         */
+        public JPasswordField getTxtConfirmNewPassword() {
+            return txtConfirmNewPassword;
+        }
+
+        /**
+         * Retrieves the current JButton of btnConfirm.
+         * @return The current btnConfirm.
+         */
+        public JButton getBtnConfirm() {
+            return btnConfirm;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblMessage.
+         * @return The current lblMessage.
+         */
+        public JLabel getLblMessage() {
+            return lblMessage;
+        }
+
+        /**
+         * Retrieves the current value of txtCurrentPassword.
+         * @return The current value of current password.
+         */
+        public String getCurrentPassword() {
+            return String.valueOf(txtCurrentPassword.getPassword());
+        }
+
+        /**
+         * Retrieves the current value of txtNewPassword.
+         * @return The current new password.
+         */
+        public String getNewPassword() {
+            return String.valueOf(txtNewPassword.getPassword());
+        }
+
+        /**
+         * Retrieves the current value of txtConfirmNewPassword.
+         * @return The current confirm new password input.
+         */
+        public String getConfirmNewPassword() {
+            return String.valueOf(txtConfirmNewPassword.getPassword());
+        }
+
+        /**
+         * Sets a specified action listener for btnConfirm.
+         * @param actionListener The specified action listener.
+         */
+        public void setConfirmListener(ActionListener actionListener) {
+            btnConfirm.addActionListener(actionListener);
         }
     }
 
@@ -670,6 +803,14 @@ public class UserProfileView extends JPanel {
      */
     public void setNavExitListener(ActionListener actionListener) {
         btnNavExit.addActionListener(actionListener);
+    }
+
+    /**
+     * Sets a specified action listener for btnNavSecurity.
+     * @param actionListener The specified action listener.
+     */
+    public void setNavSecurityListener(ActionListener actionListener) {
+        btnNavSecurity.addActionListener(actionListener);
     }
 
     /**

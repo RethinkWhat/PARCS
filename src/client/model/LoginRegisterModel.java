@@ -33,7 +33,7 @@ public class LoginRegisterModel {
      * @param passwordConfirmation Specified user input of password confirmation.
      * @return True if the password matches. False if otherwise.
      */
-    public boolean verifySignupPassword(String password, String passwordConfirmation) {
+    public static boolean verifySignupPassword(String password, String passwordConfirmation) {
         return password.equals(passwordConfirmation);
     }
 
@@ -42,7 +42,7 @@ public class LoginRegisterModel {
      * @param rawPassword The specified password in plain text.
      * @return The encrypted password.
      */
-    public String encryptPassword(String rawPassword) {
+    public static String encryptPassword(String rawPassword) {
         String encrypted = "";
         try {
             MessageDigest digest = MessageDigest.getInstance("SHA-256");
