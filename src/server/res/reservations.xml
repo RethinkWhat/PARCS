@@ -113,7 +113,7 @@
                         
             <startTime>7:00</startTime>
                         
-            <endTime>9</endTime>
+            <endTime>9:00</endTime>
                         
             <user>rickardo</user>
                     
@@ -121,7 +121,7 @@
             
         <reservation day="02/15/24">
             <startTime>7:00</startTime>
-            <endTime>8</endTime>
+            <endTime>8:00</endTime>
             <user>rickardo</user>
         </reservation>
     </parkingSpot>
