@@ -474,6 +474,15 @@ public class ReservationParser {
         return false;
     }
 
+    /**
+     * Checks if a passed startTime and endTime will have a conflict in the current reservations of a user
+     * true: if there are no conflicts
+     * false: if there are conflicts
+     * @param username
+     * @param startTime
+     * @param endTime
+     * @return
+     */
     public boolean checkScheduleConflicts(String username, String startTime, String endTime){
         getReservationsFile();
 
@@ -487,15 +496,18 @@ public class ReservationParser {
 
         NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
 
+        //Traverse all parking spot
         for (int i = 0; i < parkingSpotNodes.getLength(); i++){
             Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
 
             NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
 
+            //Traverse all reservation nodes in the current parking spot
             for (int j = 0; j < reservationNodes.getLength(); j++){
 
                 Element currReservationElement = (Element) reservationNodes.item(j);
 
+                // Checks if the current reservation's username is equals to the passed username
                 if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username)){
 
                     String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
@@ -504,6 +516,7 @@ public class ReservationParser {
                     int currStartTime = Integer.parseInt(currStartTimeParts[0]);
                     int currEndTime = Integer.parseInt(currEndTimeParts[0]);
 
+                    //Checks if the startTime and endTime of the user is not in between the current start and end time of the current reservation
                     if ((passedStartTime>=currStartTime && passedStartTime<= currEndTime) || (passedEndTime>=currStartTime && passedEndTime<=currEndTime)){
                         return false;
                     }
