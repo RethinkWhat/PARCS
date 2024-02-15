@@ -411,7 +411,34 @@ public class ReservationParser {
     }
 
     public List<String> getClosestReservation(String username){
+        getReservationsFile();
+
         List<String> reservationInformation = new ArrayList<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+            for (int j = 0; j < reservationNodes.getLength(); j++){
+
+                Element currReservationElement = (Element) reservationNodes.item(j);
+
+                String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
+                int currStartHour = Integer.parseInt(currStartTimeParts[0]);
+
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username)){
+
+
+
+                }
+
+            }
+        }
 
 
 
