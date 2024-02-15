@@ -414,6 +414,9 @@ public class ReservationParser {
         getReservationsFile();
 
         List<String> reservationInformation = new ArrayList<>();
+        reservationInformation.add("24:00");
+        reservationInformation.add("00:00");
+        reservationInformation.add("default");
 
         Element root = document.getDocumentElement();
 
@@ -444,6 +447,23 @@ public class ReservationParser {
 
 
         return reservationInformation;
+    }
+
+    /**
+     * Will return true if the first startTime is less than the second startTime
+     * @param st1
+     * @param st2
+     * @return
+     */
+    private boolean compareStartTime(String st1, String st2){
+        String[] st1Parts = st1.split(":");
+        String[] st2Parts = st2.split(":");
+
+        if (Integer.parseInt(st1Parts[0]) < Integer.parseInt(st2Parts[0])){
+            return true;
+        }
+
+        return false;
     }
 
 
