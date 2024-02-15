@@ -410,6 +410,13 @@ public class ReservationParser {
         return duration;
     }
 
+    /**
+     * Method that returns the information for the closest reservation of a user
+     * [parkingIdentifier, startTime, endTime, username]
+     *
+     * @param username
+     * @return
+     */
     public List<String> getClosestReservation(String username){
         getReservationsFile();
 
@@ -432,9 +439,11 @@ public class ReservationParser {
 
                 Element currReservationElement = (Element) reservationNodes.item(j);
 
+                // Splits the startTime string to an array because we only need the hour
                 String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
 
-
+                // Checks if the current reservation is by the user
+                // If the current reservation element's startTime is less than the reservation element startTime stored in the reservationInformation arraylist, it will replace its values
                 if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username) && compareStartTime(currStartTimeParts[0], reservationInformation.get(1))){
                     reservationInformation.set(0, currReservationElement.getParentNode().getAttributes().item(0).getTextContent());
                     reservationInformation.set(1, currReservationElement.getElementsByTagName("startTime").item(0).getTextContent());
