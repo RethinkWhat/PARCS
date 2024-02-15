@@ -153,13 +153,23 @@ public class ReservationPageModel {
         return confirmed;
     }
 
-    public String findAvailableSlotOnDay(String date) {
-        client.openSocket();
-        client.writeString("searchForSpot");
-        client.writeString(date);
-        String identifier = client.readString();
-        client.closeSocket();
-        return identifier;
+    public String findAvailableSlotOnDay(String date, int carSize, int motorSize) {
+        String dates[] = getDateList();
+        if (Arrays.stream(dates).toList().contains(date)) {
+
+            for (int x =0; x< carSize; x++) {
+                String time[] = getAvailableTime(("C" + (x+1)),"1",date);
+
+                if (time.length > 1)
+                    return ("C"+(x+1));
+            }
+            for (int x =0; x< motorSize; x++) {
+                String time[] = getAvailableTime(("M" + (x+1)),"1",date);
+                if (time.length >1)
+                    return ("M"+(x+1));
+            }
+        }
+        return null;
     }
 
 
@@ -193,7 +203,7 @@ public class ReservationPageModel {
     }
 
     public String[] getDateList() {
-        String[] dates = new String[3];
+        String[] dates = new String[4];
 
         LocalDate dateToday = LocalDate.now();
         LocalDate tomorrow = dateToday.plusDays(1);
@@ -201,9 +211,10 @@ public class ReservationPageModel {
 
         DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yy");
 
-        dates[0] = dateToday.format(formatter);
-        dates[1] = tomorrow.format(formatter);
-        dates[2] = dayAfter.format(formatter);
+        dates[0] = "Date:";
+        dates[1] = dateToday.format(formatter);
+        dates[2] = tomorrow.format(formatter);
+        dates[3] = dayAfter.format(formatter);
         return dates;
     }
 

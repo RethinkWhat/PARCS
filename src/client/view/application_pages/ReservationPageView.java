@@ -71,6 +71,10 @@ public class ReservationPageView extends JPanel {
 
     private Icon availCar = res.iconAvailableCar;
 
+    private Icon takenMotor = res.iconTakenMotor;
+
+    private Icon availMotor = res.iconAvailableMotor;
+
     private MainTopPanel mainTopPanel;
 
     public Icon getTakenCar() {
@@ -297,6 +301,30 @@ public class ReservationPageView extends JPanel {
                     button.addActionListener(listener);
                 }
             }
+            public void setCarMotorButtonsIcon(boolean isCar, int number, boolean isTaken) {
+                if (isCar) {
+                    if (isTaken) {
+                        carButtons[number].setIcon(takenCar);
+                    } else
+                        carButtons[number].setIcon(availCar);
+                } else {
+                    if (isTaken) {
+                        motorButtons[number].setIcon(takenMotor);
+                    } else {
+                        motorButtons[number].setIcon(availMotor);
+                    }
+                }
+            }
+
+            public int getCarButtonsSize() {
+                return carButtons.length;
+
+            }
+
+            public int getMotorButtonsSize() {
+                return motorButtons.length;
+            }
+
         }
     }
 
@@ -656,6 +684,14 @@ public class ReservationPageView extends JPanel {
 
         public void resetDuration() {
             cmbDuration.setSelectedIndex(0);
+        }
+
+        public void resetTime() {
+            cmbTime.setSelectedIndex(0);
+        }
+
+        public void resetDate() {
+            cmbDate.setSelectedIndex(0);
         }
 
         public void setDurationListener(ActionListener listener) {

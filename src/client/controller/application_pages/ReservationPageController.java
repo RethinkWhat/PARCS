@@ -39,6 +39,10 @@ public class ReservationPageController {
 
     private String[] dateList;
 
+    private int carsNumber;
+
+    private int motorNumber;
+
     /**
      * Constructs a ReservationPageController with a specified view and model.
      * @param view The specified view.
@@ -56,6 +60,27 @@ public class ReservationPageController {
         // updates the time every second.
         timer = new Timer(1000,e -> updateTime());
         timer.start();
+
+
+        carsNumber = view.getMainBottomPanel().getParkingSlotsPanel().getCarButtonsSize();
+        motorNumber = view.getMainBottomPanel().getParkingSlotsPanel().getMotorButtonsSize();
+
+        for (int x = 0; x < carsNumber; x++) {
+            boolean isTaken = true;
+            if (model.getAvailableTime(("C"+(x+1)), "1", date).length > 1) {
+                isTaken = false;
+            }
+            view.getMainBottomPanel().getParkingSlotsPanel().setCarMotorButtonsIcon(true, x, isTaken);
+        }
+
+        for (int x = 0; x < motorNumber; x++) {
+            boolean isTaken = true;
+            if (model.getAvailableTime(("M"+(x+1)), "1", date).length >1) {
+                isTaken = false;
+            }
+            view.getMainBottomPanel().getParkingSlotsPanel().setCarMotorButtonsIcon(false, x, isTaken);
+        }
+
 
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
@@ -124,6 +149,9 @@ public class ReservationPageController {
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
             view.getParkingSlotButtonsView().setLblDate(date);
+            view.getParkingSlotButtonsView().resetDate();
+            view.getParkingSlotButtonsView().resetTime();
+            view.getParkingSlotButtonsView().resetDuration();
         }
     }
 
@@ -135,8 +163,11 @@ public class ReservationPageController {
             if (!duration.equals("Duration:")) {
                 timeAvailable = model.getAvailableTime(btnID, duration, date);
                 view.getParkingSlotButtonsView().setTimeList(timeAvailable);
-                if (timeAvailable != null)
+                if (timeAvailable.length > 1)
                     view.getParkingSlotButtonsView().setLblStatus("Available");
+                else {
+                    view.getParkingSlotButtonsView().setLblStatus("Unavailable");
+                }
             }
 
         }
@@ -171,19 +202,20 @@ public class ReservationPageController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String search = ((JTextField) e.getSource()).getText();
-            String identifier = model.findAvailableSlotOnDay(search);
-            view.getTopCardLayout().show(view.getPnlCards(), "buttons");
+            String identifier = model.findAvailableSlotOnDay(search,carsNumber,motorNumber);
+            if (identifier != null) {
+                view.getTopCardLayout().show(view.getPnlCards(), "buttons");
 
-            if (identifier.contains("C")) {
-                view.getParkingSlotButtonsView().setVehiclesList(model.getCars());
-                view.getParkingSlotButtonsView().setLblType("Car");
-            } else {
-                view.getParkingSlotButtonsView().setVehiclesList(model.getMotorcycles());
-                view.getParkingSlotButtonsView().setLblType("Motor");
+                if (identifier.contains("C")) {
+                    view.getParkingSlotButtonsView().setVehiclesList(model.getCars());
+                    view.getParkingSlotButtonsView().setLblType("Car");
+                } else {
+                    view.getParkingSlotButtonsView().setVehiclesList(model.getMotorcycles());
+                    view.getParkingSlotButtonsView().setLblType("Motor");
+                }
+
+                view.getParkingSlotButtonsView().setLblSlotNumber(identifier);
             }
-
-            view.getParkingSlotButtonsView().setLblSlotNumber(identifier);
-
         }
     }
 }
