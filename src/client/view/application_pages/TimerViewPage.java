@@ -44,6 +44,9 @@ public class TimerViewPage extends JPanel {
         pnlTimer = new TimerPanel();
         container.add(pnlTimer);
 
+        pnlTicketInfo = new TicketInfoPanel();
+        container.add(pnlTicketInfo);
+
         this.setPreferredSize(new Dimension(1100,700));
     }
 
@@ -116,7 +119,7 @@ public class TimerViewPage extends JPanel {
         /**
          * The label for the time-in and time-out of the booking.
          */
-        private JLabel lblHours;
+        private JLabel lblTime;
 
         /**
          * Constructs a panel of TicketInfoPanel.
@@ -127,7 +130,61 @@ public class TimerViewPage extends JPanel {
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(10,10,10,10);
 
-            JLabel lblVehicleLabel;
+            gbc.gridwidth = 1;
+            gbc.fill = GridBagConstraints.BOTH;
+            gbc.anchor = GridBagConstraints.WEST;
+
+            // left column
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            JLabel lblVehicleLabel = res.createLblP("Vehicle:", res.eerieBlack);
+            add(lblVehicleLabel, gbc);
+
+            gbc.gridy = 1;
+            JLabel lblParkingTypeLabel = res.createLblP("Parking Type:", res.eerieBlack);
+            add(lblParkingTypeLabel, gbc);
+
+            gbc.gridy = 2;
+            JLabel lblParkingSpotLabel = res.createLblP("Parking Spot:", res.eerieBlack);
+            add(lblParkingSpotLabel, gbc);
+
+            gbc.gridy = 3;
+            JLabel lblDateLabel = res.createLblP("Date:", res.eerieBlack);
+            add(lblDateLabel, gbc);
+
+            gbc.gridy = 5;
+            JLabel lblDurationLabel = res.createLblP("Duration:", res.eerieBlack);
+            add(lblDurationLabel, gbc);
+
+            gbc.gridy = 4;
+            JLabel lblTimeLabel = res.createLblP("Time:", res.eerieBlack);
+            add(lblTimeLabel, gbc);
+
+            // right column
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            lblVehicle = res.createLblP("Info", res.eerieBlack);
+            add(lblVehicle, gbc);
+
+            gbc.gridy = 1;
+            lblParkingType = res.createLblP("Info", res.eerieBlack);
+            add(lblParkingType, gbc);
+
+            gbc.gridy = 2;
+            lblParkingSpot = res.createLblP("Info", res.eerieBlack);
+            add(lblParkingSpot, gbc);
+
+            gbc.gridy = 3;
+            lblDate = res.createLblP("Info", res.eerieBlack);
+            add(lblDate, gbc);
+
+            gbc.gridy = 4;
+            lblDuration = res.createLblP("Info", res.eerieBlack);
+            add(lblDuration, gbc);
+
+            gbc.gridy = 5;
+            lblTime = res.createLblP("Info", res.eerieBlack);
+            add(lblTime, gbc);
         }
     }
 }
