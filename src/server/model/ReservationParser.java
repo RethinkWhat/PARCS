@@ -310,7 +310,7 @@ public class ReservationParser {
         Element endTimeElement = document.createElement("endTime");
         String[] timeParts = startTime.split(":");
         int endTime = Integer.parseInt(timeParts[0]) + Integer.parseInt(duration);
-        endTimeElement.setTextContent(Integer.toString(endTime));
+        endTimeElement.setTextContent(Integer.toString(endTime) + ":00");
         reservationElement.appendChild(endTimeElement);
 
         Element usernameElement = document.createElement("user");
@@ -406,7 +406,5 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
-
-        parser.createReservationNode("C7", "03/09/04", "12:00", "3", "alimonem");
     }
 }
