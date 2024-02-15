@@ -28,10 +28,6 @@ public class TimerViewPage extends JPanel {
      * The stylesheet.
      */
     private Resources res = new Resources();
-    /**
-     * The timer to delay UI components.
-     */
-    private Timer timer;
 
     /**
      * Constructs a panel of TimerViewPatch.
@@ -61,6 +57,10 @@ public class TimerViewPage extends JPanel {
      * The panel to hold the timer.
      */
     public class TimerPanel extends JPanel {
+        /**
+         * The timer to delay UI components.
+         */
+        private Timer swingTimer;
         /**
          * The button for the end timer.
          */
@@ -116,7 +116,7 @@ public class TimerViewPage extends JPanel {
                     repaint();
                 }
             });
-            timer.start();
+            swingTimer.start();
 
             this.setPreferredSize(new Dimension(1100,700));
         }
