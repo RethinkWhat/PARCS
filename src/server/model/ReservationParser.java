@@ -404,7 +404,8 @@ public class ReservationParser {
 
         int totalHours = Integer.parseInt(endTimeParts[0]) - Integer.parseInt(startTimeParts[0]);
 
-        duration.add(totalHours,00);
+        duration.add(totalHours);
+        duration.add(00);
 
         return duration;
     }
@@ -420,5 +421,7 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
+
+        System.out.println(parser.computeDuration("15:00","20:00"));
     }
 }
