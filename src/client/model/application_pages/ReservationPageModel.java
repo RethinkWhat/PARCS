@@ -186,4 +186,8 @@ public class ReservationPageModel {
         // get output from server
         return motorcycles;
     }
+
+    public String getDate() {
+        return LiveDateTime.getDate();
+    }
 }

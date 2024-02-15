@@ -31,9 +31,11 @@ public class ReservationPageController {
 
     private String btnDuration;
 
-    private String date ="02/14/24";
+    private String date;
 
     private String[] timeAvailable;
+
+    private String dateChosen;
 
     /**
      * Constructs a ReservationPageController with a specified view and model.
@@ -43,6 +45,7 @@ public class ReservationPageController {
     public ReservationPageController(ReservationPageView view, ReservationPageModel model) {
         this.view = view;
         this.model = model;
+        date =model.getDate();
 
         view.setUserFullName(model.getFullName());
 
@@ -55,6 +58,7 @@ public class ReservationPageController {
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
         view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
         view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
+        view.getParkingSlotButtonsView().setDateListener(new DateListener());
         view.getParkingSlotButtonsView().setDurationListener(new durationListener());
         view.getMainTopPanel().setTxtSearchBarListener(new searchListener());
 
@@ -80,6 +84,17 @@ public class ReservationPageController {
             String time = model.getTime();
             view.getLblDate().setText(time);
         });
+    }
+
+    class DateListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String tempDate = view.getParkingSlotButtonsView().getDateChosen();
+            if (!tempDate.equals("Select Date:")) {
+                date = tempDate;
+                view.getParkingSlotButtonsView().setLblDate(date);
+            }
+        }
     }
 
     class CarMotorListener implements ActionListener {
@@ -108,20 +123,21 @@ public class ReservationPageController {
             }
 
             view.getParkingSlotButtonsView().setLblSlotNumber(btnID);
+            view.getParkingSlotButtonsView().setLblDate(date);
         }
     }
 
     class durationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-
-
+            view.getParkingSlotButtonsView().setLblDate(date);
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
             String[] timeAvailable1;
-            if (!duration.equals("Duration")) {
+            if (!duration.equals("Duration:")) {
                 timeAvailable1 = model.getAvailableTime(btnID, duration, date);
                 view.getParkingSlotButtonsView().setTimeList(timeAvailable1);
             }
+
         }
     }
 
