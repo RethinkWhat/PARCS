@@ -396,6 +396,20 @@ public class ReservationParser {
     }
 
 
+    public List<Integer> computeDuration(String startTime, String endTime){
+        List<Integer> duration = new ArrayList<>();
+
+        String[] startTimeParts = startTime.split(":");
+        String[] endTimeParts = endTime.split(":");
+
+        int totalHours = Integer.parseInt(endTimeParts[0]) - Integer.parseInt(startTimeParts[0]);
+
+        duration.add(totalHours,00);
+
+        return duration;
+    }
+
+
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
