@@ -5,7 +5,7 @@
         <lastName>Ramonster</lastName>
         <firstName>Johan</firstName>
         <phoneNumber>638484</phoneNumber>
-        <vehicle>car,Mitsubishi Mirage,N99 399</vehicle>
+        <vehicle>car,Honda Civic,N99 399</vehicle>
         <vehicle>car,Mitsubishi Montero,ILY 143</vehicle>
     </user>
 </userClass>

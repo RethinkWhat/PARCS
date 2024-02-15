@@ -1,12 +1,11 @@
 package client.view;
 
 import client.view.application_pages.ReservationPageView;
-import client.view.application_pages.TimerView;
+import client.view.application_pages.TimerPageView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
 import javax.swing.*;
-import javax.swing.border.EmptyBorder;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -61,7 +60,7 @@ public class ApplicationView extends JFrame {
     /**
      * Panel of timer view.
      */
-    private TimerView timerView;
+    private TimerPageView timerView;
     /**
      * Panel of user profile view.
      */
@@ -93,7 +92,7 @@ public class ApplicationView extends JFrame {
         pnlCards.add(reservationPageView = new ReservationPageView(), "home");
 
         // Ticket Page
-        pnlCards.add(timerView = new TimerView(), "ticket");
+        pnlCards.add(timerView = new TimerPageView(), "ticket");
 
         // Account Page
         pnlCards.add(userProfileView = new UserProfileView(), "account");
@@ -177,7 +176,7 @@ public class ApplicationView extends JFrame {
      * Retrieves the current panel of TimerView.
      * @return The current panel of TimerView.
      */
-    public TimerView getTimerView() {
+    public TimerPageView getTimerView() {
         return timerView;
     }
 
