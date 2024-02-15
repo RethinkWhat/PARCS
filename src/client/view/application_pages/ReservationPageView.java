@@ -722,6 +722,7 @@ public class ReservationPageView extends JPanel {
     }
 
     public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
+        reserveSlotConfirmationView = new ReserveSlotConfirmationView();
         return reserveSlotConfirmationView;
     }
 
