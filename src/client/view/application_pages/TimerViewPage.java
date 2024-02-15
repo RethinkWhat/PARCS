@@ -3,7 +3,10 @@ package client.view.application_pages;
 import utilities.Resources;
 
 import javax.swing.*;
+import javax.swing.Timer;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 /**
  * The
@@ -25,6 +28,10 @@ public class TimerViewPage extends JPanel {
      * The stylesheet.
      */
     private Resources res = new Resources();
+    /**
+     * The timer to delay UI components.
+     */
+    private Timer timer;
 
     /**
      * Constructs a panel of TimerViewPatch.
@@ -90,6 +97,48 @@ public class TimerViewPage extends JPanel {
          * The current time of the timer.
          */
         double current;
+
+        /**
+         * Constructs a panel of TimerPanel.
+         */
+        public TimerPanel() {
+            arcExtent = 360;
+            hour = 1;
+            minute = 0;
+            second = 0;
+            init = hour * 3600 + minute * 60 + second;
+            current = init;
+
+            swingTimer = new Timer(1000, new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    updateTime();
+                    repaint();
+                }
+            });
+            timer.start();
+
+            this.setPreferredSize(new Dimension(1100,700));
+        }
+
+        /**
+         * Updates the time left.
+         */
+        private void updateTime() {
+            if (hour == 0 && minute == 0 && second == 0) {
+                swingTimer.stop();
+                setVisible(false);
+            } else if (minute == 0 && second == 0) {
+                hour--;
+                minute = 59;
+                second = 59;
+            } else if (second == 0) {
+                minute--;
+                second = 59;
+            } else {
+                second--;
+            }
+        }
     }
 
     /**
