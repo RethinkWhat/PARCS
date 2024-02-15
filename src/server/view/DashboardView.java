@@ -87,7 +87,7 @@ public class DashboardView extends JPanel {
 
             container = new JPanel(gridLayout);
             container.setPreferredSize(new Dimension(1300,510));
-            container.setBackground(res.red);
+            container.setBackground(res.lightGray);
             add(container, BorderLayout.CENTER);
 
             pnlCompletedCar = new CarPanel();
@@ -132,7 +132,7 @@ public class DashboardView extends JPanel {
                 setLayout(new BorderLayout());
 
                 container = res.createPnlRounded(400, 500,res.white, res.lightGray);
-                container.setBorder(new EmptyBorder(10,10,10,10));
+                container.setBorder(new EmptyBorder(20,10,20,10));
                 container.setLayout(new BorderLayout());
                 add(container,BorderLayout.CENTER);
 
@@ -148,8 +148,9 @@ public class DashboardView extends JPanel {
 
                 pnlCards = new JPanel(cardLayout);
                 pnlCards.setPreferredSize(new Dimension(400,300));
-                pnlCards.setBackground(res.red);
                 container.add(pnlCards, BorderLayout.CENTER);
+
+                pnlCards.add(new RecordPanel());
 
                 this.setPreferredSize(new Dimension(400,500));
             }
@@ -184,7 +185,7 @@ public class DashboardView extends JPanel {
                 setLayout(new BorderLayout());
 
                 container = res.createPnlRounded(400, 500,res.white, res.lightGray);
-                container.setBorder(new EmptyBorder(10,10,10,10));
+                container.setBorder(new EmptyBorder(20,10,20,10));
                 container.setLayout(new BorderLayout());
                 add(container,BorderLayout.CENTER);
 
@@ -200,8 +201,9 @@ public class DashboardView extends JPanel {
 
                 pnlCards = new JPanel(cardLayout);
                 pnlCards.setPreferredSize(new Dimension(400,300));
-                pnlCards.setBackground(res.red);
                 container.add(pnlCards, BorderLayout.CENTER);
+
+                pnlCards.add(new RecordPanel());
 
                 this.setPreferredSize(new Dimension(400,500));
             }
@@ -212,12 +214,166 @@ public class DashboardView extends JPanel {
          * completed booking.
          */
         public class RecordPanel extends JPanel {
-            private String username;
-            private String vehicle;
-            private String slot;
-            private String checkIn;
-            private String checkOut;
-            private String duration;
+            /**
+             * The label for username.
+             */
+            private JLabel lblUsername;
+            /**
+             * The label for vehicle.
+             */
+            private JLabel lblVehicle;
+            /**
+             * The label for parking slot.
+             */
+            private JLabel lblSlot;
+            /**
+             * The label for date.
+             */
+            private JLabel lblDate;
+            /**
+             * The label for check-in time.
+             */
+            private JLabel lblCheckIn;
+            /**
+             * The label for check-out time.
+             */
+            private JLabel lblCheckOut;
+            /**
+             * The label for duration in hours.
+             */
+            private JLabel lblDuration;
+
+            /**
+             * Constructs a panel of RecordPanel.
+             */
+            public RecordPanel() {
+                setLayout(new GridBagLayout());
+                setBackground(res.white);
+                GridBagConstraints gbc = new GridBagConstraints();
+
+                gbc.ipadx = 5;
+                gbc.ipady = 10;
+                gbc.insets = new Insets(3,10,3,10);
+                gbc.gridwidth = 5;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                gbc.anchor = GridBagConstraints.WEST;
+
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+
+                // upper row
+                lblUsername = res.createLblH2("Username",res.eerieBlack);
+                add(lblUsername, gbc);
+
+                gbc.gridy = 1;
+                lblVehicle = res.createLblH3("Vehicle", res.eerieBlack);
+                add(lblVehicle, gbc);
+
+                gbc.gridy = 2;
+                gbc.gridwidth = 5;
+                JSeparator separator = new JSeparator();
+                separator.setForeground(res.gray);
+                add(separator, gbc);
+
+                // lower row
+                gbc.gridy = 3;
+                lblSlot = res.createLblH3("SLOT C1", res.eerieBlack);
+                add(lblSlot, gbc);
+
+                // left column
+                gbc.gridwidth = 2;
+                gbc.gridx = 0;
+                gbc.gridy = 4;
+                JLabel lblDateLabel = res.createLblP("Date:", res.gray);
+                add(lblDateLabel, gbc);
+
+                gbc.gridy = 5;
+                JLabel lblCheckInLabel = res.createLblP("Check-In Time:", res.gray);
+                add(lblCheckInLabel, gbc);
+
+                gbc.gridy = 6;
+                JLabel lblCheckOutLabel = res.createLblP("Check-Out Time:", res.gray);
+                add(lblCheckOutLabel, gbc);
+
+                gbc.gridy = 7;
+                JLabel lblDurationLabel = res.createLblP("Duration:", res.gray);
+                add(lblDurationLabel, gbc);
+
+                // right column
+                gbc.gridwidth = 2;
+                gbc.gridx = 4;
+                gbc.gridy = 4;
+                lblDate = res.createLblP("August 20, 1996", res.eerieBlack);
+                add(lblDate, gbc);
+
+                gbc.gridy = 5;
+                lblCheckIn = res.createLblP("1:00 PM", res.eerieBlack);
+                add(lblCheckIn, gbc);
+
+                gbc.gridy = 6;
+                lblCheckOut = res.createLblP("5:00 PM", res.eerieBlack);
+                add(lblCheckOut, gbc);
+
+                gbc.gridy = 7;
+                lblDuration = res.createLblP("4 hours",res.eerieBlack);
+                add(lblDuration, gbc);
+            }
+
+            /**
+             * Retrieves the current JLabel of lblUsername.
+             * @return The current lblUsername.
+             */
+            public JLabel getLblUsername() {
+                return lblUsername;
+            }
+
+            /**
+             * Retrieves the current JLabel of lblVehicle.
+             * @return The current lblVehicle.
+             */
+            public JLabel getLblVehicle() {
+                return lblVehicle;
+            }
+
+            /**
+             * Retrieves the current JLabel of lblSlot.
+             * @return The current lblSlot.
+             */
+            public JLabel getLblSlot() {
+                return lblSlot;
+            }
+
+            /**
+             * Retrieves the current JLabel of lblDate.
+             * @return The current lblDate.
+             */
+            public JLabel getLblDate() {
+                return lblDate;
+            }
+
+            /**
+             * Retrieves the current JLabel of lblCheckIn.
+             * @return The current lblCheckIn.
+             */
+            public JLabel getLblCheckIn() {
+                return lblCheckIn;
+            }
+
+            /**
+             * Retrieves the current JLabel of lblCheckOut.
+             * @return The current lblCheckOut.
+             */
+            public JLabel getLblCheckOut() {
+                return lblCheckOut;
+            }
+
+            /**
+             * Retrieves the current JLabel of lblDuration.
+             * @return The current lblDuration.
+             */
+            public JLabel getLblDuration() {
+                return lblDuration;
+            }
         }
     }
 
