@@ -67,6 +67,7 @@ public class UserProfileView extends JPanel {
      * The panel for Security.
      */
     private SecurityPage pnlSecurityPage;
+
     /**
      * Constructs a panel of UserProfileView.
      */
@@ -377,7 +378,7 @@ public class UserProfileView extends JPanel {
     /**
      * The panel that contains the information on the vehicle of the users that can be edited or add new vehicles.
      */
-    class EditCars extends JPanel {
+    public class EditCars extends JPanel {
         /**
          * The panel to holds the different components.
          */
@@ -391,6 +392,15 @@ public class UserProfileView extends JPanel {
          */
         private JButton btnNext;
         /**
+         * The button for cancel.
+         */
+        private JButton btnCancel;
+        /**
+         * The button for continue.
+         */
+        private JButton btnContinue;
+
+        /**
          * The Card Layout that controls multiple components.
          */
         private CardLayout cardLayout = new CardLayout();
@@ -403,22 +413,28 @@ public class UserProfileView extends JPanel {
             this.setBorder(new EmptyBorder(80, 20, 10, 60));
 
             JLabel myCars = res.createLblH1("My Cars", res.eerieBlack);
-            this.add(myCars, BorderLayout.NORTH);
+            add(myCars, BorderLayout.NORTH);
 
             pnlCards  = new JPanel(cardLayout);
             pnlCards.setBackground(res.white);
             pnlCards.setPreferredSize(new Dimension(300,325));
             add(pnlCards, BorderLayout.CENTER);
 
+            btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 20,20);
+            add(btnPrev, BorderLayout.WEST);
+
+            btnNext = res.createBtnIconOnly(res.iconRightArrow, 20,20);
+            add(btnNext, BorderLayout.EAST);
+
             JPanel pnlButtons = new JPanel(new FlowLayout());
             pnlButtons.setBackground(res.lightGray);
             add(pnlButtons, BorderLayout.SOUTH);
 
-            btnPrev = res.createBtnRounded("PREV", res.gray, res.eerieBlack, 10); // Adjust the radius as needed
-            pnlButtons.add(btnPrev);
+            btnCancel = res.createBtnRounded("Cancel", res.lightGray, res.eerieBlack, 10);
+            pnlButtons.add(btnCancel);
 
-            btnNext = res.createBtnRounded("NEXT", res.celadon, res.eerieBlack, 10); // Adjust the radius as needed
-            pnlButtons.add(btnNext);
+            btnContinue = res.createBtnRounded("Continue", res.celadon, res.celadon, 10);
+            pnlButtons.add(btnContinue);
         }
 
         /**
@@ -438,6 +454,38 @@ public class UserProfileView extends JPanel {
         }
 
         /**
+         * Retrieves the current panel with the card layout.
+         * @return Panel with the card layout.
+         */
+        public JPanel getPnlCards() {
+            return pnlCards;
+        }
+
+        /**
+         * Retrieves the current JButton of btnCancel.
+         * @return The current btnCancel.
+         */
+        public JButton getBtnCancel() {
+            return btnCancel;
+        }
+
+        /**
+         * Retrieves the current JButton of btnContinue.
+         * @return The current btnContinue.
+         */
+        public JButton getBtnContinue() {
+            return btnContinue;
+        }
+
+        /**
+         * Retrieves the current card layout that controls the panels.
+         * @return THe current card layout.
+         */
+        public CardLayout getCardLayout() {
+            return cardLayout;
+        }
+
+        /**
          * Sets a specified action listener to btnNext.
          * @param actionListener The specified action listener.
          */
@@ -454,58 +502,131 @@ public class UserProfileView extends JPanel {
         }
 
         /**
-         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehicle.
-         *
-         * @param plateNumber The specified license plate number.
-         * @param vehicleType The specified type of vehicle.
-         * @param model       The specified model of the vehicle.
-         * @return JPanel with vehicle information.
+         * Sets a specified listener to btnCancel.
+         * @param actionListener The specified action listener.
          */
-        public JPanel createPnlCars(String plateNumber, String vehicleType, String model) {
-            JPanel whitePanel = res.createPnlRounded(300,325,res.white, res.lightGray);
-            whitePanel.setLayout(new GridBagLayout());
-            whitePanel.setBackground(res.white);
-            whitePanel.setPreferredSize(new Dimension(300, 325));
+        public void setCancelListener(ActionListener actionListener) {
+            btnCancel.addActionListener(actionListener);
+        }
 
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(5, 5, 5, 5);
+        /**
+         * Sets a specified listener to btnContinue.
+         * @param actionListener The specified action listener.
+         */
+        public void setContinueListener(ActionListener actionListener) {
+            btnContinue.addActionListener(actionListener);
+        }
 
-            Font labelFontBold = new Font("Arial", Font.BOLD, 20);
-            Font labelFont = new Font("Arial", Font.ITALIC, 20);
+        /**
+         * Panel containing a vehicle's pertinent information.
+         */
+        public class CarsPanel extends JPanel {
+            /**
+             * The text field for the plate number.
+             */
+            private JTextField txtPlateNumber;
+            /**
+             * The text field for the model.
+             */
+            private JTextField txtModel;
+            /**
+             * The text field for the vehicle type.
+             */
+            private JTextField txtVehicleType;
+            /**
+             * The button for edit.
+             */
+            private JButton btnEdit;
 
-            JLabel lblPlateNumber = new JLabel("Plate Number");
-            lblPlateNumber.setFont(labelFontBold);
-            whitePanel.add(lblPlateNumber, gbc);
+            /**
+             * Constructs a panel of CarsPanel.
+             */
+            public CarsPanel() {
+                JPanel whitePanel = res.createPnlRounded(300,325,res.white, res.lightGray);
+                whitePanel.setLayout(new GridBagLayout());
+                whitePanel.setBackground(res.white);
+                whitePanel.setPreferredSize(new Dimension(300, 325));
 
-            gbc.gridy++; // Move to the next row
-            JLabel plateNumberInfo = new JLabel(plateNumber);
-            plateNumberInfo.setFont(labelFont);
-            whitePanel.add(plateNumberInfo, gbc);
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(5, 5, 5, 5);
 
-            gbc.gridy++; // Move to the next row
-            JLabel lblModel = new JLabel("Model");
-            lblModel.setFont(labelFontBold);
-            whitePanel.add(lblModel, gbc);
+                Font labelFontBold = new Font("Arial", Font.BOLD, 20);
 
-            gbc.gridy++; // Move to the next row
-            JLabel modelInfo = new JLabel(model);
-            modelInfo.setFont(labelFont);
-            whitePanel.add(modelInfo, gbc);
+                JLabel lblPlateNumber = new JLabel("Plate Number");
+                lblPlateNumber.setFont(labelFontBold);
+                whitePanel.add(lblPlateNumber, gbc);
 
-            gbc.gridy++; // Move to the next row
-            JLabel vehicle = new JLabel("Vehicle Type");
-            vehicle.setFont(labelFontBold);
-            whitePanel.add(vehicle, gbc);
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.EAST;
+                btnEdit = res.createBtnIconOnly(res.iconEdit, 30,30);
+                whitePanel.add(btnEdit, gbc);
 
-            gbc.gridy++; // Move to the next row
-            JLabel vehicleInfo = new JLabel(vehicleType);
-            vehicleInfo.setFont(labelFont);
-            whitePanel.add(vehicleInfo, gbc);
+                gbc.gridy++; // Move to the next row
+                gbc.anchor = GridBagConstraints.WEST;
+                txtPlateNumber = res.createTxtRounded("Info", res.white, res.gray, 20);
+                whitePanel.add(txtPlateNumber, gbc);
 
-            return whitePanel;
+                gbc.gridy++; // Move to the next row
+                JLabel lblModel = new JLabel("Model");
+                lblModel.setFont(labelFontBold);
+                whitePanel.add(lblModel, gbc);
+
+                gbc.gridy++; // Move to the next row
+                txtModel = res.createTxtRounded("Info", res.white, res.gray, 20);
+                whitePanel.add(txtModel, gbc);
+
+                gbc.gridy++; // Move to the next row
+                JLabel vehicle = new JLabel("Vehicle Type");
+                vehicle.setFont(labelFontBold);
+                whitePanel.add(vehicle, gbc);
+
+                gbc.gridy++; // Move to the next row
+                txtVehicleType = res.createTxtRounded("Info", res.white, res.gray, 20);
+                whitePanel.add(txtVehicleType, gbc);
+            }
+
+            /**
+             * Retrieves the current JTextField of txtPlateNumber.
+             * @return The current txtPlateNumber.
+             */
+            public JTextField getTxtPlateNumber() {
+                return txtPlateNumber;
+            }
+
+            /**
+             * Retrieves the current JTextField of txtModel.
+             * @return The current txtModel.
+             */
+            public JTextField getTxtModel() {
+                return txtModel;
+            }
+
+            /**
+             * Retrieves the current JTextField of txtVehicleType.
+             * @return The current txtVehicleType.
+             */
+            public JTextField getTxtVehicleType() {
+                return txtVehicleType;
+            }
+
+            /**
+             * Retrieves the current JButton of btnEdit.
+             * @return The current btnEdit.
+             */
+            public JButton getBtnEdit() {
+                return btnEdit;
+            }
+
+            /**
+             * Sets a specified action listener for btnEdit.
+             * @param actionListener The specified action listener.
+             */
+            public void setEditListener(ActionListener actionListener) {
+                btnEdit.addActionListener(actionListener);
+            }
         }
     }
 
