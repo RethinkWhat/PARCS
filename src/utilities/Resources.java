@@ -18,31 +18,31 @@ public class Resources {
     /**
      * Main brand color
      */
-    public final Color celadon = new Color(128,207,168);
+    public final Color celadon = new Color(128, 207, 168);
     /**
      * Secondary brand color
      */
-    public final Color feldgrau = new Color(76,102,99);
+    public final Color feldgrau = new Color(76, 102, 99);
     /**
      * Solid color
      */
-    public final Color eerieBlack = new Color(17,29, 19);
+    public final Color eerieBlack = new Color(17, 29, 19);
     /**
      * Solid color
      */
-    public final Color white = new Color(255,255,255);
+    public final Color white = new Color(255, 255, 255);
     /**
      * Background color for I/O components.
      */
-    public final Color lightGray = new Color(239,239,239);
+    public final Color lightGray = new Color(239, 239, 239);
     /**
      * Foreground color for I/O components.
      */
-    public final Color gray = new Color(133,133,133);
+    public final Color gray = new Color(133, 133, 133);
     /**
      * Error color.
      */
-    public final Color red = new Color(230,92,92);
+    public final Color red = new Color(230, 92, 92);
     /**
      * The icon for the PARCS logo.
      */
@@ -112,9 +112,15 @@ public class Resources {
      */
     public ImageIcon iconSwitch = new ImageIcon("res/drawable/icons/switch-white-outline.png");
     /**
+     * The icon for edit in the user profile page.
+     */
+    public ImageIcon iconEdit = new ImageIcon("res/drawable/icons/edit.png");
+
+    /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h1).
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified color.
      * @return JLabel with specified text and color in an H1 format.
      */
@@ -128,7 +134,8 @@ public class Resources {
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h2).
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified color.
      * @return JLabel with specified text and color in an H2 format.
      */
@@ -142,7 +149,8 @@ public class Resources {
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h3).
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified color.
      * @return JLabel with specified text and color in an H3 format.
      */
@@ -156,7 +164,8 @@ public class Resources {
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h4).
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified color.
      * @return JLabel with specified text and color in an H3 format.
      */
@@ -171,7 +180,8 @@ public class Resources {
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a paragraph.
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified color.
      * @return JLabel with specified text and color in a paragraph format.
      */
@@ -185,7 +195,8 @@ public class Resources {
     /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a paragraph.
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified color.
      * @return JLabel with specified text and color in a paragraph format.
      */
@@ -199,7 +210,8 @@ public class Resources {
     /**
      * Creates a new JButton with a specified text and color.
      * The JButton will only contain text with no background color and no icon.
-     * @param text The specified text.
+     *
+     * @param text  The specified text.
      * @param color The specified foreground color.
      * @return The JButton with specified text and foreground color.
      */
@@ -216,14 +228,15 @@ public class Resources {
 
     /**
      * Creates a new JButton with a specified icon and size.
-     * @param icon The specified icon URL.
-     * @param width The desired width of the icon.
+     *
+     * @param icon   The specified icon URL.
+     * @param width  The desired width of the icon.
      * @param height The desired height of the icon.
      * @return The JButton with a specified icon and size.
      */
     public JButton createBtnIconOnly(ImageIcon icon, int width, int height) {
         Image img = icon.getImage();
-        Image scaledImg = img.getScaledInstance(width,height,Image.SCALE_SMOOTH);
+        Image scaledImg = img.getScaledInstance(width, height, Image.SCALE_SMOOTH);
 
         JButton button = new JButton();
         button.setIcon(new ImageIcon(scaledImg));
@@ -236,10 +249,11 @@ public class Resources {
 
     /**
      * Creates a new JButton with a specified text, background color, foreground color, and radius.
-     * @param text The specified text.
+     *
+     * @param text       The specified text.
      * @param background The specified background.
      * @param foreground The specified foreground.
-     * @param radius The specified radius.
+     * @param radius     The specified radius.
      * @return The specified button.
      */
     public JButton createBtnRounded(String text, Color background, Color foreground, int radius) {
@@ -256,9 +270,10 @@ public class Resources {
 
     /**
      * Creates a new JComboBox with a specified background color, foreground color, and radius.
+     *
      * @param background The specified background.
      * @param foreground The specified foreground.
-     * @param radius The specified radius.
+     * @param radius     The specified radius.
      * @return The specified combo box.
      */
     public JComboBox<?> createCmbRounded(Color background, Color foreground, int radius) {
@@ -282,6 +297,7 @@ public class Resources {
 
         /**
          * Constructs a rounded border with a specified radius.
+         *
          * @param radius The specified radius.
          */
         public RoundedBorder(int radius) {
@@ -290,16 +306,18 @@ public class Resources {
 
         /**
          * Retrieves the current insets of the rounded border.
+         *
          * @param c the component for which this border insets value applies
          * @return The current insets of the rounded border.
          */
         public Insets getBorderInsets(Component c) {
-            return new Insets(this.radius+2, this.radius+2, this.radius+3, this.radius);
+            return new Insets(this.radius + 2, this.radius + 2, this.radius + 3, this.radius);
         }
 
         /**
          * Returns the current state of opacity of the rounded border.
          * Returns true if the border is opaque, false if otherwise.
+         *
          * @return The current opacity of the rounded border.
          */
         public boolean isBorderOpaque() {
@@ -308,24 +326,26 @@ public class Resources {
 
         /**
          * Paints the Border.
-         * @param c the component for which this border is being painted
-         * @param g the paint graphics
-         * @param x the x position of the painted border
-         * @param y the y position of the painted border
-         * @param width the width of the painted border
+         *
+         * @param c      the component for which this border is being painted
+         * @param g      the paint graphics
+         * @param x      the x position of the painted border
+         * @param y      the y position of the painted border
+         * @param width  the width of the painted border
          * @param height the height of the painted border
          */
         public void paintBorder(Component c, Graphics g, int x, int y, int width, int height) {
-            g.drawRoundRect(x, y, width-1, height-1, radius, radius);
+            g.drawRoundRect(x, y, width - 1, height - 1, radius, radius);
         }
     }
 
     /**
      * Creates a JTextField with rounded corners with a specified text, background color, foreground color, and columns.
-     * @param text The specified text.
+     *
+     * @param text       The specified text.
      * @param background The specified background color.
      * @param foreground The specified foreground color.
-     * @param columns The specified columns.
+     * @param columns    The specified columns.
      * @return The new JTextField with rounded borders.
      */
     public JTextField createTxtRounded(String text, Color background, Color foreground, int columns) {
@@ -333,18 +353,19 @@ public class Resources {
         textField.setText(text);
         textField.setBackground(background);
         textField.setForeground(foreground);
-        textField.setFont(new Font("Arial",Font.PLAIN,16));
+        textField.setFont(new Font("Arial", Font.PLAIN, 16));
         return textField;
     }
 
     /**
      * Creates a new JPanel with a specified width, height, foreground and background color.
      * The JPanel to be created will have rounded edges.
-     * @param width The specified width.
-     * @param height The specified height.
+     *
+     * @param width    The specified width.
+     * @param height   The specified height.
      * @param pnlColor The specified foreground color.
-     * @param bgColor The specified background color. This color must be the same with another component's background
-     *                color for the foreground to have its rounded edges.
+     * @param bgColor  The specified background color. This color must be the same with another component's background
+     *                 color for the foreground to have its rounded edges.
      * @return The JPanel with rounded edges with specified width, height, foreground and background color.
      */
     public JPanel createPnlRounded(int width, int height, Color pnlColor, Color bgColor) {
@@ -364,7 +385,7 @@ public class Resources {
             }
         };
 
-        panel.setPreferredSize(new Dimension(width,height));
+        panel.setPreferredSize(new Dimension(width, height));
         return panel;
     }
 
@@ -379,6 +400,7 @@ public class Resources {
 
         /**
          * Constructs a RoundJTextField with a specified size.
+         *
          * @param size The specified size.
          */
         public RoundJTextField(int size) {
@@ -388,33 +410,35 @@ public class Resources {
 
         /**
          * Paints the background of the RoundJTextField.
+         *
          * @param g the <code>Graphics</code> object to protect
          */
         protected void paintComponent(Graphics g) {
             g.setColor(getBackground());
-            g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             super.paintComponent(g);
         }
 
         /**
          * Paints the borders of the RoundJTextField.
-         * @param g  the <code>Graphics</code> context in which to paint
          *
+         * @param g the <code>Graphics</code> context in which to paint
          */
         protected void paintBorder(Graphics g) {
             g.setColor(getForeground());
-            g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
         }
 
         /**
          * Checks whether the shape is equal to the given bound coordinates.
-         * @param x   the <i>x</i> coordinate of the point
-         * @param y   the <i>y</i> coordinate of the point
+         *
+         * @param x the <i>x</i> coordinate of the point
+         * @param y the <i>y</i> coordinate of the point
          * @return true / false
          */
         public boolean contains(int x, int y) {
             if (shape == null || !shape.getBounds().equals(getBounds())) {
-                shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+                shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             }
             return shape.contains(x, y);
         }
@@ -422,16 +446,17 @@ public class Resources {
 
     /**
      * Creates a RoundJPasswordField with a specified background color, foreground color, and columns.
+     *
      * @param background The specified background color.
      * @param foreground The specified foreground color.
-     * @param columns The specified columns.
+     * @param columns    The specified columns.
      * @return The new RoundJPasswordField.
      */
     public JPasswordField createPwdRounded(Color background, Color foreground, int columns) {
         JPasswordField passwordField = new RoundJPasswordField(columns);
         passwordField.setBackground(background);
         passwordField.setForeground(foreground);
-        passwordField.setFont(new Font("Arial",Font.PLAIN,16));
+        passwordField.setFont(new Font("Arial", Font.PLAIN, 16));
         return passwordField;
     }
 
@@ -446,6 +471,7 @@ public class Resources {
 
         /**
          * Constructs a RoundJPasswordField with a specified size.
+         *
          * @param size The specified size.
          */
         public RoundJPasswordField(int size) {
@@ -455,33 +481,35 @@ public class Resources {
 
         /**
          * Paints the background of the RoundJTextField.
+         *
          * @param g the <code>Graphics</code> object to protect
          */
         protected void paintComponent(Graphics g) {
             g.setColor(getBackground());
-            g.fillRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g.fillRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             super.paintComponent(g);
         }
 
         /**
          * Paints the borders of the RoundJTextField.
-         * @param g  the <code>Graphics</code> context in which to paint
          *
+         * @param g the <code>Graphics</code> context in which to paint
          */
         protected void paintBorder(Graphics g) {
             g.setColor(getForeground());
-            g.drawRoundRect(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+            g.drawRoundRect(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
         }
 
         /**
          * Checks whether the shape is equal to the given bound coordinates.
-         * @param x   the <i>x</i> coordinate of the point
-         * @param y   the <i>y</i> coordinate of the point
+         *
+         * @param x the <i>x</i> coordinate of the point
+         * @param y the <i>y</i> coordinate of the point
          * @return TODO
          */
         public boolean contains(int x, int y) {
             if (shape == null || !shape.getBounds().equals(getBounds())) {
-                shape = new RoundRectangle2D.Float(0, 0, getWidth()-1, getHeight()-1, 15, 15);
+                shape = new RoundRectangle2D.Float(0, 0, getWidth() - 1, getHeight() - 1, 15, 15);
             }
             return shape.contains(x, y);
         }
@@ -498,6 +526,7 @@ public class Resources {
 
         /**
          * Constructs an object of CursorChanger with a specified JButton.
+         *
          * @param button The specified button.
          */
         public CursorChanger(JButton button) {
@@ -506,6 +535,7 @@ public class Resources {
 
         /**
          * When the mouse hovers inside the vicinity of the UI component.
+         *
          * @param e the event to be processed
          */
         @Override
@@ -515,6 +545,7 @@ public class Resources {
 
         /**
          * When the mouse hovers outside the UI component.
+         *
          * @param e the event to be processed
          */
         @Override
@@ -539,7 +570,8 @@ public class Resources {
 
         /**
          * Constructs an object of TextFieldFocus with a specified text field and placeholder text.
-         * @param textField The specified text field.
+         *
+         * @param textField   The specified text field.
          * @param placeholder The specified placeholder text.
          */
         public TextFieldFocus(JTextField textField, String placeholder) {
@@ -549,6 +581,7 @@ public class Resources {
 
         /**
          * Processes the event when focused. The text field contents are cleared to accommodate user input.
+         *
          * @param e the event to be processed
          */
         @Override
@@ -560,6 +593,7 @@ public class Resources {
 
         /**
          * Processes the event when unfocused. A placeholder text is inserted in the text field.
+         *
          * @param e the event to be processed
          */
         @Override
@@ -587,8 +621,9 @@ public class Resources {
         /**
          * Constructs an object of PasswordFocus with a specified password field, show password text box and
          * placeholder text.
+         *
          * @param passwordField The specified password field.
-         * @param placeholder The specified placeholder text.
+         * @param placeholder   The specified placeholder text.
          */
         public PasswordFocus(JPasswordField passwordField, String placeholder) {
             this.passwordField = passwordField;
@@ -598,6 +633,7 @@ public class Resources {
 
         /**
          * Processes the event when focused. Clears the password field of its placeholder text.
+         *
          * @param e the event to be processed
          */
         @Override
@@ -611,6 +647,7 @@ public class Resources {
         /**
          * Processes the event when focused. The checkbox is overridden and displays the password in plain text, and
          * adds a placeholder text.
+         *
          * @param e the event to be processed
          */
         @Override
