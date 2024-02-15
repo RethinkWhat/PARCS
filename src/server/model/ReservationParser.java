@@ -310,7 +310,7 @@ public class ReservationParser {
         Element endTimeElement = document.createElement("endTime");
         String[] timeParts = startTime.split(":");
         int endTime = Integer.parseInt(timeParts[0]) + Integer.parseInt(duration);
-        endTimeElement.setTextContent(Integer.toString(endTime));
+        endTimeElement.setTextContent(Integer.toString(endTime) + ":00");
         reservationElement.appendChild(endTimeElement);
 
         Element usernameElement = document.createElement("user");
