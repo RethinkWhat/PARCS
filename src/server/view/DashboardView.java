@@ -83,7 +83,7 @@ public class DashboardView extends JPanel {
             setBackground(res.lightGray);
 
             GridLayout gridLayout = new GridLayout(0,2);
-            gridLayout.setHgap(25);
+            gridLayout.setHgap(20);
 
             container = new JPanel(gridLayout);
             container.setPreferredSize(new Dimension(1300,510));
@@ -132,11 +132,11 @@ public class DashboardView extends JPanel {
                 setLayout(new BorderLayout());
 
                 container = res.createPnlRounded(400, 500,res.white, res.lightGray);
-                container.setBorder(new EmptyBorder(20,10,20,10));
+                container.setBorder(new EmptyBorder(20,15,20,15));
                 container.setLayout(new BorderLayout());
                 add(container,BorderLayout.CENTER);
 
-                JLabel lblTitle = res.createLblH1("Completed Car Bookings", res.eerieBlack);
+                JLabel lblTitle = res.createLblH1("All Car Bookings", res.eerieBlack);
                 lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
                 container.add(lblTitle, BorderLayout.NORTH);
 
@@ -181,6 +181,9 @@ public class DashboardView extends JPanel {
              */
             private CardLayout cardLayout = new CardLayout();
 
+            /**
+             * Constructs a panel of MotorPanel.
+             */
             public MotorPanel() {
                 setLayout(new BorderLayout());
 
@@ -189,7 +192,7 @@ public class DashboardView extends JPanel {
                 container.setLayout(new BorderLayout());
                 add(container,BorderLayout.CENTER);
 
-                JLabel lblTitle = res.createLblH1("Completed Motorcycle Bookings", res.eerieBlack);
+                JLabel lblTitle = res.createLblH1("All Motorcycle Bookings", res.eerieBlack);
                 lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
                 container.add(lblTitle, BorderLayout.NORTH);
 
@@ -270,8 +273,10 @@ public class DashboardView extends JPanel {
                 add(lblVehicle, gbc);
 
                 gbc.gridy = 2;
-                gbc.gridwidth = 5;
-                JSeparator separator = new JSeparator();
+                gbc.gridwidth = 10;
+                gbc.fill = GridBagConstraints.HORIZONTAL;
+                JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
+                separator.setPreferredSize(new Dimension(400,1));
                 separator.setForeground(res.gray);
                 add(separator, gbc);
 
@@ -281,7 +286,7 @@ public class DashboardView extends JPanel {
                 add(lblSlot, gbc);
 
                 // left column
-                gbc.gridwidth = 2;
+                gbc.gridwidth = 3;
                 gbc.gridx = 0;
                 gbc.gridy = 4;
                 JLabel lblDateLabel = res.createLblP("Date:", res.gray);
@@ -300,7 +305,7 @@ public class DashboardView extends JPanel {
                 add(lblDurationLabel, gbc);
 
                 // right column
-                gbc.gridwidth = 2;
+                gbc.gridwidth = 3;
                 gbc.gridx = 4;
                 gbc.gridy = 4;
                 lblDate = res.createLblP("August 20, 1996", res.eerieBlack);
@@ -317,6 +322,8 @@ public class DashboardView extends JPanel {
                 gbc.gridy = 7;
                 lblDuration = res.createLblP("4 hours",res.eerieBlack);
                 add(lblDuration, gbc);
+
+                this.setPreferredSize(new Dimension(300,400));
             }
 
             /**
