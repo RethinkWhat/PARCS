@@ -396,6 +396,85 @@ public class ReservationParser {
     }
 
 
+    public List<Integer> computeDuration(String startTime, String endTime){
+        List<Integer> duration = new ArrayList<>();
+
+        String[] startTimeParts = startTime.split(":");
+        String[] endTimeParts = endTime.split(":");
+
+        int totalHours = Integer.parseInt(endTimeParts[0]) - Integer.parseInt(startTimeParts[0]);
+
+        duration.add(totalHours);
+        duration.add(00);
+
+        return duration;
+    }
+
+    /**
+     * Method that returns the information for the closest reservation of a user
+     * [parkingIdentifier, startTime, endTime, username]
+     *
+     * @param username
+     * @return
+     */
+    public List<String> getClosestReservation(String username){
+        getReservationsFile();
+
+        List<String> reservationInformation = new ArrayList<>();
+        reservationInformation.add("C0");
+        reservationInformation.add("24:00");
+        reservationInformation.add("00:00");
+        reservationInformation.add("default");
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+            for (int j = 0; j < reservationNodes.getLength(); j++){
+
+                Element currReservationElement = (Element) reservationNodes.item(j);
+
+                // Splits the startTime string to an array because we only need the hour
+                String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
+
+                // Checks if the current reservation is by the user
+                // If the current reservation element's startTime is less than the reservation element startTime stored in the reservationInformation arraylist, it will replace its values
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username) && compareStartTime(currStartTimeParts[0], reservationInformation.get(1))){
+                    reservationInformation.set(0, currReservationElement.getParentNode().getAttributes().item(0).getTextContent());
+                    reservationInformation.set(1, currReservationElement.getElementsByTagName("startTime").item(0).getTextContent());
+                    reservationInformation.set(2, currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
+                    reservationInformation.set(3, currReservationElement.getElementsByTagName("user").item(0).getTextContent());
+                }
+
+            }
+        }
+
+        return reservationInformation;
+    }
+
+    /**
+     * Will return true if the first startTime is less than the second startTime
+     * @param st1
+     * @param st2
+     * @return
+     */
+    private boolean compareStartTime(String st1, String st2){
+        String[] st1Parts = st1.split(":");
+        String[] st2Parts = st2.split(":");
+
+        if (Integer.parseInt(st1Parts[0]) < Integer.parseInt(st2Parts[0])){
+            return true;
+        }
+
+        return false;
+    }
+
+
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
@@ -406,5 +485,9 @@ public class ReservationParser {
         for (int x = 0 ; x < parkingSpotList.size(); x++) {
             System.out.println(parkingSpotList.get(x));
         }
+
+        System.out.println(parser.computeDuration("15:00","20:00"));
+
+        System.out.println(parser.getClosestReservation("aaliyah"));
     }
 }
