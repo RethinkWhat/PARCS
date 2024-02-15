@@ -1,6 +1,7 @@
 package client.controller;
 
 import client.controller.application_pages.ReservationPageController;
+import client.controller.application_pages.TimerController;
 import client.controller.application_pages.UserProfileController;
 import client.model.ApplicationModel;
 import client.model.Client;
@@ -39,6 +40,7 @@ public class ApplicationController {
         view.getLblLocation().setText("Home");
         new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
         new UserProfileController(view.getUserProfileView(), model.getUserProfileModel(), this.view);
+        new TimerController(view.getTimerView(), model.getTimerModel());
 
         // action listeners
         view.setNavHomeListener(e -> {
