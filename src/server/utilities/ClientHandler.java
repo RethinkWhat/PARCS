@@ -1,6 +1,7 @@
 package server.utilities;
 
 
+import client.model.DateTime;
 import server.model.Server;
 import server.model.Vehicle;
 
@@ -280,10 +281,11 @@ public class ClientHandler implements Runnable {
     }
 
     public void ticket() {
+        DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
 
-            List<String> userReservation = server.getClosestReservation(username);
+            List<String> userReservation = server.getClosestReservation(username, dateTime.getTime());
             String duration = server.getDuration(userReservation.get(1), userReservation.get(2));
             writer.println(duration);
             System.out.println("attempting to write: " + userReservation);
