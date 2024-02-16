@@ -48,7 +48,8 @@ public class VehicleAdderModel {
         boolean vehicleAccepted = client.readString().equals("true");
         client.closeSocket();
         if (vehicleAccepted) {
-            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+            client.logout();
+            //new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }
         return vehicleAccepted;
     }
