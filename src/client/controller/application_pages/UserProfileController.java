@@ -24,11 +24,15 @@ public class UserProfileController {
     /**
      * The view LoginRegisterView object.
      */
-    private final UserProfileView view;
+    private UserProfileView view;
     /**
      * The model LoginRegisterModel object.
      */
-    private final UserProfileModel model;
+    private UserProfileModel model;
+    /**
+     * The array for Cars Panel holding the user's cars.
+     */
+    private UserProfileView.EditCars.CarsPanel[] pnlsCars;
 
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
@@ -44,8 +48,9 @@ public class UserProfileController {
         populateFields(); // populate fields of the edit profile text fields.
         model.getVehiclesInfo();
 
-        // populate cars panel inside edit cars page.
+        pnlsCars = new UserProfileView.EditCars.CarsPanel[model.getVehicleList().size()];
 
+        // populate cars panel inside edit cars page.
         for (int i = 0; i < model.getVehicleList().size(); i++) {
             String token = model.getVehicleList().get(i);
             String[] tokens = token.split(",");
@@ -53,8 +58,10 @@ public class UserProfileController {
             String vType = tokens[1];
             String vModel = tokens[2];
 
-            view.getPnlEditCars().getPnlCards().add(new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel),
-                    String.valueOf(i));
+            UserProfileView.EditCars.CarsPanel carPanel = new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel);
+            pnlsCars[i] = carPanel;
+
+            view.getPnlEditCars().getPnlCards().add(carPanel, String.valueOf(i));
             view.getPnlEditCars().getCardLayout().show(view.getPnlEditCars().getPnlCards(), String.valueOf(i));
         }
         // action listeners
@@ -82,11 +89,19 @@ public class UserProfileController {
         view.getPnlEditCars().setPrevListener(e ->
                 view.getPnlEditCars().getCardLayout().previous(view.getPnlEditCars().getPnlCards()));
 
+        for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+            panel.setEditListener(e -> {
+                panel.getTxtPlateNumber().setEditable(true);
+                panel.getTxtModel().setEditable(true);
+                view.getPnlEditCars().getBtnContinue().setVisible(true);
+                view.getPnlEditCars().getBtnCancel().setVisible(true);
+            });
+        }
+
         // history page
         // TODO: action listeners for history page
 
         // security page
-        // TODO: action listeners for security page
         view.getPnlSecurityPage().setConfirmListener(new SecurityConfirmListener());
 
         // mouse listeners
@@ -130,6 +145,15 @@ public class UserProfileController {
                 new Resources.TextFieldFocus(view.getPnlEditProfile().getTxtContact(), model.getContactNo()));
 
         // edit cars page
+        for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+            String initialPlateNumber = panel.getTxtPlateNumber().getText();
+            String initialModel = panel.getTxtPlateNumber().getText();
+
+            panel.getTxtPlateNumber().addFocusListener(new Resources.TextFieldFocus(
+                    panel.getTxtPlateNumber(), initialPlateNumber));
+            panel.getTxtModel().addFocusListener(new Resources.TextFieldFocus(
+                    panel.getTxtModel(), initialModel));
+        }
 
         // security page
         view.getPnlSecurityPage().getTxtCurrentPassword().
@@ -150,7 +174,6 @@ public class UserProfileController {
         view.revalidate();
         view.repaint();
     }
-
 
 
     /**
@@ -196,6 +219,7 @@ public class UserProfileController {
     public class ProfileEditListener implements ActionListener {
         /**
          * TODO: Documentation
+         *
          * @param e the event to be processed
          */
         @Override
@@ -216,11 +240,21 @@ public class UserProfileController {
     class CarCancelListener implements ActionListener {
         /**
          * Processes the user request.
+         *
          * @param e the event to be processed
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO: Process cancellation of car editing
+            String vType = null;
+            String vPlateNumber = null;
+            String vModel = null;
+
+            for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+                vType = panel.getTxtVehicleType().getText();
+                vPlateNumber = panel.getTxtPlateNumber().getText();
+                vModel = panel.getTxtModel().getText();
+            }
+            model.editVehicleInfo(vType, vModel, vPlateNumber);
         }
     }
 
@@ -230,11 +264,12 @@ public class UserProfileController {
     class CarContinueListener implements ActionListener {
         /**
          * Processes the user request.
+         *
          * @param e the event to be processed
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO: Process editing of car editing
+
         }
     }
 
@@ -267,7 +302,5 @@ public class UserProfileController {
             }
         }
     }
-
-
 }
 
