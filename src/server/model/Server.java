@@ -107,8 +107,6 @@ public class Server implements Runnable{
 
     public boolean checkScheduleConflicts(String username, String startTime, String duration) {
         String endTime = reservationParser.computeEndTime(startTime,duration);
-        System.out.println("start time: " + startTime);
-        System.out.println("endtime: " + endTime);
         return reservationParser.checkScheduleConflicts(username, startTime, endTime);
     }
 

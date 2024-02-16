@@ -727,7 +727,12 @@ public class ReservationPageView extends JPanel {
             pnlIcon.setPreferredSize(new Dimension(600, 200));
 
             // Create and set ImageIcon for pnlIcon
-            ImageIcon iconAvailableCar = res.iconAvailableCar; //change icon
+            ImageIcon iconAvailableCar;
+            if (success)
+                iconAvailableCar = res.iconAvailableCar; //change icon
+            else {
+                iconAvailableCar = res.iconTakenCar;
+            }
             pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
             // Create PnlConfirmation panel
@@ -739,7 +744,7 @@ public class ReservationPageView extends JPanel {
                 lblReserved = res.createLblH1("RESERVED!", res.celadon);
                 lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
             } else {
-                lblReserved = res.createLblH1("FAILED!", res.celadon);
+                lblReserved = res.createLblH1("FAILED!", res.red);
                 lblConfirmationMsg = res.createLblH2("No booking two parking spots at a time. Thank you!", res.eerieBlack);
             }
 
