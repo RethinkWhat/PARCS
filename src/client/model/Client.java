@@ -235,6 +235,18 @@ public class Client {
         ImageIcon iconAvailableCar = res.iconTakenCar; // CHANGE ICON
         pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
+        // Create pnlServerClosed
+        JPanel pnlServerClosed = new JPanel(new BorderLayout());
+        pnlServerClosed.setPreferredSize(new Dimension(600, 170));
+
+        // Labels for the pnlConfirmation panel
+        JLabel lblServerMsg = res.createLblH1("SERVER IS CLOSED", res.red);
+        JLabel lblClosedMsg = res.createLblP("Unable to connect to the server. Please try again later.", res.eerieBlack);
+
+        // Add labels to PnlConfirmation panel
+        pnlServerClosed.add(lblServerMsg, BorderLayout.NORTH);
+        pnlServerClosed.add(lblClosedMsg, BorderLayout.CENTER);
+
 
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
