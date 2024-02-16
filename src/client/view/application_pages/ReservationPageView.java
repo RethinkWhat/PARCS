@@ -827,6 +827,9 @@ public class ReservationPageView extends JPanel {
             this.setLocationRelativeTo(null);
             this.setVisible(true);
         }
+        public void setErrorMessage(String errorMessage) {
+            lblSpecificError.setText(errorMessage);
+        }
     }
 
     public ParkingSlotButtonsView getParkingSlotButtonsView() {
