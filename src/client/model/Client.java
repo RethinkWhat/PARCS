@@ -254,6 +254,11 @@ public class Client {
         // Create the exit button
         JButton btnExit = res.createBtnRounded("EXIT", res.red, res.eerieBlack, 10);
 
+        btnExit.addActionListener(e -> {
+            // Close the program in a controlled manner
+            System.exit(0);
+        });
+
         // Add panels to the dialog
         dialog.add(pnlIcon);
         dialog.add(pnlServerClosed);
