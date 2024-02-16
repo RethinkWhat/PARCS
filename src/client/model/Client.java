@@ -225,7 +225,7 @@ public class Client {
 
         // Create and set ImageIcon for pnlIcon
         Resources res = new Resources();
-        ImageIcon iconAvailableCar = res.iconTakenCar; // CHANGE ICON
+        ImageIcon iconAvailableCar = res.iconOffline;
         pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
         // Create pnlServerClosed panel

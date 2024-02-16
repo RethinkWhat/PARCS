@@ -112,6 +112,14 @@ public class Resources {
      */
     public ImageIcon iconSwitch = new ImageIcon("res/drawable/icons/switch-white-outline.png");
     /**
+     * The icon for the successful reservation prompt.
+     */
+    public ImageIcon iconSuccess = new ImageIcon("res/drawable/icons/check-celadon-solid");
+    /**
+     * The icon for when the server is closed/offline.
+     */
+    public ImageIcon iconOffline = new ImageIcon("res/drawable/icons/offline-red-outline.png");
+    /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h1).
      * @param text The specified text.

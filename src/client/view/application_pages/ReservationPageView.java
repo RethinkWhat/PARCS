@@ -727,7 +727,7 @@ public class ReservationPageView extends JPanel {
             pnlIcon.setPreferredSize(new Dimension(600, 200));
 
             // Create and set ImageIcon for pnlIcon
-            ImageIcon iconAvailableCar = res.iconAvailableCar; //change icon
+            ImageIcon iconAvailableCar = res.iconSuccess;
             pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
             // Create PnlConfirmation panel
