@@ -600,6 +600,58 @@ public class ReservationParser {
     }
 
 
+    public List<List<String>> getAllMotorBookings(){
+        getReservationsFile();
+        List<List<String>> motorBookings = new ArrayList<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            if (currParkingSpotElement.getAttribute("identifier").startsWith("M")){
+
+                NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+                for (int j = 0; j < reservationNodes.getLength(); j++){
+
+                    Element currReservationElement = (Element) reservationNodes.item(j);
+
+
+                    String currUser = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
+                    String currIdentifier = currParkingSpotElement.getAttribute("identifier");
+                    String currDate = currReservationElement.getAttribute("date");
+                    String currStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                    String currEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+
+                    String[] currStartTimeParts = currStartTime.split(":");
+                    String[] currEndTimeParts = currEndTime.split(":");
+                    String duration = Integer.toString(Integer.parseInt(currEndTimeParts[0]) - Integer.parseInt(currStartTimeParts[0]));
+
+                    List<String> currReservation = new ArrayList<>();
+                    currReservation.add(currUser);
+                    currReservation.add(currIdentifier);
+                    currReservation.add(currDate);
+                    currReservation.add(currStartTime);
+                    currReservation.add(currEndTime);
+                    currReservation.add(duration);
+
+                    motorBookings.add(currReservation);
+                }
+
+            }
+
+        }
+
+        return motorBookings;
+    }
+
+
+
+
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
@@ -607,6 +659,6 @@ public class ReservationParser {
        // System.out.println(parser.checkScheduleConflicts("rickardo", "9:00", "10:00"));
 
         System.out.println(parser.getAllCarBookings().toString());
-
+        System.out.println(parser.getAllMotorBookings().toString());
     }
 }
