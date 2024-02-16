@@ -715,7 +715,7 @@ public class ReservationPageView extends JPanel {
         private JLabel lblConfirmationMsg;
         private JButton btnCloseConfirmation;
 
-        public ReserveSlotConfirmationView() {
+        public ReserveSlotConfirmationView(boolean success) {
 
             this.setTitle("PARCS Reservation Confirmation");
             this.setModal(true);
@@ -734,9 +734,14 @@ public class ReservationPageView extends JPanel {
             JPanel pnlConfirmation = new JPanel(new GridBagLayout());
             pnlConfirmation.setPreferredSize(new Dimension(600, 150));
 
-            // Create label for PnlConfirmation with font based on resources class
-            lblReserved = res.createLblH1("RESERVED!", res.celadon);
-            lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+            if (success) {
+                // Create label for PnlConfirmation with font based on resources class
+                lblReserved = res.createLblH1("RESERVED!", res.celadon);
+                lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+            } else {
+                lblReserved = res.createLblH1("FAILED!", res.celadon);
+                lblConfirmationMsg = res.createLblH2("No booking two parking spots at a time. Thank you!", res.eerieBlack);
+            }
 
             // Add labels to PnlConfirmation panel
             GridBagConstraints gbc = new GridBagConstraints();
@@ -765,14 +770,17 @@ public class ReservationPageView extends JPanel {
             this.setLocationRelativeTo(null);
             this.setVisible(true);
         }
+        public void setBtnCloseConfirmationListener(ActionListener listener) {
+            btnCloseConfirmation.addActionListener(listener);
+        }
     }
 
     public ParkingSlotButtonsView getParkingSlotButtonsView() {
         return parkingSlotButtonsView;
     }
 
-    public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
-        reserveSlotConfirmationView = new ReserveSlotConfirmationView();
+    public ReserveSlotConfirmationView getReserveSlotConfirmationView(boolean booked) {
+        reserveSlotConfirmationView = new ReserveSlotConfirmationView(booked);
         return reserveSlotConfirmationView;
     }
 

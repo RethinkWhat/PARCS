@@ -64,10 +64,8 @@ public class ReservationPageModel {
         this.fullName = client.readString();
 
         totalBookings = client.readString();
-        System.out.println("total bookings: " + totalBookings);
 
         vehicles = (Map<String, List<String>>) client.readObject();
-        System.out.println(vehicles);
 
         client.closeSocket();
 

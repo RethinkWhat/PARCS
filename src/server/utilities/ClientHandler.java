@@ -222,7 +222,6 @@ public class ClientHandler implements Runnable {
             writer.println(totalBookings);
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
-            System.out.println("vehicles being sent: " + vehicles );
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(vehicles);
         } catch (IOException ex) {
@@ -289,8 +288,13 @@ public class ClientHandler implements Runnable {
             String duration = reader.readLine();
             String username = reader.readLine();
 
-            boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
-            writer.println(confirmed);
+
+            if (server.checkScheduleConflicts(identifier,startTime,duration)) {
+                boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
+                writer.println(confirmed);
+            } else {
+                writer.println("false");
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }

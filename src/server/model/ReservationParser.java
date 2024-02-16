@@ -462,6 +462,12 @@ public class ReservationParser {
         return toReturnTime;
     }
 
+    public String computeEndTime(String startTime, String duration) {
+        String[] startTimeParts = startTime.split(":");
+        int endTime = Integer.parseInt(startTimeParts[0]) + Integer.parseInt(duration);
+        return endTime+":00";
+    }
+
 
     public String computeDuration(String startTime, String endTime){
         List<Integer> duration = new ArrayList<>();

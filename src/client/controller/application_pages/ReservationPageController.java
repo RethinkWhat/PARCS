@@ -92,11 +92,11 @@ public class ReservationPageController {
 
 
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
-        view.getParkingSlotButtonsView().setBtnCloseListener(new exitListener());
-        view.getParkingSlotButtonsView().setReserveSlotListener(new reserveSlotListener());
+        view.getParkingSlotButtonsView().setBtnCloseListener(new ExitListener());
+        view.getParkingSlotButtonsView().setReserveSlotListener(new ReserveSlotListener());
         view.getParkingSlotButtonsView().setDateListener(new DateListener());
-        view.getParkingSlotButtonsView().setDurationListener(new durationListener());
-        view.getMainTopPanel().setTxtSearchBarListener(new searchListener());
+        view.getParkingSlotButtonsView().setDurationListener(new DurationListener());
+        view.getMainTopPanel().setTxtSearchBarListener(new SearchListener());
 
         view.getMainTopPanel().setPnlAvailCar(String.valueOf(availableCarCount));
         view.getMainTopPanel().setPnlAvailMotor(String.valueOf(availableMotorCount));
@@ -164,7 +164,7 @@ public class ReservationPageController {
         }
     }
 
-    class durationListener implements ActionListener {
+    class DurationListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.getParkingSlotButtonsView().setLblDate(date);
@@ -182,31 +182,45 @@ public class ReservationPageController {
         }
     }
 
-    class exitListener implements ActionListener {
+    class ExitListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.getTopCardLayout().show(view.getPnlCards(), "dashboard");
         }
     }
 
-    class reserveSlotListener implements ActionListener {
+    ReservationPageView.ReserveSlotConfirmationView confirmationView;
+
+    class ReserveSlotListener implements ActionListener {
+        String attemptBooking = null;
         @Override
         public void actionPerformed(ActionEvent e) {
             String startTime = view.getParkingSlotButtonsView().getStartTime();
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
                 if (startTime != null && duration != null) {
-                    model.attemptBooking(btnID, date, startTime, duration);
+                    attemptBooking = String.valueOf(model.attemptBooking(btnID, date, startTime, duration));
                     view.getParkingSlotButtonsView().resetDuration();
                     timeAvailable = model.getAvailableTime(btnID, duration, date);
                     view.getParkingSlotButtonsView().setTimeList(timeAvailable);
                     if (timeAvailable != null)
                         view.getParkingSlotButtonsView().setLblStatus("Available");
-                    view.getReserveSlotConfirmationView();
                 }
+                if (attemptBooking.equals("true"))
+                    confirmationView = view.getReserveSlotConfirmationView(true);
+                else
+                    confirmationView = view.getReserveSlotConfirmationView(false);
+                confirmationView.setBtnCloseConfirmationListener(new CloseConfirmationListener());
+        }
+    }
+    class CloseConfirmationListener implements ActionListener {
+
+        public void actionPerformed(ActionEvent e) {
+            System.out.println("reached");
+            confirmationView.dispose();
         }
     }
 
-    class searchListener implements ActionListener {
+    class SearchListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
             String search = ((JTextField) e.getSource()).getText();
