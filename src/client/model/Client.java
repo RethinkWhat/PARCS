@@ -247,12 +247,17 @@ public class Client {
         pnlServerClosed.add(lblServerMsg, BorderLayout.NORTH);
         pnlServerClosed.add(lblClosedMsg, BorderLayout.CENTER);
 
-        // Create pnlCloseBtn panel
-        JPanel pnlExitBtn = new JPanel(new FlowLayout());
-        pnlExitBtn.setPreferredSize(new Dimension(600, 30));
+        // Create pnlExit panel
+        JPanel pnlExit = new JPanel(new FlowLayout());
+        pnlExit.setPreferredSize(new Dimension(600, 30));
 
-        // Create the close button
+        // Create the exit button
         JButton btnExit = res.createBtnRounded("EXIT", res.red, res.eerieBlack, 10);
+
+        // Add panels to the dialog
+        dialog.add(pnlIcon);
+        dialog.add(pnlServerClosed);
+        dialog.add(pnlExit);
 
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
