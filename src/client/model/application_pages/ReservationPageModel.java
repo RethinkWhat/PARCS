@@ -57,10 +57,10 @@ public class ReservationPageModel {
      */
     public ReservationPageModel(Client client) {
         this.client = client;
-
         client.openSocket();
         client.writeString("reservation");
         client.writeString(client.getUsername());
+
         this.fullName = client.readString();
 
         totalBookings = client.readString();

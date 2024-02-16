@@ -59,6 +59,7 @@ public class ClientHandler implements Runnable {
                                     reserve();
                                     break;
                                 case "signUp":
+                                    System.out.println("reached sign up");
                                     signUp();
                                     break;
                                 case "disconnect":
@@ -216,14 +217,20 @@ public class ClientHandler implements Runnable {
         DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
+            System.out.println("received username: " + username);
+
             writer.println(server.getUserFullName(username));
+            System.out.println("wrote full name: " + server.getUserFullName(username));
 
             String totalBookings = String.valueOf(server.countBookings(username,dateTime.getDateTime()));
             writer.println(totalBookings);
+            System.out.println("wrote total bookings: " + totalBookings);
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
+            System.out.println("vehicles: " + vehicles);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(vehicles);
+            System.out.println("2. vehicles: " + vehicles);
         } catch (IOException ex) {
             ex.printStackTrace();
         }

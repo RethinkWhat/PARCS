@@ -32,6 +32,7 @@ public class Server implements Runnable{
         userParser = new UserParser();
         reservationParser = new ReservationParser();
         userLog = new ArrayList<>();
+        server = new ServerSocket(this.socketAddress);
     }
 
     public boolean validateAccount(String username, String password) {
@@ -125,19 +126,16 @@ public class Server implements Runnable{
         this.serverRunning = serverRunning;
     }
 
-    ExecutorService executor = Executors.newFixedThreadPool(10);
+    ExecutorService executor = Executors.newFixedThreadPool(100);
 
     public void run() {
         while (true) {
             try {
-                boolean flag = this.serverRunning();
-                while (flag) {
-                    Socket clientSocket = server.accept();
-                    executor.submit(new ClientHandler(this, clientSocket));
-                    //new Thread(new ClientHandler(this, clientSocket)).start();
-
-                }
+                Socket clientSocket = server.accept();
+                executor.submit(new ClientHandler(this, clientSocket));
+                //new Thread(new ClientHandler(this, clientSocket)).start();
             } catch (IOException ignore) {
+                ignore.printStackTrace();
             }
         }
     }
