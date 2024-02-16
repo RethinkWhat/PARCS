@@ -76,22 +76,21 @@ public class AdminApplicationController {
     /**
      * TODO: Documentation
      */
-    class ServerListener implements ActionListener{
-        /**
-         * TODO: Documentation
-         * @param e the event to be processed
-         */
+    class ServerListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!serverStatus){
+            if (!serverStatus) {
                 view.getServerStatusView().setOnline();
                 serverStatus = true;
-                ExecutorService executor = Executors.newFixedThreadPool(10);
-                server.startAccepting();
-                executor.submit(server);
-            }else {
+
+                // Create and start a new thread for the server
+                Thread thread = new Thread(server);
+                thread.start();
+            } else {
                 view.getServerStatusView().setOffline();
-                serverStatus= false;
+                serverStatus = false;
+
+                // Stop the server logic
                 server.stopAccepting();
             }
         }

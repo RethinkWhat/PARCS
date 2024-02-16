@@ -125,13 +125,14 @@ public class Server implements Runnable{
         this.serverRunning = serverRunning;
     }
 
+    ExecutorService executor = Executors.newFixedThreadPool(10);
+
     public void run() {
         while (true) {
             try {
                 boolean flag = this.serverRunning();
                 while (flag) {
                     Socket clientSocket = server.accept();
-                    ExecutorService executor = Executors.newFixedThreadPool(10);
                     executor.submit(new ClientHandler(this, clientSocket));
                     //new Thread(new ClientHandler(this, clientSocket)).start();
 

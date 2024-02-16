@@ -1,11 +1,157 @@
 <userClass>
-                        
+                                        
+    
+    
+    
+    
     
     
     
     
     
     <user username="roxas">
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <type>user</type>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <password>WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=</password>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <lastName>Roxas</lastName>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <firstName>Johan Rickardo</firstName>
+                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        <phoneNumber>01234567890</phoneNumber>
+                                                                            
+        
+        
+        
+        
+        
+        
+        
+        
+        <vehicle>Car,Honda Civic,NWA 911</vehicle>
+                                                                    
+    
+    
+    
+    
+    
+    
+    
+    </user>
+                                    
+
+    
+    
+    
+    
+    
+    
+    
+    <user username="basti">
+                                                                
+        
+        
+        
+        
+        
+        
+        <type>user</type>
+                                                                
+        
+        
+        
+        
+        
+        
+        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
+                                                                
+        
+        
+        
+        
+        
+        
+        <lastName>basti</lastName>
+                                                                
+        
+        
+        
+        
+        
+        
+        <firstName>basti</firstName>
+                                                                
+        
+        
+        
+        
+        
+        
+        <phoneNumber>0293812903</phoneNumber>
+                                                            
+        
+        
+        
+        
+        
+        
+        <vehicle>Car,basti car,NGA 1298</vehicle>
+                                                    
+    
+    
+    
+    
+    
+    </user>
+                            
+
+    
+    
+    
+    
+    
+    <user username="Mizu">
                                                 
         
         
@@ -17,31 +163,31 @@
         
         
         
-        <password>WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=</password>
+        <password>jyzJNrGWjJCuNzaoRIMzfTgxS2nx2ofbtNdGgVH9lJQ=</password>
                                                 
         
         
         
         
-        <lastName>Roxas</lastName>
+        <lastName>Marcos</lastName>
                                                 
         
         
         
         
-        <firstName>Johan Rickardo</firstName>
+        <firstName>Jay</firstName>
                                                 
         
         
         
         
-        <phoneNumber>01234567890</phoneNumber>
+        <phoneNumber>09603357926</phoneNumber>
                                             
         
         
         
         
-        <vehicle>Car,Honda Civic,NWA 911</vehicle>
+        <vehicle>Car,honda,NCR 1802</vehicle>
                                     
     
     
@@ -72,30 +218,30 @@
                                 
         
         
-        <phoneNumber>0293812903</phoneNumber>
+        <phoneNumber>209890234</phoneNumber>
                             
         
         
-        <vehicle>Car,basti car,NGA 1298</vehicle>
+        <vehicle>Car,basti,basti</vehicle>
                     
     
     </user>
             
 
     
-    <user username="Mizu">
+    <user username="roxas">
                 
         <type>user</type>
                 
-        <password>jyzJNrGWjJCuNzaoRIMzfTgxS2nx2ofbtNdGgVH9lJQ=</password>
+        <password>A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=</password>
                 
-        <lastName>Marcos</lastName>
+        <lastName>roxas</lastName>
                 
-        <firstName>Jay</firstName>
+        <firstName>johan</firstName>
                 
-        <phoneNumber>09603357926</phoneNumber>
+        <phoneNumber>01234567890</phoneNumber>
             
-        <vehicle>Car,honda,NCR 1802</vehicle>
+        <vehicle>Motorcycle,df,adfa 23</vehicle>
     </user>
     
 </userClass>
