@@ -63,8 +63,6 @@ public class ReservationPageModel {
         client.writeString(client.getUsername());
         this.fullName = client.readString();
 
-        availCarSlots = client.readString();
-        availMotorSlots = client.readString();
         totalBookings = client.readString();
 
         vehicles = (HashMap<String, List<String>>) client.readObject();

@@ -162,15 +162,6 @@ public class Server implements Runnable{
         userLog.remove(username);
     }
 
-    public String countCarSlots() {
-        //TODO: call method from user parser
-        return "19";
-    }
-    public String countMotorSpots() {
-        //TODO: call method from user parser
-        return "20";
-    }
-
     public int countBookings(String username, String date) {
         return reservationParser.countTotalBookingsPerDay(username, date);
     }
