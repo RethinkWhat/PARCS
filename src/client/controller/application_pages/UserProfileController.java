@@ -30,24 +30,6 @@ public class UserProfileController {
      */
     private final UserProfileModel model;
 
-    /*
-    private void showHistory() {
-        // Dispose the current window and show the history page
-        gui.dispose();
-        HistoryPageView historyPageView = new HistoryPageView();
-        historyPageView.setVisible(true);
-    }
-
-    /*
-    public class exit implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            LoginRegisterController loginObj = new LoginRegisterController();
-            loginObj.run();
-        }
-    }
-    */
-
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
      *
@@ -59,7 +41,21 @@ public class UserProfileController {
         this.model = model;
 
         // constants / variables
-        populateFields();
+        populateFields(); // populate fields of the edit profile text fields.
+        model.getVehiclesInfo();
+        JPanel[] vehiclePanels = new JPanel[model.getVehicleList().size()];
+
+        // populate cars panel inside edit cars page.
+        for (int i = 0; i < vehiclePanels.length; i++) {
+            String token = model.getVehicleList().get(i);
+            String[] tokens = token.split(",");
+            String vPlateNumber = tokens[0];
+            String vType = tokens[1];
+            String vModel = tokens[2];
+
+            view.getPnlEditCars().getPnlCards().add(new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel),
+                    String.valueOf(i));
+        }
 
         // action listeners
 
@@ -75,18 +71,23 @@ public class UserProfileController {
         // view.setNavExitListener(new LoginRegisterController());
 
         // edit profile page
-        view.getPnlEditProfile().setContinueListener(new EditListener());
-        view.getPnlEditProfile().setCancelListener(new CancelListener());
+        view.getPnlEditProfile().setContinueListener(new ProfileEditListener());
+        view.getPnlEditProfile().setCancelListener(new ProfileCancelListener());
 
         // edit cars page
-        // TODO: action listeners for edit cars page
+        view.getPnlEditCars().setContinueListener(new CarContinueListener());
+        view.getPnlEditCars().setCancelListener(new CarCancelListener());
+        view.getPnlEditCars().setNextListener(e ->
+                view.getPnlEditCars().getCardLayout().next(view.getPnlEditCars().getPnlCards()));
+        view.getPnlEditCars().setPrevListener(e ->
+                view.getPnlEditCars().getCardLayout().previous(view.getPnlEditCars().getPnlCards()));
 
         // history page
         // TODO: action listeners for history page
 
         // security page
         // TODO: action listeners for security page
-        view.getPnlSecurityPage().setConfirmListener(new ConfirmListener());
+        view.getPnlSecurityPage().setConfirmListener(new SecurityConfirmListener());
 
         // mouse listeners
 
@@ -172,7 +173,7 @@ public class UserProfileController {
     /**
      * TODO: Documentation
      */
-    class CancelListener implements ActionListener {
+    class ProfileCancelListener implements ActionListener {
         /**
          * TODO: Documentation
          *
@@ -190,7 +191,7 @@ public class UserProfileController {
     /**
      * TODO: Documentation
      */
-    public class EditListener implements ActionListener {
+    public class ProfileEditListener implements ActionListener {
         /**
          * TODO: Documentation
          * @param e the event to be processed
@@ -208,9 +209,37 @@ public class UserProfileController {
     }
 
     /**
+     * Cancels the editing of the car information.
+     */
+    class CarCancelListener implements ActionListener {
+        /**
+         * Processes the user request.
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO: Process cancellation of car editing
+        }
+    }
+
+    /**
+     * Sends the information of the edited car information.
+     */
+    class CarContinueListener implements ActionListener {
+        /**
+         * Processes the user request.
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO: Process editing of car editing
+        }
+    }
+
+    /**
      * Updates the user's password.
      */
-    class ConfirmListener implements ActionListener {
+    class SecurityConfirmListener implements ActionListener {
         /**
          * 1. Verifies if the input equates to the original password.
          * 2. Verifies if the new password and the confirmed new password matches.
@@ -236,5 +265,7 @@ public class UserProfileController {
             }
         }
     }
+
+
 }
 
