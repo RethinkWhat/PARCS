@@ -431,9 +431,11 @@ public class UserProfileView extends JPanel {
             add(pnlButtons, BorderLayout.SOUTH);
 
             btnCancel = res.createBtnRounded("Cancel", res.lightGray, res.eerieBlack, 10);
+            btnCancel.setVisible(false);
             pnlButtons.add(btnCancel);
 
             btnContinue = res.createBtnRounded("Continue", res.celadon, res.celadon, 10);
+            btnContinue.setVisible(false);
             pnlButtons.add(btnContinue);
 
             this.setPreferredSize(new Dimension(750,700));
@@ -575,6 +577,7 @@ public class UserProfileView extends JPanel {
                 gbc.anchor = GridBagConstraints.WEST;
                 txtPlateNumber = res.createTxtRounded(plateNumber, res.white, res.gray, 20);
                 txtPlateNumber.setEditable(false);
+                txtPlateNumber.setFocusable(false);
                 whitePanel.add(txtPlateNumber, gbc);
 
                 gbc.gridy++; // Move to the next row
@@ -585,6 +588,7 @@ public class UserProfileView extends JPanel {
                 gbc.gridy++; // Move to the next row
                 txtModel = res.createTxtRounded(model, res.white, res.gray, 20);
                 txtModel.setEditable(false);
+                txtModel.setFocusable(false);
                 whitePanel.add(txtModel, gbc);
 
                 gbc.gridy++; // Move to the next row
@@ -594,6 +598,7 @@ public class UserProfileView extends JPanel {
 
                 gbc.gridy++; // Move to the next row
                 txtVehicleType = res.createTxtRounded(type, res.white, res.gray, 20);
+                txtVehicleType.setEditable(false);
                 txtVehicleType.setEditable(false);
                 whitePanel.add(txtVehicleType, gbc);
 

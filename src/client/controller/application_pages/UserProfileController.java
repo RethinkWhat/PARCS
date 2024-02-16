@@ -92,7 +92,9 @@ public class UserProfileController {
         for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
             panel.setEditListener(e -> {
                 panel.getTxtPlateNumber().setEditable(true);
+                panel.getTxtPlateNumber().setFocusable(true);
                 panel.getTxtModel().setEditable(true);
+                panel.getTxtModel().setFocusable(true);
                 view.getPnlEditCars().getBtnContinue().setVisible(true);
                 view.getPnlEditCars().getBtnCancel().setVisible(true);
             });
@@ -124,6 +126,9 @@ public class UserProfileController {
         view.getPnlEditCars().getBtnNext().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnNext()));
         view.getPnlEditCars().getBtnContinue().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnContinue()));
         view.getPnlEditCars().getBtnCancel().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnCancel()));
+        for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+            panel.getBtnEdit().addMouseListener(new Resources.CursorChanger(panel.getBtnEdit()));
+        }
 
         // history page
         // TODO: mouse listeners for history page
@@ -245,16 +250,14 @@ public class UserProfileController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            String vType = null;
-            String vPlateNumber = null;
-            String vModel = null;
-
+            view.getPnlEditCars().getBtnCancel().setVisible(false);
+            view.getPnlEditCars().getBtnContinue().setVisible(false);
             for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
-                vType = panel.getTxtVehicleType().getText();
-                vPlateNumber = panel.getTxtPlateNumber().getText();
-                vModel = panel.getTxtModel().getText();
+                panel.getTxtPlateNumber().setEditable(false);
+                panel.getTxtPlateNumber().setFocusable(false);
+                panel.getTxtModel().setEditable(false);
+                panel.getTxtModel().setFocusable(false);
             }
-            model.editVehicleInfo(vType, vModel, vPlateNumber);
         }
     }
 
@@ -269,7 +272,16 @@ public class UserProfileController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
+            String vType = null;
+            String vPlateNumber = null;
+            String vModel = null;
 
+            for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+                vType = panel.getTxtVehicleType().getText();
+                vPlateNumber = panel.getTxtPlateNumber().getText();
+                vModel = panel.getTxtModel().getText();
+            }
+            model.editVehicleInfo(vType, vModel, vPlateNumber);
         }
     }
 
