@@ -420,6 +420,8 @@ public class UserProfileView extends JPanel {
             pnlCards.setPreferredSize(new Dimension(300,325));
             add(pnlCards, BorderLayout.CENTER);
 
+            pnlCards.add(new CarsPanel("placeholder", "placeholder", "placeholder"));
+
             btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 20,20);
             add(btnPrev, BorderLayout.WEST);
 
