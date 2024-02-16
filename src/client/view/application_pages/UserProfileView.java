@@ -14,7 +14,7 @@ public class UserProfileView extends JPanel {
     /**
      * The stylesheet
      */
-    Resources res = new Resources();
+    static Resources res = new Resources();
     /**
      * Instance variable of grid bag constraints used in grid bag layout.
      */
@@ -520,7 +520,7 @@ public class UserProfileView extends JPanel {
         /**
          * Panel containing a vehicle's pertinent information.
          */
-        public class CarsPanel extends JPanel {
+        public static class CarsPanel extends JPanel {
             /**
              * The text field for the plate number.
              */
@@ -541,7 +541,7 @@ public class UserProfileView extends JPanel {
             /**
              * Constructs a panel of CarsPanel.
              */
-            public CarsPanel() {
+            public CarsPanel(String plateNumber, String type, String model) {
                 JPanel whitePanel = res.createPnlRounded(300,325,res.white, res.lightGray);
                 whitePanel.setLayout(new GridBagLayout());
                 whitePanel.setBackground(res.white);
@@ -566,7 +566,8 @@ public class UserProfileView extends JPanel {
 
                 gbc.gridy++; // Move to the next row
                 gbc.anchor = GridBagConstraints.WEST;
-                txtPlateNumber = res.createTxtRounded("Info", res.white, res.gray, 20);
+                txtPlateNumber = res.createTxtRounded(plateNumber, res.white, res.gray, 20);
+                txtPlateNumber.setEditable(false);
                 whitePanel.add(txtPlateNumber, gbc);
 
                 gbc.gridy++; // Move to the next row
@@ -575,7 +576,8 @@ public class UserProfileView extends JPanel {
                 whitePanel.add(lblModel, gbc);
 
                 gbc.gridy++; // Move to the next row
-                txtModel = res.createTxtRounded("Info", res.white, res.gray, 20);
+                txtModel = res.createTxtRounded(model, res.white, res.gray, 20);
+                txtModel.setEditable(false);
                 whitePanel.add(txtModel, gbc);
 
                 gbc.gridy++; // Move to the next row
@@ -584,8 +586,11 @@ public class UserProfileView extends JPanel {
                 whitePanel.add(vehicle, gbc);
 
                 gbc.gridy++; // Move to the next row
-                txtVehicleType = res.createTxtRounded("Info", res.white, res.gray, 20);
+                txtVehicleType = res.createTxtRounded(type, res.white, res.gray, 20);
+                txtVehicleType.setEditable(false);
                 whitePanel.add(txtVehicleType, gbc);
+
+                this.setPreferredSize(new Dimension(new Dimension(300,325)));
             }
 
             /**

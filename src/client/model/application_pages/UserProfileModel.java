@@ -2,6 +2,7 @@ package client.model.application_pages;
 
 import client.model.Client;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -34,24 +35,38 @@ public class UserProfileModel {
      */
     private String contactNo;
     /**
-     * The cars of the user.
-     */
-    private String[] cars;
-    /**
-     * The motors of the user.
-     */
-    private String[] motors;
-    /**
      * The mapping of the user to their vehicles.
      */
     private HashMap<String, List<String>> vehicles;
+    /**
+     * The String array list of vehicles, populated by a HashMap.
+     */
+    private ArrayList<String> vehicleList;
 
     /**
      * Constructs a model of UserProfile with a specified client.
+     *
      * @param client The specified client.
      */
     public UserProfileModel(Client client) {
         this.client = client;
+    }
+
+    /**
+     * Retrieves the user's vehicles.
+     */
+    public void getVehiclesInfo() {
+        client.openSocket();
+        client.writeString("getVehicles");
+        client.writeString(client.getUsername());
+        vehicles = (HashMap<String, List<String>>) client.readObject();
+        client.closeSocket();
+
+        vehicleList = new ArrayList();
+
+        for (String vehicle : vehicles.keySet()) {
+            vehicleList.add(vehicle + "," + vehicles.get(vehicle).get(0) + "," + vehicles.get(vehicle).get(1));
+        }
     }
 
     /**
@@ -74,6 +89,7 @@ public class UserProfileModel {
 
     /**
      * Retrieves the current first name of the user.
+     *
      * @return The current first name.
      */
     public String getFirstName() {
@@ -82,6 +98,7 @@ public class UserProfileModel {
 
     /**
      * Retrieves the current last name of the user.
+     *
      * @return The current last name.
      */
     public String getLastName() {
@@ -90,6 +107,7 @@ public class UserProfileModel {
 
     /**
      * Retrieves the current username of the user.
+     *
      * @return The current username.
      */
     public String getUsername() {
@@ -98,6 +116,7 @@ public class UserProfileModel {
 
     /**
      * Retrieves the current password of the user.
+     *
      * @return The current password (encrypted).
      */
     public String getPassword() {
@@ -106,14 +125,20 @@ public class UserProfileModel {
 
     /**
      * Retrieves the current contact number of the user.
+     *
      * @return The current contact number.
      */
     public String getContactNo() {
         return contactNo;
     }
 
+    public ArrayList<String> getVehicleList() {
+        return vehicleList;
+    }
+
     /**
      * TODO: Documentation
+     *
      * @param firstName
      * @param lastName
      * @param contactNo
@@ -142,18 +167,24 @@ public class UserProfileModel {
 
     /**
      * Edits the user's vehicle information with a specified vehicle type, model, and plateNumber.
-     * @param type The specified type.
-     * @param model The specified model.
+     *
+     * @param type        The specified type.
+     * @param model       The specified model.
      * @param plateNumber The specified plate number.
      * @return True if the edit was successful. False if otherwise.
      */
     public boolean editVehicleInfo(String type, String model, String plateNumber) {
-        client.openSocket();;
+        client.openSocket();
+
         client.writeString("editInfo");
 
-        // TODO: Handle equal values
-        client.writeString(username + ",vehicle," +
-                type + "," + model + "," + plateNumber);
+
+        if (!vehicles.get(plateNumber).equals(plateNumber)) {
+            if (!vehicles.get(model).equals(model)) {
+                client.writeString(username + ",vehicle," +
+                        type + "," + model + "," + plateNumber);
+            }
+        }
 
         client.writeString("complete");
 
@@ -166,6 +197,7 @@ public class UserProfileModel {
     /**
      * Changes the password of the user with a specified new password.
      * The client sends the information to the server and parses it.
+     *
      * @param password The specified new password.
      * @return True if successful. False if otherwise.
      */
@@ -180,9 +212,9 @@ public class UserProfileModel {
         return true;
     }
 
-
     /**
      * Retrieves the current client.
+     *
      * @return The current client.
      */
     public Client getClient() {
