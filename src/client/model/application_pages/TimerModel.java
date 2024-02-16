@@ -55,7 +55,6 @@ public class TimerModel {
      */
     public TimerModel(Client client) {
         this.client = client;
-        ;
         getReservationInfo();
     }
 
@@ -65,9 +64,11 @@ public class TimerModel {
         client.writeString("ticket");
 
         client.writeString(client.getUsername());
-        duration = Integer.valueOf(client.readString());
 
         reservationInfo = (List<String>) client.readObject();
+
+        duration = Integer.valueOf(client.readString());
+
         parkingSlot = reservationInfo.get(0);
         timeIn = reservationInfo.get(1);
         timeOut = reservationInfo.get(2);
