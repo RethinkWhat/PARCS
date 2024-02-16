@@ -43,11 +43,10 @@ public class UserProfileController {
         // constants / variables
         populateFields(); // populate fields of the edit profile text fields.
         model.getVehiclesInfo();
-        JPanel[] vehiclePanels = new JPanel[model.getVehicleList().size()];
 
         // populate cars panel inside edit cars page.
-        /*
-        for (int i = 0; i < vehiclePanels.length; i++) {
+
+        for (int i = 0; i < model.getVehicleList().size(); i++) {
             String token = model.getVehicleList().get(i);
             String[] tokens = token.split(",");
             String vPlateNumber = tokens[0];
@@ -57,8 +56,6 @@ public class UserProfileController {
             view.getPnlEditCars().getPnlCards().add(new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel),
                     String.valueOf(i));
         }
-
-         */
 
         // action listeners
 
