@@ -55,8 +55,8 @@ public class UserProfileController {
 
             view.getPnlEditCars().getPnlCards().add(new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel),
                     String.valueOf(i));
+            view.getPnlEditCars().getCardLayout().show(view.getPnlCards(), String.valueOf(i));
         }
-
         // action listeners
 
         // navigation

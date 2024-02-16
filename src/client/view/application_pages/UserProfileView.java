@@ -93,7 +93,7 @@ public class UserProfileView extends JPanel {
         // history page
         pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
         //shows edit profile first
-        cardLayout.show(pnlCards, "profile");
+        cardLayout.show(pnlCards, "vehicles");
 
         // account navigation panel
         pnlProfileOptions = new ProfileOptionsPanel(cardLayout, pnlCards);
@@ -410,7 +410,7 @@ public class UserProfileView extends JPanel {
          */
         public EditCars() {
             this.setLayout(new BorderLayout());
-            this.setBorder(new EmptyBorder(80, 20, 10, 60));
+            this.setBorder(new EmptyBorder(40, 20, 20, 20));
 
             JLabel myCars = res.createLblH1("My Cars", res.eerieBlack);
             add(myCars, BorderLayout.NORTH);
@@ -419,9 +419,6 @@ public class UserProfileView extends JPanel {
             pnlCards.setBackground(res.white);
             pnlCards.setPreferredSize(new Dimension(300,325));
             add(pnlCards, BorderLayout.CENTER);
-
-            pnlCards.add(new CarsPanel("placeholder", "placeholder", "placeholder"), "1");
-            cardLayout.show(pnlCards, "1");
 
             btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 20,20);
             add(btnPrev, BorderLayout.WEST);
@@ -438,6 +435,8 @@ public class UserProfileView extends JPanel {
 
             btnContinue = res.createBtnRounded("Continue", res.celadon, res.celadon, 10);
             pnlButtons.add(btnContinue);
+
+            this.setPreferredSize(new Dimension(750,700));
         }
 
         /**
@@ -545,10 +544,12 @@ public class UserProfileView extends JPanel {
              * Constructs a panel of CarsPanel.
              */
             public CarsPanel(String plateNumber, String type, String model) {
-                JPanel whitePanel = res.createPnlRounded(300,325,res.white, res.lightGray);
+                setLayout(new BorderLayout());
+
+                JPanel whitePanel = res.createPnlRounded(250,300,res.white, res.lightGray);
                 whitePanel.setLayout(new GridBagLayout());
                 whitePanel.setBackground(res.white);
-                whitePanel.setPreferredSize(new Dimension(300, 325));
+                whitePanel.setPreferredSize(new Dimension(250, 300));
 
                 GridBagConstraints gbc = new GridBagConstraints();
                 gbc.gridx = 0;
@@ -567,6 +568,9 @@ public class UserProfileView extends JPanel {
                 btnEdit = res.createBtnIconOnly(res.iconEdit, 30,30);
                 whitePanel.add(btnEdit, gbc);
 
+                gbc.gridx = 0;
+                gbc.gridwidth = 2;
+                gbc.fill = GridBagConstraints.BOTH;
                 gbc.gridy++; // Move to the next row
                 gbc.anchor = GridBagConstraints.WEST;
                 txtPlateNumber = res.createTxtRounded(plateNumber, res.white, res.gray, 20);
@@ -593,6 +597,7 @@ public class UserProfileView extends JPanel {
                 txtVehicleType.setEditable(false);
                 whitePanel.add(txtVehicleType, gbc);
 
+                this.add(whitePanel, BorderLayout.CENTER);
                 this.setPreferredSize(new Dimension(new Dimension(300,325)));
                 this.setVisible(true);
             }
