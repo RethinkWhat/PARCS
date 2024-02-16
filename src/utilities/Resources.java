@@ -125,8 +125,6 @@ public class Resources {
      */
     public ImageIcon iconError = new ImageIcon("res/drawable/icons/error-red-solid.png");
 
-     * The icon for edit in the user profile page.
-     */
     public ImageIcon iconEdit = new ImageIcon("res/drawable/icons/edit.png");
 
     /**

@@ -1,454 +1,356 @@
 <userClass>
-                    
+                                                
     
     
     
-    <user username="rickardo">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>Z4QRMo5v3ja99VBaAxrc8K7FWXyhqAt07EIFuGNIUTQ=</password>
-                                        
-        
-        
-        
-        <lastName>Ramonster</lastName>
-                                        
-        
-        
-        
-        <firstName>Johan</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>638484</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>car,Honda Civic,N99 399</vehicle>
-                                        
-        
-        
-        
-        <vehicle>car,Mitsubishi Montero,ILY 143</vehicle>
-                                    
     
     
     
-    </user>
-                    
     
     
-    
-    <user username="RektMeMamshie">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>WOJxlQnifa8x8ym0+IWcErsKGXLmSOMbO+Y0XoIsvK4=</password>
-                                        
-        
-        
-        
-        <lastName>Jasmin</lastName>
-                                        
-        
-        
-        
-        <firstName>Ramon Emmiel</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>09494177993</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Motorcycle,Yamaha Fazzio,ALI 143</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
     
     
     
     <user username="basti">
-                                        
+                                                                                                
+        
+        
+        
+        
+        
+        
+        
         
         
         
         <type>user</type>
-                                        
+                                                                                                
+        
+        
+        
+        
+        
+        
+        
         
         
         
         <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
-                                        
+                                                                                                
         
         
         
-        <lastName>Siccuan</lastName>
-                                        
         
         
         
-        <firstName>Sebastian</firstName>
-                                        
         
-        
-        
-        <phoneNumber>0961223123123</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Honda Bajaj,NIG 441</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="johan">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>12345</password>
-                                        
-        
-        
-        
-        <lastName>Roxas</lastName>
-                                        
-        
-        
-        
-        <firstName>Johan Rickardo</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>1234567890</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Honda Civic,WHF 123</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="ArtOfJakuling">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>WOJxlQnifa8x8ym0+IWcErsKGXLmSOMbO+Y0XoIsvK4=</password>
-                                        
-        
-        
-        
-        <lastName>Jasmin</lastName>
-                                        
-        
-        
-        
-        <firstName>Ramon Emmiel</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>09494177993</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Motorcycle,Yamaha Fazzio,ALI 143</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="patchoi">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>rtsX6Klw1tuZKCsGqIFjjPQ064L0T1hJnHyX/7p7wWI=</password>
-                                        
-        
-        
-        
-        <lastName>Lacanilao</lastName>
-                                        
-        
-        
-        
-        <firstName>Patrick</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>02930931</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Honda CR-V,IDK 333</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="rethinkwhat">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>LVnC+vO8d5OLPCstLDTT4RwWBvQ+wPY32BekbnGtiKg=</password>
-                                        
-        
-        
-        
-        <lastName>Tank</lastName>
-                                        
-        
-        
-        
-        <firstName>Rithik</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>09177900153</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Mitsubishi Mirage,YAA 9999</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="bb">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>O2TblctVx2M5HHBxCEia4YtBEteDMA3jjgM7TJjD3q8=</password>
-                                        
-        
-        
-        
-        <lastName>siccuan</lastName>
-                                        
-        
-        
-        
-        <firstName>Basticoy</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>49549</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car, Honda Civic,NWA 991</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="basti">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
-                                        
-        
-        
-        
-        <lastName>Siccuan</lastName>
-                                        
-        
-        
-        
-        <firstName>Sebastian</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>012931238</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Honda Civic,NIG 4412</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="chess">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>rHOdzNEh9xJh2HRhJW6cpw2OO227zJB21fO1DHOl0i0=</password>
-                                        
-        
-        
-        
-        <lastName>Attempt</lastName>
-                                        
-        
-        
-        
-        <firstName>testAccount</firstName>
-                                        
-        
-        
-        
-        <phoneNumber>c4599345</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Honda Civic,NWA 991</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-    
-    
-    
-    <user username="basti">
-                                        
-        
-        
-        
-        <type>user</type>
-                                        
-        
-        
-        
-        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
-                                        
         
         
         
         <lastName>basti</lastName>
-                                        
+                                                                                                
+        
+        
+        
+        
+        
+        
+        
         
         
         
         <firstName>basti</firstName>
+                                                                                                
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <phoneNumber>2309841</phoneNumber>
+                                                                                            
+    
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <vehicle>Car,dsfasdf,N9G89123</vehicle>
+                                                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    </user>
+                                            
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <user username="patchoi">
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <type>user</type>
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <password>rtsX6Klw1tuZKCsGqIFjjPQ064L0T1hJnHyX/7p7wWI=</password>
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <lastName>choi</lastName>
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <firstName>pat</firstName>
+                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        <phoneNumber>234374</phoneNumber>
+                                                                                    
+    
+    
+        
+        
+        
+        
+        
+        
+        
+        <vehicle>Car,Ford Escape,NWA 911</vehicle>
+                                                            
+    
+    
+    
+    
+    
+    
+    </user>
                                         
-        
-        
-        
-        <phoneNumber>102831</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,Honda Bajaj,NIG 4444</vehicle>
-                                    
+
     
     
     
+    
+    
+    
+    
+    
+    <user username="roxas">
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <type>user</type>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <password>WZRHGrsBESr8wYFZ9sx0tPURuZgG2lmzyvWpwXPKz8U=</password>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <lastName>Roxas</lastName>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <firstName>Johan Rickardo</firstName>
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <phoneNumber>01234567890</phoneNumber>
+                                                                    
+    
+    
+    
+    
+    
+    
+    
+    </user>
+                                
+
+    
+    
+    
+    
+    
+    
+    <user username="papapapa">
+                                                        
+        
+        
+        
+        
+        
+        <type>user</type>
+                                                        
+        
+        
+        
+        
+        
+        <password>rtsX6Klw1tuZKCsGqIFjjPQ064L0T1hJnHyX/7p7wWI=</password>
+                                                        
+        
+        
+        
+        
+        
+        <lastName>choi</lastName>
+                                                        
+        
+        
+        
+        
+        
+        <firstName>pat</firstName>
+                                                        
+        
+        
+        
+        
+        
+        <phoneNumber>0239109310</phoneNumber>
+                                                    
+    
+    
+        
+        
+        
+        <vehicle>Car,HDS,HDSG 3123</vehicle>
+                            
+    
+    
+    </user>
+                        
+    
+    
+    
+    
+    
+    <user username="Mizu">
+                                                
+        
+        
+        
+        
+        <type>user</type>
+                                                
+        
+        
+        
+        
+        <password>jyzJNrGWjJCuNzaoRIMzfTgxS2nx2ofbtNdGgVH9lJQ=</password>
+                                                
+        
+        
+        
+        
+        <lastName>Marcos</lastName>
+                                                
+        
+        
+        
+        
+        <firstName>Jay</firstName>
+                                                
+        
+        
+        
+        
+        <phoneNumber>09603357926</phoneNumber>
+                                            
+    
+    
+    
+        
+        <vehicle>Car,Honda,NCR 1080</vehicle>
+            
     </user>
                     
     
     
     
-    <user username="johan1">
+    
+    <user username="basti">
                                         
         
         
@@ -458,65 +360,39 @@
         
         
         
-        <password>123</password>
+        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
                                         
         
         
         
-        <lastName>roxas</lastName>
+        <lastName>Basti</lastName>
                                         
         
         
         
-        <firstName>johan</firstName>
+        <firstName>Sebastian</firstName>
                                         
         
         
         
-        <phoneNumber>123456789</phoneNumber>
-                                        
-        
-        
-        
-        <vehicle>Car,car,car 123</vehicle>
+        <phoneNumber>basti</phoneNumber>
                                     
     
-    
+        
+        
+        <vehicle>Car,adsfasd,asd 213123</vehicle>
+                    
     
     </user>
                 
-    
-    
-    
-    <user username="johan2">
-                                
-        
-        
+
+
+
+    <user username="LRSM">
         <type>user</type>
-                                
-        
-        
-        <password>A6xnQhbz4Vx2HuGl4lXwZ5U2I8iziLRFnhP5eNfIRvQ=</password>
-                                
-        
-        
-        <lastName>roxas</lastName>
-                                
-        
-        
-        <firstName>johan</firstName>
-                                
-        
-        
-        <phoneNumber>12334567890</phoneNumber>
-                            
-        
-        
-        <vehicle>Motorcycle,asdf,dfs</vehicle>
-                    
-    
+        <password>vpPl31dUCih1P9ymx7DfWN0XQKIEcr1Br+h/l+N3Q44=</password>
+        <lastName>Ipsum</lastName>
+        <firstName>Lorem</firstName>
+        <phoneNumber>0945678910</phoneNumber>
     </user>
-            
-
-
 </userClass>

@@ -10,6 +10,8 @@ import java.net.Socket;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class Server implements Runnable{
     private ServerSocket server;
@@ -129,7 +131,9 @@ public class Server implements Runnable{
                 boolean flag = this.serverRunning();
                 while (flag) {
                     Socket clientSocket = server.accept();
-                    new Thread(new ClientHandler(this, clientSocket)).start();
+                    ExecutorService executor = Executors.newFixedThreadPool(10);
+                    executor.submit(new ClientHandler(this, clientSocket));
+                    //new Thread(new ClientHandler(this, clientSocket)).start();
 
                 }
             } catch (IOException ignore) {

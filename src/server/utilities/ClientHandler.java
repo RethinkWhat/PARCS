@@ -41,61 +41,61 @@ public class ClientHandler implements Runnable {
 
     @Override
     public void run() {
-
-        while (!disconnect) {
             try {
-                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
                 while (!disconnect) {
-                    String page = reader.readLine();
-                    if (page != null) {
-                        switch (page) {
-                            case "logout":
-                                handleLogout();
-                                break;
-                            case "login":
-                                login();
-                                break;
-                            case "reservation":
-                                reserve();
-                                break;
-                            case "signUp" :
-                                signUp();
-                                break;
-                            case "disconnect":
-                                handleDisconnect();
-                                break;
-                            case "account":
-                                account();
-                                break;
-                            case "editInfo":
-                                editInfo();
-                                break;
-                            case "editPassword":
-                                editPassword();
-                                break;
-                            case "addVehicle":
-                                addVehicle();
-                                break;
-                            case "spotInfo":
-                                spotInfo();
-                                break;
-                            case "book":
-                                bookReservation();
-                                break;
-                            case "ticket":
-                                ticket();
-                                break;
-                            case "getVehicles":
-                                getVehicles();
-                                break;
+                    reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                    writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
+                    while (!disconnect) {
+                        String page = reader.readLine();
+                        if (page != null) {
+                            switch (page) {
+                                case "logout":
+                                    handleLogout();
+                                    break;
+                                case "login":
+                                    login();
+                                    break;
+                                case "reservation":
+                                    reserve();
+                                    break;
+                                case "signUp":
+                                    signUp();
+                                    break;
+                                case "disconnect":
+                                    handleDisconnect();
+                                    break;
+                                case "account":
+                                    account();
+                                    break;
+                                case "editInfo":
+                                    editInfo();
+                                    break;
+                                case "editPassword":
+                                    editPassword();
+                                    break;
+                                case "addVehicle":
+                                    addVehicle();
+                                    break;
+                                case "spotInfo":
+                                    spotInfo();
+                                    break;
+                                case "book":
+                                    bookReservation();
+                                    break;
+                                case "ticket":
+                                    ticket();
+                                    break;
+                                case "getVehicles":
+                                    getVehicles();
+                                    break;
+                            }
                         }
                     }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
             }
-        }
+
     }
 
     public void handleDisconnect() {

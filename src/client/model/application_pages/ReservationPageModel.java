@@ -73,7 +73,7 @@ public class ReservationPageModel {
         ArrayList<String> motorArrayList = new ArrayList();
 
         for (String vehicle : vehicles.keySet()) {
-            if (vehicles.get(vehicle).get(0).equals("car")) {
+            if (vehicles.get(vehicle).get(0).equalsIgnoreCase("car")) {
                 carsArrayList.add(vehicles.get(vehicle).get(1));
             }
             else {
