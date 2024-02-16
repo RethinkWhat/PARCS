@@ -65,21 +65,30 @@ public class ReservationPageController {
         carsNumber = view.getMainBottomPanel().getParkingSlotsPanel().getCarButtonsSize();
         motorNumber = view.getMainBottomPanel().getParkingSlotsPanel().getMotorButtonsSize();
 
+        int availableCarCount = 0;
         for (int x = 0; x < carsNumber; x++) {
             boolean isTaken = true;
-            if (model.getAvailableTime(("C"+(x+1)), "1", date).length > 1) {
+            if (model.getAvailableTime(("C" + (x + 1)), "1", date).length > 1) {
                 isTaken = false;
+                availableCarCount++;
             }
+
             view.getMainBottomPanel().getParkingSlotsPanel().setCarMotorButtonsIcon(true, x, isTaken);
         }
 
+        int availableMotorCount = 0;
+
         for (int x = 0; x < motorNumber; x++) {
             boolean isTaken = true;
-            if (model.getAvailableTime(("M"+(x+1)), "1", date).length >1) {
+
+            if (model.getAvailableTime(("M" + (x + 1)), "1", date).length > 1) {
                 isTaken = false;
+                availableMotorCount++;
             }
+
             view.getMainBottomPanel().getParkingSlotsPanel().setCarMotorButtonsIcon(false, x, isTaken);
         }
+
 
 
         view.getMainBottomPanel().getParkingSlotsPanel().setCarButtonsListener(new CarMotorListener());
@@ -89,8 +98,8 @@ public class ReservationPageController {
         view.getParkingSlotButtonsView().setDurationListener(new durationListener());
         view.getMainTopPanel().setTxtSearchBarListener(new searchListener());
 
-        view.getMainTopPanel().setPnlAvailMotor(model.getAvailMotorSlots());
-        view.getMainTopPanel().setPnlAvailCar(model.getAvailCarSlots());
+        view.getMainTopPanel().setPnlAvailCar(String.valueOf(availableCarCount));
+        view.getMainTopPanel().setPnlAvailMotor(String.valueOf(availableMotorCount));
         view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
 
         view.getParkingSlotButtonsView().setDateList(dateList);
