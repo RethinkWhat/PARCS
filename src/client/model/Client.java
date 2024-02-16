@@ -2,7 +2,10 @@ package client.model;
 
 import client.controller.LoginRegisterController;
 import client.view.LoginRegisterView;
+import utilities.Resources;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 
 import java.net.*;
@@ -45,18 +48,14 @@ public class Client {
                 client = new Socket(host, port);
                 client.close();
             } catch (ConnectException ex) {
-                System.out.println();
-                System.out.println("-----------------");
-                System.out.println("Server is closed.");
-                System.out.println("-----------------");
-                System.exit(0);
+                displayErrorMessage();
             }
 
             // if no exception occurs in connecting to server
             socketAddress = new InetSocketAddress(host, port);
             fileReader.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 
@@ -118,35 +117,31 @@ public class Client {
         this.username = username;
     }
 
-    public void openSocket() {
+    public boolean openSocket() {
         try {
             client = new Socket();
             client.connect(socketAddress);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
+            return true;
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println();
-            System.out.println("-----------------");
-            System.out.println("Server is closed.");
-            System.out.println("-----------------");
-            System.exit(0);
+            displayErrorMessage();
+            return false;
         }
     }
 
-    public void openObjectSocket() {
+    public boolean openObjectSocket() {
         try {
             client = new Socket();
             client.connect(socketAddress);
             //readerObject = new ObjectInputStream(client.getInputStream());
             //writerObject = new ObjectOutputStream(client.getOutputStream());
+            return true;
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println();
-            System.out.println("-----------------");
-            System.out.println("Server is closed.");
-            System.out.println("-----------------");
-            System.exit(0);
+            displayErrorMessage();
+            return false;
         }
     }
 
@@ -216,11 +211,87 @@ public class Client {
         }
     }
 
-    public void startGUI() {
+    private void displayErrorMessage() {
+        JFrame mainFrame = new JFrame();
+        JDialog dialog = new JDialog(mainFrame, "PARCS", true);
+        dialog.setTitle("PARCS");
+        dialog.setLayout(new GridLayout(3, 1));
+        dialog.setSize(500, 300);
+
+        // Create pnlIcon panel
+        JPanel pnlIcon = new JPanel();
+        pnlIcon.setLayout(new BorderLayout());
+        pnlIcon.setPreferredSize(new Dimension(600, 200));
+
+        // Create and set ImageIcon for pnlIcon
+        Resources res = new Resources();
+        ImageIcon iconAvailableCar = res.iconOffline;
+        pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
+
+        // Create pnlServerClosed panel
+        JPanel pnlServerClosed = new JPanel(new GridBagLayout());
+        pnlServerClosed.setPreferredSize(new Dimension(600, 170));
+
+        // Labels for the pnlServerClosed
+        JLabel lblServerMsg = res.createLblH1("SERVER IS CLOSED", res.red);
+        JLabel lblClosedMsg = res.createLblP("Unable to connect to server. Please try again later.", res.eerieBlack);
+
+        // Add labels to pnlServerClosed panel
+        GridBagConstraints gbc = new GridBagConstraints();
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        pnlServerClosed.add(lblServerMsg, gbc);
+
+        gbc.gridy = 1;
+        pnlServerClosed.add(lblClosedMsg, gbc);
+
+        // Create pnlExit panel
+        JPanel pnlExit = new JPanel(new FlowLayout());
+        pnlExit.setPreferredSize(new Dimension(600, 30));
+
+        // Create the exit button
+        JButton btnExit = res.createBtnRounded("EXIT", res.red, res.eerieBlack, 10);
+
+        btnExit.addActionListener(e -> {
+            System.exit(0);
+        });
+
+        pnlExit.add(btnExit);
+
+        // Add panels to the dialog
+        dialog.add(pnlIcon);
+        dialog.add(pnlServerClosed);
+        dialog.add(pnlExit);
+
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
+    }
+
+    private boolean isServerOpen() {
+        try {
+            Socket testSocket = new Socket();
+            testSocket.connect(socketAddress);
+            testSocket.close();
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
+    }
+
+    private void loginRegister() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
         view.setDefaultCloseOperation(logoutAndExit());
         new LoginRegisterController(view, model);
+    }
+
+    public void startGUI() {
+        if (isServerOpen() && openSocket() && openObjectSocket()) {
+            loginRegister();
+        } else {
+            displayErrorMessage();
+        }
     }
 
     public static void main(String[] args) {

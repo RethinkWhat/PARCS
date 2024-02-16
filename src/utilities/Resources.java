@@ -112,6 +112,19 @@ public class Resources {
      */
     public ImageIcon iconSwitch = new ImageIcon("res/drawable/icons/switch-white-outline.png");
     /**
+
+     * The icon for the successful reservation prompt.
+     */
+    public ImageIcon iconSuccess = new ImageIcon("res/drawable/icons/check-celadon-solid.png");
+    /**
+     * The icon for when the server is closed/offline.
+     */
+    public ImageIcon iconOffline = new ImageIcon("res/drawable/icons/offline-red-outline.png");
+    /**
+     * The icon for errors.
+     */
+    public ImageIcon iconError = new ImageIcon("res/drawable/icons/error-red-solid.png");
+
      * The icon for edit in the user profile page.
      */
     public ImageIcon iconEdit = new ImageIcon("res/drawable/icons/edit.png");
