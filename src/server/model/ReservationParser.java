@@ -434,7 +434,7 @@ public class ReservationParser {
      * @param username
      * @return
      */
-    public List<String> getClosestReservation(String username){
+    public List<String> getClosestReservation(String username, String currentTime){
         getReservationsFile();
 
         List<String> reservationInformation = new ArrayList<>();
@@ -442,6 +442,8 @@ public class ReservationParser {
         reservationInformation.add("24:00");
         reservationInformation.add("00:00");
         reservationInformation.add("default");
+
+        String[] currentTimeParts = currentTime.split(":");
 
         Element root = document.getDocumentElement();
 
@@ -458,10 +460,12 @@ public class ReservationParser {
 
                 // Splits the startTime string to an array because we only need the hour
                 String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
+                String[] currEndTimeParts = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent().split(":");
 
                 // Checks if the current reservation is by the user
                 // If the current reservation element's startTime is less than the reservation element startTime stored in the reservationInformation arraylist, it will replace its values
-                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username) && compareStartTime(currStartTimeParts[0], reservationInformation.get(1))){
+                // It checks if the current time passed is not greater than the endTime of the current reservation
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username) && compareStartTime(currStartTimeParts[0], reservationInformation.get(1)) && !(Integer.parseInt(currentTimeParts[0]) >= Integer.parseInt(currEndTimeParts[0]))){
                     reservationInformation.set(0, currReservationElement.getParentNode().getAttributes().item(0).getTextContent());
                     reservationInformation.set(1, currReservationElement.getElementsByTagName("startTime").item(0).getTextContent());
                     reservationInformation.set(2, currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
@@ -506,6 +510,6 @@ public class ReservationParser {
 
         System.out.println(parser.computeDuration("15:00","20:00"));
 
-        System.out.println(parser.getClosestReservation("aaliyah"));
+        System.out.println(parser.getClosestReservation("aaliyah", ""));
     }
 }
