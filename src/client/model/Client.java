@@ -3,6 +3,8 @@ package client.model;
 import client.controller.LoginRegisterController;
 import client.view.LoginRegisterView;
 
+import javax.swing.*;
+import java.awt.*;
 import java.io.*;
 
 import java.net.*;
@@ -214,6 +216,18 @@ public class Client {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    private void displayErrorMessage() {
+        JDialog dialog = new JDialog();
+        dialog.setTitle("PARCS");
+        dialog.setLayout(new GridLayout(3, 1));
+        dialog.setSize(500, 300);
+
+
+        dialog.setLocationRelativeTo(null);
+        dialog.setResizable(false);
+        dialog.setVisible(true);
     }
 
     public void startGUI() {
