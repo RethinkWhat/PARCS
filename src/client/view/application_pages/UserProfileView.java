@@ -93,7 +93,7 @@ public class UserProfileView extends JPanel {
         // history page
         pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
         //shows edit profile first
-        cardLayout.show(pnlCards, "vehicles");
+        cardLayout.show(pnlCards, "profile");
 
         // account navigation panel
         pnlProfileOptions = new ProfileOptionsPanel(cardLayout, pnlCards);

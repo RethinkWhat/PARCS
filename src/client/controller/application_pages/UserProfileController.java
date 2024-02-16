@@ -55,7 +55,7 @@ public class UserProfileController {
 
             view.getPnlEditCars().getPnlCards().add(new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel),
                     String.valueOf(i));
-            view.getPnlEditCars().getCardLayout().show(view.getPnlCards(), String.valueOf(i));
+            view.getPnlEditCars().getCardLayout().show(view.getPnlEditCars().getPnlCards(), String.valueOf(i));
         }
         // action listeners
 
@@ -105,8 +105,10 @@ public class UserProfileController {
                 addMouseListener(new Resources.CursorChanger(view.getPnlEditProfile().getBtnCancel()));
 
         // edit cars page
-        // TODO: mouse listeners for edit cars page
-        // TODO: functionality when the mouse hovers on the vehicle, an edit button appears
+        view.getPnlEditCars().getBtnPrev().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnPrev()));
+        view.getPnlEditCars().getBtnNext().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnNext()));
+        view.getPnlEditCars().getBtnContinue().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnContinue()));
+        view.getPnlEditCars().getBtnCancel().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnCancel()));
 
         // history page
         // TODO: mouse listeners for history page
