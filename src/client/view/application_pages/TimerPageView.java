@@ -72,10 +72,7 @@ public class TimerPageView extends JPanel {
      * The panel to hold the timer.
      */
     public class TimerPanel extends JPanel {
-        /**
-         * The button for the end timer.
-         */
-        private JButton btnEndTimer;
+
 
         /**
          * Constructs a panel of TimerPanel.
@@ -92,27 +89,10 @@ public class TimerPageView extends JPanel {
             pnlButtons.setBackground(res.white);
             add(pnlButtons, BorderLayout.SOUTH);
 
-            btnEndTimer = res.createBtnRounded("End Timer", res.red, res.eerieBlack, 10);
-            pnlButtons.add(btnEndTimer);
 
             this.setPreferredSize(new Dimension(550, 650));
         }
 
-        /**
-         * Sets a specified action listener to btnEndTimer.
-         * @param actionListener The specified action listener.
-         */
-        public void setEndTimerListener(ActionListener actionListener) {
-            btnEndTimer.addActionListener(actionListener);
-        }
-
-        /**
-         * Retrieves the current JButton of btnEndTimer.
-         * @return The current btnEndTimer.
-         */
-        public JButton getBtnEndTimer() {
-            return btnEndTimer;
-        }
     }
 
     /**
@@ -282,10 +262,8 @@ public class TimerPageView extends JPanel {
      * The panel to hold the ticket information of the booking.
      */
     public class TicketInfoPanel extends JPanel {
-        /**
-         * The label of the vehicle parked.
-         */
-        private JLabel lblVehicle;
+
+
         /**
          * The label of the parking type.
          */
@@ -329,26 +307,22 @@ public class TimerPageView extends JPanel {
             add(lblParkAreaLabel, gbc);
 
             gbc.gridy = 1;
-            JLabel lblVehicleLabel = res.createLblP("Vehicle:", res.eerieBlack);
-            add(lblVehicleLabel, gbc);
-
-            gbc.gridy = 2;
             JLabel lblParkingTypeLabel = res.createLblP("Parking Type:", res.eerieBlack);
             add(lblParkingTypeLabel, gbc);
 
-            gbc.gridy = 3;
+            gbc.gridy = 2;
             JLabel lblParkingSpotLabel = res.createLblP("Parking Spot:", res.eerieBlack);
             add(lblParkingSpotLabel, gbc);
 
-            gbc.gridy = 4;
+            gbc.gridy = 3;
             JLabel lblDateLabel = res.createLblP("Date:", res.eerieBlack);
             add(lblDateLabel, gbc);
 
-            gbc.gridy = 5;
+            gbc.gridy = 4;
             JLabel lblDurationLabel = res.createLblP("Duration:", res.eerieBlack);
             add(lblDurationLabel, gbc);
 
-            gbc.gridy = 6;
+            gbc.gridy = 5;
             JLabel lblTimeLabel = res.createLblP("Time:", res.eerieBlack);
             add(lblTimeLabel, gbc);
 
@@ -361,40 +335,28 @@ public class TimerPageView extends JPanel {
             add(lblParkingArea, gbc);
 
             gbc.gridy = 1;
-            lblVehicle = res.createLblP("Info", res.eerieBlack);
-            add(lblVehicle, gbc);
-
-            gbc.gridy = 2;
             lblParkingType = res.createLblP("Info", res.eerieBlack);
             add(lblParkingType, gbc);
 
-            gbc.gridy = 3;
+            gbc.gridy = 2;
             lblParkingSpot = res.createLblP("Info", res.eerieBlack);
             add(lblParkingSpot, gbc);
 
-            gbc.gridy = 4;
+            gbc.gridy = 3;
             lblDate = res.createLblP("Info", res.eerieBlack);
             add(lblDate, gbc);
 
-            gbc.gridy = 5;
+            gbc.gridy = 4;
             lblDuration = res.createLblP("Info", res.eerieBlack);
             add(lblDuration, gbc);
 
-            gbc.gridy = 6;
+            gbc.gridy = 5;
             lblTime = res.createLblP("Info", res.eerieBlack);
             add(lblTime, gbc);
 
             this.setPreferredSize(new Dimension(550, 650));
         }
 
-        /**
-         * Retrieves the current JLabel of lblVehicle.
-         *
-         * @return The current lblVehicle.
-         */
-        public JLabel getLblVehicle() {
-            return lblVehicle;
-        }
 
         /**
          * Retrieves the current JLabel of lblParkingType.

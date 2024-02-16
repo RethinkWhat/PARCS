@@ -104,6 +104,5 @@ public class LiveDateTime extends Thread {
     public static void main(String[] args) {
         LiveDateTime dateTime = new LiveDateTime();
         String c = dateTime.getDate();
-        System.out.println(c);
     }
 }

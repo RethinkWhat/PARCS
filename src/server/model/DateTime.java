@@ -26,13 +26,12 @@ public class DateTime {
      */
     public DateTime() {
         timeFormat = new SimpleDateFormat("hh:mm");
-        dateFormat = new SimpleDateFormat("mm/dd/yy");
+        dateFormat = new SimpleDateFormat("MM/dd/yy");
     }
 
     public String getDateTime() {
         Date currentTime = Calendar.getInstance().getTime();
-        return dateFormat.format(currentTime);// + ", " //+
-                //timeFormat.format(currentTime);
+        return dateFormat.format(currentTime);
     }
 
     public String getTime() {
@@ -106,7 +105,6 @@ public class DateTime {
 
     public static void main(String[] args) {
         DateTime dateTime = new DateTime();
-        System.out.println(dateTime.createDateTime(2024,9,1,12,30,2));
 
     }
 }

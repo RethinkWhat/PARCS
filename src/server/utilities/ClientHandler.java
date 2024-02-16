@@ -167,7 +167,6 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
 
-            System.out.println(username);
             writer.println(server.checkUsernameExists(username));
 
             String password = reader.readLine();
@@ -211,12 +210,11 @@ public class ClientHandler implements Runnable {
 
 
     public void reserve() {
+        DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
             writer.println(server.getUserFullName(username));
-            writer.println(server.countCarSlots());
-            writer.println(server.countMotorSpots());
-            writer.println(server.countBookings(username,"02/14/24"));
+            writer.println(server.countBookings(username,dateTime.getDateTime()));
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
@@ -288,10 +286,8 @@ public class ClientHandler implements Runnable {
             List<String> userReservation = server.getClosestReservation(username, dateTime.getTime());
             String duration = server.getDuration(userReservation.get(1), userReservation.get(2));
             writer.println(duration);
-            System.out.println("attempting to write: " + userReservation);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(userReservation);
-            System.out.println("Written");
         } catch (IOException exception) {
             exception.printStackTrace();
         }

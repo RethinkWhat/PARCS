@@ -62,9 +62,8 @@ public class ReservationPageModel {
         client.writeString("reservation");
         client.writeString(client.getUsername());
         this.fullName = client.readString();
+        this.fullName = client.readString();
 
-        availCarSlots = client.readString();
-        availMotorSlots = client.readString();
         totalBookings = client.readString();
 
         vehicles = (HashMap<String, List<String>>) client.readObject();
@@ -91,10 +90,6 @@ public class ReservationPageModel {
 
         for (int x =0; x < motorArrayList.size(); x++) {
             motorcycles[x] = motorArrayList.get(x);
-        }
-
-        for (String vehicle : cars) {
-            System.out.println(vehicle);
         }
     }
 
