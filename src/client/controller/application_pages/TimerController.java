@@ -77,6 +77,7 @@ public class TimerController {
 
                     view.getPnlTimerGraphics().getSwingTimer().start();
                     model.setTimeStarted(true);
+                    view.repaint();
                 }
             }
         });

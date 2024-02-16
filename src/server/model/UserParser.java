@@ -127,7 +127,6 @@ public class UserParser {
                     Node currNode = currChildren.item(y);
 
                     if (currNode.getNodeType() == Node.ELEMENT_NODE) {
-                        System.out.println(currChildren.item(y).getNodeName() + " : " + tagToEdit);
                         if (currChildren.item(y).getNodeName().equalsIgnoreCase(tagToEdit)) {
                             System.out.println("reached");
                             currChildren.item(y).setTextContent(newInformation);
@@ -352,6 +351,5 @@ public class UserParser {
            //     null);
         //obj.addVehicle("ri", new Vehicle("Car", "Civic", "A4949329"));
 
-        System.out.println(obj.getUserVehicles("rickardo").toString());
     }
 }

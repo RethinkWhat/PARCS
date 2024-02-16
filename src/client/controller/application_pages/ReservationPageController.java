@@ -198,7 +198,6 @@ public class ReservationPageController {
                     model.attemptBooking(btnID, date, startTime, duration);
                     view.getParkingSlotButtonsView().resetDuration();
                     timeAvailable = model.getAvailableTime(btnID, duration, date);
-                    System.out.println(timeAvailable);
                     view.getParkingSlotButtonsView().setTimeList(timeAvailable);
                     if (timeAvailable != null)
                         view.getParkingSlotButtonsView().setLblStatus("Available");

@@ -169,9 +169,7 @@ public class ReservationParser {
 
         for (ParkingSpot parkingSpot : parkingSpotList) {
             List<Reservations> reservationList =  parkingSpot.getReservationsList();
-            for (Reservations reservation : reservationList ) {
-                size++;
-            }
+            size += reservationList.size();
         }
         return size;
     }
@@ -263,8 +261,6 @@ public class ReservationParser {
     }
 
     public List<TimeRange> getParkingSpotAvailability(String identifier, String date){
-        System.out.println("DATE PASSED IN: " + date);
-        System.out.println("IDENTIFIER: " + identifier);
         getReservationsFile();
 
         //This will have a list of time ranges that is booked in a certain date and a certain parking spot identifier
@@ -498,15 +494,7 @@ public class ReservationParser {
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
-        System.out.println(parkingSpotList);
-        System.out.println(parser.countTotalBookingsPerDay("rickardo","02/14/24"));
 
-        for (int x = 0 ; x < parkingSpotList.size(); x++) {
-            System.out.println(parkingSpotList.get(x));
-        }
 
-        System.out.println(parser.computeDuration("15:00","20:00"));
-
-        System.out.println(parser.getClosestReservation("aaliyah", ""));
     }
 }
