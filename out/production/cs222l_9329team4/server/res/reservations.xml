@@ -1,5 +1,6 @@
 <reservations>
-                                
+                                    
+    
     
     
     
@@ -7,7 +8,8 @@
     
     
     <parkingSpot identifier="C1">
-                                                                
+                                                                        
+        
         
         
         
@@ -15,7 +17,8 @@
         
         
         <reservation day="02/14/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -23,7 +26,8 @@
             
             
             <startTime>8:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -31,7 +35,8 @@
             
             
             <endTime>9:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -39,7 +44,8 @@
             
             
             <user>jasmin</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -47,7 +53,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -55,7 +62,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -63,7 +71,8 @@
             
             
             <startTime>8:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -71,7 +80,8 @@
             
             
             <endTime>11:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -79,7 +89,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -87,7 +98,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -95,7 +107,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -103,7 +116,8 @@
             
             
             <startTime>7:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -111,7 +125,8 @@
             
             
             <endTime>11:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -119,7 +134,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -127,7 +143,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -135,7 +152,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -143,7 +161,8 @@
             
             
             <startTime>13:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -151,7 +170,8 @@
             
             
             <endTime>16:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -159,7 +179,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -167,7 +188,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -175,7 +197,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -183,7 +206,8 @@
             
             
             <startTime>17:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -191,7 +215,8 @@
             
             
             <endTime>18:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -199,7 +224,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -207,7 +233,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -215,7 +242,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -223,7 +251,8 @@
             
             
             <startTime>11:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -231,7 +260,8 @@
             
             
             <endTime>12:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -239,7 +269,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -247,7 +278,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -255,7 +287,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -263,7 +296,8 @@
             
             
             <startTime>12:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -271,7 +305,8 @@
             
             
             <endTime>13:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -279,7 +314,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -287,7 +323,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -295,7 +332,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -303,7 +341,8 @@
             
             
             <startTime>16:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -311,7 +350,8 @@
             
             
             <endTime>17:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -319,7 +359,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -327,7 +368,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -335,7 +377,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -343,7 +386,8 @@
             
             
             <startTime>13:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -351,7 +395,8 @@
             
             
             <endTime>14:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -359,7 +404,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -367,7 +413,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -375,7 +422,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -383,7 +431,8 @@
             
             
             <startTime>11:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -391,7 +440,8 @@
             
             
             <endTime>13:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -399,7 +449,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -407,7 +458,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -415,7 +467,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -423,7 +476,8 @@
             
             
             <startTime>14:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -431,7 +485,8 @@
             
             
             <endTime>16:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -439,7 +494,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -447,7 +503,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -455,7 +512,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -463,7 +521,8 @@
             
             
             <startTime>7:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -471,7 +530,8 @@
             
             
             <endTime>8:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -479,7 +539,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -487,7 +548,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -495,7 +557,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -503,7 +566,8 @@
             
             
             <startTime>16:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -511,7 +575,8 @@
             
             
             <endTime>17:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -519,7 +584,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -527,7 +593,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -535,7 +602,8 @@
         
         
         <reservation day="02/15/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -543,7 +611,8 @@
             
             
             <startTime>17:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -551,7 +620,8 @@
             
             
             <endTime>18:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -559,7 +629,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -567,7 +638,8 @@
         
         
         </reservation>
-                                                            
+                                                                    
+    
     
     
     
@@ -575,7 +647,8 @@
     
     
     </parkingSpot>
-                                
+                                    
+    
     
     
     
@@ -583,7 +656,8 @@
     
     
     <parkingSpot identifier="C2">
-                                                                
+                                                                        
+        
         
         
         
@@ -591,7 +665,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -599,7 +674,8 @@
             
             
             <startTime>9:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -607,7 +683,8 @@
             
             
             <endTime>11:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -615,7 +692,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -623,7 +701,8 @@
         
         
         </reservation>
-                                                                
+                                                                        
+        
         
         
         
@@ -631,7 +710,8 @@
         
         
         <reservation day="02/16/24">
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -639,7 +719,8 @@
             
             
             <startTime>11:00</startTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -647,7 +728,8 @@
             
             
             <endTime>13:00</endTime>
-                                                                                                
+                                                                                                            
+            
             
             
             
@@ -655,7 +737,8 @@
             
             
             <user>rickardo</user>
-                                                                                            
+                                                                                                        
+        
         
         
         
@@ -663,9 +746,40 @@
         
         
         </reservation>
-                                                            
+                                                                    
     
     
+        
+        
+        
+        
+        
+        <reservation day="02/16/24">
+                                                                        
+            
+            
+            
+            
+            <startTime>7:00</startTime>
+                                                                        
+            
+            
+            
+            
+            <endTime>9:00</endTime>
+                                                                        
+            
+            
+            
+            
+            <user>rickardo</user>
+                                                                    
+        
+        
+        
+        
+        </reservation>
+                                            
         
         
         
@@ -675,12 +789,12 @@
             
             
             
-            <startTime>7:00</startTime>
+            <startTime>14:00</startTime>
                                                             
             
             
             
-            <endTime>9:00</endTime>
+            <endTime>16:00</endTime>
                                                             
             
             
@@ -692,6 +806,235 @@
         
         </reservation>
                                     
+    
+    
+    
+    </parkingSpot>
+                                    
+    
+    
+    
+    
+    
+    
+    
+    <parkingSpot identifier="C3">
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <reservation day="02/16/24">
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <startTime>11:00</startTime>
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <endTime>13:00</endTime>
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <user>rickardo</user>
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        </reservation>
+                                                                    
+    
+    
+    
+    
+    
+    
+    
+    </parkingSpot>
+                                    
+    
+    
+    
+    
+    
+    
+    
+    <parkingSpot identifier="C5">
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <reservation day="02/16/24">
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <startTime>11:00</startTime>
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <endTime>13:00</endTime>
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <user>rickardo</user>
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        </reservation>
+                                                                    
+    
+    
+    
+    
+    
+    
+    
+    </parkingSpot>
+                                    
+    
+    
+    
+    
+    
+    
+    
+    <parkingSpot identifier="C6">
+                                                                        
+        
+        
+        
+        
+        
+        
+        
+        <reservation day="02/16/24">
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <startTime>10:00</startTime>
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <endTime>14:00</endTime>
+                                                                                                            
+            
+            
+            
+            
+            
+            
+            
+            <user>rickardo</user>
+                                                                                                        
+        
+        
+        
+        
+        
+        
+        
+        </reservation>
+                                                                    
+        
+        
+        
+        
+        
+        
+        
+        <reservation day="02/16/24">
+                                                                                                
+            
+            
+            
+            
+            
+            
+            <startTime>8:00</startTime>
+                                                                                                
+            
+            
+            
+            
+            
+            
+            <endTime>10:00</endTime>
+                                                                                                
+            
+            
+            
+            
+            
+            
+            <user>rickardo</user>
+                                                                                            
+        
+        
+        
+        
+        
+        
+        </reservation>
+                                                            
+    
+    
+    
         
         
         
@@ -699,11 +1042,11 @@
                                                 
             
             
-            <startTime>14:00</startTime>
+            <startTime>7:00</startTime>
                                                 
             
             
-            <endTime>16:00</endTime>
+            <endTime>8:00</endTime>
                                                 
             
             
@@ -715,169 +1058,22 @@
                             
     
     
+        <reservation day="02/18/24">
+            <startTime>7:00</startTime>
+            <endTime>8:00</endTime>
+            <user>rickardo</user>
+        </reservation>
     </parkingSpot>
                                 
+
     
     
     
     
     
     
-    <parkingSpot identifier="C3">
-                                                                
-        
-        
-        
-        
-        
-        
-        <reservation day="02/16/24">
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <startTime>11:00</startTime>
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <endTime>13:00</endTime>
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <user>rickardo</user>
-                                                                                            
-        
-        
-        
-        
-        
-        
-        </reservation>
-                                                            
-    
-    
-    
-    
-    
-    
-    </parkingSpot>
-                                
-    
-    
-    
-    
-    
-    
-    <parkingSpot identifier="C5">
-                                                                
-        
-        
-        
-        
-        
-        
-        <reservation day="02/16/24">
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <startTime>11:00</startTime>
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <endTime>13:00</endTime>
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <user>rickardo</user>
-                                                                                            
-        
-        
-        
-        
-        
-        
-        </reservation>
-                                                            
-    
-    
-    
-    
-    
-    
-    </parkingSpot>
-                                
-    
-    
-    
-    
-    
-    
-    <parkingSpot identifier="C6">
-                                                                
-        
-        
-        
-        
-        
-        
-        <reservation day="02/16/24">
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <startTime>10:00</startTime>
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <endTime>14:00</endTime>
-                                                                                                
-            
-            
-            
-            
-            
-            
-            <user>rickardo</user>
-                                                                                            
-        
-        
-        
-        
-        
-        
-        </reservation>
-                                                            
-        
+    <parkingSpot identifier="C7">
+                                                        
         
         
         
@@ -916,7 +1112,17 @@
     
     
     
-        
+    
+    
+    </parkingSpot>
+                        
+
+
+
+    
+    
+    <parkingSpot identifier="C8">
+                        
         
         <reservation day="02/16/24">
                                     
@@ -934,56 +1140,9 @@
                     
     
     </parkingSpot>
-                            
-
-    
-    
-    
-    
-    
-    <parkingSpot identifier="C7">
-                                                
         
-        
-        
-        
-        <reservation day="02/16/24">
-                                                                        
-            
-            
-            
-            
-            <startTime>8:00</startTime>
-                                                                        
-            
-            
-            
-            
-            <endTime>10:00</endTime>
-                                                                        
-            
-            
-            
-            
-            <user>rickardo</user>
-                                                                    
-        
-        
-        
-        
-        </reservation>
-                                            
     
-    
-    
-    
-    </parkingSpot>
-                    
-
-
-
-    
-    <parkingSpot identifier="C8">
+    <parkingSpot identifier="C9">
                 
         <reservation day="02/16/24">
                         
@@ -997,11 +1156,4 @@
             
     </parkingSpot>
     
-    <parkingSpot identifier="C9">
-        <reservation day="02/16/24">
-            <startTime>7:00</startTime>
-            <endTime>8:00</endTime>
-            <user>rickardo</user>
-        </reservation>
-    </parkingSpot>
 </reservations>
