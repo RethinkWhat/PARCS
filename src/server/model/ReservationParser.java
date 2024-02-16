@@ -471,11 +471,8 @@ public class ReservationParser {
                     reservationInformation.set(2, currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
                     reservationInformation.set(3, currReservationElement.getAttributes().item(0).getTextContent());
                 }
-
             }
         }
-
-        System.out.println(reservationInformation);
         return reservationInformation;
     }
 
