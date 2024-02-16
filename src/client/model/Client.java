@@ -48,11 +48,7 @@ public class Client {
                 client = new Socket(host, port);
                 client.close();
             } catch (ConnectException ex) {
-                System.out.println();
-                System.out.println("-----------------");
-                System.out.println("Server is closed.");
-                System.out.println("-----------------");
-                System.exit(0);
+                displayErrorMessage();
             }
 
             // if no exception occurs in connecting to server
@@ -129,11 +125,7 @@ public class Client {
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println();
-            System.out.println("-----------------");
-            System.out.println("Server is closed.");
-            System.out.println("-----------------");
-            System.exit(0);
+            displayErrorMessage();
         }
     }
 
@@ -145,11 +137,7 @@ public class Client {
             //writerObject = new ObjectOutputStream(client.getOutputStream());
         } catch (IOException ex) {
             ex.printStackTrace();
-            System.out.println();
-            System.out.println("-----------------");
-            System.out.println("Server is closed.");
-            System.out.println("-----------------");
-            System.exit(0);
+            displayErrorMessage();
         }
     }
 
