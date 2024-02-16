@@ -57,6 +57,7 @@ public class VehicleAdderController {
             boolean validate = model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
             if (validate) {
                 view.dispose();
+
             }
         }
     }
@@ -65,6 +66,7 @@ public class VehicleAdderController {
         @Override
         public void actionPerformed(ActionEvent e) {
             view.dispose();
+            model.getClient().startGUI();
         }
     }
 }
