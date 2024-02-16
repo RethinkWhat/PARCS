@@ -199,7 +199,7 @@ public class ReservationPageModel {
     }
 
     public String getDate() {
-        return LiveDateTime.getDate();
+        return client.getDate();
     }
 
     public String[] getDateList() {

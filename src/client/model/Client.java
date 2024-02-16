@@ -102,6 +102,14 @@ public class Client {
         return obj;
     }
 
+    public String getDate() {
+        return LiveDateTime.getDate();
+    }
+
+    public String getTime() {
+        return LiveDateTime.getTimeForTimerComparisons();
+    }
+
     public String getUsername() {
         return username;
     }

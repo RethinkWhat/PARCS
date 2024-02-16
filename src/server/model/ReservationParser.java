@@ -384,7 +384,6 @@ public class ReservationParser {
         DateTime dateTime = new DateTime();
         List<TimeRange> bookedTimeRange = getParkingSpotAvailability(date, identifier);
 
-        System.out.println("BOOKED TIME: " + bookedTimeRange);
 
         List<String> allBookings = new ArrayList<>();
         List<String> allTime = new ArrayList<>(timeArray);
@@ -410,12 +409,11 @@ public class ReservationParser {
             }
         }
 
-        System.out.println("RETURNING: " + toReturnTime);
         return toReturnTime;
     }
 
 
-    public List<Integer> computeDuration(String startTime, String endTime){
+    public String computeDuration(String startTime, String endTime){
         List<Integer> duration = new ArrayList<>();
 
         String[] startTimeParts = startTime.split(":");
@@ -426,12 +424,12 @@ public class ReservationParser {
         duration.add(totalHours);
         duration.add(00);
 
-        return duration;
+        return String.valueOf(totalHours);
     }
 
     /**
      * Method that returns the information for the closest reservation of a user
-     * [parkingIdentifier, startTime, endTime, username]
+     * [parkingIdentifier, startTime, endTime, date]
      *
      * @param username
      * @return
@@ -467,12 +465,13 @@ public class ReservationParser {
                     reservationInformation.set(0, currReservationElement.getParentNode().getAttributes().item(0).getTextContent());
                     reservationInformation.set(1, currReservationElement.getElementsByTagName("startTime").item(0).getTextContent());
                     reservationInformation.set(2, currReservationElement.getElementsByTagName("endTime").item(0).getTextContent());
-                    reservationInformation.set(3, currReservationElement.getElementsByTagName("user").item(0).getTextContent());
+                    reservationInformation.set(3, currReservationElement.getAttributes().item(0).getTextContent());
                 }
 
             }
         }
 
+        System.out.println(reservationInformation);
         return reservationInformation;
     }
 

@@ -209,6 +209,13 @@ public class TimerPageView extends JPanel {
             this.hour = hour;
         }
 
+        public void setMinute(int minute) {
+            this.minute = minute;
+        }
+        public void setSecond(int second) {
+            this.second = second;
+        }
+
         /**
          * Updates the time left.
          */
@@ -398,6 +405,10 @@ public class TimerPageView extends JPanel {
             return lblParkingType;
         }
 
+        public void setLblParkingType(String label) {
+            lblParkingType.setText(label);
+        }
+
         /**
          * Retrieves the current JLabel of lblParkingSpot.
          *
@@ -405,6 +416,10 @@ public class TimerPageView extends JPanel {
          */
         public JLabel getLblParkingSpot() {
             return lblParkingSpot;
+        }
+
+        public void setLblParkingSpot(String label) {
+            lblParkingSpot.setText(label);
         }
 
         /**
@@ -416,6 +431,10 @@ public class TimerPageView extends JPanel {
             return lblDate;
         }
 
+        public void setLblParkingDate(String label) {
+            lblDate.setText(label);
+        }
+
         /**
          * Retrieves the current JLabel of lblDuration.
          *
@@ -425,6 +444,10 @@ public class TimerPageView extends JPanel {
             return lblDuration;
         }
 
+        public void setLblParkingDuration(String label) {
+            lblDuration.setText(label);
+        }
+
         /**
          * Retrieves the current JLabel of lblTime.
          *
@@ -432,6 +455,10 @@ public class TimerPageView extends JPanel {
          */
         public JLabel getLblTime() {
             return lblTime;
+        }
+
+        public void setLblParkingTime(String label) {
+            lblTime.setText(label);
         }
     }
 

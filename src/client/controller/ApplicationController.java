@@ -11,6 +11,8 @@ import client.view.ApplicationView;
 import client.view.application_pages.ReservationPageView;
 import client.view.application_pages.UserProfileView;
 
+import java.sql.Time;
+
 /**
  * Template for ApplicationController object.
  * The ApplicationController processes the user requests. Based on the user request, the ApplicationController
@@ -40,7 +42,8 @@ public class ApplicationController {
         view.getLblLocation().setText("Home");
         new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
         new UserProfileController(view.getUserProfileView(), model.getUserProfileModel(), this.view);
-        new TimerController(view.getTimerView(), model.getTimerModel());
+        TimerController controller = new TimerController(view.getTimerView(), model.getTimerModel());
+        controller.startTimer();
 
         // action listeners
         view.setNavHomeListener(e -> {
