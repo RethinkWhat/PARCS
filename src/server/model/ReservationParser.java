@@ -269,7 +269,7 @@ public class ReservationParser {
      * @param endTime
      * @return
      */
-    public boolean checkScheduleConflicts(String username, String startTime, String endTime){
+    public boolean checkScheduleConflicts(String username, String startTime, String endTime, String date){
         getReservationsFile();
 
         String[] startTimeParts = startTime.split(":");
@@ -294,7 +294,7 @@ public class ReservationParser {
                 Element currReservationElement = (Element) reservationNodes.item(j);
 
                 // Checks if the current reservation's username is equals to the passed username
-                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username)){
+                if (currReservationElement.getElementsByTagName("user").item(0).getTextContent().equalsIgnoreCase(username) && currReservationElement.getAttribute("day").equalsIgnoreCase(date)){
 
                     String[] currStartTimeParts = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
                     String[] currEndTimeParts = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent().split(":");
