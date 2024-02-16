@@ -87,8 +87,8 @@ public class Server implements Runnable{
 
     }
 
-    public List<String> getClosestReservation(String username) {
-        return reservationParser.getClosestReservation(username);
+    public List<String> getClosestReservation(String username, String currentTime) {
+        return reservationParser.getClosestReservation(username, currentTime);
     }
 
     public Map<String, List<String>> getUserVehicles(String username) {
