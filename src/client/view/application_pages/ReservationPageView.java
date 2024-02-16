@@ -791,15 +791,15 @@ public class ReservationPageView extends JPanel {
             ImageIcon iconAvailableCar = res.iconSuccess;
             pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
-            // Create PnlConfirmation panel
+            // Create pnlErrorMessage panel
             JPanel pnlErrorMessage = new JPanel(new GridBagLayout());
             pnlErrorMessage.setPreferredSize(new Dimension(600, 150));
 
-            // Create label for PnlConfirmation with font based on resources class
+            // Labels for pnlErrorMessage
             lblError = res.createLblH1("ERROR", res.red);
             lblSpecificError = res.createLblP("Please choose a first before selecting", res.eerieBlack);
 
-            // Add labels to PnlConfirmation panel
+            // Add labels to pnlErrorMessage panel
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.gridx = 0;
             gbc.gridy = 0;
@@ -808,11 +808,11 @@ public class ReservationPageView extends JPanel {
             gbc.gridy = 1;
             pnlErrorMessage.add(lblSpecificError, gbc);
 
-            // Create pnlCloseBtn panel
+            // Create pnlButton panel
             JPanel pnlButton = new JPanel(new FlowLayout());
             pnlButton.setPreferredSize(new Dimension(600, 50));
 
-            // Close button
+            // Okay button
             btnOkay = res.createBtnRounded("OKAY", res.celadon, res.eerieBlack, 10);
 
             pnlButton.add(btnOkay);
