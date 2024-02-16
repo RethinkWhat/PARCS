@@ -550,6 +550,24 @@ public class ReservationParser {
     }
 
 
+    public List<List<String>> getAllCarBookings(){
+        getReservationsFile();
+        List<List<String>> carBookings = new ArrayList<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+        }
+
+        return carBookings;
+    }
+
+
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
