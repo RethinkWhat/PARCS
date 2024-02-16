@@ -89,9 +89,6 @@ public class ClientHandler implements Runnable {
                             case "getVehicles":
                                 getVehicles();
                                 break;
-                            case "getVehicles":
-                                getVehicles();
-                                break;
                         }
                     }
                 }
@@ -220,9 +217,12 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
             writer.println(server.getUserFullName(username));
-            writer.println(server.countBookings(username,dateTime.getDateTime()));
+
+            String totalBookings = String.valueOf(server.countBookings(username,dateTime.getDateTime()));
+            writer.println(totalBookings);
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
+            System.out.println("vehicles being sent: " + vehicles );
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(vehicles);
         } catch (IOException ex) {
@@ -300,12 +300,13 @@ public class ClientHandler implements Runnable {
         DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
 
             List<String> userReservation = server.getClosestReservation(username, dateTime.getTime());
+            outputStreamWriter.writeObject(userReservation);
+
             String duration = server.getDuration(userReservation.get(1), userReservation.get(2));
             writer.println(duration);
-            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-            outputStreamWriter.writeObject(userReservation);
         } catch (IOException exception) {
             exception.printStackTrace();
         }
