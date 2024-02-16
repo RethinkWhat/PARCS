@@ -554,7 +554,7 @@ public class ReservationParser {
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
         List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
-        System.out.println(parser.checkScheduleConflicts("rickardo", "9:00", "10:00"));
+       // System.out.println(parser.checkScheduleConflicts("rickardo", "9:00", "10:00"));
 
 
     }

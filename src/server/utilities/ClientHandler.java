@@ -289,7 +289,7 @@ public class ClientHandler implements Runnable {
             String username = reader.readLine();
 
 
-            if (server.checkScheduleConflicts(username,startTime,duration)) {
+            if (server.checkScheduleConflicts(username,startTime,duration, date)) {
                 boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
                 writer.println(confirmed);
             } else {
