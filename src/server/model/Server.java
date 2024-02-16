@@ -16,9 +16,9 @@ import java.util.concurrent.Executors;
 public class Server implements Runnable{
     private ServerSocket server;
 
-    private UserParser userParser;
+    private volatile UserParser userParser;
 
-    private ReservationParser reservationParser;
+    private volatile ReservationParser reservationParser;
 
     private int socketAddress;
 

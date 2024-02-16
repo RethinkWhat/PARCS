@@ -30,7 +30,7 @@ public class AdminApplicationController {
     /**
      * The default port of the server.
      */
-    final int address = 2020;
+    final int address = 2040;
 
     /**
      * Constructs a ServerController with a specified AdminApplicationView.

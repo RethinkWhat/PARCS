@@ -146,6 +146,7 @@ public class ClientHandler implements Runnable {
 
 
     public void login() throws IOException {
+        System.out.println("login attempt");
         String username = null;
         while (username == null) {
             username = reader.readLine();
