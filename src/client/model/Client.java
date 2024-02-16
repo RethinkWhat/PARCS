@@ -255,7 +255,6 @@ public class Client {
         JButton btnExit = res.createBtnRounded("EXIT", res.red, res.eerieBlack, 10);
 
         btnExit.addActionListener(e -> {
-            // Close the program in a controlled manner
             System.exit(0);
         });
 
@@ -267,6 +266,17 @@ public class Client {
         dialog.setLocationRelativeTo(null);
         dialog.setResizable(false);
         dialog.setVisible(true);
+    }
+
+    private boolean isServerOpen() {
+        try {
+            Socket testSocket = new Socket();
+            testSocket.connect(socketAddress);
+            testSocket.close();
+            return true;
+        } catch (IOException ex) {
+            return false;
+        }
     }
 
     public void startGUI() {
