@@ -287,10 +287,11 @@ public class Client {
     }
 
     public void startGUI() {
-        LoginRegisterModel model = new LoginRegisterModel(this);
-        LoginRegisterView view = new LoginRegisterView();
-        view.setDefaultCloseOperation(logoutAndExit());
-        new LoginRegisterController(view, model);
+        if (isServerOpen()) {
+            loginRegister();
+        } else {
+            displayErrorMessage();
+        }
     }
 
     public static void main(String[] args) {
