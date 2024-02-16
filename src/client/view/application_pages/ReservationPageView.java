@@ -67,6 +67,8 @@ public class ReservationPageView extends JPanel {
 
     private ReserveSlotConfirmationView reserveSlotConfirmationView;
 
+    private ErrorMessageView errorMessageView;
+
     private Icon takenCar = res.iconTakenCar;
 
     private Icon availCar = res.iconAvailableCar;
@@ -761,6 +763,66 @@ public class ReservationPageView extends JPanel {
             this.add(pnlCloseBtn);
 
             this.setPreferredSize(new Dimension(500,300));
+            this.setResizable(false);
+            this.pack();
+            this.setLocationRelativeTo(null);
+            this.setVisible(true);
+        }
+    }
+
+    public class ErrorMessageView extends JDialog {
+        private Resources res = new Resources();
+        private JLabel lblError;
+        private JLabel lblSpecificError;
+        private JButton btnOkay;
+
+        public ErrorMessageView() {
+
+            this.setTitle("PARCS Error Message");
+            this.setModal(true);
+            this.setLayout(new GridLayout(3, 1));
+
+            // Create pnlIcon panel
+            JPanel pnlIcon = new JPanel();
+            pnlIcon.setLayout(new BorderLayout());
+            pnlIcon.setPreferredSize(new Dimension(600, 200));
+
+            // Create and set ImageIcon for pnlIcon
+            ImageIcon iconAvailableCar = res.iconSuccess;
+            pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
+
+            // Create PnlConfirmation panel
+            JPanel pnlErrorMessage = new JPanel(new GridBagLayout());
+            pnlErrorMessage.setPreferredSize(new Dimension(600, 150));
+
+            // Create label for PnlConfirmation with font based on resources class
+            lblError = res.createLblH1("ERROR", res.red);
+            lblSpecificError = res.createLblP("Please choose a first before selecting", res.eerieBlack);
+
+            // Add labels to PnlConfirmation panel
+            GridBagConstraints gbc = new GridBagConstraints();
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            pnlErrorMessage.add(lblError, gbc);
+
+            gbc.gridy = 1;
+            pnlErrorMessage.add(lblSpecificError, gbc);
+
+            // Create pnlCloseBtn panel
+            JPanel pnlButton = new JPanel(new FlowLayout());
+            pnlButton.setPreferredSize(new Dimension(600, 50));
+
+            // Close button
+            btnOkay = res.createBtnRounded("OKAY", res.celadon, res.eerieBlack, 10);
+
+            pnlButton.add(btnOkay);
+
+            this.add(pnlIcon);
+            this.add(pnlErrorMessage);
+            this.add(pnlButton);
+
+            this.setPreferredSize(new Dimension(500,300));
+            this.setResizable(false);
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
@@ -774,6 +836,11 @@ public class ReservationPageView extends JPanel {
     public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
         reserveSlotConfirmationView = new ReserveSlotConfirmationView();
         return reserveSlotConfirmationView;
+    }
+
+    public ErrorMessageView getErrorMesageView() {
+        errorMessageView = new ErrorMessageView();
+        return errorMessageView;
     }
 
     public JPanel getPnlCards() {

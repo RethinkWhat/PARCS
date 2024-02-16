@@ -114,7 +114,7 @@ public class Resources {
     /**
      * The icon for the successful reservation prompt.
      */
-    public ImageIcon iconSuccess = new ImageIcon("res/drawable/icons/check-celadon-solid");
+    public ImageIcon iconSuccess = new ImageIcon("res/drawable/icons/check-celadon-solid.png");
     /**
      * The icon for when the server is closed/offline.
      */
