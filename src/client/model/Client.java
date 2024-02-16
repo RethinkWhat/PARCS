@@ -279,6 +279,13 @@ public class Client {
         }
     }
 
+    private void loginRegister() {
+        LoginRegisterModel model = new LoginRegisterModel(this);
+        LoginRegisterView view = new LoginRegisterView();
+        view.setDefaultCloseOperation(logoutAndExit());
+        new LoginRegisterController(view, model);
+    }
+
     public void startGUI() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
