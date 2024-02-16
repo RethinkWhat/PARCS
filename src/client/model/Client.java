@@ -2,6 +2,7 @@ package client.model;
 
 import client.controller.LoginRegisterController;
 import client.view.LoginRegisterView;
+import utilities.Resources;
 
 import javax.swing.*;
 import java.awt.*;
@@ -223,6 +224,16 @@ public class Client {
         dialog.setTitle("PARCS");
         dialog.setLayout(new GridLayout(3, 1));
         dialog.setSize(500, 300);
+
+        // Create pnlIcon panel
+        JPanel pnlIcon = new JPanel();
+        pnlIcon.setLayout(new BorderLayout());
+        pnlIcon.setPreferredSize(new Dimension(600, 200));
+
+        // Create and set ImageIcon for pnlIcon
+        Resources res = new Resources();
+        ImageIcon iconAvailableCar = res.iconTakenCar; // CHANGE ICON
+        pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
 
         dialog.setLocationRelativeTo(null);
