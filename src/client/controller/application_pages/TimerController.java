@@ -82,13 +82,39 @@ public class TimerController {
                 if (model.isStartTimer() && !model.isTimeStarted()) {
                     String timeNow[] = model.getClient().getTime().split(":");
 
-                    //TODO: Fix timer subtraction
-                    view.getPnlTimerGraphics().setHour(
-                            Integer.valueOf(model.getTimeOut().split(":")[0]) -
-                                    Integer.valueOf(timeNow[0])
-                    );
-                    view.getPnlTimerGraphics().setMinute(Integer.valueOf(timeNow[1]));
-                    view.getPnlTimerGraphics().setSecond(Integer.valueOf(timeNow[2]));
+                    int secondsNow = Integer.parseInt(timeNow[2]);
+                    int minutesNow = Integer.parseInt(timeNow[1]);
+                    int hoursNow = Integer.parseInt(timeNow[0]);
+
+                    int secondsRemaining = 0;
+                    int minutesRemaining = 0;
+                    int hoursRemaining = hoursNow;
+
+                    if (secondsNow != 0) {
+                        secondsRemaining = 60 - secondsNow;
+                        minutesRemaining -= 1;
+                    }
+                    if (minutesNow != 0) {
+                        minutesRemaining += 60 - minutesNow;
+                        hoursRemaining -= 1;
+                    }
+
+                    view.getPnlTimerGraphics().setHour(hoursRemaining);
+                    view.getPnlTimerGraphics().setMinute(minutesRemaining);
+                    view.getPnlTimerGraphics().setSecond(secondsRemaining);
+                /*
+                view.getPnlTimerGraphics().setHour(
+                        Integer.parseInt(model.getTimeOut().split(":")[0]) -
+                                hoursNow);
+                view.getPnlTimerGraphics().setMinute(Integer.parseInt(timeNow[1]));
+
+                if ((Integer.parseInt(timeNow[2])) != 0) {
+                    Integer secondsRemaining = 60 - Integer.parseInt(timeNow[2]);
+                }
+
+                view.getPnlTimerGraphics().setSecond(Integer.parseInt(timeNow[2]));
+
+                 */
 
                     view.getPnlTimerGraphics().getSwingTimer().start();
                     model.setTimeStarted(true);
@@ -97,4 +123,5 @@ public class TimerController {
         });
         thread.start();
     }
+
 }

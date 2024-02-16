@@ -35,6 +35,12 @@ public class DateTime {
                 //timeFormat.format(currentTime);
     }
 
+    public String getTime() {
+        Date currentTime = Calendar.getInstance().getTime();
+        SimpleDateFormat tempFormat = new SimpleDateFormat("HH:mm");
+        return tempFormat.format(currentTime);
+    }
+
     public String createDateTime(int year, int month, int day, int hour, int minute, int second) {
         Calendar cal = Calendar.getInstance();
         cal.set(Calendar.YEAR, year);
