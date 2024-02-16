@@ -86,6 +86,12 @@ public class ClientHandler implements Runnable {
                             case "ticket":
                                 ticket();
                                 break;
+                            case "getVehicles":
+                                getVehicles();
+                                break;
+                            case "getVehicles":
+                                getVehicles();
+                                break;
                         }
                     }
                 }
@@ -224,6 +230,20 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * TODO: Documentation
+     */
+    public void getVehicles() {
+        try {
+            String username = reader.readLine();
+            Map<String, List<String>> vehicles = server.getUserVehicles(username);
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+            outputStreamWriter.writeObject(vehicles);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void account() {
         try {
             String username = reader.readLine();
@@ -248,7 +268,6 @@ public class ClientHandler implements Runnable {
         }
     }
 
-
     public void spotInfo() {
         try {
             String identifier = reader.readLine();
@@ -259,7 +278,6 @@ public class ClientHandler implements Runnable {
             outputStreamWriter.writeObject(availableTime);
         } catch (IOException ex) {
             ex.printStackTrace();
-
         }
     }
 

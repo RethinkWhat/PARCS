@@ -24,29 +24,15 @@ public class UserProfileController {
     /**
      * The view LoginRegisterView object.
      */
-    private final UserProfileView view;
+    private UserProfileView view;
     /**
      * The model LoginRegisterModel object.
      */
-    private final UserProfileModel model;
-
-    /*
-    private void showHistory() {
-        // Dispose the current window and show the history page
-        gui.dispose();
-        HistoryPageView historyPageView = new HistoryPageView();
-        historyPageView.setVisible(true);
-    }
-
-    /*
-    public class exit implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            LoginRegisterController loginObj = new LoginRegisterController();
-            loginObj.run();
-        }
-    }
-    */
+    private UserProfileModel model;
+    /**
+     * The array for Cars Panel holding the user's cars.
+     */
+    private UserProfileView.EditCars.CarsPanel[] pnlsCars;
 
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
@@ -59,8 +45,25 @@ public class UserProfileController {
         this.model = model;
 
         // constants / variables
-        populateFields();
+        populateFields(); // populate fields of the edit profile text fields.
+        model.getVehiclesInfo();
 
+        pnlsCars = new UserProfileView.EditCars.CarsPanel[model.getVehicleList().size()];
+
+        // populate cars panel inside edit cars page.
+        for (int i = 0; i < model.getVehicleList().size(); i++) {
+            String token = model.getVehicleList().get(i);
+            String[] tokens = token.split(",");
+            String vPlateNumber = tokens[0];
+            String vType = tokens[1];
+            String vModel = tokens[2];
+
+            UserProfileView.EditCars.CarsPanel carPanel = new UserProfileView.EditCars.CarsPanel(vPlateNumber, vType, vModel);
+            pnlsCars[i] = carPanel;
+
+            view.getPnlEditCars().getPnlCards().add(carPanel, String.valueOf(i));
+            view.getPnlEditCars().getCardLayout().show(view.getPnlEditCars().getPnlCards(), String.valueOf(i));
+        }
         // action listeners
 
         // navigation
@@ -75,18 +78,33 @@ public class UserProfileController {
         // view.setNavExitListener(new LoginRegisterController());
 
         // edit profile page
-        view.getPnlEditProfile().setContinueListener(new EditListener());
-        view.getPnlEditProfile().setCancelListener(new CancelListener());
+        view.getPnlEditProfile().setContinueListener(new ProfileEditListener());
+        view.getPnlEditProfile().setCancelListener(new ProfileCancelListener());
 
         // edit cars page
-        // TODO: action listeners for edit cars page
+        view.getPnlEditCars().setContinueListener(new CarContinueListener());
+        view.getPnlEditCars().setCancelListener(new CarCancelListener());
+        view.getPnlEditCars().setNextListener(e ->
+                view.getPnlEditCars().getCardLayout().next(view.getPnlEditCars().getPnlCards()));
+        view.getPnlEditCars().setPrevListener(e ->
+                view.getPnlEditCars().getCardLayout().previous(view.getPnlEditCars().getPnlCards()));
+
+        for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+            panel.setEditListener(e -> {
+                panel.getTxtPlateNumber().setEditable(true);
+                panel.getTxtPlateNumber().setFocusable(true);
+                panel.getTxtModel().setEditable(true);
+                panel.getTxtModel().setFocusable(true);
+                view.getPnlEditCars().getBtnContinue().setVisible(true);
+                view.getPnlEditCars().getBtnCancel().setVisible(true);
+            });
+        }
 
         // history page
         // TODO: action listeners for history page
 
         // security page
-        // TODO: action listeners for security page
-        view.getPnlSecurityPage().setConfirmListener(new ConfirmListener());
+        view.getPnlSecurityPage().setConfirmListener(new SecurityConfirmListener());
 
         // mouse listeners
 
@@ -104,8 +122,13 @@ public class UserProfileController {
                 addMouseListener(new Resources.CursorChanger(view.getPnlEditProfile().getBtnCancel()));
 
         // edit cars page
-        // TODO: mouse listeners for edit cars page
-        // TODO: functionality when the mouse hovers on the vehicle, an edit button appears
+        view.getPnlEditCars().getBtnPrev().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnPrev()));
+        view.getPnlEditCars().getBtnNext().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnNext()));
+        view.getPnlEditCars().getBtnContinue().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnContinue()));
+        view.getPnlEditCars().getBtnCancel().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnCancel()));
+        for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+            panel.getBtnEdit().addMouseListener(new Resources.CursorChanger(panel.getBtnEdit()));
+        }
 
         // history page
         // TODO: mouse listeners for history page
@@ -127,6 +150,15 @@ public class UserProfileController {
                 new Resources.TextFieldFocus(view.getPnlEditProfile().getTxtContact(), model.getContactNo()));
 
         // edit cars page
+        for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+            String initialPlateNumber = panel.getTxtPlateNumber().getText();
+            String initialModel = panel.getTxtPlateNumber().getText();
+
+            panel.getTxtPlateNumber().addFocusListener(new Resources.TextFieldFocus(
+                    panel.getTxtPlateNumber(), initialPlateNumber));
+            panel.getTxtModel().addFocusListener(new Resources.TextFieldFocus(
+                    panel.getTxtModel(), initialModel));
+        }
 
         // security page
         view.getPnlSecurityPage().getTxtCurrentPassword().
@@ -147,7 +179,6 @@ public class UserProfileController {
         view.revalidate();
         view.repaint();
     }
-
 
 
     /**
@@ -172,7 +203,7 @@ public class UserProfileController {
     /**
      * TODO: Documentation
      */
-    class CancelListener implements ActionListener {
+    class ProfileCancelListener implements ActionListener {
         /**
          * TODO: Documentation
          *
@@ -190,9 +221,10 @@ public class UserProfileController {
     /**
      * TODO: Documentation
      */
-    public class EditListener implements ActionListener {
+    public class ProfileEditListener implements ActionListener {
         /**
          * TODO: Documentation
+         *
          * @param e the event to be processed
          */
         @Override
@@ -208,9 +240,55 @@ public class UserProfileController {
     }
 
     /**
+     * Cancels the editing of the car information.
+     */
+    class CarCancelListener implements ActionListener {
+        /**
+         * Processes the user request.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.getPnlEditCars().getBtnCancel().setVisible(false);
+            view.getPnlEditCars().getBtnContinue().setVisible(false);
+            for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+                panel.getTxtPlateNumber().setEditable(false);
+                panel.getTxtPlateNumber().setFocusable(false);
+                panel.getTxtModel().setEditable(false);
+                panel.getTxtModel().setFocusable(false);
+            }
+        }
+    }
+
+    /**
+     * Sends the information of the edited car information.
+     */
+    class CarContinueListener implements ActionListener {
+        /**
+         * Processes the user request.
+         *
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            String vType = null;
+            String vPlateNumber = null;
+            String vModel = null;
+
+            for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
+                vType = panel.getTxtVehicleType().getText();
+                vPlateNumber = panel.getTxtPlateNumber().getText();
+                vModel = panel.getTxtModel().getText();
+            }
+            model.editVehicleInfo(vType, vModel, vPlateNumber);
+        }
+    }
+
+    /**
      * Updates the user's password.
      */
-    class ConfirmListener implements ActionListener {
+    class SecurityConfirmListener implements ActionListener {
         /**
          * 1. Verifies if the input equates to the original password.
          * 2. Verifies if the new password and the confirmed new password matches.

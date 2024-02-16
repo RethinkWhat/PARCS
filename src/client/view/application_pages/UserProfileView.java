@@ -14,7 +14,7 @@ public class UserProfileView extends JPanel {
     /**
      * The stylesheet
      */
-    Resources res = new Resources();
+    static Resources res = new Resources();
     /**
      * Instance variable of grid bag constraints used in grid bag layout.
      */
@@ -67,6 +67,7 @@ public class UserProfileView extends JPanel {
      * The panel for Security.
      */
     private SecurityPage pnlSecurityPage;
+
     /**
      * Constructs a panel of UserProfileView.
      */
@@ -116,6 +117,7 @@ public class UserProfileView extends JPanel {
             this.setBackground(res.white);
 
             JPanel buttonsPanel = new JPanel(new GridLayout(5, 1, 0, 0));
+            buttonsPanel.setPreferredSize(new Dimension(300,400));
             buttonsPanel.setBackground(res.white);
 
             Font buttonFont = new Font("Arial", Font.BOLD, 20);
@@ -161,9 +163,9 @@ public class UserProfileView extends JPanel {
             buttonsPanel.add(btnNavExit);
 
             // Add buttons panel to the center of the layout with some padding
-            this.add(buttonsPanel, BorderLayout.CENTER);
+            this.add(buttonsPanel, BorderLayout.NORTH);
             this.setBorder(new EmptyBorder(20, 20, 20, 20)); // Add padding to the panel
-            this.setPreferredSize(new Dimension(300, 700)); // Set preferred size
+            this.setPreferredSize(new Dimension(300, 400)); // Set preferred size
         }
     }
 
@@ -376,148 +378,274 @@ public class UserProfileView extends JPanel {
     /**
      * The panel that contains the information on the vehicle of the users that can be edited or add new vehicles.
      */
-    class EditCars extends JPanel {
-        JLabel plateNumber;
-        JLabel model;
-        JLabel vehicle;
-        JLabel plateNumberInfo;
-        JLabel modelInfo;
-        JLabel vehicleInfo;
+    public class EditCars extends JPanel {
+        /**
+         * The panel to holds the different components.
+         */
+        private JPanel pnlCards;
+        /**
+         * The button for previous.
+         */
+        private JButton btnPrev;
+        /**
+         * The button for next.
+         */
+        private JButton btnNext;
+        /**
+         * The button for cancel.
+         */
+        private JButton btnCancel;
+        /**
+         * The button for continue.
+         */
+        private JButton btnContinue;
 
+        /**
+         * The Card Layout that controls multiple components.
+         */
+        private CardLayout cardLayout = new CardLayout();
 
         /**
          * Constructs a panel of EditCars.
          */
         public EditCars() {
             this.setLayout(new BorderLayout());
-            this.setBorder(new EmptyBorder(80, 20, 10, 60));
+            this.setBorder(new EmptyBorder(40, 20, 20, 20));
 
             JLabel myCars = res.createLblH1("My Cars", res.eerieBlack);
-            this.add(myCars, BorderLayout.NORTH);
+            add(myCars, BorderLayout.NORTH);
 
-            JPanel whitePanel = new JPanel(new GridBagLayout());
-            whitePanel.setBackground(res.white);
-            whitePanel.setPreferredSize(new Dimension(300, 325));
+            pnlCards  = new JPanel(cardLayout);
+            pnlCards.setBackground(res.white);
+            pnlCards.setPreferredSize(new Dimension(300,325));
+            add(pnlCards, BorderLayout.CENTER);
 
-            GridBagConstraints gbc = new GridBagConstraints();
-            gbc.gridx = 0;
-            gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.insets = new Insets(5, 5, 5, 5);
+            btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 20,20);
+            add(btnPrev, BorderLayout.WEST);
 
-            Font labelFontBold = new Font("Arial", Font.BOLD, 20);
-            Font labelFont = new Font("Arial", Font.ITALIC, 20);
+            btnNext = res.createBtnIconOnly(res.iconRightArrow, 20,20);
+            add(btnNext, BorderLayout.EAST);
 
-            plateNumber = new JLabel("Plate Number");
-            plateNumber.setFont(labelFontBold);
-            whitePanel.add(plateNumber, gbc);
-
-            gbc.gridy++; // Move to the next row
-            plateNumberInfo = new JLabel("WHF 6262");
-            plateNumberInfo.setFont(labelFont);
-            whitePanel.add(plateNumberInfo, gbc);
-
-            gbc.gridy++; // Move to the next row
-            model = new JLabel("Model");
-            model.setFont(labelFontBold);
-            whitePanel.add(model, gbc);
-
-            gbc.gridy++; // Move to the next row
-            modelInfo = new JLabel("Toyota Mirage");
-            modelInfo.setFont(labelFont);
-            whitePanel.add(modelInfo, gbc);
-
-            gbc.gridy++; // Move to the next row
-            vehicle = new JLabel("Vehicle");
-            vehicle.setFont(labelFontBold);
-            whitePanel.add(vehicle, gbc);
-
-            gbc.gridy++; // Move to the next row
-            vehicleInfo = new JLabel("Sedan SUV");
-            vehicleInfo.setFont(labelFont);
-            whitePanel.add(vehicleInfo, gbc);
-
-            this.add(whitePanel, BorderLayout.CENTER);
-
-            JButton btnPrev;
-            JButton btnNext;
             JPanel pnlButtons = new JPanel(new FlowLayout());
             pnlButtons.setBackground(res.lightGray);
             add(pnlButtons, BorderLayout.SOUTH);
 
-            btnPrev = res.createBtnRounded("PREV", res.gray, res.eerieBlack, 10); // Adjust the radius as needed
-            pnlButtons.add(btnPrev);
+            btnCancel = res.createBtnRounded("Cancel", res.lightGray, res.eerieBlack, 10);
+            btnCancel.setVisible(false);
+            pnlButtons.add(btnCancel);
 
-            btnNext = res.createBtnRounded("NEXT", res.celadon, res.eerieBlack, 10); // Adjust the radius as needed
-            pnlButtons.add(btnNext);
+            btnContinue = res.createBtnRounded("Continue", res.celadon, res.celadon, 10);
+            btnContinue.setVisible(false);
+            pnlButtons.add(btnContinue);
+
+            this.setPreferredSize(new Dimension(750,700));
         }
 
         /**
-         * Creates a panel of cars with a specified plate number, type of vehicle, and model of the vehicle.
-         *
-         * @param plateNumber The specified license plate number.
-         * @param vehicleType The specified type of vehicle.
-         * @param model       The specified model of the vehicle.
-         * @return JPanel with vehicle information.
+         * Retrieves the current JButton of btnPrev.
+         * @return The current btnPrev.
          */
-        public JPanel createCarsLayout(String plateNumber, String vehicleType, String model) {//String PlateNumber, String vehicle, String model){
-            JPanel pnlCarInformation = res.createPnlRounded(290, 150, res.feldgrau, res.gray);
-            //pnlCarInformation.setBackground(res.feldgrau);
-            pnlCarInformation.setLayout(new GridBagLayout());
+        public JButton getBtnPrev() {
+            return btnPrev;
+        }
 
-            JPanel innerContent = new JPanel(new GridBagLayout());
-            innerContent.setBackground(res.feldgrau);
-            //innerContent.setBackground(res.feldgrau);
+        /**
+         * Retrieves the current JButton of btnNext.
+         * @return The current btnNext.
+         */
+        public JButton getBtnNext() {
+            return btnNext;
+        }
 
-            gbc = new GridBagConstraints();
-            gbc.gridy = 0;
-            gbc.anchor = GridBagConstraints.WEST;
+        /**
+         * Retrieves the current panel with the card layout.
+         * @return Panel with the card layout.
+         */
+        public JPanel getPnlCards() {
+            return pnlCards;
+        }
 
-            gbc.insets = new Insets(0, 20, 0, 0);
-            JLabel lblPlateNumber = res.createLblP("Plate Number", res.eerieBlack);
-            lblPlateNumber.setMaximumSize(new Dimension(150, 20));
-            innerContent.add(lblPlateNumber, gbc);
+        /**
+         * Retrieves the current JButton of btnCancel.
+         * @return The current btnCancel.
+         */
+        public JButton getBtnCancel() {
+            return btnCancel;
+        }
 
-            gbc.gridy = 1;
-            JLabel lblPlateNumberInfo = res.createLblP2(plateNumber, res.white);
-            lblPlateNumberInfo.setMaximumSize(new Dimension(150, 30));
-            innerContent.add(lblPlateNumberInfo, gbc);
+        /**
+         * Retrieves the current JButton of btnContinue.
+         * @return The current btnContinue.
+         */
+        public JButton getBtnContinue() {
+            return btnContinue;
+        }
 
-            gbc.gridy = 2;
-            JLabel lblEmpty = new JLabel(" ");
-            innerContent.add(lblEmpty, gbc);
+        /**
+         * Retrieves the current card layout that controls the panels.
+         * @return THe current card layout.
+         */
+        public CardLayout getCardLayout() {
+            return cardLayout;
+        }
 
-            gbc.gridy = 3;
-            gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblVehicle = res.createLblP("Vehicle", res.eerieBlack);
-            lblVehicle.setMaximumSize(new Dimension(120, 12));
-            innerContent.add(lblVehicle, gbc);
+        /**
+         * Sets a specified action listener to btnNext.
+         * @param actionListener The specified action listener.
+         */
+        public void setNextListener(ActionListener actionListener) {
+            btnNext.addActionListener(actionListener);
+        }
 
-            gbc.gridy = 3;
-            gbc.anchor = GridBagConstraints.EAST;
-            gbc.insets = new Insets(0, 0, 0, 20);
-            JLabel lblModel = res.createLblP("Model", res.eerieBlack);
-            lblModel.setMaximumSize(new Dimension(110, 12));
-            innerContent.add(lblModel, gbc);
+        /**
+         * Sets a specified action listener to btnPrev.
+         * @param actionListener The specified action listener.
+         */
+        public void setPrevListener(ActionListener actionListener) {
+            btnPrev.addActionListener(actionListener);
+        }
 
-            gbc.insets = new Insets(0, 20, 0, 0);
-            gbc.gridy = 4;
-            gbc.anchor = GridBagConstraints.WEST;
-            JLabel lblVehicleInfo = res.createLblP(vehicleType, res.white);
-            lblVehicleInfo.setMaximumSize(new Dimension(95, 12));
-            innerContent.add(lblVehicleInfo, gbc);
+        /**
+         * Sets a specified listener to btnCancel.
+         * @param actionListener The specified action listener.
+         */
+        public void setCancelListener(ActionListener actionListener) {
+            btnCancel.addActionListener(actionListener);
+        }
 
-            gbc.insets = new Insets(0, 0, 0, 20);
-            gbc.gridy = 4;
-            gbc.anchor = GridBagConstraints.EAST;
-            JLabel lblModelInfo = res.createLblP(model, res.white);
-            lblModelInfo.setMaximumSize(new Dimension(100, 20));
-            innerContent.add(lblModelInfo, gbc);
+        /**
+         * Sets a specified listener to btnContinue.
+         * @param actionListener The specified action listener.
+         */
+        public void setContinueListener(ActionListener actionListener) {
+            btnContinue.addActionListener(actionListener);
+        }
 
-            gbc.insets = new Insets(20, 30, 20, 30);
-            pnlCarInformation.add(innerContent);
+        /**
+         * Panel containing a vehicle's pertinent information.
+         */
+        public static class CarsPanel extends JPanel {
+            /**
+             * The text field for the plate number.
+             */
+            private JTextField txtPlateNumber;
+            /**
+             * The text field for the model.
+             */
+            private JTextField txtModel;
+            /**
+             * The text field for the vehicle type.
+             */
+            private JTextField txtVehicleType;
+            /**
+             * The button for edit.
+             */
+            private JButton btnEdit;
 
-            return pnlCarInformation;
+            /**
+             * Constructs a panel of CarsPanel.
+             */
+            public CarsPanel(String plateNumber, String type, String model) {
+                setLayout(new BorderLayout());
+
+                JPanel whitePanel = res.createPnlRounded(250,300,res.white, res.lightGray);
+                whitePanel.setLayout(new GridBagLayout());
+                whitePanel.setBackground(res.white);
+                whitePanel.setPreferredSize(new Dimension(250, 300));
+
+                GridBagConstraints gbc = new GridBagConstraints();
+                gbc.gridx = 0;
+                gbc.gridy = 0;
+                gbc.anchor = GridBagConstraints.WEST;
+                gbc.insets = new Insets(5, 5, 5, 5);
+
+                Font labelFontBold = new Font("Arial", Font.BOLD, 20);
+
+                JLabel lblPlateNumber = new JLabel("Plate Number");
+                lblPlateNumber.setFont(labelFontBold);
+                whitePanel.add(lblPlateNumber, gbc);
+
+                gbc.gridx = 1;
+                gbc.anchor = GridBagConstraints.EAST;
+                btnEdit = res.createBtnIconOnly(res.iconEdit, 30,30);
+                whitePanel.add(btnEdit, gbc);
+
+                gbc.gridx = 0;
+                gbc.gridwidth = 2;
+                gbc.fill = GridBagConstraints.BOTH;
+                gbc.gridy++; // Move to the next row
+                gbc.anchor = GridBagConstraints.WEST;
+                txtPlateNumber = res.createTxtRounded(plateNumber, res.white, res.gray, 20);
+                txtPlateNumber.setEditable(false);
+                txtPlateNumber.setFocusable(false);
+                whitePanel.add(txtPlateNumber, gbc);
+
+                gbc.gridy++; // Move to the next row
+                JLabel lblModel = new JLabel("Model");
+                lblModel.setFont(labelFontBold);
+                whitePanel.add(lblModel, gbc);
+
+                gbc.gridy++; // Move to the next row
+                txtModel = res.createTxtRounded(model, res.white, res.gray, 20);
+                txtModel.setEditable(false);
+                txtModel.setFocusable(false);
+                whitePanel.add(txtModel, gbc);
+
+                gbc.gridy++; // Move to the next row
+                JLabel vehicle = new JLabel("Vehicle Type");
+                vehicle.setFont(labelFontBold);
+                whitePanel.add(vehicle, gbc);
+
+                gbc.gridy++; // Move to the next row
+                txtVehicleType = res.createTxtRounded(type, res.white, res.gray, 20);
+                txtVehicleType.setEditable(false);
+                txtVehicleType.setEditable(false);
+                whitePanel.add(txtVehicleType, gbc);
+
+                this.add(whitePanel, BorderLayout.CENTER);
+                this.setPreferredSize(new Dimension(new Dimension(300,325)));
+                this.setVisible(true);
+            }
+
+            /**
+             * Retrieves the current JTextField of txtPlateNumber.
+             * @return The current txtPlateNumber.
+             */
+            public JTextField getTxtPlateNumber() {
+                return txtPlateNumber;
+            }
+
+            /**
+             * Retrieves the current JTextField of txtModel.
+             * @return The current txtModel.
+             */
+            public JTextField getTxtModel() {
+                return txtModel;
+            }
+
+            /**
+             * Retrieves the current JTextField of txtVehicleType.
+             * @return The current txtVehicleType.
+             */
+            public JTextField getTxtVehicleType() {
+                return txtVehicleType;
+            }
+
+            /**
+             * Retrieves the current JButton of btnEdit.
+             * @return The current btnEdit.
+             */
+            public JButton getBtnEdit() {
+                return btnEdit;
+            }
+
+            /**
+             * Sets a specified action listener for btnEdit.
+             * @param actionListener The specified action listener.
+             */
+            public void setEditListener(ActionListener actionListener) {
+                btnEdit.addActionListener(actionListener);
+            }
         }
     }
 
