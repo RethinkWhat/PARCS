@@ -60,7 +60,7 @@ public class TimerController {
 
                     int secondsRemaining = 0;
                     int minutesRemaining = 0;
-                    int hoursRemaining = hoursNow;
+                    int hoursRemaining = model.getDuration();
 
                     if (secondsNow != 0) {
                         secondsRemaining = 60 - secondsNow;
