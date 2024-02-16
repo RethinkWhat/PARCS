@@ -82,8 +82,8 @@ public class ClientHandler implements Runnable {
                             case "book":
                                 bookReservation();
                                 break;
-                            case "searchForSpot":
-                                searchForSpot();
+                            case "ticket":
+                                ticket();
                                 break;
                         }
                     }
@@ -279,16 +279,20 @@ public class ClientHandler implements Runnable {
         }
     }
 
-    public void searchForSpot() {
+    public void ticket() {
         try {
-            String date = reader.readLine();
-            //TODO: Check which car spot avail
+            String username = reader.readLine();
 
-            writer.println("C3");
-        } catch (IOException ex) {
-            ex.printStackTrace();
+            List<String> userReservation = server.getClosestReservation(username);
+            String duration = server.getDuration(userReservation.get(1), userReservation.get(2));
+            writer.println(duration);
+            System.out.println("attempting to write: " + userReservation);
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+            outputStreamWriter.writeObject(userReservation);
+            System.out.println("Written");
+        } catch (IOException exception) {
+            exception.printStackTrace();
         }
     }
-
 
 }

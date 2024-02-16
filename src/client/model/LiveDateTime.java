@@ -12,7 +12,7 @@ public class LiveDateTime extends Thread {
     /**
      * The format for the time (HH:MM AM/PM MARKER)
      */
-    private SimpleDateFormat timeFormat;
+    private static SimpleDateFormat timeFormat;
     /**
      * The format for the day that specifies the whole text.
      */
@@ -61,6 +61,12 @@ public class LiveDateTime extends Thread {
 
     public String getTime() {
         return time;
+    }
+
+    public static String getTimeForTimerComparisons() {
+        Date currentTime = Calendar.getInstance().getTime();
+        timeFormat = new SimpleDateFormat("hh:mm:ss");
+        return timeFormat.format(currentTime);
     }
 
     public static String getDate() {

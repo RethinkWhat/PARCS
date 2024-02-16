@@ -82,6 +82,15 @@ public class Server implements Runnable{
         return reservationParser.availableTime(identifier,duration, date);
     }
 
+    public String getDuration(String startTime, String endTime) {
+        return reservationParser.computeDuration(startTime, endTime);
+
+    }
+
+    public List<String> getClosestReservation(String username) {
+        return reservationParser.getClosestReservation(username);
+    }
+
     public Map<String, List<String>> getUserVehicles(String username) {
 
         return userParser.getUserVehicles(username);

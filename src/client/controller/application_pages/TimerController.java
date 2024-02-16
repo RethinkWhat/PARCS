@@ -34,7 +34,16 @@ public class TimerController {
         // constants / variables
         // TODO: add method to check if the time today is equal to the time of the booking.
         //  Use the code below to start it:
-        // view.getPnlTimerGraphics().getSwingTimer().start();
+
+        //if (model.isStartTimer()) {
+        //    view.getPnlTimerGraphics().getSwingTimer().start();
+       // }
+
+        view.getPnlTicketInfo().setLblParkingType(model.getParkingType());
+        view.getPnlTicketInfo().setLblParkingSpot(model.getParkingSlot());
+        view.getPnlTicketInfo().setLblParkingDate(model.getDate());
+        view.getPnlTicketInfo().setLblParkingDuration((model.getDuration() + " hour/s"));
+        view.getPnlTicketInfo().setLblParkingTime(model.getTimeIn() + " - " + model.getTimeOut());
 
         // action listeners
         view.getPnlTimer().setEndTimerListener(e -> { // opens a JDialog to show a message
@@ -64,5 +73,28 @@ public class TimerController {
         public void actionPerformed(ActionEvent e) {
             // TODO: Implementation of cancelling the ticket.
         }
+    }
+
+    public void startTimer() {
+        Thread thread = new Thread(() -> {
+            if (model.getClient().getDate().equals(model.getDate()) &&
+                    model.getTimeIn().split(":")[0].compareTo(model.getClient().getTime())>0) {
+                if (model.isStartTimer() && !model.isTimeStarted()) {
+                    String timeNow[] = model.getClient().getTime().split(":");
+
+                    //TODO: Fix timer subtraction
+                    view.getPnlTimerGraphics().setHour(
+                            Integer.valueOf(model.getTimeOut().split(":")[0]) -
+                                    Integer.valueOf(timeNow[0])
+                    );
+                    view.getPnlTimerGraphics().setMinute(Integer.valueOf(timeNow[1]));
+                    view.getPnlTimerGraphics().setSecond(Integer.valueOf(timeNow[2]));
+
+                    view.getPnlTimerGraphics().getSwingTimer().start();
+                    model.setTimeStarted(true);
+                }
+            }
+        });
+        thread.start();
     }
 }
