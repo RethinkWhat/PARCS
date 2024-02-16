@@ -736,7 +736,7 @@ public class ReservationPageView extends JPanel {
 
             // Create label for PnlConfirmation with font based on resources class
             lblReserved = res.createLblH1("RESERVED!", res.celadon);
-            lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+            lblConfirmationMsg = res.createLblP("You successfully created your reservation. Thank you!", res.eerieBlack);
 
             // Add labels to PnlConfirmation panel
             GridBagConstraints gbc = new GridBagConstraints();
@@ -752,7 +752,7 @@ public class ReservationPageView extends JPanel {
             pnlCloseBtn.setPreferredSize(new Dimension(600, 50));
 
             // Close button
-            btnCloseConfirmation = res.createBtnRounded("CLOSE", res.red, res.eerieBlack, 20);
+            btnCloseConfirmation = res.createBtnRounded("CLOSE", res.celadon, res.eerieBlack, 10);
 
             pnlCloseBtn.add(btnCloseConfirmation);
 
@@ -760,7 +760,7 @@ public class ReservationPageView extends JPanel {
             this.add(pnlConfirmation);
             this.add(pnlCloseBtn);
 
-            this.setPreferredSize(new Dimension(600,400));
+            this.setPreferredSize(new Dimension(500,300));
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
