@@ -6,6 +6,8 @@ import server.view.AdminApplicationView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * Proc
@@ -84,7 +86,9 @@ public class AdminApplicationController {
             if (!serverStatus){
                 view.getServerStatusView().setOnline();
                 serverStatus = true;
+                ExecutorService executor = Executors.newFixedThreadPool(10);
                 server.startAccepting();
+                executor.submit(server);
             }else {
                 view.getServerStatusView().setOffline();
                 serverStatus= false;
