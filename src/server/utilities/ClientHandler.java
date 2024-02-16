@@ -89,6 +89,9 @@ public class ClientHandler implements Runnable {
                             case "getVehicles":
                                 getVehicles();
                                 break;
+                            case "getVehicles":
+                                getVehicles();
+                                break;
                         }
                     }
                 }
