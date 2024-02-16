@@ -549,7 +549,11 @@ public class ReservationParser {
         return false;
     }
 
-
+    /**
+     * Returns all the current car booking reservations
+     * FORMAT: [username, parking identifier, date, start time, end time, duration]
+     * @return
+     */
     public List<List<String>> getAllCarBookings(){
         getReservationsFile();
         List<List<String>> carBookings = new ArrayList<>();
@@ -599,7 +603,11 @@ public class ReservationParser {
         return carBookings;
     }
 
-
+    /**
+     * Returns all the current motor booking reservations
+     * FORMAT: [username, parking identifier, date, start time, end time, duration]
+     * @return
+     */
     public List<List<String>> getAllMotorBookings(){
         getReservationsFile();
         List<List<String>> motorBookings = new ArrayList<>();
