@@ -77,11 +77,11 @@ public class UserProfileView extends JPanel {
         cardLayout = new CardLayout();
 
         JPanel pnlRight = new JPanel(new BorderLayout());
-        pnlRight.setPreferredSize(new Dimension(750, 700));
+        pnlRight.setPreferredSize(new Dimension(950, 700));
         add(pnlRight, BorderLayout.EAST);
 
         pnlCards = new JPanel(cardLayout);
-        pnlCards.setPreferredSize(new Dimension(750, 560));
+        pnlCards.setPreferredSize(new Dimension(950, 560));
         // pnlCards.setBounds(220,0,750,560);
         pnlRight.add(pnlCards, BorderLayout.NORTH);
 
@@ -99,7 +99,7 @@ public class UserProfileView extends JPanel {
         pnlProfileOptions = new ProfileOptionsPanel(cardLayout, pnlCards);
         add(pnlProfileOptions, BorderLayout.WEST);
 
-        this.setPreferredSize(new Dimension(1100, 700));
+        this.setPreferredSize(new Dimension(950, 700));
     }
 
     /**
