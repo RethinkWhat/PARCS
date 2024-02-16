@@ -55,23 +55,20 @@ public class TimerModel {
      */
     public TimerModel(Client client) {
         this.client = client;
-        ;
         getReservationInfo();
     }
 
     public void getReservationInfo() {
-        System.out.println("client socket opened");
         client.openSocket();
 
-        System.out.println("client writing ticket");
         client.writeString("ticket");
 
         client.writeString(client.getUsername());
+
+        reservationInfo = (List<String>) client.readObject();
+
         duration = Integer.valueOf(client.readString());
 
-        System.out.println("duration received");
-        reservationInfo = (List<String>) client.readObject();
-        System.out.println("reservation received");
         parkingSlot = reservationInfo.get(0);
         timeIn = reservationInfo.get(1);
         timeOut = reservationInfo.get(2);

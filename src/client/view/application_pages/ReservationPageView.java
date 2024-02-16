@@ -736,7 +736,7 @@ public class ReservationPageView extends JPanel {
         private JLabel lblConfirmationMsg;
         private JButton btnCloseConfirmation;
 
-        public ReserveSlotConfirmationView() {
+        public ReserveSlotConfirmationView(boolean success) {
 
             this.setTitle("PARCS Reservation Confirmation");
             this.setModal(true);
@@ -748,16 +748,26 @@ public class ReservationPageView extends JPanel {
             pnlIcon.setPreferredSize(new Dimension(600, 200));
 
             // Create and set ImageIcon for pnlIcon
-            ImageIcon iconAvailableCar = res.iconSuccess;
+            ImageIcon iconAvailableCar;
+            if (success)
+                iconAvailableCar = res.iconAvailableCar; //change icon
+            else {
+                iconAvailableCar = res.iconTakenCar;
+            }
             pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
             // Create PnlConfirmation panel
             JPanel pnlConfirmation = new JPanel(new GridBagLayout());
             pnlConfirmation.setPreferredSize(new Dimension(600, 150));
 
-            // Create label for PnlConfirmation with font based on resources class
-            lblReserved = res.createLblH1("RESERVED!", res.celadon);
-            lblConfirmationMsg = res.createLblP("You successfully created your reservation. Thank you!", res.eerieBlack);
+            if (success) {
+                // Create label for PnlConfirmation with font based on resources class
+                lblReserved = res.createLblH1("RESERVED!", res.celadon);
+                lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+            } else {
+                lblReserved = res.createLblH1("FAILED!", res.red);
+                lblConfirmationMsg = res.createLblH2("No booking two parking spots at a time. Thank you!", res.eerieBlack);
+            }
 
             // Add labels to PnlConfirmation panel
             GridBagConstraints gbc = new GridBagConstraints();
@@ -786,6 +796,9 @@ public class ReservationPageView extends JPanel {
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
+        }
+        public void setBtnCloseConfirmationListener(ActionListener listener) {
+            btnCloseConfirmation.addActionListener(listener);
         }
     }
 
@@ -855,8 +868,8 @@ public class ReservationPageView extends JPanel {
         return parkingSlotButtonsView;
     }
 
-    public ReserveSlotConfirmationView getReserveSlotConfirmationView() {
-        reserveSlotConfirmationView = new ReserveSlotConfirmationView();
+    public ReserveSlotConfirmationView getReserveSlotConfirmationView(boolean booked) {
+        reserveSlotConfirmationView = new ReserveSlotConfirmationView(booked);
         return reserveSlotConfirmationView;
     }
 

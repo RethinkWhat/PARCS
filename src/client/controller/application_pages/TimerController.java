@@ -45,34 +45,6 @@ public class TimerController {
         view.getPnlTicketInfo().setLblParkingDuration((model.getDuration() + " hour/s"));
         view.getPnlTicketInfo().setLblParkingTime(model.getTimeIn() + " - " + model.getTimeOut());
 
-        // action listeners
-        view.getPnlTimer().setEndTimerListener(e -> { // opens a JDialog to show a message
-            view.getDlgEndTimer().setLocationRelativeTo(view);
-            view.getDlgEndTimer().setVisible(true);
-            view.getDlgEndTimer().setAlwaysOnTop(true);
-            view.getDlgEndTimer().requestFocusInWindow();
-        });
-        view.getDlgEndTimer().setConfirmListener(new ConfirmListener()); // actual ending of the ticket timer.
-        view.getDlgEndTimer().setCancelListener(e -> view.getDlgEndTimer().dispose());
-
-        // mouse listeners
-        view.getPnlTimer().getBtnEndTimer().addMouseListener(new Resources.CursorChanger(view.getPnlTimer().getBtnEndTimer()));
-        view.getDlgEndTimer().getBtnConfirm().addMouseListener(new Resources.CursorChanger(view.getDlgEndTimer().getBtnConfirm()));
-        view.getDlgEndTimer().getBtnCancel().addMouseListener(new Resources.CursorChanger(view.getDlgEndTimer().getBtnCancel()));
-    }
-
-    /**
-     * Processes the request for the end timer confirmation.
-     */
-    class ConfirmListener implements ActionListener {
-        /**
-         * TODO: Documentation
-         * @param e the event to be processed
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            // TODO: Implementation of cancelling the ticket.
-        }
     }
 
     public void startTimer() {
@@ -88,7 +60,7 @@ public class TimerController {
 
                     int secondsRemaining = 0;
                     int minutesRemaining = 0;
-                    int hoursRemaining = hoursNow;
+                    int hoursRemaining = model.getDuration();
 
                     if (secondsNow != 0) {
                         secondsRemaining = 60 - secondsNow;
@@ -102,22 +74,10 @@ public class TimerController {
                     view.getPnlTimerGraphics().setHour(hoursRemaining);
                     view.getPnlTimerGraphics().setMinute(minutesRemaining);
                     view.getPnlTimerGraphics().setSecond(secondsRemaining);
-                /*
-                view.getPnlTimerGraphics().setHour(
-                        Integer.parseInt(model.getTimeOut().split(":")[0]) -
-                                hoursNow);
-                view.getPnlTimerGraphics().setMinute(Integer.parseInt(timeNow[1]));
-
-                if ((Integer.parseInt(timeNow[2])) != 0) {
-                    Integer secondsRemaining = 60 - Integer.parseInt(timeNow[2]);
-                }
-
-                view.getPnlTimerGraphics().setSecond(Integer.parseInt(timeNow[2]));
-
-                 */
 
                     view.getPnlTimerGraphics().getSwingTimer().start();
                     model.setTimeStarted(true);
+                    view.repaint();
                 }
             }
         });

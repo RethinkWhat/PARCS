@@ -105,6 +105,11 @@ public class Server implements Runnable{
         }
     }
 
+    public boolean checkScheduleConflicts(String username, String startTime, String duration, String date) {
+        String endTime = reservationParser.computeEndTime(startTime,duration);
+        return reservationParser.checkScheduleConflicts(username, startTime, endTime, date);
+    }
+
     public boolean serverRunning() {
         return serverRunning;
     }
@@ -160,15 +165,6 @@ public class Server implements Runnable{
 
     public void accountLogout(String username) {
         userLog.remove(username);
-    }
-
-    public String countCarSlots() {
-        //TODO: call method from user parser
-        return "19";
-    }
-    public String countMotorSpots() {
-        //TODO: call method from user parser
-        return "20";
     }
 
     public int countBookings(String username, String date) {

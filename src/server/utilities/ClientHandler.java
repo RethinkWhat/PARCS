@@ -86,6 +86,9 @@ public class ClientHandler implements Runnable {
                             case "ticket":
                                 ticket();
                                 break;
+                            case "getVehicles":
+                                getVehicles();
+                                break;
                         }
                     }
                 }
@@ -167,7 +170,6 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
 
-            System.out.println(username);
             writer.println(server.checkUsernameExists(username));
 
             String password = reader.readLine();
@@ -211,18 +213,33 @@ public class ClientHandler implements Runnable {
 
 
     public void reserve() {
+        DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
             writer.println(server.getUserFullName(username));
-            writer.println(server.countCarSlots());
-            writer.println(server.countMotorSpots());
-            writer.println(server.countBookings(username,"02/14/24"));
+
+            String totalBookings = String.valueOf(server.countBookings(username,dateTime.getDateTime()));
+            writer.println(totalBookings);
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
             ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
             outputStreamWriter.writeObject(vehicles);
         } catch (IOException ex) {
             ex.printStackTrace();
+        }
+    }
+
+    /**
+     * TODO: Documentation
+     */
+    public void getVehicles() {
+        try {
+            String username = reader.readLine();
+            Map<String, List<String>> vehicles = server.getUserVehicles(username);
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+            outputStreamWriter.writeObject(vehicles);
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 
@@ -250,7 +267,6 @@ public class ClientHandler implements Runnable {
         }
     }
 
-
     public void spotInfo() {
         try {
             String identifier = reader.readLine();
@@ -261,7 +277,6 @@ public class ClientHandler implements Runnable {
             outputStreamWriter.writeObject(availableTime);
         } catch (IOException ex) {
             ex.printStackTrace();
-
         }
     }
 
@@ -273,8 +288,13 @@ public class ClientHandler implements Runnable {
             String duration = reader.readLine();
             String username = reader.readLine();
 
-            boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
-            writer.println(confirmed);
+
+            if (server.checkScheduleConflicts(username,startTime,duration, date)) {
+                boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
+                writer.println(confirmed);
+            } else {
+                writer.println("false");
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -284,14 +304,13 @@ public class ClientHandler implements Runnable {
         DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
+            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
 
             List<String> userReservation = server.getClosestReservation(username, dateTime.getTime());
+            outputStreamWriter.writeObject(userReservation);
+
             String duration = server.getDuration(userReservation.get(1), userReservation.get(2));
             writer.println(duration);
-            System.out.println("attempting to write: " + userReservation);
-            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-            outputStreamWriter.writeObject(userReservation);
-            System.out.println("Written");
         } catch (IOException exception) {
             exception.printStackTrace();
         }

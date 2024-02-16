@@ -49,7 +49,7 @@ public class ReservationPageModel {
 
     private String fullName;
 
-    private HashMap<String, List<String>> vehicles;
+    private Map<String, List<String>> vehicles;
 
     /**
      * Constructs a ReservationPageModel with a specified client.
@@ -63,11 +63,10 @@ public class ReservationPageModel {
         client.writeString(client.getUsername());
         this.fullName = client.readString();
 
-        availCarSlots = client.readString();
-        availMotorSlots = client.readString();
         totalBookings = client.readString();
 
-        vehicles = (HashMap<String, List<String>>) client.readObject();
+        vehicles = (Map<String, List<String>>) client.readObject();
+
         client.closeSocket();
 
         ArrayList<String> carsArrayList = new ArrayList();
@@ -91,10 +90,6 @@ public class ReservationPageModel {
 
         for (int x =0; x < motorArrayList.size(); x++) {
             motorcycles[x] = motorArrayList.get(x);
-        }
-
-        for (String vehicle : cars) {
-            System.out.println(vehicle);
         }
     }
 
