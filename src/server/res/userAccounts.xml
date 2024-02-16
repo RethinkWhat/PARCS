@@ -1,46 +1,295 @@
 <userClass>
-            
-    
+
+
     <user username="rickardo">
-                        
-        
+
+
         <type>user</type>
-                        
-        
+
+
         <password>Z4QRMo5v3ja99VBaAxrc8K7FWXyhqAt07EIFuGNIUTQ=</password>
-                        
-        
+
+
         <lastName>Ramonster</lastName>
-                        
-        
+
+
         <firstName>Johan</firstName>
-                        
-        
+
+
         <phoneNumber>638484</phoneNumber>
-                        
-        
+
+
         <vehicle>car,Honda Civic,N99 399</vehicle>
-                        
-        
+
+
         <vehicle>car,Mitsubishi Montero,ILY 143</vehicle>
-                    
-    
+
+
     </user>
-        
-    
+
+
     <user username="RektMeMamshie">
-                
+
+
         <type>user</type>
-                
+
+
         <password>WOJxlQnifa8x8ym0+IWcErsKGXLmSOMbO+Y0XoIsvK4=</password>
-                
+
+
         <lastName>Jasmin</lastName>
-                
+
+
         <firstName>Ramon Emmiel</firstName>
-                
+
+
         <phoneNumber>09494177993</phoneNumber>
-            
+
+
         <vehicle>Motorcycle,Yamaha Fazzio,ALI 143</vehicle>
+
+
     </user>
-    
+
+
+    <user username="basti">
+
+
+        <type>user</type>
+
+
+        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
+
+
+        <lastName>Siccuan</lastName>
+
+
+        <firstName>Sebastian</firstName>
+
+
+        <phoneNumber>0961223123123</phoneNumber>
+
+
+        <vehicle>Car,Honda Bajaj,NIG 441</vehicle>
+
+
+    </user>
+
+
+    <user username="johan">
+
+
+        <type>user</type>
+
+
+        <password>12345</password>
+
+
+        <lastName>Roxas</lastName>
+
+
+        <firstName>Johan Rickardo</firstName>
+
+
+        <phoneNumber>1234567890</phoneNumber>
+
+
+        <vehicle>Car,Honda Civic,WHF 123</vehicle>
+
+
+    </user>
+
+
+    <user username="ArtOfJakuling">
+
+
+        <type>user</type>
+
+
+        <password>WOJxlQnifa8x8ym0+IWcErsKGXLmSOMbO+Y0XoIsvK4=</password>
+
+
+        <lastName>Jasmin</lastName>
+
+
+        <firstName>Ramon Emmiel</firstName>
+
+
+        <phoneNumber>09494177993</phoneNumber>
+
+
+        <vehicle>Motorcycle,Yamaha Fazzio,ALI 143</vehicle>
+
+
+    </user>
+
+
+    <user username="patchoi">
+
+
+        <type>user</type>
+
+
+        <password>rtsX6Klw1tuZKCsGqIFjjPQ064L0T1hJnHyX/7p7wWI=</password>
+
+
+        <lastName>Lacanilao</lastName>
+
+
+        <firstName>Patrick</firstName>
+
+
+        <phoneNumber>02930931</phoneNumber>
+
+
+        <vehicle>Car,Honda CR-V,IDK 333</vehicle>
+
+
+    </user>
+
+
+    <user username="rethinkwhat">
+
+
+        <type>user</type>
+
+
+        <password>LVnC+vO8d5OLPCstLDTT4RwWBvQ+wPY32BekbnGtiKg=</password>
+
+
+        <lastName>Tank</lastName>
+
+
+        <firstName>Rithik</firstName>
+
+
+        <phoneNumber>09177900153</phoneNumber>
+
+
+        <vehicle>Car,Mitsubishi Mirage,YAA 9999</vehicle>
+
+
+    </user>
+
+
+    <user username="bb">
+
+
+        <type>user</type>
+
+
+        <password>O2TblctVx2M5HHBxCEia4YtBEteDMA3jjgM7TJjD3q8=</password>
+
+
+        <lastName>siccuan</lastName>
+
+
+        <firstName>Basticoy</firstName>
+
+
+        <phoneNumber>49549</phoneNumber>
+
+
+        <vehicle>Car, Honda Civic,NWA 991</vehicle>
+
+
+    </user>
+
+
+    <user username="basti">
+
+
+        <type>user</type>
+
+
+        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
+
+
+        <lastName>Siccuan</lastName>
+
+
+        <firstName>Sebastian</firstName>
+
+
+        <phoneNumber>012931238</phoneNumber>
+
+
+        <vehicle>Car,Honda Civic,NIG 4412</vehicle>
+
+
+    </user>
+
+
+    <user username="chess">
+
+
+        <type>user</type>
+
+
+        <password>rHOdzNEh9xJh2HRhJW6cpw2OO227zJB21fO1DHOl0i0=</password>
+
+
+        <lastName>Attempt</lastName>
+
+
+        <firstName>testAccount</firstName>
+
+
+        <phoneNumber>c4599345</phoneNumber>
+
+
+        <vehicle>Car,Honda Civic,NWA 991</vehicle>
+
+
+    </user>
+
+
+    <user username="basti">
+
+
+        <type>user</type>
+
+
+        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
+
+
+        <lastName>basti</lastName>
+
+
+        <firstName>basti</firstName>
+
+
+        <phoneNumber>102831</phoneNumber>
+
+
+        <vehicle>Car,Honda Bajaj,NIG 4444</vehicle>
+
+
+    </user>
+
+
+    <user username="johan1">
+
+
+        <type>user</type>
+
+
+        <password>123</password>
+
+
+        <lastName>roxas</lastName>
+
+
+        <firstName>johan</firstName>
+
+
+        <phoneNumber>123456789</phoneNumber>
+
+
+        <vehicle>Car,car,car 123</vehicle>
+
+
+    </user>
+
+
 </userClass>
