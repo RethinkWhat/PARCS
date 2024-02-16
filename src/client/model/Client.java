@@ -55,7 +55,7 @@ public class Client {
             socketAddress = new InetSocketAddress(host, port);
             fileReader.close();
         } catch (IOException ex) {
-            ex.printStackTrace();
+
         }
     }
 
@@ -117,27 +117,31 @@ public class Client {
         this.username = username;
     }
 
-    public void openSocket() {
+    public boolean openSocket() {
         try {
             client = new Socket();
             client.connect(socketAddress);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
             writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
+            return true;
         } catch (IOException ex) {
             ex.printStackTrace();
             displayErrorMessage();
+            return false;
         }
     }
 
-    public void openObjectSocket() {
+    public boolean openObjectSocket() {
         try {
             client = new Socket();
             client.connect(socketAddress);
             //readerObject = new ObjectInputStream(client.getInputStream());
             //writerObject = new ObjectOutputStream(client.getOutputStream());
+            return true;
         } catch (IOException ex) {
             ex.printStackTrace();
             displayErrorMessage();
+            return false;
         }
     }
 
@@ -275,7 +279,7 @@ public class Client {
     }
 
     public void startGUI() {
-        if (isServerOpen()) {
+        if (isServerOpen() && openSocket() && openObjectSocket()) {
             loginRegister();
         } else {
             displayErrorMessage();
