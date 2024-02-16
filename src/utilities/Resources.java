@@ -120,6 +120,10 @@ public class Resources {
      */
     public ImageIcon iconOffline = new ImageIcon("res/drawable/icons/offline-red-outline.png");
     /**
+     * The icon for errors.
+     */
+    public ImageIcon iconError = new ImageIcon("res/drawable/icons/error-red-solid.png");
+    /**
      * Creates a new JLabel with a specified text and color.
      * The JLabel is a heading (h1).
      * @param text The specified text.
