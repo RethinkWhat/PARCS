@@ -34,7 +34,7 @@ public class VehicleAdderController {
     public VehicleAdderController(VehicleAdderView view, VehicleAdderModel model) {
         this.view = view;
         this.model = model;
-        view.setDefaultCloseOperation(model.getClient().logoutAndExit());
+        //view.setDefaultCloseOperation(model.getClient().logoutAndExit());
 
         // model map
         view.getCmbType().setModel(new DefaultComboBoxModel(model.getVehicleTypes()));
@@ -54,6 +54,7 @@ public class VehicleAdderController {
     class AddVehicleListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("vehicle adder button clicked");
             boolean validate = model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
             if (validate) {
                 view.dispose();

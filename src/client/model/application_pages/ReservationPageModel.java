@@ -56,16 +56,46 @@ public class ReservationPageModel {
      * @param client The specified client.
      */
     public ReservationPageModel(Client client) {
+        System.out.println("reservation model");
         this.client = client;
+
         client.openSocket();
+        System.out.println("socket open");
         client.writeString("reservation");
+
         client.writeString(client.getUsername());
+        System.out.println(client.getUsername());
 
         this.fullName = client.readString();
+        System.out.println(fullName);
 
         totalBookings = client.readString();
+        System.out.println(totalBookings);
 
-      //  vehicles = (Map<String, List<String>>) client.readObject();
+        vehicles = new HashMap<>();
+        List<String> vehicleInfo;
+
+        while (true) {
+            String vehicleKey = client.readString();
+            System.out.println("KEY: " + vehicleKey);
+            vehicleInfo = new ArrayList<>();
+
+            if (vehicleKey.equals("empty") || vehicleKey.equals("complete"))
+                break;
+
+            while (true) {
+                String vehicleValue = client.readString();
+                System.out.println("\tvalue: " + vehicleValue);
+                if (vehicleValue.equals("nextKey")) {
+                    break;
+                }
+                vehicleInfo.add(vehicleValue);
+            }
+            vehicles.put(vehicleKey, vehicleInfo);
+        }
+
+        //vehicles = (Map<String, List<String>>) client.readObject();
+        System.out.println(vehicles);
 
         client.closeSocket();
 
@@ -91,6 +121,8 @@ public class ReservationPageModel {
         for (int x =0; x < motorArrayList.size(); x++) {
             motorcycles[x] = motorArrayList.get(x);
         }
+
+
     }
 
     /**
@@ -121,7 +153,16 @@ public class ReservationPageModel {
         client.writeString(parkingIdentifier);
         client.writeString(duration);
         client.writeString(date);
-        ArrayList<String> listOfTime = (ArrayList<String>) client.readObject();
+
+        ArrayList<String> listOfTime = new ArrayList<>();
+        while (true) {
+            String timeAccepted = client.readString();
+            if (timeAccepted.equals("complete"))
+                break;
+            listOfTime.add(timeAccepted);
+
+        }
+        //ArrayList<String> listOfTime = null ;//(ArrayList<String>) client.readObject();
 
         String[] arrayString = new String[1];
         if (!listOfTime.isEmpty()) {

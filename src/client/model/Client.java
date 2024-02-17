@@ -26,9 +26,6 @@ public class Client {
 
     PrintWriter writer;
 
-    ObjectInputStream readerObject;
-
-    ObjectOutputStream writerObject;
 
     public Client(Socket client) {
         this.client = client;
@@ -82,24 +79,6 @@ public class Client {
         return toReturn;
     }
 
-    public void writeObject(Object object) {
-        try {
-            writerObject.writeObject(object);
-        } catch (IOException ex ){
-            ex.printStackTrace();
-        }
-    }
-
-    public Object readObject() {
-        Object obj = null;
-        try {
-            readerObject = new ObjectInputStream(client.getInputStream());
-            obj = readerObject.readObject();
-        }catch (IOException | ClassNotFoundException ex) {
-            ex.printStackTrace();
-        }
-        return obj;
-    }
 
     public String getDate() {
         return LiveDateTime.getDate();
@@ -121,8 +100,8 @@ public class Client {
         try {
             client = new Socket();
             client.connect(socketAddress);
+            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream(), "UTF-8"), true);
             reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-            writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()),true);
             return true;
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -131,19 +110,10 @@ public class Client {
         }
     }
 
-    public boolean openObjectSocket() {
-        try {
-            client = new Socket();
-            client.connect(socketAddress);
-            //readerObject = new ObjectInputStream(client.getInputStream());
-            //writerObject = new ObjectOutputStream(client.getOutputStream());
-            return true;
-        } catch (IOException ex) {
-            ex.printStackTrace();
-            displayErrorMessage();
-            return false;
-        }
+    public void flushWriter() {
+        writer.flush();
     }
+
 
     public void newSocket(int port) {
         try {
@@ -170,6 +140,7 @@ public class Client {
         openSocket();
         try {
             writeString("logout");
+            System.out.println("logout");
             this.writeString(this.getUsername());
             client.close();
             startGUI();
@@ -183,6 +154,7 @@ public class Client {
         openSocket();
         try {
             writeString("logout");
+            System.out.println("logout and exit");
             this.writeString(this.getUsername());
             client.close();
         } catch (IOException ex) {
@@ -197,15 +169,6 @@ public class Client {
             client.close();
             reader.close();
             writer.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    public void closeObjectSocket() {
-        try{
-            readerObject.close();
-            writerObject.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -282,12 +245,12 @@ public class Client {
     private void loginRegister() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
-        view.setDefaultCloseOperation(logoutAndExit());
+        //view.setDefaultCloseOperation(logoutAndExit());
         new LoginRegisterController(view, model);
     }
 
     public void startGUI() {
-        if (isServerOpen() && openSocket() && openObjectSocket()) {
+        if (isServerOpen() && openSocket()) {
             loginRegister();
         } else {
             displayErrorMessage();
@@ -296,7 +259,7 @@ public class Client {
 
     public static void main(String[] args) {
         Thread clientsThread = new Thread(() ->{
-            Client client = new Client(2020);
+            Client client = new Client(2040);
 
             client.startGUI();
         });

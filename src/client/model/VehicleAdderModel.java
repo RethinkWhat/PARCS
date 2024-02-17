@@ -47,9 +47,9 @@ public class VehicleAdderModel {
         client.writeString(plateNumber);
         boolean vehicleAccepted = client.readString().equals("true");
         client.closeSocket();
+        System.out.println("vehicle  accepted = " + vehicleAccepted);
         if (vehicleAccepted) {
-            client.logout();
-            //new ApplicationController(new ApplicationView(), new ApplicationModel(client));
+            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }
         return vehicleAccepted;
     }

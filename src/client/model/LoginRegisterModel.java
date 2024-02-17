@@ -63,12 +63,15 @@ public class LoginRegisterModel {
      * @return The success state.
      */
     public boolean validateAccount(String username, String password) {
+        System.out.println("login register model validation attempting");
         client.openSocket();
+        System.out.println("socket open");
         client.writeString("login");
         client.writeString(username);
         client.writeString(password);
 
         String validationMessage = client.readString();
+        System.out.println(validationMessage);
         boolean validated =  validationMessage.equals("true");
 
         if (!validated) {
@@ -79,11 +82,12 @@ public class LoginRegisterModel {
         }
 
         if (validated) {
-            client.writeString("disconnect");
-            client.closeSocket();
+           // client.writeString("disconnect");
             client.setUsername(username);
             new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }
+        client.closeSocket();
+
         return validated;
     }
 
@@ -115,11 +119,12 @@ public class LoginRegisterModel {
         boolean signUpSuccess =  client.readString().equals("true");
 
         if (signUpSuccess) {
-            client.writeString("disconnect");
-            client.closeSocket();
+            //client.writeString("disconnect");
             client.setUsername(username);
+            System.out.println("sign up success");
             new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel(client));
         }
+        client.closeSocket();
         return signUpSuccess;
 
     }
