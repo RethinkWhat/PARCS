@@ -117,6 +117,16 @@ public class UserProfileModel {
     }
 
     /**
+     * Method to handle deleting a user account
+     */
+    public void deleteAccount() {
+        client.openSocket();
+        client.writeString("delete");
+        client.closeSocket();
+    }
+
+
+    /**
      * Retrieves the current first name of the user.
      *
      * @return The current first name.

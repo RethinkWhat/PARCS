@@ -374,11 +374,24 @@ public class UserParser {
         }
     }
 
+    public void deleteUser(String username) {
+        getUserAccountsFile();
+        NodeList nodeList = document.getElementsByTagName("user");
+        for (int x = 0; x < nodeList.getLength(); x++) {
+            Node curr = nodeList.item(x);
+            if (curr.getAttributes().item(0).getTextContent().equalsIgnoreCase(username)) {
+                Node parent = curr.getParentNode();
+                parent.removeChild(curr);
+            }
+        }
+        transform();
+    }
+
     /** Will be deleted later */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
-        obj.editVehicle("basti","NWA 991", "Motor,Judge,INDIA");
+        obj.deleteUser("basti");
 
 //        obj.editUserInfo("basti", "lastName", "SicSic");
         //obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",

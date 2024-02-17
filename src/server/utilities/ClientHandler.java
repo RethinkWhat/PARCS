@@ -98,6 +98,9 @@ public class ClientHandler implements Runnable {
                                 case "history":
                                     history();
                                     break;
+                                case "delete":
+                                    deleteUser();
+                                    break;
                             }
                         }
                 }
@@ -452,6 +455,18 @@ public class ClientHandler implements Runnable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
+    }
+
+    /** Method to delete a user account */
+    public void deleteUser() {
+        try {
+            String username = reader.readLine();
+            server.deleteUser(username);
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+
+
     }
 
 }

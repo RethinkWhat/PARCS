@@ -185,6 +185,10 @@ public class Server implements Runnable{
         return reservationParser.countTotalBookingsPerDay(username, date);
     }
 
+    public void deleteUser(String username) {
+        userParser.deleteUser(username);
+    }
+
     public List<List<String>> getUserReservations(String username) {
         Map<String,Reservations> parkingSpotList = reservationParser.getUserReservations(username);
 
