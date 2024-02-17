@@ -15,25 +15,25 @@ public class ClientHandler implements Runnable {
 
 
     /** Reference to the server instance */
-    private Server server;
+    Server server;
 
     /** Socket representing the client connection */
-    private Socket client;
+    Socket client;
 
     /** BufferedReader for reading client input */
-    private BufferedReader reader;
+    BufferedReader reader;
 
     /** PrintWriter for writing output to the client */
-    private PrintWriter writer;
+    PrintWriter writer;
 
     /** Flag indicating whether the client is authenticated */
-    private boolean authenticateLogin = false;
+    boolean authenticateLogin = false;
 
     /** Flag indicating whether the client is disconnected */
-    private boolean disconnect = false;
+    boolean disconnect = false;
 
     /** The server's IP address */
-    private InetAddress address;
+    InetAddress address;
 
 
     /**
