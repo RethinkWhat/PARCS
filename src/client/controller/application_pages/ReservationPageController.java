@@ -100,8 +100,8 @@ public class ReservationPageController {
         view.getParkingSlotButtonsView().setDurationListener(new DurationListener());
         view.getMainTopPanel().setTxtSearchBarListener(new SearchListener());
 
-        //view.getMainTopPanel().setPnlAvailCar(String.valueOf(availableCarCount));
-        //view.getMainTopPanel().setPnlAvailMotor(String.valueOf(availableMotorCount));
+        view.getMainTopPanel().setPnlAvailCar(String.valueOf(availableCarCount));
+        view.getMainTopPanel().setPnlAvailMotor(String.valueOf(availableMotorCount));
         view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
 
         view.getParkingSlotButtonsView().setDateList(dateList);
