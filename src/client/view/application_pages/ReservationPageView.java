@@ -738,7 +738,7 @@ public class ReservationPageView extends JPanel {
 
         public ReserveSlotConfirmationView(boolean success) {
 
-            this.setTitle("PARCS Reservation Confirmation");
+            this.setTitle("PARCS");
             this.setModal(true);
             this.setLayout(new GridLayout(3, 1));
 
@@ -750,9 +750,9 @@ public class ReservationPageView extends JPanel {
             // Create and set ImageIcon for pnlIcon
             ImageIcon iconAvailableCar;
             if (success)
-                iconAvailableCar = res.iconAvailableCar; //change icon
+                iconAvailableCar = res.iconSuccess; //change icon
             else {
-                iconAvailableCar = res.iconTakenCar;
+                iconAvailableCar = res.iconError;
             }
             pnlIcon.add(new JLabel(iconAvailableCar), BorderLayout.CENTER);
 
@@ -763,10 +763,10 @@ public class ReservationPageView extends JPanel {
             if (success) {
                 // Create label for PnlConfirmation with font based on resources class
                 lblReserved = res.createLblH1("RESERVED!", res.celadon);
-                lblConfirmationMsg = res.createLblH2("You successfully created your reservation. Thank you!", res.eerieBlack);
+                lblConfirmationMsg = res.createLblP("You successfully created your reservation. Thank you!", res.eerieBlack);
             } else {
                 lblReserved = res.createLblH1("FAILED!", res.red);
-                lblConfirmationMsg = res.createLblH2("No booking two parking spots at a time. Thank you!", res.eerieBlack);
+                lblConfirmationMsg = res.createLblP("No booking two parking spots at a time. Thank you!", res.eerieBlack);
             }
 
             // Add labels to PnlConfirmation panel
