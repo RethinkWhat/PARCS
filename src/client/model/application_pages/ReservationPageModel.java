@@ -51,6 +51,7 @@ public class ReservationPageModel {
 
     private Map<String, List<String>> vehicles;
 
+
     /**
      * Constructs a ReservationPageModel with a specified client.
      * @param client The specified client.
@@ -169,8 +170,10 @@ public class ReservationPageModel {
             arrayString = new String[listOfTime.size()];
         }
         arrayString[0] = "Select Time:";
+        int index =1;
         for (int x =1 ; x< listOfTime.size(); x++) {
-            arrayString[x] = listOfTime.get(x);
+                arrayString[x] = listOfTime.get(index);
+                index++;
         }
         client.closeSocket();
         return arrayString;
