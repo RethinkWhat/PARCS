@@ -5,19 +5,15 @@ import server.view.AdminApplicationView;
 import server.view.DashboardView;
 import utilities.Resources;
 
-import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
 /**
- * Proc
- *
+ * Processes the server initialization and viewing of pertinent activities in the server.
  */
 public class AdminApplicationController {
     /**
@@ -136,9 +132,13 @@ public class AdminApplicationController {
     }
 
     /**
-     * TODO: Documentation
+     * Processes the initializing and disabling the server.
      */
     class ServerListener implements ActionListener {
+        /**
+         * Turns the server on and/or off.
+         * @param e the event to be processed
+         */
         @Override
         public void actionPerformed(ActionEvent e) {
             if (!serverStatus) {
