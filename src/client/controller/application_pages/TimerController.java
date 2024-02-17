@@ -48,15 +48,19 @@ public class TimerController {
     }
 
     public void startTimer() {
+        System.out.println("reached");
         Thread thread = new Thread(() -> {
+
+            System.out.println("TIME IN: " + model.getTimeIn().split(":")[0]);
+            System.out.println("MODEL tiME: " + model.getClient().getTime().split(":")[0]);
             if (model.getClient().getDate().equals(model.getDate()) &&
-                    model.getTimeIn().split(":")[0].compareTo(model.getClient().getTime())>0) {
+                    Integer.valueOf(model.getTimeIn().split(":")[0]) >=
+            Integer.valueOf(model.getClient().getTime().split(":")[0])) {
                 if (model.isStartTimer() && !model.isTimeStarted()) {
                     String timeNow[] = model.getClient().getTime().split(":");
 
                     int secondsNow = Integer.parseInt(timeNow[2]);
                     int minutesNow = Integer.parseInt(timeNow[1]);
-                    int hoursNow = Integer.parseInt(timeNow[0]);
 
                     int secondsRemaining = 0;
                     int minutesRemaining = 0;

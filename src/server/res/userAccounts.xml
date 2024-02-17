@@ -1,52 +1,18 @@
 <userClass>
-                 
-    
-    
-    
+        
     <user username="basti">
-                                
-        
-        
+                
         <type>user</type>
-                                
-        
-        
+                
         <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
-                                
-        
-        
+                
         <lastName>siccuan</lastName>
-                                
-        
-        
+                
         <firstName>basti</firstName>
-                                
-        
-        
+                
         <phoneNumber>09177900153</phoneNumber>
-                            
-        
-        
+            
         <vehicle>Car,Honda Civic,NWA 991</vehicle>
-                    
-    
-    </user>
-            
-
-    
-    <user username="a">
-                
-        <type>user</type>
-                
-        <password>ypeBEsobvcr6wjGzmiPcTaeG7/gUfE5yuYB3ha/uSLs=</password>
-                
-        <lastName>a</lastName>
-                
-        <firstName>a</firstName>
-                
-        <phoneNumber>a</phoneNumber>
-            
-        <vehicle>Car, Honda Civic,NWA 991</vehicle>
     </user>
     
 </userClass>
