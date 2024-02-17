@@ -122,6 +122,7 @@ public class UserProfileModel {
     public void deleteAccount() {
         client.openSocket();
         client.writeString("delete");
+        client.writeString(client.getUsername());
         client.closeSocket();
     }
 

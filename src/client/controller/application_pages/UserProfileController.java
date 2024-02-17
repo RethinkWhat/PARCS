@@ -233,7 +233,8 @@ public class UserProfileController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            // TODO: @Rithik
+            model.deleteAccount();
+            System.exit(0);
         }
     }
 
