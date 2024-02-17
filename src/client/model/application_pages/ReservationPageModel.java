@@ -126,14 +126,6 @@ public class ReservationPageModel {
 
     }
 
-    /**
-     * Retrieves the current live date and time.
-     * @return The current date and time.
-     */
-    public String getTime() {
-        return "Date";
-        //return liveDateTime.getTime();
-    }
 
     /**
      * Retrieves the full name of the user to be displayed in the ReservationPage.
@@ -159,12 +151,11 @@ public class ReservationPageModel {
         ArrayList<String> listOfTime = new ArrayList<>();
         while (true) {
             String timeAccepted = client.readString();
+            System.out.println("LINE READ IN LOOP: " + timeAccepted);
             if (timeAccepted.equals("complete"))
                 break;
             listOfTime.add(timeAccepted);
-
         }
-        //ArrayList<String> listOfTime = null ;//(ArrayList<String>) client.readObject();
 
         String[] arrayString = new String[1];
         if (!listOfTime.isEmpty()) {
@@ -199,6 +190,7 @@ public class ReservationPageModel {
 
             for (int x =0; x< carSize; x++) {
                 String time[] = getAvailableTime(("C" + (x+1)),"1",date);
+                System.out.println(("C" + (x+1)) + " : " + date);
 
                 if (time.length > 1)
                     return ("C"+(x+1));

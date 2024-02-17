@@ -97,6 +97,7 @@ public class ClientHandler implements Runnable {
                                     break;
                                 case "history":
                                     history();
+                                    break;
                             }
                         }
                 }
@@ -366,13 +367,16 @@ public class ClientHandler implements Runnable {
             String identifier = reader.readLine();
             String duration = reader.readLine();
             String date = reader.readLine();
+
+            System.out.println("SERVER: " + identifier + ", " + duration + ", " + date);
             List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
+            System.out.println("AVAILABLE TIME: " +  availableTime);
 
             for (String time : availableTime) {
-                if (Integer.valueOf(dateTime.getTime().split(":")[0]) <=
-                        Integer.valueOf(time.split(":")[0])) {
+               // if (Integer.valueOf(dateTime.getTime().split(":")[0]) <=
+                //        Integer.valueOf(time.split(":")[0])) {
                     writer.println(time);
-                }
+                //}
             }
             writer.println("complete");
           //  outputStreamWriter.writeObject(availableTime);

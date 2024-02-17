@@ -56,10 +56,7 @@ public class ReservationPageController {
         view.setUserFullName(model.getFullName());
 
         // constants/variables
-        view.getLblDate().setText(model.getTime());
-        // updates the time every second.
-        timer = new Timer(1000,e -> updateTime());
-        timer.start();
+        view.getLblDate().setText("");
 
 
         carsNumber = view.getMainBottomPanel().getParkingSlotsPanel().getCarButtonsSize();
@@ -67,12 +64,12 @@ public class ReservationPageController {
 
         int availableCarCount = 0;
         for (int x = 0; x < carsNumber; x++) {
+            System.out.println("carNumber size: " + carsNumber);
             boolean isTaken = true;
             if (model.getAvailableTime(("C" + (x + 1)), "1", date).length > 1) {
                 isTaken = false;
                 availableCarCount++;
             }
-
             view.getMainBottomPanel().getParkingSlotsPanel().setCarMotorButtonsIcon(true, x, isTaken);
         }
 
@@ -104,6 +101,7 @@ public class ReservationPageController {
         view.getMainTopPanel().setPnlAvailMotor(String.valueOf(availableMotorCount));
         view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
 
+        //System.out.println("THIS IS DATELIST: " + dateList[0]);
         view.getParkingSlotButtonsView().setDateList(dateList);
 
 
@@ -122,8 +120,8 @@ public class ReservationPageController {
      */
     private void updateTime() {
         SwingUtilities.invokeLater(() -> {
-            String time = model.getTime();
-            view.getLblDate().setText(time);
+            //String time = model.getTime();
+            //view.getLblDate().setText(time);
         });
     }
 
@@ -172,9 +170,10 @@ public class ReservationPageController {
             view.getParkingSlotButtonsView().setLblDate(date);
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
             if (!duration.equals("Duration:")) {
-                timeAvailable = model.getAvailableTime(btnID, duration, date);
-                view.getParkingSlotButtonsView().setTimeList(timeAvailable);
-                if (timeAvailable.length > 1)
+                String[] time = model.getAvailableTime(btnID, duration, date);
+                System.out.println("DURATION LISTENER: " + time[1]);
+                view.getParkingSlotButtonsView().setTimeList(time);
+                if (time.length > 1)
                     view.getParkingSlotButtonsView().setLblStatus("Available");
                 else {
                     view.getParkingSlotButtonsView().setLblStatus("Unavailable");
