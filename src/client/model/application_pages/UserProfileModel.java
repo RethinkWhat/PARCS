@@ -43,6 +43,12 @@ public class UserProfileModel {
      */
     private ArrayList<String> vehicleList;
 
+
+    /** Histroy page variables */
+    private int historyPageNo =0;
+
+    private ArrayList<ArrayList<String>> bookings;
+
     /**
      * Constructs a model of UserProfile with a specified client.
      *
@@ -191,8 +197,8 @@ public class UserProfileModel {
     /**
      * Edits the user's vehicle information with a specified vehicle type, model, and plateNumber.
      *
-     * @param type        The specified type.
-     * @param model       The specified model.
+     * @param plateNumber        The specified plateNumber.
+     * @param newInfo       The new vehicle information.
      * @param plateNumber The specified plate number.
      * @return True if the edit was successful. False if otherwise.
      */
@@ -229,6 +235,32 @@ public class UserProfileModel {
         return true;
     }
 
+    public void viewHistory() {
+        client.openSocket();
+        client.writeString("history");
+        client.writeString(client.getUsername());
+
+        bookings = new ArrayList<>();
+        ArrayList parkingInfo;
+        String lineRead;
+        while (true) {
+            lineRead = client.readString();
+            if (lineRead.equals("complete"))
+                break;
+            parkingInfo = new ArrayList<>();
+            parkingInfo.add(lineRead);
+            while (true) {
+                lineRead = client.readString();
+                if (lineRead.equals("nextBooking"))
+                    break;
+                parkingInfo.add(lineRead);
+            }
+            bookings.add(parkingInfo);
+        }
+        client.closeSocket();
+        System.out.println(bookings);
+    }
+
     /**
      * Retrieves the current client.
      *
@@ -237,4 +269,36 @@ public class UserProfileModel {
     public Client getClient() {
         return client;
     }
+
+    public boolean validateEndOrStart(int number) {
+        int indexToCheck = historyPageNo + number;
+        boolean isValidIndex = indexToCheck >= 0 && indexToCheck < bookings.size();
+        if (isValidIndex) {
+            historyPageNo += number;
+        }
+        return isValidIndex;
+    }
+
+
+    public String getType() {
+        return bookings.get(historyPageNo).get(0);
+    }
+
+    public String getSpot() {
+        return bookings.get(historyPageNo).get(1);
+    }
+
+    public String getCheckIn() {
+        return bookings.get(historyPageNo).get(2);
+    }
+
+    public String getCheckOut() {
+        return bookings.get(historyPageNo).get(3);
+    }
+
+
+    public String getDuration() {
+        return bookings.get(historyPageNo).get(4);
+    }
+
 }

@@ -2,6 +2,7 @@ package server.utilities;
 
 
 import client.model.DateTime;
+import server.model.Reservations;
 import server.model.Server;
 import server.model.Vehicle;
 
@@ -94,6 +95,8 @@ public class ClientHandler implements Runnable {
                                 case "editVehicleInfo":
                                     editVehicle();
                                     break;
+                                case "history":
+                                    history();
                             }
                         }
                 }
@@ -421,6 +424,29 @@ public class ClientHandler implements Runnable {
             writer.println(duration);
         } catch (IOException exception) {
             exception.printStackTrace();
+        }
+    }
+
+    /**
+     * Method to get all the history of bookings associated with a user account
+     */
+    public void history() {
+        try {
+            String username = reader.readLine();
+            List<List<String>> userBookings = server.getUserReservations(username);
+            System.out.println("SENDING: "  + userBookings);
+
+            for (List<String> bookingList : userBookings) {
+
+                for (String bookingInfo : bookingList) {
+                    writer.println(bookingInfo);
+                }
+                writer.println("nextBooking");
+            }
+            writer.println("complete");
+
+        } catch (IOException ex) {
+            ex.printStackTrace();
         }
     }
 

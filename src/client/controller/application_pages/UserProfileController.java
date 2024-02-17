@@ -79,7 +79,15 @@ public class UserProfileController {
         // navigation
         view.setNavEditProfileListener(e -> view.getCardLayout().show(view.getPnlCards(), "profile"));
         view.setNavEditCarsListener(e -> view.getCardLayout().show(view.getPnlCards(), "vehicles"));
-        view.setNavHistoryListener(e -> view.getCardLayout().show(view.getPnlCards(), "history"));
+        view.setNavHistoryListener(e -> {
+            view.getCardLayout().show(view.getPnlCards(), "history");
+            model.viewHistory();
+            view.getHistoryPage().recordPanel().setLblType(model.getType());
+            view.getHistoryPage().recordPanel().setLblSpot(model.getSpot());
+            view.getHistoryPage().recordPanel().setLblCheckIn(model.getCheckIn());
+            view.getHistoryPage().recordPanel().setLblCheckOut(model.getCheckOut());
+            view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
+        });
         view.setNavSecurityListener(e -> view.getCardLayout().show(view.getPnlCards(), "security"));
         view.setNavExitListener(e -> {
             parent.dispose();
@@ -109,8 +117,10 @@ public class UserProfileController {
         }
 
         // history page
-        // TODO: action listeners for history page
-        view.get
+        view.getHistoryPage().recordPanel().btnNextListener(new HistoryNextListener());
+        view.getHistoryPage().recordPanel().btnPrevListener(new HistoryPreviousListener());
+
+
 
         // security page
         view.getPnlSecurityPage().setConfirmListener(new SecurityConfirmListener());
@@ -184,6 +194,8 @@ public class UserProfileController {
                 ));
 
         // history page
+
+
 
         view.revalidate();
         view.repaint();
@@ -340,5 +352,33 @@ public class UserProfileController {
             }
         }
     }
+
+    class HistoryNextListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (model.validateEndOrStart(1)) {
+                view.getHistoryPage().recordPanel().setLblType(model.getType());
+                view.getHistoryPage().recordPanel().setLblSpot(model.getSpot());
+                view.getHistoryPage().recordPanel().setLblCheckIn(model.getCheckIn());
+                view.getHistoryPage().recordPanel().setLblCheckOut(model.getCheckOut());
+                view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
+            }
+        }
+    }
+
+    class HistoryPreviousListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (model.validateEndOrStart(-1)) {
+                view.getHistoryPage().recordPanel().setLblType(model.getType());
+                view.getHistoryPage().recordPanel().setLblSpot(model.getSpot());
+                view.getHistoryPage().recordPanel().setLblCheckIn(model.getCheckIn());
+                view.getHistoryPage().recordPanel().setLblCheckOut(model.getCheckOut());
+                view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
+            }
+        }
+    }
+
+
 }
 

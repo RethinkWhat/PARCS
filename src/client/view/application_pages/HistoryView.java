@@ -5,6 +5,7 @@ import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * The HistoryView contains the pertinent information about the user's booking details.
@@ -35,6 +36,8 @@ public class HistoryView extends JPanel {
      */
     private Resources res = new Resources();
 
+    private RecordPanel recordPanel;
+
     /**
      * Constructs a panel of HistoryView.
      */
@@ -55,7 +58,8 @@ public class HistoryView extends JPanel {
         pnlCards.setPreferredSize(new Dimension(600,500));
         container.add(pnlCards, BorderLayout.CENTER);
 
-        pnlCards.add(new RecordPanel());
+        recordPanel = new RecordPanel();
+        pnlCards.add(recordPanel);
 
         btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 30,30);
         container.add(btnPrev, BorderLayout.WEST);
@@ -65,6 +69,10 @@ public class HistoryView extends JPanel {
 
         this.setPreferredSize(new Dimension(750, 700));
     }
+    public RecordPanel recordPanel() {
+        return recordPanel;
+    }
+
 
     /**
      * The panel that contains the booking information.
@@ -82,10 +90,8 @@ public class HistoryView extends JPanel {
          * The label for type of vehicle.
          */
         private JLabel lblType;
-        /**
-         * The label for vehicle of the user.
-         */
-        private JLabel lblVehicle;
+
+
         /**
          * The label for parking spot.
          */
@@ -148,22 +154,18 @@ public class HistoryView extends JPanel {
             container.add(lblTypeLabel, gbc);
 
             gbc.gridy = 4;
-            JLabel lblVehicleLabel = res.createLblP("Vehicle:", res.eerieBlack);
-            container.add(lblVehicleLabel, gbc);
-
-            gbc.gridy = 5;
             JLabel lblSpotLabel = res.createLblP("Parking Spot", res.eerieBlack);
             container.add(lblSpotLabel, gbc);
 
-            gbc.gridy = 6;
+            gbc.gridy = 5;
             JLabel lblCheckInLabel = res.createLblP("Check-In:", res.eerieBlack);
             container.add(lblCheckInLabel, gbc);
 
-            gbc.gridy = 7;
+            gbc.gridy = 6;
             JLabel lblCheckOutLabel = res.createLblP("Check-Out:", res.eerieBlack);
             container.add(lblCheckOutLabel, gbc);
 
-            gbc.gridy = 8;
+            gbc.gridy = 7;
             JLabel lblDurationLabel = res.createLblP("Duration:", res.eerieBlack);
             container.add(lblDurationLabel, gbc);
 
@@ -178,22 +180,18 @@ public class HistoryView extends JPanel {
             container.add(lblType, gbc);
 
             gbc.gridy = 4;
-            lblVehicle = res.createLblP("Info", res.eerieBlack);
-            container.add(lblVehicle, gbc);
-
-            gbc.gridy = 5;
             lblSpot = res.createLblP("Info", res.eerieBlack);
             container.add(lblSpot, gbc);
 
-            gbc.gridy = 6;
+            gbc.gridy = 5;
             lblCheckIn = res.createLblP("Info", res.eerieBlack);
             container.add(lblCheckIn, gbc);
 
-            gbc.gridy = 7;
+            gbc.gridy = 6;
             lblCheckOut = res.createLblP("Info", res.eerieBlack);
             container.add(lblCheckOut, gbc);
 
-            gbc.gridy = 8;
+            gbc.gridy = 7;
             lblDuration = res.createLblP("Info", res.eerieBlack);;
             container.add(lblDuration, gbc);
         }
@@ -214,13 +212,6 @@ public class HistoryView extends JPanel {
             return lblType;
         }
 
-        /**
-         * Retrieves the current JLabel of lblVehicle.
-         * @return The current lblVehicle.
-         */
-        public JLabel getLblVehicle() {
-            return lblVehicle;
-        }
 
         /**
          * Retrieves the current JLabel of lblSpot.
@@ -253,5 +244,44 @@ public class HistoryView extends JPanel {
         public JLabel getLblDuration() {
             return lblDuration;
         }
+
+
+
+        public void setLblDate(String label) {
+            lblDate.setText(label);
+        }
+
+        public void setLblType(String label) {
+            lblType.setText(label);
+        }
+
+
+        public void setLblSpot(String label) {
+             lblSpot.setText(label);
+        }
+
+
+        public void setLblCheckIn(String label) {
+            lblCheckIn.setText(label);
+        }
+
+
+        public void setLblCheckOut(String label) {
+            lblCheckOut.setText(label);
+        }
+
+        public void setLblDuration(String label) {
+            lblDuration.setText(label);
+        }
+
+
+        public void btnPrevListener(ActionListener listener) {
+            btnPrev.addActionListener(listener);
+        }
+
+        public void btnNextListener(ActionListener listener) {
+            btnNext.addActionListener(listener);
+        }
     }
+
 }

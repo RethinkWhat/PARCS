@@ -653,7 +653,6 @@ public class ReservationParser {
             }
 
         }
-
         return motorBookings;
     }
 
@@ -661,12 +660,38 @@ public class ReservationParser {
 
 
 
+
+
+
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
-        List<ParkingSpot> parkingSpotList = parser.getParkingInformation();
+        Map<String,Reservations> parkingSpotList = parser.getUserReservations("basti");
+
+        ArrayList userBookings = new ArrayList<>();
+        for (String key : parkingSpotList.keySet()) {
+            ArrayList<String> booking = new ArrayList<>();
+            if (key.contains("C"))
+                booking.add("Car");
+            else
+                booking.add("Motor");
+
+            booking.add(key);
+
+            Reservations value = parkingSpotList.get(key);
+            booking.add(value.getDate());
+
+            for (TimeRange timeRange : value.getTimeAndUserMap().keySet()) {
+                booking.add(timeRange.startTime());
+                booking.add(timeRange.endTime());
+            }
+            userBookings.add(booking);
+        }
+        System.out.println(userBookings);
+
+
        // System.out.println(parser.checkScheduleConflicts("rickardo", "9:00", "10:00"));
 
-        System.out.println(parser.getAllCarBookings().toString());
-        System.out.println(parser.getAllMotorBookings().toString());
+    //    System.out.println(parser.getAllCarBookings().toString());
+      //  System.out.println(parser.getAllMotorBookings().toString());
     }
 }
