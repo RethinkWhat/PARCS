@@ -91,6 +91,9 @@ public class ClientHandler implements Runnable {
                                 case "getVehicles":
                                     getVehicles();
                                     break;
+                                case "editVehicleInfo":
+                                    editVehicle();
+                                    break;
                             }
                         }
                 }
@@ -200,6 +203,17 @@ public class ClientHandler implements Runnable {
                 server.editInfo(tagAndUpdate[0], tagAndUpdate[1], tagAndUpdate[2]);
             }
             writer.println("true");
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void editVehicle() {
+        try {
+            String username = reader.readLine();
+            String plateNo = reader.readLine();
+            String newVehicle = reader.readLine();
+            writer.println(server.editVehicle(username,plateNo, newVehicle));
         } catch (IOException ex) {
             ex.printStackTrace();
         }

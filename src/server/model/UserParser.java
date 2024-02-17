@@ -342,11 +342,45 @@ public class UserParser {
         return userVehicles;
     }
 
+    public boolean editVehicle(String username, String plateNo, String newInformation) {
+        getUserAccountsFile();
+        try {
+            NodeList nodeList = document.getElementsByTagName("user");
+
+            for (int x = 0; x < nodeList.getLength(); x ++) {
+                Node curr = nodeList.item(x);
+                if (curr.getAttributes().item(0).getTextContent().equalsIgnoreCase(username)) {
+
+                    NodeList currChildren = curr.getChildNodes();
+                    for (int y = 0 ; y < currChildren.getLength() ; y++) {
+                        Node currNode = currChildren.item(y);
+
+                        if (currNode.getNodeType() == Node.ELEMENT_NODE) {
+                            if (currChildren.item(y).getNodeName().equalsIgnoreCase("vehicle")) {
+                                if (currChildren.item(y).getTextContent().contains(plateNo)) {
+                                    currChildren.item(y).setTextContent(newInformation);
+                                }
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+            transform();
+
+            return true;
+        } catch (Exception ex) {
+            return false;
+        }
+    }
+
     /** Will be deleted later */
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
-        obj.editUserInfo("basti", "lastName", "SicSic");
+        obj.editVehicle("basti","NWA 991", "Motor,Judge,INDIA");
+
+//        obj.editUserInfo("basti", "lastName", "SicSic");
         //obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",
            //     null);
         //obj.addVehicle("ri", new Vehicle("Car", "Civic", "A4949329"));

@@ -1,6 +1,5 @@
 package server.controller;
 
-import server.model.ReservationParser;
 import server.model.Server;
 import server.view.AdminApplicationView;
 import server.view.DashboardView;
@@ -41,7 +40,6 @@ public class AdminApplicationController {
     /**
      * Instance variable of reservation parser.
      */
-    private static ReservationParser reservationParser = new ReservationParser();
     /**
      * List of lists of car bookings.
      */
@@ -169,8 +167,8 @@ public class AdminApplicationController {
         motorBookings.clear();
 
         // populate / repopulate lists
-        carBookings = reservationParser.getAllCarBookings();
-        motorBookings = reservationParser.getAllMotorBookings();
+        carBookings = server.getAllCarBookings();
+        motorBookings = server.getAllMotorBookings();
 
         view.getDashboardView().getPnlMainTop().getLblCarCount().setText(String.valueOf(carBookings.size()));
         view.getDashboardView().getPnlMainTop().getLblMotorCount().setText(String.valueOf(motorBookings.size()));
@@ -245,11 +243,5 @@ public class AdminApplicationController {
      */
     public static void main(String[] args) {
         new AdminApplicationController(new AdminApplicationView());
-
-        List<List<String>> carBookings = reservationParser.getAllCarBookings();
-        for (List<String> car : carBookings) {
-            System.out.println(car);
-        }
-        List<List<String>> motorBookings = reservationParser.getAllMotorBookings();
     }
 }

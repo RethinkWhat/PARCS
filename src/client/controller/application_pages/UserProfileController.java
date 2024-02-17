@@ -12,6 +12,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 /**
  * The UserProfileController processes the user requests for editing user account information, vehicle information,
@@ -34,6 +35,12 @@ public class UserProfileController {
      */
     private UserProfileView.EditCars.CarsPanel[] pnlsCars;
 
+    private int carIndex =0;;
+
+    private int max;
+
+    private ArrayList<String> plateNumbers;
+
     /**
      * Constructs a controller of the UserProfile page with a specified view and model.
      *
@@ -50,11 +57,16 @@ public class UserProfileController {
 
         pnlsCars = new UserProfileView.EditCars.CarsPanel[model.getVehicleList().size()];
 
+        max = model.getVehicleList().size();
+        plateNumbers = new ArrayList<>();
+
         // populate cars panel inside edit cars page.
-        for (int i = 0; i < model.getVehicleList().size(); i++) {
+        for (int i = 0; i < max; i++) {
             String token = model.getVehicleList().get(i);
             String[] tokens = token.split(",");
             String vPlateNumber = tokens[0];
+            plateNumbers.add(vPlateNumber);
+
             String vType = tokens[1];
             String vModel = tokens[2];
 
@@ -84,10 +96,8 @@ public class UserProfileController {
         // edit cars page
         view.getPnlEditCars().setContinueListener(new CarContinueListener());
         view.getPnlEditCars().setCancelListener(new CarCancelListener());
-        view.getPnlEditCars().setNextListener(e ->
-                view.getPnlEditCars().getCardLayout().next(view.getPnlEditCars().getPnlCards()));
-        view.getPnlEditCars().setPrevListener(e ->
-                view.getPnlEditCars().getCardLayout().previous(view.getPnlEditCars().getPnlCards()));
+        view.getPnlEditCars().setNextListener(new NextListener());
+        view.getPnlEditCars().setPrevListener(new PreviousListener());
 
         for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
             panel.setEditListener(e -> {
@@ -272,16 +282,13 @@ public class UserProfileController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            String vType = null;
-            String vPlateNumber = null;
-            String vModel = null;
-
-            for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
-                vType = panel.getTxtVehicleType().getText();
-                vPlateNumber = panel.getTxtPlateNumber().getText();
-                vModel = panel.getTxtModel().getText();
-            }
-            model.editVehicleInfo(vType, vModel, vPlateNumber);
+            String newType = pnlsCars[carIndex].getTxtVehicleType().getText();
+            String newPlate = pnlsCars[carIndex].getTxtPlateNumber().getText();
+            String newModel = pnlsCars[carIndex].getTxtModel().getText();
+            model.editVehicleInfo(
+                    plateNumbers.get(carIndex),
+                    (newType + "," + newPlate + "," + newModel)
+            );
         }
     }
 
@@ -311,6 +318,26 @@ public class UserProfileController {
                     view.getPnlSecurityPage().getLblMessage().setForeground(Color.green);
                     model.editPassword(LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
                 }
+            }
+        }
+    }
+
+    class NextListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.getPnlEditCars().getCardLayout().next(view.getPnlEditCars().getPnlCards());
+            if (carIndex != max) {
+                carIndex += 1;
+            }
+        }
+    }
+
+    class PreviousListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.getPnlEditCars().getCardLayout().previous(view.getPnlEditCars().getPnlCards());
+            if (carIndex != 0) {
+                carIndex -= 1;
             }
         }
     }

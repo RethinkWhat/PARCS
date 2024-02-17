@@ -196,20 +196,14 @@ public class UserProfileModel {
      * @param plateNumber The specified plate number.
      * @return True if the edit was successful. False if otherwise.
      */
-    public boolean editVehicleInfo(String type, String model, String plateNumber) {
+    public boolean editVehicleInfo(String plateNumber, String newInfo) {
         client.openSocket();
 
-        client.writeString("editInfo");
+        client.writeString("editVehicleInfo");
 
-
-        if (!vehicles.get(plateNumber).equals(plateNumber)) {
-            if (!vehicles.get(model).equals(model)) {
-                client.writeString(username + ",vehicle," +
-                        type + "," + model + "," + plateNumber);
-            }
-        }
-
-        client.writeString("complete");
+        client.writeString(client.getUsername());
+        client.writeString(plateNumber);
+        client.writeString(newInfo);
 
         boolean editConfirmed = client.readString().equals("true");
         client.closeSocket();

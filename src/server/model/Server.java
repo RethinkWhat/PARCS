@@ -149,6 +149,18 @@ public class Server implements Runnable{
         }
     }
 
+    public boolean editVehicle(String username, String plateNo, String newInformation) {
+        return userParser.editVehicle(username,plateNo, newInformation);
+    }
+
+    public List<List<String>> getAllCarBookings() {
+        return reservationParser.getAllCarBookings();
+    }
+
+    public List<List<String>> getAllMotorBookings() {
+        return reservationParser.getAllMotorBookings();
+    }
+
     public void startAccepting() {
         try {
             server = new ServerSocket(socketAddress);
