@@ -10,27 +10,51 @@ import java.io.*;
 
 import java.net.*;
 import java.util.Scanner;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
 
+
+/**
+ * The Client class represents the client-side of the PARCS (Parking Reservation and Counting System) application.
+ * It manages the connection to the server, socket operations, and GUI initialization.
+ */
 public class Client {
 
     // Object to hold client socket
     private Socket client;
 
+    /**
+     * The username associated with the client.
+     */
     private String username;
 
+    /**
+     * The socket address used for connecting to the server.
+     */
     private SocketAddress socketAddress;
 
+    /**
+     * The BufferedReader used for reading from the server.
+     */
     BufferedReader reader;
 
+    /**
+     * The PrintWriter used for writing to the server.
+     */
     PrintWriter writer;
 
-
+    /**
+     * Constructs a Client with a specified client socket.
+     *
+     * @param client The client socket.
+     */
     public Client(Socket client) {
         this.client = client;
     }
 
+    /**
+     * Constructs a Client with a specified port.
+     *
+     * @param port The port to connect to.
+     */
     public Client(int port ) {
         try {
             Scanner fileReader = new Scanner(new File("src/client/host"));
@@ -56,18 +80,38 @@ public class Client {
         }
     }
 
+    /**
+     * Retrieves the client socket.
+     *
+     * @return The client socket.
+     */
     public Socket getClient() {
         return client;
     }
 
+    /**
+     * Sets the client socket.
+     *
+     * @param client The new client socket.
+     */
     public void setClient(Socket client) {
         this.client = client;
     }
 
+    /**
+     * Writes a string to the server.
+     *
+     * @param line The string to be written.
+     */
     public void writeString(String line) {
             writer.println(line);
     }
 
+    /**
+     * Reads a string from the server.
+     *
+     * @return The string read from the server.
+     */
     public String readString() {
         String toReturn = null;
         try {
@@ -79,23 +123,47 @@ public class Client {
         return toReturn;
     }
 
-
+    /**
+     * Retrieves the current date using the LiveDateTime class.
+     *
+     * @return The current date.
+     */
     public String getDate() {
         return LiveDateTime.getDate();
     }
 
+    /**
+     * Retrieves the current time using the LiveDateTime class.
+     *
+     * @return The current time.
+     */
     public String getTime() {
         return LiveDateTime.getTimeForTimerComparisons();
     }
 
+    /**
+     * Retrieves the username associated with the client.
+     *
+     * @return The username.
+     */
     public String getUsername() {
         return username;
     }
 
+    /**
+     * Sets the username associated with the client.
+     *
+     * @param username The new username.
+     */
     public void setUsername(String username) {
         this.username = username;
     }
 
+    /**
+     * Opens a socket connection to the server.
+     *
+     * @return True if the connection is successful, false otherwise.
+     */
     public boolean openSocket() {
         try {
             client = new Socket();
@@ -110,11 +178,18 @@ public class Client {
         }
     }
 
+    /**
+     * Flushes the writer.
+     */
     public void flushWriter() {
         writer.flush();
     }
 
-
+    /**
+     * Initializes a new socket connection using a specified port.
+     *
+     * @param port The port to connect to.
+     */
     public void newSocket(int port) {
         try {
             Scanner fileReader = new Scanner(new File("src/client/host"));
@@ -136,6 +211,9 @@ public class Client {
         }
     }
 
+    /**
+     * Logs out the user from the server and starts the GUI.
+     */
     public void logout() {
         openSocket();
         writeString("logout");
@@ -146,6 +224,11 @@ public class Client {
         closeSocket();
     }
 
+    /**
+     * Logs out the user from the server and exits the application.
+     *
+     * @return 1 indicating a successful exit.
+     */
     public int logoutAndExit() {
         openSocket();
         try {
@@ -160,6 +243,9 @@ public class Client {
         return 1;
     }
 
+    /**
+     * Closes the client socket, reader, and writer.
+     */
     public void closeSocket() {
         try {
             client.close();
@@ -170,6 +256,9 @@ public class Client {
         }
     }
 
+    /**
+     * Displays an error message dialog when unable to connect to the server.
+     */
     private void displayErrorMessage() {
         JFrame mainFrame = new JFrame();
         JDialog dialog = new JDialog(mainFrame, "PARCS", true);
@@ -227,6 +316,11 @@ public class Client {
         dialog.setVisible(true);
     }
 
+    /**
+     * Checks if the server is open by attempting to create a test socket.
+     *
+     * @return True if the server is open, false otherwise.
+     */
     private boolean isServerOpen() {
         try {
             Socket testSocket = new Socket();
@@ -238,6 +332,9 @@ public class Client {
         }
     }
 
+    /**
+     * Initiates the login and registration process.
+     */
     private void loginRegister() {
         LoginRegisterModel model = new LoginRegisterModel(this);
         LoginRegisterView view = new LoginRegisterView();
@@ -245,6 +342,9 @@ public class Client {
         new LoginRegisterController(view, model);
     }
 
+    /**
+     * Checks if the server is open and initializes the GUI accordingly.
+     */
     public void startGUI() {
         if (isServerOpen() && openSocket()) {
             loginRegister();
@@ -253,6 +353,11 @@ public class Client {
         }
     }
 
+    /**
+     * The main method to start the client application.
+     *
+     * @param args Command line arguments.
+     */
     public static void main(String[] args) {
         Thread clientsThread = new Thread(() ->{
             Client client = new Client(2040);
@@ -261,6 +366,4 @@ public class Client {
         });
         clientsThread.start();
     }
-
-
 }

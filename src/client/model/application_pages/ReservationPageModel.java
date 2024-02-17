@@ -1,9 +1,6 @@
 package client.model.application_pages;
 
 import client.model.Client;
-import client.model.LiveDateTime;
-
-import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
 import java.util.*;
@@ -46,9 +43,13 @@ public class ReservationPageModel {
 
     private String[] reservationTime = {"Select Time:", "6:00", "7:00", "8:00", "9:00",
             "10:00", "11:00", "12:00", "13:00", "14:00", "15:00", "16:00", "17:00", "18:00"};
-
+    /**
+     * The full name of the user.
+     */
     private String fullName;
-
+    /**
+     * Mapping of vehicles associated with the user.
+     */
     private Map<String, List<String>> vehicles;
 
 
@@ -136,10 +137,23 @@ public class ReservationPageModel {
         return fullName;
     }
 
+    /**
+     * Retrieves the array of reservation time slots.
+     *
+     * @return The array of reservation time slots.
+     */
     public String[] getReservationTime() {
         return reservationTime;
     }
 
+    /**
+     * Retrieves the available time slots for a given parking spot, duration, and date.
+     *
+     * @param parkingIdentifier The identifier of the parking spot.
+     * @param duration          The duration of the reservation.
+     * @param date              The date of the reservation.
+     * @return The array of available time slots.
+     */
     public String[] getAvailableTime(String parkingIdentifier, String duration, String date) {
         client.openSocket();
         client.writeString("spotInfo");
@@ -171,6 +185,15 @@ public class ReservationPageModel {
         return arrayString;
     }
 
+    /**
+     * Attempts to book a parking spot for the user on a specified date and time.
+     *
+     * @param identifier The identifier of the parking spot.
+     * @param date       The date of the reservation.
+     * @param startTime  The starting time of the reservation.
+     * @param duration   The duration of the reservation.
+     * @return True if the booking is confirmed, false otherwise.
+     */
     public boolean attemptBooking(String identifier, String date, String startTime, String duration) {
         client.openSocket();
         client.writeString("book");
@@ -184,6 +207,14 @@ public class ReservationPageModel {
         return confirmed;
     }
 
+    /**
+     * Finds an available parking slot on a specific date for a given number of car and motorcycle slots.
+     *
+     * @param date     The date for which to find an available slot.
+     * @param carSize  The number of car slots.
+     * @param motorSize The number of motorcycle slots.
+     * @return The identifier of the available parking slot, or null if none is available.
+     */
     public String findAvailableSlotOnDay(String date, int carSize, int motorSize) {
         String dates[] = getDateList();
         if (Arrays.stream(dates).toList().contains(date)) {
@@ -204,36 +235,67 @@ public class ReservationPageModel {
         return null;
     }
 
-
+    /**
+     * Retrieves the number of available car parking slots.
+     *
+     * @return The number of available car parking slots.
+     */
     public String getAvailCarSlots() {
         return availCarSlots;
     }
 
+    /**
+     * Retrieves the number of available motorcycle parking slots.
+     *
+     * @return The number of available motorcycle parking slots.
+     */
     public String getAvailMotorSlots() {
         return availMotorSlots;
     }
 
+    /**
+     * Retrieves the total number of bookings the user has.
+     *
+     * @return The total number of bookings.
+     */
     public String getTotalBookings() {
         return totalBookings;
     }
 
-    // Motorcycles and cars are separated. This is to cater when the user clicks on
-    // the parking spot. If the selected parking spot is for cars only, the user can only select from
-    // their list of cars. Else, motorcycle list.
+    /**
+     * Retrieves the array of cars owned by the user.
+     *
+     * @return The array of cars.
+     */
     public String[] getCars() {
 
         return cars;
     }
 
+    /**
+     * Retrieves the array of motorcycles owned by the user.
+     *
+     * @return The array of motorcycles.
+     */
     public String[] getMotorcycles() {
-        // get output from server
+        //get output from server
         return motorcycles;
     }
 
+    /**
+     * Retrieves the current date.
+     *
+     * @return The current date.
+     */
     public String getDate() {
         return client.getDate();
     }
 
+    /**
+     * Retrieves an array of dates including today, tomorrow, and the day after tomorrow.
+     *
+     * @return The array of dates.
+     */
     public String[] getDateList() {
         String[] dates = new String[4];
 
