@@ -62,7 +62,7 @@ public class UserProfileView extends JPanel {
     /**
      * The panel for History.
      */
-    private HistoryPage pnlHistoryPage;
+    private HistoryView pnlHistoryPage;
     /**
      * The panel for Security.
      */
@@ -91,7 +91,7 @@ public class UserProfileView extends JPanel {
         // security page
         pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
         // history page
-        pnlCards.add(pnlHistoryPage = new HistoryPage(), "history");
+        pnlCards.add(pnlHistoryPage = new HistoryView(), "history");
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
 
@@ -1027,24 +1027,6 @@ public class UserProfileView extends JPanel {
      */
     public SecurityPage getPnlSecurityPage(){
         return pnlSecurityPage;
-    }
-
-    //This is for testing the GUI.
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            public void run() {
-                // Create an instance of UserProfileView
-                UserProfileView userProfileView = new UserProfileView();
-
-                // Create a JFrame to hold the UserProfileView
-                JFrame frame = new JFrame("User Profile");
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-                frame.getContentPane().add(userProfileView);
-                frame.pack();
-                frame.setLocationRelativeTo(null); // Center the frame on the screen
-                frame.setVisible(true);
-            }
-        });
     }
 }
 
