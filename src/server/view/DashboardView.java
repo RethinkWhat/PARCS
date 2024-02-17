@@ -619,14 +619,14 @@ public class DashboardView extends JPanel {
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     lblCarCount = res.createLblH1("13", res.eerieBlack),
-                    lblAvailCar = res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
+                    lblAvailCar = res.createLblP("<html>Total<br> Car Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
             ButtonPanel pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     lblMotorCount = res.createLblH1("10", res.eerieBlack),
-                    lblAvailMotor = res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
+                    lblAvailMotor = res.createLblP("<html>Total<br> Motor Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
