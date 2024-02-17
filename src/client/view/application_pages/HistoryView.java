@@ -6,6 +6,9 @@ import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
 
+/**
+ * The HistoryView contains the pertinent information about the user's booking details.
+ */
 public class HistoryView extends JPanel {
     /**
      * The button for next.
@@ -37,10 +40,11 @@ public class HistoryView extends JPanel {
      */
     public HistoryView() {
         setLayout(new BorderLayout());
-        setBorder(new EmptyBorder(10,25,10,10));
+        setBorder(new EmptyBorder(25,25,25,25));
         setBackground(res.lightGray);
 
         container = res.createPnlRounded(700,700, res.white, res.lightGray);
+        container.setBorder(new EmptyBorder(10,25,10,25));
         container.setLayout(new BorderLayout());
         add(container, BorderLayout.CENTER);
 
@@ -50,6 +54,8 @@ public class HistoryView extends JPanel {
         pnlCards.setBackground(res.red);
         pnlCards.setPreferredSize(new Dimension(600,500));
         container.add(pnlCards, BorderLayout.CENTER);
+
+        pnlCards.add(new RecordPanel());
 
         btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 30,30);
         container.add(btnPrev, BorderLayout.WEST);
@@ -103,8 +109,8 @@ public class HistoryView extends JPanel {
         public RecordPanel() {
             setLayout(new BorderLayout());
 
-            JPanel container = res.createPnlRounded(600,500,res.lightGray, res.white);
-            container.setLayout(new GridBagLayout());
+            JPanel container = new JPanel(new GridBagLayout());
+            container.setBackground(res.white);
             add(container, BorderLayout.CENTER);
 
             GridBagConstraints gbc = new GridBagConstraints();
@@ -112,14 +118,14 @@ public class HistoryView extends JPanel {
             gbc.insets = new Insets(10,10,10,10);
             gbc.fill = GridBagConstraints.BOTH;
 
-            gbc.anchor = GridBagConstraints.WEST;
-            gbc.gridwidth = 3;
-            gbc.ipadx = 100;
+            gbc.gridwidth = 2;
+            gbc.ipadx = 170;
             gbc.ipady = 10;
 
             // center
             gbc.gridx = 0;
             gbc.gridy = 0;
+            gbc.anchor = GridBagConstraints.CENTER;
             lblDate = res.createLblH1("Info", res.eerieBlack);
             container.add(lblDate, gbc);
 
@@ -130,7 +136,9 @@ public class HistoryView extends JPanel {
             container.add(separator, gbc);
 
             // left column
-            gbc.gridx = 1;
+            gbc.anchor = GridBagConstraints.WEST;
+            gbc.gridwidth = 1;
+            gbc.gridx = 0;
             gbc.gridy = 2;
             JLabel lblAreaLabel = res.createLblP("Parking Area:", res.eerieBlack);
             container.add(lblAreaLabel, gbc);
@@ -167,7 +175,7 @@ public class HistoryView extends JPanel {
 
             gbc.gridy = 3;
             lblType = res.createLblP("Info", res.eerieBlack);
-            container.add(lblArea, gbc);
+            container.add(lblType, gbc);
 
             gbc.gridy = 4;
             lblVehicle = res.createLblP("Info", res.eerieBlack);
@@ -175,7 +183,7 @@ public class HistoryView extends JPanel {
 
             gbc.gridy = 5;
             lblSpot = res.createLblP("Info", res.eerieBlack);
-            container.add(lblSpotLabel,  gbc);
+            container.add(lblSpot, gbc);
 
             gbc.gridy = 6;
             lblCheckIn = res.createLblP("Info", res.eerieBlack);
