@@ -103,12 +103,18 @@ public class ClientHandler implements Runnable {
 
     }
 
+    /**
+     * Method to handle disconnect the client from the server
+     */
     public void handleDisconnect() {
         disconnect = true;
         closeResources();
         openResources();
     }
 
+    /**
+     * Method to handle user logout
+     */
     public void handleLogout() {
         try {
             String username = reader.readLine();
@@ -119,6 +125,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle closing the client port, reader, and writer
+     */
     private void closeResources() {
         try {
             if (reader != null) {
@@ -135,6 +144,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle accepting a new client connection and establishing a connection, reader, and writer
+     */
     private void openResources() {
         try {
             client = new Socket();  // Create a new socket for a potential reconnection
@@ -146,9 +158,10 @@ public class ClientHandler implements Runnable {
         }
     }
 
-
-
-
+    /**
+     * Method to handle login, sending and receiving information between client and server
+     * @throws IOException
+     */
     public void login() throws IOException {
         System.out.println("login attempt");
 
@@ -174,6 +187,9 @@ public class ClientHandler implements Runnable {
     }
 
 
+    /**
+     * Method to handle sign up, creating account and validating credentials
+     */
     public void signUp() {
         try {
             String username = reader.readLine();
@@ -192,6 +208,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle editing user information, called when user clicks edit profile
+     */
     public void editInfo() {
         try {
             String lineRead = "";
@@ -208,6 +227,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle editing information of a vehicle registered to a user
+     */
     public void editVehicle() {
         try {
             String username = reader.readLine();
@@ -219,6 +241,10 @@ public class ClientHandler implements Runnable {
         }
     }
 
+
+    /**
+     * Method to handle editing the password associated to a user account
+     */
     public void editPassword(){
         try {
             String username = reader.readLine();
@@ -231,6 +257,9 @@ public class ClientHandler implements Runnable {
     }
 
 
+    /**
+     * Method to handle populating the information present on the reservation page of user
+     */
     public void reserve() {
         DateTime dateTime = new DateTime();
         try {
@@ -268,14 +297,12 @@ public class ClientHandler implements Runnable {
     }
 
     /**
-     * TODO: Documentation
+     * Method to get the vehicles associated with a user account
      */
     public void getVehicles() {
         try {
             String username = reader.readLine();
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
-            //ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-           // outputStreamWriter.writeObject(vehicles);
             if (vehicles.isEmpty()) {
                 writer.println("empty");
             }
@@ -297,6 +324,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to get the account credentials of a user account
+     */
     public void account() {
         try {
             String username = reader.readLine();
@@ -306,6 +336,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle registering a vehicle for a user
+     */
     public void addVehicle() {
         try {
             String username = reader.readLine();
@@ -321,6 +354,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle getting the information of a parking spot
+     */
     public void spotInfo() {
         DateTime dateTime = new DateTime();
         try {
@@ -342,6 +378,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle make a reservation and validating if reservation can be made
+     */
     public void bookReservation() {
         try {
             String identifier = reader.readLine();
@@ -362,6 +401,9 @@ public class ClientHandler implements Runnable {
         }
     }
 
+    /**
+     * Method to handle displaying the information necessary for a booking under the ticket view
+     */
     public void ticket() {
         DateTime dateTime = new DateTime();
         try {
