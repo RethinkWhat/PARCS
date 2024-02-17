@@ -65,7 +65,6 @@ public class ReservationPageController {
         carsNumber = view.getMainBottomPanel().getParkingSlotsPanel().getCarButtonsSize();
         motorNumber = view.getMainBottomPanel().getParkingSlotsPanel().getMotorButtonsSize();
 
-        /*
         int availableCarCount = 0;
         for (int x = 0; x < carsNumber; x++) {
             boolean isTaken = true;
@@ -90,7 +89,7 @@ public class ReservationPageController {
             view.getMainBottomPanel().getParkingSlotsPanel().setCarMotorButtonsIcon(false, x, isTaken);
         }
 
-         */
+
 
 
 
