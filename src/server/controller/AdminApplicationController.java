@@ -4,6 +4,7 @@ import server.model.ReservationParser;
 import server.model.Server;
 import server.view.AdminApplicationView;
 import server.view.DashboardView;
+import utilities.Resources;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -53,12 +54,14 @@ public class AdminApplicationController {
         Thread thread = new Thread(server);
         thread.start();
 
-        // constants / variables
-        List<List<String>> carBookings =
-
-        DashboardView.MainBottomPanel.RecordPanel[] records = new DashboardView.MainBottomPanel.RecordPanel[];
-
         this.view = view;
+
+        // constants / variables
+        List<List<String>> carBookings = reservationParser.getAllCarBookings();
+        List<List<String>> motorBookings = reservationParser.getAllMotorBookings();
+
+        DashboardView.MainBottomPanel.RecordPanel[] carRecords = new DashboardView.MainBottomPanel.RecordPanel[carBookings.size()];
+        DashboardView.MainBottomPanel.RecordPanel[] motorRecords = new DashboardView.MainBottomPanel.RecordPanel[motorBookings.size()];
 
         // action listeners
 
@@ -74,15 +77,39 @@ public class AdminApplicationController {
         });
 
         // dashboard page
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().setNextListener(e -> {
+            view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getCardLayout().next(
+                    view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getPnlCards());
+        });
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().setPrevListener(e -> {
+            view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getCardLayout().previous(
+                    view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getPnlCards());
+        });
+
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().setNextListener(e -> {
+            view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getCardLayout().next(
+                    view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getPnlCards());
+        });
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().setPrevListener(e -> {
+            view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getCardLayout().previous(
+                    view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getPnlCards());
+        });
 
         // mouse listeners
-
 
         // server status page
         // TODO
 
         // dashboard page
-        for (int i = 0; )
+
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnNext().addMouseListener(
+                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnNext()));
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnPrev().addMouseListener(
+                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnPrev()));
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnNext().addMouseListener(
+                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnNext()));
+        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnPrev().addMouseListener(
+                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnPrev()));
     }
 
     /**

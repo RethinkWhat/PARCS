@@ -5,6 +5,7 @@ import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * The panel of DashboardView.
@@ -43,6 +44,14 @@ public class DashboardView extends JPanel {
      * The CardLayout that controls the components of the MainTopPanel.
      */
     private CardLayout topCardLayout = new CardLayout();
+    /**
+     * The top panel of the main page.
+     */
+    private MainTopPanel pnlMainTop;
+    /**
+     * The bottom panel of the main page.
+     */
+    private MainBottomPanel pnlMainBottom;
 
     /**
      * Constructs a panel of DashboardView.
@@ -53,9 +62,41 @@ public class DashboardView extends JPanel {
 
         // Main Panel
         add(new MainTopPanel(), BorderLayout.NORTH);
-        add(new MainBottomPanel(), BorderLayout.SOUTH);
+        add(pnlMainBottom = new MainBottomPanel(), BorderLayout.SOUTH);
 
         this.setPreferredSize(new Dimension(1100,700));
+    }
+
+    /**
+     * Retrieves the current JButton of btnAvailCar.
+     * @return The current btnAvailCar.
+     */
+    public JButton getBtnAvailCar() {
+        return btnAvailCar;
+    }
+
+    /**
+     * Retrieves the current JButton of btnAvailMotor.
+     * @return The current btnAvailMotor.
+     */
+    public JButton getBtnAvailMotor() {
+        return btnAvailMotor;
+    }
+
+    /**
+     * Retrieves the current btnTot
+     * @return
+     */
+    public JButton getBtnTotalBookings() {
+        return btnTotalBookings;
+    }
+
+    public MainTopPanel getPnlMainTop() {
+        return pnlMainTop;
+    }
+
+    public MainBottomPanel getPnlMainBottom() {
+        return pnlMainBottom;
     }
 
     /**
@@ -98,6 +139,22 @@ public class DashboardView extends JPanel {
 
             setPreferredSize(new Dimension(1300, 510));
             setVisible(true);
+        }
+
+        /**
+         * Retrieves the current CarPanel of pnlCompletedCar.
+         * @return The current pnlCompletedCar.
+         */
+        public CarPanel getPnlCompletedCar() {
+            return pnlCompletedCar;
+        }
+
+        /**
+         * Retrieves the current MotorPanel of pnlCompletedMotor
+         * @return The current pnlCompletedMotor.
+         */
+        public MotorPanel getPnlCompletedMotor() {
+            return pnlCompletedMotor;
         }
 
         /**
@@ -154,6 +211,54 @@ public class DashboardView extends JPanel {
 
                 this.setPreferredSize(new Dimension(400,500));
             }
+
+            /**
+             * Sets a specified action listener to btnNext.
+             * @param actionListener The specified action listener.
+             */
+            public void setNextListener(ActionListener actionListener) {
+                btnNext.addActionListener(actionListener);
+            }
+
+            /**
+             * Sets a specified action listener for btnPrev.
+             * @param actionListener The specified action listener.
+             */
+            public void setPrevListener(ActionListener actionListener) {
+                btnPrev.addActionListener(actionListener);
+            }
+
+            /**
+             * Retrieves the current panel that holds the different components.
+             * @return The current pnlCards.
+             */
+            public JPanel getPnlCards() {
+                return pnlCards;
+            }
+
+            /**
+             * Retrieves the current Card Layout that manages pnlCards.
+             * @return The current cardLayout.
+             */
+            public CardLayout getCardLayout() {
+                return cardLayout;
+            }
+
+            /**
+             * Retrieves the current JButton of btnPrev.
+             * @return THe current btnPrev.
+             */
+            public JButton getBtnPrev() {
+                return btnPrev;
+            }
+
+            /**
+             * Retrieves the current JButton of btnNext.
+             * @return The current btnNext.
+             */
+            public JButton getBtnNext() {
+                return btnNext;
+            }
         }
 
         /**
@@ -209,6 +314,50 @@ public class DashboardView extends JPanel {
                 pnlCards.add(new RecordPanel());
 
                 this.setPreferredSize(new Dimension(400,500));
+            }
+
+            /**
+             * Sets a specified action listener to btnNext.
+             * @param actionListener The specified action listener.
+             */
+            public void setNextListener(ActionListener actionListener) {
+                btnNext.addActionListener(actionListener);
+            }
+
+            /**
+             * Sets a specified action listener for btnPrev.
+             * @param actionListener The specified action listener.
+             */
+            public void setPrevListener(ActionListener actionListener) {
+                btnPrev.addActionListener(actionListener);
+            }
+
+            /**
+             * Retrieves the current JButton of btnPrev.
+             * @return THe current btnPrev.
+             */
+            public JButton getBtnPrev() {
+                return btnPrev;
+            }
+
+            /**
+             * Retrieves the current JButton of btnNext.
+             * @return The current btnNext.
+             */
+            public JButton getBtnNext() {
+                return btnNext;
+            }
+
+            /**
+             * Retrieves the current panel that
+             * @return
+             */
+            public JPanel getPnlCards() {
+                return pnlCards;
+            }
+
+            public CardLayout getCardLayout() {
+                return cardLayout;
             }
         }
 
