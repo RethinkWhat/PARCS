@@ -11,17 +11,25 @@ import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
- * Template for LoginRegisterModel.
- * TODO: Documentation (describe this class)
+ * Represents the model for user login and registration functionality.
+ * This class provides methods for validating user credentials, encrypting passwords,
+ * and handling user account creation and login.
  */
 public class LoginRegisterModel {
 
+    /**
+     * The client object for server communication.
+     */
     private Client client;
 
+    /**
+     * Holds the error message associated with the last operation, if any.
+     */
     private String errorMessage;
 
     /**
-     * Constructs a LoginRegisterModel with null values.
+     * Constructs a LoginRegisterModel with a specified client.
+     * @param client The client associated with the model.
      */
     public LoginRegisterModel(Client client) {
         this.client = client;
@@ -91,10 +99,23 @@ public class LoginRegisterModel {
         return validated;
     }
 
+    /**
+     * Retrieves the error message associated with the last operation.
+     * @return The error message, if any.
+     */
     public String getErrorMessage() {
         return errorMessage;
     }
 
+    /**
+     * Creates a new user account with the provided information.
+     * @param firstName User's first name.
+     * @param lastName User's last name.
+     * @param username User's chosen username.
+     * @param phoneNumber User's phone number.
+     * @param password User's chosen password.
+     * @return True if the account creation is successful. False otherwise.
+     */
     public boolean createAccount(String firstName, String lastName,
                                  String username, String phoneNumber, String password) {
 
@@ -128,6 +149,5 @@ public class LoginRegisterModel {
         return signUpSuccess;
 
     }
-
 
 }

@@ -51,6 +51,10 @@ public class LiveDateTime extends Thread {
         }
     }
 
+    /**
+     * Sets the current time, day, and date and returns a formatted string.
+     * @return A string representing the formatted combination of date, day, and time.
+     */
     private String setTime() {
         Date currentTime = Calendar.getInstance().getTime();
         return dateFormat.format(currentTime) + " | " +
@@ -59,16 +63,28 @@ public class LiveDateTime extends Thread {
     }
 
 
+    /**
+     * Retrieves the current time.
+     * @return The current time format.
+     */
     public String getTime() {
         return time;
     }
 
+    /**
+     * Retrieves the current time in a format suitable for timer comparisons.
+     * @return The current time formatted as "hh:mm:ss".
+     */
     public static String getTimeForTimerComparisons() {
         Date currentTime = Calendar.getInstance().getTime();
         timeFormat = new SimpleDateFormat("hh:mm:ss");
         return timeFormat.format(currentTime);
     }
 
+    /**
+     * Retrieves the current date in the format "MM/dd/yy".
+     * @return The current date formatted as "MM/dd/yy".
+     */
     public static String getDate() {
         Date currentTime = Calendar.getInstance().getTime();
         dateFormat = new SimpleDateFormat("MM/dd/yy");
@@ -101,8 +117,4 @@ public class LiveDateTime extends Thread {
         return dateFormat;
     }
 
-    public static void main(String[] args) {
-        LiveDateTime dateTime = new LiveDateTime();
-        String c = dateTime.getDate();
-    }
 }

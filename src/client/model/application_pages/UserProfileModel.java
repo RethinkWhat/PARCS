@@ -172,17 +172,22 @@ public class UserProfileModel {
         return contactNo;
     }
 
+    /**
+     * Retrieves the list of vehicles associated with the user.
+     *
+     * @return The list of vehicles in a formatted string.
+     */
     public ArrayList<String> getVehicleList() {
         return vehicleList;
     }
 
     /**
-     * TODO: Documentation
+     * Edits the user's information with the specified first name, last name, and contact number.
      *
-     * @param firstName
-     * @param lastName
-     * @param contactNo
-     * @return
+     * @param firstName The new first name.
+     * @param lastName  The new last name.
+     * @param contactNo The new contact number.
+     * @return True if the edit was successful. False if otherwise.
      */
     public boolean editUserInformation(String firstName, String lastName, String contactNo) {
         client.openSocket();
@@ -246,6 +251,9 @@ public class UserProfileModel {
         return true;
     }
 
+    /**
+     * Retrieves and displays the booking history of the user.
+     */
     public void viewHistory() {
         client.openSocket();
         client.writeString("history");
@@ -281,6 +289,12 @@ public class UserProfileModel {
         return client;
     }
 
+    /**
+     * Validates and updates the current index for viewing booking history.
+     *
+     * @param number The specified number to move forward or backward in history.
+     * @return True if the index is valid and updated. False if otherwise.
+     */
     public boolean validateEndOrStart(int number) {
         int indexToCheck = historyPageNo + number;
         boolean isValidIndex = indexToCheck >= 0 && indexToCheck < bookings.size();
@@ -290,24 +304,47 @@ public class UserProfileModel {
         return isValidIndex;
     }
 
-
+    /**
+     * Retrieves the type of the current booking.
+     *
+     * @return The type of the current booking.
+     */
     public String getType() {
         return bookings.get(historyPageNo).get(0);
     }
 
+    /**
+     * Retrieves the parking spot of the current booking.
+     *
+     * @return The parking spot of the current booking.
+     */
     public String getSpot() {
         return bookings.get(historyPageNo).get(1);
     }
 
+    /**
+     * Retrieves the check-in time of the current booking.
+     *
+     * @return The check-in time of the current booking.
+     */
     public String getCheckIn() {
         return bookings.get(historyPageNo).get(2);
     }
 
+    /**
+     * Retrieves the check-out time of the current booking.
+     *
+     * @return The check-out time of the current booking.
+     */
     public String getCheckOut() {
         return bookings.get(historyPageNo).get(3);
     }
 
-
+    /**
+     * Retrieves the duration of the current booking.
+     *
+     * @return The duration of the current booking.
+     */
     public String getDuration() {
         return bookings.get(historyPageNo).get(4);
     }

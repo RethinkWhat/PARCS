@@ -4,8 +4,9 @@ import client.controller.ApplicationController;
 import client.view.ApplicationView;
 
 /**
- * Template for VehicleAdderModel.
- * TODO: Documentation
+ * Represents the model for adding vehicles to the user's account.
+ * This class provides methods for retrieving vehicle types, writing vehicle information to the server,
+ * and facilitating navigation back to the main application view.
  */
 public class VehicleAdderModel {
     /**
@@ -38,6 +39,13 @@ public class VehicleAdderModel {
         return vehicleTypes;
     }
 
+    /**
+     * Writes the provided vehicle information to the server and returns whether the vehicle was accepted.
+     * @param type The type of the vehicle.
+     * @param model The model of the vehicle.
+     * @param plateNumber The plate number of the vehicle.
+     * @return True if the vehicle information was accepted by the server, false otherwise.
+     */
     public boolean writeVehicle(String type, String model, String plateNumber) {
         client.openSocket();
         client.writeString("addVehicle");
@@ -54,14 +62,25 @@ public class VehicleAdderModel {
         return vehicleAccepted;
     }
 
+    /**
+     * Navigates back to the main application view.
+     */
     public void returnToApplication() {
         new ApplicationController(new ApplicationView(), new ApplicationModel(client));
     }
 
+    /**
+     * Gets the associated client.
+     * @return The client associated with the model.
+     */
     public Client getClient() {
         return client;
     }
 
+    /**
+     * Sets the client associated with the model.
+     * @param client The client to be associated with the model.
+     */
     public void setClient(Client client) {
         this.client = client;
     }
