@@ -1,7 +1,5 @@
 package server.view;
 
-import client.view.application_pages.ReservationPageView;
-import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
 import javax.swing.*;
@@ -41,11 +39,11 @@ public class AdminApplicationView extends JFrame {
      */
     private Resources res = new Resources();
     /**
-     * TODO: Documentation
+     * The view for ServerStatus.
      */
     private ServerStatusView serverStatusView;
     /**
-     * TODO: Documentation
+     * The view for DashboardView.
      */
     private DashboardView dashboardView;
 
@@ -129,42 +127,82 @@ public class AdminApplicationView extends JFrame {
         }
     }
 
+    /**
+     * Retrieves the current panel of pnlCards.
+     * @return The current pnlCards.
+     */
     public JPanel getPnlCards() {
         return pnlCards;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavMenu.
+     * @return The current btnNavMenu.
+     */
     public JButton getBtnNavMenu() {
         return btnNavMenu;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavStatus.
+     * @return The current btnNavStatus.
+     */
     public JButton getBtnNavStatus() {
         return btnNavStatus;
     }
 
+    /**
+     * Retrieves the current JButton of btnNavDashboard.
+     * @return The current btnNavDashboard.
+     */
     public JButton getBtnNavDashboard() {
         return btnNavDashboard;
     }
 
+    /**
+     * Retrieves the current JLabel of lblLocation.
+     * @return The current lblLocation.
+     */
     public JLabel getLblLocation() {
         return lblLocation;
     }
 
+    /**
+     * Retrieves the current card layout of the main panel.
+     * @return The current mainCardLayout.
+     */
     public CardLayout getMainCardLayout() {
         return mainCardLayout;
     }
 
+    /**
+     * Retrieves the current panel of serverStatusView.
+     * @return The current serverStatusView.
+     */
     public ServerStatusView getServerStatusView() {
         return serverStatusView;
     }
 
+    /**
+     * Retrieves the current panel of DashboardView.
+     * @return The current dashboardView.
+     */
     public DashboardView getDashboardView() {
         return dashboardView;
     }
 
+    /**
+     * Sets a specified action listener for btnNavStatus.
+     * @param actionListener The specified action listener.
+     */
     public void setNavStatusListener(ActionListener actionListener) {
         btnNavStatus.addActionListener(actionListener);
     }
 
+    /**
+     * Sets a specified action listener for btnNavDashboard.
+     * @param actionListener The specified action listener.
+     */
     public void setNavDashboardListener(ActionListener actionListener) {
         btnNavDashboard.addActionListener(actionListener);
     }

@@ -9,7 +9,7 @@ import java.awt.event.ActionListener;
 
 /**
  * The panel of DashboardView.
- * TODO: Documentation
+ * Holds all the information of the car and motor bookings and number of each booking.
  */
 public class DashboardView extends JPanel {
     /**

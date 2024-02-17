@@ -7,7 +7,7 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 /**
- * TODO: Documentation
+ * Holds the server status.
  */
 public class ServerStatusView extends JPanel {
     /**
@@ -83,23 +83,41 @@ public class ServerStatusView extends JPanel {
         }
     }
 
+    /**
+     * Retrieves the current JButton of btnServerSwitch.
+     * @return The current btnServerSwitch.
+     */
     public JButton getServerSwitch() {
         return btnServerSwitch;
     }
 
+    /**
+     * Retrieves the current JLabel of lblServerPrompt.
+     * @return The current lblServerPrompt.
+     */
     public JLabel getServerPrompt() {
         return lblServerPrompt;
     }
 
+    /**
+     * Retrieves the current JLabel of lblServerStatus.
+     * @return The current lblServerStatus.
+     */
     public JLabel getServerStatus() {
         return lblServerStatus;
     }
 
+    /**
+     * Sets a specified action listener for btnServerSwitch.
+     * @param actionListener The specified action listener.
+     */
     public void setServerListener(ActionListener actionListener){
         btnServerSwitch.addActionListener(actionListener);
     }
 
-    // TODO: Transfer to controller
+    /**
+     * Changes the labels when the server is online.
+     */
     public void setOnline(){
         lblServerStatus.setText("ONLINE");
         lblServerStatus.setForeground(res.celadon);
@@ -109,6 +127,9 @@ public class ServerStatusView extends JPanel {
         btnServerSwitch.setForeground(res.red);
     }
 
+    /**
+     * Changes the labels when the server is offline.
+     */
     public void setOffline(){
         lblServerStatus.setText("OFFLINE");
         lblServerStatus.setForeground(res.red);
