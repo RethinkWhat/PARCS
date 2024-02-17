@@ -968,6 +968,10 @@ public class UserProfileView extends JPanel {
         return pnlSecurityPage;
     }
 
+    /**
+     * Retrieves the current panel of HistoryPage.
+     * @return The current pnlHistoryPage.
+     */
     public HistoryView getHistoryPage() {
         return pnlHistoryPage;
     }
