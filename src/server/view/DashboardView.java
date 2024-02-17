@@ -29,9 +29,9 @@ public class DashboardView extends JPanel {
      */
     private JLabel lblName;
     /**
-     * The current date.
+     * The button to refresh the lists of car bookings and motor bookings.
      */
-    private JLabel lblDate;
+    private JButton btnRefresh;
     /**
      * The stylesheet.
      */
@@ -97,6 +97,22 @@ public class DashboardView extends JPanel {
 
     public MainBottomPanel getPnlMainBottom() {
         return pnlMainBottom;
+    }
+
+    /**
+     * Retrieves the current JButton of btnRefresh.
+     * @return The current btnRefresh.
+     */
+    public JButton getBtnRefresh() {
+        return btnRefresh;
+    }
+
+    /**
+     * Sets a specified action listener for btnRefresh.
+     * @param actionListener The specified action listener.
+     */
+    public void setRefreshListener(ActionListener actionListener) {
+        btnRefresh.addActionListener(actionListener);
     }
 
     /**
@@ -550,17 +566,18 @@ public class DashboardView extends JPanel {
             gbc.gridx = 0;
             gbc.gridy = 0;
             gbc.gridwidth = 1;
-            gbc.ipadx = 1100;
+            gbc.ipadx = 900;
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.anchor = GridBagConstraints.WEST;
             lblName = res.createLblH2("Hello, " + "Admin"+ "!", res.eerieBlack);
             pnlInformation.add(lblName, gbc);
 
-            gbc.gridy = 1;
-            gbc.gridwidth = 3;
-            String date = "";
-            lblDate = res.createLblH4(date, res.eerieBlack);
-            pnlInformation.add(lblDate, gbc);
+            gbc.gridx = 1;
+            gbc.gridwidth = 2;
+            gbc.anchor = GridBagConstraints.EAST;
+            btnRefresh = res.createBtnIconOnly(res.iconRefresh, 30,30);
+            pnlInformation.add(btnRefresh, gbc);
+
 
             GridLayout gridLayout = new GridLayout(0,3);
             gridLayout.setHgap(10);
