@@ -610,6 +610,7 @@ public class ReservationParser {
 
         NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
 
+        //This will traverse all parking spot nodes
         for (int i = 0; i < parkingSpotNodes.getLength(); i++){
 
             Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
@@ -633,6 +634,7 @@ public class ReservationParser {
                     String[] currEndTimeParts = currEndTime.split(":");
                     String duration = Integer.toString(Integer.parseInt(currEndTimeParts[0]) - Integer.parseInt(currStartTimeParts[0]));
 
+                    //This will add the current reservation element to the list of all car bookings
                     List<String> currReservation = new ArrayList<>();
                     currReservation.add(currUser);
                     currReservation.add(currIdentifier);
@@ -687,6 +689,7 @@ public class ReservationParser {
                     String[] currEndTimeParts = currEndTime.split(":");
                     String duration = Integer.toString(Integer.parseInt(currEndTimeParts[0]) - Integer.parseInt(currStartTimeParts[0]));
 
+                    //This will add the current reservation element as a list to the lists of motor bookings
                     List<String> currReservation = new ArrayList<>();
                     currReservation.add(currUser);
                     currReservation.add(currIdentifier);
