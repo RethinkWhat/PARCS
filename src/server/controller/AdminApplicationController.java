@@ -1,11 +1,14 @@
 package server.controller;
 
+import server.model.ReservationParser;
 import server.model.Server;
 import server.view.AdminApplicationView;
+import server.view.DashboardView;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
+import java.util.List;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -31,6 +34,10 @@ public class AdminApplicationController {
      * The default port of the server.
      */
     final int address = 2040;
+    /**
+     * Instance variable of reservation parser.
+     */
+    private ReservationParser reservationParser = new ReservationParser();
 
     /**
      * Constructs a ServerController with a specified AdminApplicationView.
@@ -45,6 +52,11 @@ public class AdminApplicationController {
 
         Thread thread = new Thread(server);
         thread.start();
+
+        // constants / variables
+        List<List<String>> carBookings =
+
+        DashboardView.MainBottomPanel.RecordPanel[] records = new DashboardView.MainBottomPanel.RecordPanel[];
 
         this.view = view;
 
@@ -70,7 +82,7 @@ public class AdminApplicationController {
         // TODO
 
         // dashboard page
-        // TODO
+        for (int i = 0; )
     }
 
     /**
