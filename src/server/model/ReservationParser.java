@@ -46,6 +46,11 @@ public class ReservationParser {
             timeArray.add(timeItem);
         return timeArray;
     }
+
+    /**
+     * Parses the reservations file and initializes the Document object for further processing.
+     * If an error occurs during parsing or configuration, appropriate exceptions are handled.
+     */
     private void getReservationsFile() {
         try {
             builder = DocumentBuilderFactory.newNSInstance().newDocumentBuilder();
@@ -162,6 +167,12 @@ public class ReservationParser {
         return parkingSpot;
     }
 
+    /**
+     * This method counts the total number of bookings by retrieving reservation information from the reservations file.
+     * It iterates through each parking spot and sums up the sizes of their reservation lists.
+     *
+     * @return The total number of bookings across all parking spots.
+     */
     public int countBookings() {
         getReservationsFile();
         List<ParkingSpot> parkingSpotList = getParkingInformation();
@@ -174,6 +185,15 @@ public class ReservationParser {
         return size;
     }
 
+    /**
+     * This method counts the total number of bookings made by a specific user on a given date by parsing the reservations file.
+     * It iterates through each reservation in the reservations file, checks if the reservation matches the provided
+     * username and date, and increments the count if a match is found.
+     *
+     * @param username The username of the user for whom the bookings are to be counted.
+     * @param date The date for which the bookings are to be counted.
+     * @return The total number of bookings made by the specified user on the given date.
+     */
     public int countTotalBookingsPerDay(String username, String date) {
         getReservationsFile();
         int count = 0;
@@ -314,6 +334,14 @@ public class ReservationParser {
     }
 
 
+    /**
+     * This class retrieves the availability of a parking spot identified by its identifier on a specific date.
+     * It parses the reservations file to identify all booked time ranges for the specified parking spot and date.
+     *
+     * @param identifier The unique identifier of the parking spot for which availability is to be checked.
+     * @param date The date for which availability is to be checked.
+     * @return A list of TimeRange objects representing the booked time ranges for the specified parking spot on the given date.
+     */
     public List<TimeRange> getParkingSpotAvailability(String identifier, String date){
         getReservationsFile();
 
@@ -429,6 +457,13 @@ public class ReservationParser {
         }
     }
 
+    /**
+     * This method retrieves the available time slots for booking a parking spot on a specified date and duration.
+     * @param date The date for which available time slots are to be checked.
+     * @param duration The duration for which the parking spot is required, in hours.
+     * @param identifier The unique identifier of the parking spot for which availability is to be checked.
+     * @return A list of available time slots for booking the parking spot on the specified date and duration.
+     */
     public List<String> availableTime(String date, String duration, String identifier) {
         ArrayList<String> timeArray = populateTime();
         DateTime dateTime = new DateTime();
@@ -462,13 +497,26 @@ public class ReservationParser {
         return toReturnTime;
     }
 
+    /**
+     * Computes the end time based on the start time and duration provided.
+     *
+     * @param startTime The start time in HH:mm format.
+     * @param duration The duration in hours.
+     * @return The end time in HH:mm format.
+     */
     public String computeEndTime(String startTime, String duration) {
         String[] startTimeParts = startTime.split(":");
         int endTime = Integer.parseInt(startTimeParts[0]) + Integer.parseInt(duration);
         return endTime+":00";
     }
 
-
+    /**
+     * Computes the duration between the start time and end time provided.
+     *
+     * @param startTime The start time in HH:mm format.
+     * @param endTime The end time in HH:mm format.
+     * @return The duration between the start and end time in hours.
+     */
     public String computeDuration(String startTime, String endTime){
         List<Integer> duration = new ArrayList<>();
 
@@ -657,12 +705,6 @@ public class ReservationParser {
     }
 
 
-
-
-
-
-
-
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
         Map<String,Reservations> parkingSpotList = parser.getUserReservations("basti");
@@ -689,9 +731,5 @@ public class ReservationParser {
         System.out.println(userBookings);
 
 
-       // System.out.println(parser.checkScheduleConflicts("rickardo", "9:00", "10:00"));
-
-    //    System.out.println(parser.getAllCarBookings().toString());
-      //  System.out.println(parser.getAllMotorBookings().toString());
     }
 }

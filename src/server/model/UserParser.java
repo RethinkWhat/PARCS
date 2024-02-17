@@ -112,6 +112,16 @@ public class UserParser {
     }
 
 
+    /**
+     * This method edits the information of a specific user identified by the username.
+     * It searches for the user in the XML document and modifies the value
+     * associated with the specified tagToEdit to the newInformation provided.
+     * After the modification, it saves the changes to the user accounts file.
+     *
+     * @param username       The username of the user whose information needs to be edited.
+     * @param tagToEdit      The tag name indicating the information to be edited.
+     * @param newInformation The new information to replace the existing one.
+     */
     public void editUserInfo(String username, String tagToEdit, String newInformation) {
 
         getUserAccountsFile(); // Set document
@@ -180,6 +190,17 @@ public class UserParser {
 
     }
 
+    /**
+     * This method creates a new user with the provided information and appends it to the user accounts file.
+     *
+     * @param username The username of the new user.
+     * @param type The type of the new user (e.g., admin, regular).
+     * @param password The password of the new user.
+     * @param lastName The last name of the new user.
+     * @param firstName The first name of the new user.
+     * @param phoneNumber The phone number of the new user.
+     * @param vehicles The list of vehicles associated with the new user.
+     */
     public void createUser(String username, String type, String password, String lastName, String firstName,
                            String phoneNumber, ArrayList<Vehicle> vehicles) {
 
@@ -192,6 +213,12 @@ public class UserParser {
         transform();
     }
 
+    /**
+     * This method transforms the current DOM structure into an XML file.
+     * This method applies formatting options to the XML output,
+     * including indentation and omitting the XML declaration.
+     * The transformed XML content is written to the user accounts file.
+     */
     private void transform() {
         DOMSource source = new DOMSource(document);
         TransformerFactory factory = null;
@@ -209,6 +236,12 @@ public class UserParser {
         }
     }
 
+    /**
+     * This method retrieves the full name of a user based on the username.
+     *
+     * @param username the username of the user to retrieve the full name for
+     * @return the full name of the user if found, otherwise null
+     */
     public String getUserFullName(String username) {
         String name = null;
         List<User> userList = getUserList();
@@ -259,6 +292,12 @@ public class UserParser {
         }
     }
 
+    /**
+     * Checks whether a given user is an admin based on the username.
+     *
+     * @param username the username of the user to check
+     * @return true if the user is an admin, otherwise false
+     */
     public boolean isAdmin(String username) {
         String name = null;
         List<User> userList = getUserList();
@@ -269,6 +308,12 @@ public class UserParser {
         return false;
     }
 
+    /**
+     * Checks whether a given username exists in the user accounts file.
+     *
+     * @param username the username to check for existence
+     * @return true if the username exists in the user accounts file, otherwise false
+     */
     public boolean doesUsernameExist(String username) {
         getUserAccountsFile();
 
@@ -280,6 +325,17 @@ public class UserParser {
         }
         return false;
     }
+
+    /**
+     * Adds a new vehicle for the specified user to the user accounts file.
+     * This method retrieves the user accounts file, creates a new "vehicle" element
+     * with the information provided by the Vehicle object, and appends it to the user's
+     * node in the XML document. After adding the vehicle information, it performs a
+     * transformation on the XML document.
+     *
+     * @param username the username of the user to whom the vehicle belongs
+     * @param vehicle  the Vehicle object containing the information of the vehicle to be added
+     */
 
     public void addVehicle(String username, Vehicle vehicle) {
         getUserAccountsFile();
@@ -342,6 +398,18 @@ public class UserParser {
         return userVehicles;
     }
 
+    /**
+     * Edits the information of a vehicle associated with the specified user.
+     * This method retrieves the user accounts file, searches for the specified user by username,
+     * and updates the information of the vehicle with the provided plate number.
+     * The new information replaces the existing information of the vehicle.
+     * After editing the vehicle information, it performs a transformation on the XML document.
+     *
+     * @param username      the username of the user whose vehicle information needs to be edited
+     * @param plateNo       the plate number of the vehicle whose information needs to be edited
+     * @param newInformation the new information to be set for the vehicle
+     * @return true if the vehicle information is successfully edited, false otherwise
+     */
     public boolean editVehicle(String username, String plateNo, String newInformation) {
         getUserAccountsFile();
         try {
@@ -374,6 +442,14 @@ public class UserParser {
         }
     }
 
+    /**
+     * Deletes a user from the user accounts file based on the provided username.
+     * This method retrieves the user accounts file, searches for the specified username,
+     * and removes the corresponding user node from the XML document.
+     * After deleting the user node, it transforms the updated XML document.
+     *
+     * @param username the username of the user to be deleted
+     */
     public void deleteUser(String username) {
         getUserAccountsFile();
         NodeList nodeList = document.getElementsByTagName("user");
@@ -392,11 +468,5 @@ public class UserParser {
         UserParser obj = new UserParser();
 
         obj.deleteUser("basti");
-
-//        obj.editUserInfo("basti", "lastName", "SicSic");
-        //obj.createUser("laclac", "user","password","lacanilao","patrick","+639177900153",
-           //     null);
-        //obj.addVehicle("ri", new Vehicle("Car", "Civic", "A4949329"));
-
     }
 }

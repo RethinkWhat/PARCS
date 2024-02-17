@@ -40,6 +40,9 @@ public class Vehicle {
         this.plateNumber = plateNumber;
     }
 
+    /**
+     * Constructs a new Vehicle object with the provided vehicle information.
+     */
     public Vehicle(String[] vehicleInfo) {
         this.type = vehicleInfo[0];
         this.model = vehicleInfo[1];

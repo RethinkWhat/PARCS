@@ -14,6 +14,9 @@ public class ParkingSpot {
     /** A list to hold the different dates of reservations */
     private List<Reservations> reservationsList;
 
+    /**
+     * Constructs a ParkingSpot object with a null identifier and an empty list of reservations.
+     */
     public ParkingSpot(){
         this.identifier = null;
         this.reservationsList = new ArrayList<>();
@@ -68,6 +71,16 @@ public class ParkingSpot {
         reservationsList.add(reservations);
     }
 
+    /**
+     * It retrieves reservations for a specific date.
+     * Searches through the list of reservations and returns a HashMap
+     * containing time ranges mapped to corresponding user information
+     * for the given date.
+     *
+     * @param date The date for which reservations are to be retrieved.
+     * @return A HashMap containing time ranges mapped to corresponding user information,
+     *         or null if no reservations are found for the specified date.
+     */
     public HashMap<TimeRange, String> getReservationsOnDate(String date) {
         for (Reservations reservation : reservationsList) {
             if (reservation.getDate().equals(date)) {
