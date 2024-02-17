@@ -14,18 +14,33 @@ import java.util.*;
 public class ClientHandler implements Runnable {
 
 
+    /** Reference to the server instance */
     Server server;
+
+    /** Socket representing the client connection */
     Socket client;
+
+    /** BufferedReader for reading client input */
     BufferedReader reader;
+
+    /** PrintWriter for writing output to the client */
     PrintWriter writer;
 
-
+    /** Flag indicating whether the client is authenticated */
     boolean authenticateLogin = false;
 
+    /** Flag indicating whether the client is disconnected */
     boolean disconnect = false;
+
+    /** The server's IP address */
     InetAddress address;
 
 
+    /**
+     * Constructs a new ClientHandler with the given server and client socket.
+     * @param server The server instance.
+     * @param client The client socket.
+     */
     public ClientHandler(Server server, Socket client) {
         this.client = client;
         this.server = server;
@@ -40,6 +55,9 @@ public class ClientHandler implements Runnable {
         this.client = client;
     }
 
+    /**
+     * Runs the client handler thread, processing client requests.
+     */
     @Override
     public void run() {
             try {
