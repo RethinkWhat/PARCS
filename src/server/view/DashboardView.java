@@ -35,7 +35,7 @@ public class DashboardView extends JPanel {
     /**
      * The stylesheet.
      */
-    private Resources res = new Resources();
+    private static Resources res = new Resources();
     /**
      * Instance variable of GridBagConstraints used for JPanels using GridBagLayout.
      */
@@ -207,8 +207,6 @@ public class DashboardView extends JPanel {
                 pnlCards.setPreferredSize(new Dimension(400,300));
                 container.add(pnlCards, BorderLayout.CENTER);
 
-                pnlCards.add(new RecordPanel());
-
                 this.setPreferredSize(new Dimension(400,500));
             }
 
@@ -311,8 +309,6 @@ public class DashboardView extends JPanel {
                 pnlCards.setPreferredSize(new Dimension(400,300));
                 container.add(pnlCards, BorderLayout.CENTER);
 
-                pnlCards.add(new RecordPanel());
-
                 this.setPreferredSize(new Dimension(400,500));
             }
 
@@ -365,7 +361,7 @@ public class DashboardView extends JPanel {
          * The record panel holds one record of a booking. It displays the pertinent information about the particular
          * completed booking.
          */
-        public class RecordPanel extends JPanel {
+        public static class RecordPanel extends JPanel {
             /**
              * The label for username.
              */

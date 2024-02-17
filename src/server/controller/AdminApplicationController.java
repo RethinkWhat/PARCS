@@ -38,7 +38,15 @@ public class AdminApplicationController {
     /**
      * Instance variable of reservation parser.
      */
-    private ReservationParser reservationParser = new ReservationParser();
+    private static ReservationParser reservationParser = new ReservationParser();
+    /**
+     * List of lists of car bookings.
+     */
+    private volatile List<List<String>> carBookings;
+    /**
+     * List of lists of motor bookings.
+     */
+    private volatile List<List<String>> motorBookings;
 
     /**
      * Constructs a ServerController with a specified AdminApplicationView.
@@ -60,8 +68,63 @@ public class AdminApplicationController {
         List<List<String>> carBookings = reservationParser.getAllCarBookings();
         List<List<String>> motorBookings = reservationParser.getAllMotorBookings();
 
+        // create record panels of car bookings
         DashboardView.MainBottomPanel.RecordPanel[] carRecords = new DashboardView.MainBottomPanel.RecordPanel[carBookings.size()];
+        for (DashboardView.MainBottomPanel.RecordPanel recordPanel : carRecords) {
+            for (List<String> booking : carBookings) {
+                String[] tokens = booking.toString().replace("[","").replace("]","").split(",");
+                String username = tokens[0];
+                String spot = tokens[1];
+                String date = tokens[2];
+                String timeIn = tokens[3];
+                String timeOut = tokens[4];
+                String duration = tokens[5];
+
+                DashboardView.MainBottomPanel.RecordPanel record = new DashboardView.MainBottomPanel.RecordPanel();
+                record.getLblUsername().setText(username);
+                record.getLblSlot().setText(spot);
+                record.getLblDate().setText(date);
+                record.getLblCheckIn().setText(timeIn);
+                record.getLblCheckOut().setText(timeOut);
+                record.getLblDuration().setText(duration);
+                record.getLblVehicle().setText("Car");
+
+                view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().
+                        getPnlCards().add(record, String.valueOf(recordPanel));
+                view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().
+                        getCardLayout().show(view.getDashboardView().
+                                getPnlMainBottom().getPnlCompletedCar().getPnlCards(), String.valueOf(recordPanel));
+            }
+        }
+
+        // create record panels of motor bookings
         DashboardView.MainBottomPanel.RecordPanel[] motorRecords = new DashboardView.MainBottomPanel.RecordPanel[motorBookings.size()];
+        for (DashboardView.MainBottomPanel.RecordPanel recordPanel : motorRecords) {
+            for (List<String> booking : motorBookings) {
+                String[] tokens = booking.toString().replace("[","").replace("]","").split(",");
+                String username = tokens[0];
+                String spot = tokens[1];
+                String date = tokens[2];
+                String timeIn = tokens[3];
+                String timeOut = tokens[4];
+                String duration = tokens[5];
+
+                DashboardView.MainBottomPanel.RecordPanel record = new DashboardView.MainBottomPanel.RecordPanel();
+                record.getLblUsername().setText(username);
+                record.getLblSlot().setText(spot);
+                record.getLblDate().setText(date);
+                record.getLblCheckIn().setText(timeIn);
+                record.getLblCheckOut().setText(timeOut);
+                record.getLblDuration().setText(duration);
+                record.getLblVehicle().setText("Motor");
+
+                view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().
+                        getPnlCards().add(record, String.valueOf(recordPanel));
+                view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().
+                        getCardLayout().show(view.getDashboardView().
+                                getPnlMainBottom().getPnlCompletedMotor().getPnlCards(), String.valueOf(recordPanel));
+            }
+        }
 
         // action listeners
 
@@ -98,7 +161,8 @@ public class AdminApplicationController {
         // mouse listeners
 
         // server status page
-        // TODO
+        view.getServerStatusView().getServerSwitch().addMouseListener(
+                new Resources.CursorChanger(view.getServerStatusView().getServerSwitch()));
 
         // dashboard page
 
@@ -135,11 +199,22 @@ public class AdminApplicationController {
         }
     }
 
+    private void refreshBookings() {
+        carBookings = reservationParser.getAllCarBookings();
+        motorBookings = reservationParser.getAllMotorBookings();
+    }
+
     /**
      * Main entry point of the program.
      * @param args The command line arguments.
      */
     public static void main(String[] args) {
         new AdminApplicationController(new AdminApplicationView());
+
+        List<List<String>> carBookings = reservationParser.getAllCarBookings();
+        for (List<String> car : carBookings) {
+            System.out.println(car);
+        }
+        List<List<String>> motorBookings = reservationParser.getAllMotorBookings();
     }
 }
