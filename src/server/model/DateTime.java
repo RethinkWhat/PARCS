@@ -29,67 +29,32 @@ public class DateTime {
         dateFormat = new SimpleDateFormat("MM/dd/yy");
     }
 
+    /**
+     * Get the formatted date time
+     * @return date : String
+     */
     public String getDateTime() {
         Date currentTime = Calendar.getInstance().getTime();
         return dateFormat.format(currentTime);
     }
 
+    /**
+     * Method Get the formatted date
+     * @return time : String
+     */
     public String getTime() {
         Date currentTime = Calendar.getInstance().getTime();
         SimpleDateFormat tempFormat = new SimpleDateFormat("HH:mm");
         return tempFormat.format(currentTime);
     }
 
-    public String createDateTime(int year, int month, int day, int hour, int minute, int second) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, day);
-        cal.set(Calendar.HOUR_OF_DAY, hour);
-        cal.set(Calendar.MINUTE, minute);
-        cal.set(Calendar.SECOND, second);
 
-        return dateFormat.format(cal.getTime()) + "," +
-                timeFormat.format(cal.getTime());
-    }
-
-    public String createDate(int year, int month, int day) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.YEAR, year);
-        cal.set(Calendar.MONTH, month);
-        cal.set(Calendar.DAY_OF_MONTH, day);
-
-        return dateFormat.format(cal.getTime());
-    }
-
-    public String createDate(String date) {
-        Calendar cal = Calendar.getInstance();
-        String[] dateValues = date.split("/");
-        cal.set(Calendar.YEAR, Integer.valueOf(dateValues[0]));
-        cal.set(Calendar.MONTH, Integer.valueOf(dateValues[1]));
-        cal.set(Calendar.DAY_OF_MONTH, Integer.valueOf(dateValues[2]));
-
-        return dateFormat.format(cal.getTime());
-    }
-
-    public String createTime(int hour, int minute) {
-        Calendar cal = Calendar.getInstance();
-        cal.set(Calendar.HOUR_OF_DAY, hour);
-        cal.set(Calendar.MINUTE, minute);
-
-        return timeFormat.format(cal.getTime());
-    }
-
-    public String createTime(String time) {
-        Calendar cal = Calendar.getInstance();
-        String[] timeValues = time.split(":");
-        cal.set(Calendar.HOUR_OF_DAY, Integer.valueOf(timeValues[0]));
-        cal.set(Calendar.MINUTE, Integer.valueOf(timeValues[0]));
-        cal.set(Calendar.SECOND, Integer.valueOf(timeValues[0]));
-
-        return timeFormat.format(cal.getTime());
-    }
-
+    /**
+     * Method to get the endTime given a start time and duration
+     * @param time
+     * @param duration
+     * @return computed time
+     */
     public String addDuration(String time, int duration) {
         // Assuming time is in "HH:mm" format
         String[] parts = time.split(":");
@@ -100,11 +65,5 @@ public class DateTime {
         hours +=duration;
         // Format the result
         return String.format("%02d:%02d", hours, minutes);
-    }
-
-
-    public static void main(String[] args) {
-        DateTime dateTime = new DateTime();
-
     }
 }

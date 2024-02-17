@@ -138,15 +138,11 @@ public class Client {
 
     public void logout() {
         openSocket();
-        try {
-            writeString("logout");
-            System.out.println("logout");
-            this.writeString(this.getUsername());
-            client.close();
-            startGUI();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
+        writeString("logout");
+        System.out.println("logout");
+        this.writeString(this.getUsername());
+        username = null;
+        startGUI();
         closeSocket();
     }
 
