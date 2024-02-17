@@ -1,7 +1,6 @@
 package client.model.application_pages;
 
 import client.model.Client;
-import client.view.application_pages.Timer;
 
 import java.util.ArrayList;
 import java.util.List;

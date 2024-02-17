@@ -94,54 +94,83 @@ public class VehicleAdderView extends JFrame {
         this.setVisible(true);
     }
 
+    /**
+     * Sets a specified action listener for btnAddVehicle.
+     * @param actionListener The specified action listener.
+     */
     public void setAddVehicleListener(ActionListener actionListener) {
         btnAddVehicle.addActionListener(actionListener);
     }
 
+    /**
+     * Sets a specified action listener for btnCancel.
+     * @param actionListener The specified action listener.
+     */
     public void setCancelListener(ActionListener actionListener) {
         btnCancel.addActionListener(actionListener);
     }
 
+    /**
+     * Retrieves the current JComboBox of cmbType.
+     * @return The current cmbType.
+     */
     public JComboBox<?> getCmbType() {
         return cmbType;
     }
 
+    /**
+     * Retrieves the current JTextField of txtModel.
+     * @return The current txtModel.
+     */
     public JTextField getTxtModel() {
         return txtModel;
     }
 
+    /**
+     * Retrieves the current JTextField of txtPlateNumber.
+     * @return The current txtPlateNumber.
+     */
     public JTextField getTxtPlateNumber() {
         return txtPlateNumber;
     }
 
+    /**
+     * Retrieves the current JComboBox of cmbType.
+     * @return The current cmbType.
+     */
     public String getVehicleType() {
         return cmbType.getSelectedItem().toString();
     }
 
-
+    /**
+     * Retrieves the current JTextField of txtModel.
+     * @return The current txtModel.
+     */
     public String getModel() {
         return txtModel.getText();
     }
+
+    /**
+     * Retrieves the current JTextField of txtPlateNumber.
+     * @return The current txtPlateNumber.
+     */
     public String getPlateNumber() {
         return txtPlateNumber.getText();
     }
 
-
+    /**
+     * Retrieves the current JButton of btnAddVehicle.
+     * @return The current btnAddVehicle.
+     */
     public JButton getBtnAddVehicle() {
         return btnAddVehicle;
     }
 
+    /**
+     * Retrieves the current JButton of btnCancel.
+     * @return The current btnCancel.
+     */
     public JButton getBtnCancel() {
         return btnCancel;
-    }
-
-    // Temporary main method to view and debug frame
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new VehicleAdderView();
-            }
-        });
     }
 }

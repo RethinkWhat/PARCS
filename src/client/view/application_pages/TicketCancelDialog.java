@@ -1,6 +1,10 @@
+package client.view.application_pages;
 
 import java.awt.geom.RoundRectangle2D;
 
+/**
+ * To be implemented in Version 2.0.
+ */
 public class TicketCancelDialog extends javax.swing.JDialog {
 
     /**

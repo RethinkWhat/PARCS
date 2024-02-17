@@ -189,9 +189,18 @@ public class TimerPageView extends JPanel {
             this.hour = hour;
         }
 
+        /**
+         * Mutates the new minute of the timer.
+         * @param minute The new minute (integer).
+         */
         public void setMinute(int minute) {
             this.minute = minute;
         }
+
+        /**
+         * Mutates the new second of the timer.
+         * @param second The new second (integer).
+         */
         public void setSecond(int second) {
             this.second = second;
         }
@@ -436,7 +445,6 @@ public class TimerPageView extends JPanel {
          * The button to cancel.
          */
         private JButton btnCancel;
-
 
         /**
          * Constructs a dialog of EndTimerDialog.

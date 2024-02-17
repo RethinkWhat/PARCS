@@ -51,39 +51,65 @@ public class ReservationPageView extends JPanel {
      * Instance variable of GridBagConstraints used for JPanels using GridBagLayout.
      */
     private GridBagConstraints gbc;
-
     /**
-     * Variable to hold full name of user
+     * Variable to hold full name of user. Ramon is the placeholder.
      */
     private JLabel userFullName = new JLabel("Ramon");
     /**
      * The CardLayout that controls the components of the MainTopPanel.
      */
     private CardLayout topCardLayout = new CardLayout();
-
+    /**
+     * The panel of MainBottomPanel.
+     */
     private MainBottomPanel mainBottomPanel;
-
+    /**
+     * The panel for the parking slots buttons.
+     */
     private ParkingSlotButtonsView parkingSlotButtonsView;
-
+    /**
+     * The dialog for successful booking.
+     */
     private ReserveSlotConfirmationView reserveSlotConfirmationView;
-
+    /**
+     * The dialog for unsuccessful booking.
+     */
     private ErrorMessageView errorMessageView;
-
+    /**
+     * The icon for a taken car parking spot.
+     */
     private Icon takenCar = res.iconTakenCar;
-
+    /**
+     * The icon for an available car parking spot.
+     */
     private Icon availCar = res.iconAvailableCar;
-
+    /**
+     * The icon for a taken motor parking spot.
+     */
     private Icon takenMotor = res.iconTakenMotor;
-
+    /**
+     * The icon for an available motor parking spot.
+     */
     private Icon availMotor = res.iconAvailableMotor;
-
+    /**
+     * The panel for the MainTopPanel.
+     */
     private MainTopPanel mainTopPanel;
 
+    /**
+     * Retrieves the current taken car parking spot icon.
+     *
+     * @return The current takenCar icon.
+     */
     public Icon getTakenCar() {
         return takenCar;
     }
 
-
+    /**
+     * Retrieves the current available car parking spot icon.
+     *
+     * @return The current availCar icon.
+     */
     public Icon getAvailCar() {
         return availCar;
     }
@@ -91,8 +117,6 @@ public class ReservationPageView extends JPanel {
     /**
      * Constructs a panel of ReservationPageView.
      */
-
-
     public ReservationPageView() {
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(25, 25, 25, 25));
@@ -124,13 +148,14 @@ public class ReservationPageView extends JPanel {
          * The rounded panel.
          */
         private JPanel container;
-
+        /**
+         * The panel that holds the parking slots.
+         */
         private ParkingSlotsPanel parkingSlotsPanel;
 
         /**
          * Constructs a panel of MainBottomPanel.
          */
-
         public MainBottomPanel() {
             setLayout(new BorderLayout());
 
@@ -149,9 +174,13 @@ public class ReservationPageView extends JPanel {
             add(container, BorderLayout.CENTER);
 
             setPreferredSize(new Dimension(1300, 510));
-
         }
 
+        /**
+         * Retrieves the current ParkingSlotsPanel of parkingSlotsPanel
+         *
+         * @return The current parkingSlotsPanel.
+         */
         public ParkingSlotsPanel getParkingSlotsPanel() {
             return parkingSlotsPanel;
         }
@@ -160,16 +189,33 @@ public class ReservationPageView extends JPanel {
          * The panel that contains the parking slots.
          */
         public class ParkingSlotsPanel extends JPanel {
+            /**
+             * The number of car slots.
+             */
             private static final int NUM_CAR_SLOTS = 5;
+            /**
+             * The number of motor slots.
+             */
             private static final int NUM_MOTOR_SLOTS = 2;
-
+            /**
+             * The array of car buttons.
+             */
             private CarMotorButton[] carButtons;
+            /**
+             * The array of motor buttons.
+             */
             private CarMotorButton[] motorButtons;
 
+            /**
+             * Constructs a panel of ParkingSlots.
+             */
             public ParkingSlotsPanel() {
                 initializeButtons();
             }
 
+            /**
+             * Constructs the buttons.
+             */
             private void initializeButtons() {
                 carButtons = new CarMotorButton[NUM_CAR_SLOTS * 2];
                 motorButtons = new CarMotorButton[NUM_MOTOR_SLOTS * 2];
@@ -180,7 +226,6 @@ public class ReservationPageView extends JPanel {
                     carButtons[i] = new CarMotorButton(carLabel);
                     carButtons[i].setIdentifier(carLabel);
 
-                    //TODO: Validate if it is taken
                     //for buttons with image
                     carButtons[i] = new CarMotorButton(carLabel, res.iconAvailableCar);
                     carButtons[i].setOpaque(false);
@@ -225,6 +270,11 @@ public class ReservationPageView extends JPanel {
                 }
             }
 
+            /**
+             * Paints the parking slots outline.
+             *
+             * @param g the <code>Graphics</code> object to protect
+             */
             @Override
             protected void paintComponent(Graphics g) {
                 super.paintComponent(g);
@@ -295,6 +345,11 @@ public class ReservationPageView extends JPanel {
                 }
             }
 
+            /**
+             * Sets a specified action listener for the parking spots.
+             *
+             * @param listener The specified action listener.
+             */
             public void setCarButtonsListener(ActionListener listener) {
                 for (JButton button : carButtons) {
                     button.addActionListener(listener);
@@ -304,6 +359,13 @@ public class ReservationPageView extends JPanel {
                 }
             }
 
+            /**
+             * Sets a specified icon for the parking spots.
+             *
+             * @param isCar   Specified spot if car or motorcycle.
+             * @param number  The index of the parking spot.
+             * @param isTaken Specified spot if taken or not.
+             */
             public void setCarMotorButtonsIcon(boolean isCar, int number, boolean isTaken) {
                 if (isCar) {
                     if (isTaken) {
@@ -319,15 +381,23 @@ public class ReservationPageView extends JPanel {
                 }
             }
 
+            /**
+             * Retrieves the current size of the button.
+             *
+             * @return The current button size.
+             */
             public int getCarButtonsSize() {
                 return carButtons.length;
-
             }
 
+            /**
+             * Retrieves the current size of the button.
+             *
+             * @return The current button size.
+             */
             public int getMotorButtonsSize() {
                 return motorButtons.length;
             }
-
         }
     }
 
@@ -336,13 +406,21 @@ public class ReservationPageView extends JPanel {
      */
     public class MainTopPanel extends JPanel {
         /**
-         * Constructs a panel of MainTopPanel.
+         * The panel for available cars.
          */
-
         ButtonPanel pnlAvailCar;
+        /**
+         * The panel for available motors.
+         */
         ButtonPanel pnlAvailMotor;
+        /**
+         * The panel for all the bookings.
+         */
         ButtonPanel pnlTotalBookings;
 
+        /**
+         * Constructs a panel of MainTopPanel.
+         */
         public MainTopPanel() {
             setBackground(res.lightGray);
             setLayout(new BorderLayout());
@@ -412,22 +490,47 @@ public class ReservationPageView extends JPanel {
             this.setPreferredSize(new Dimension(1300, 150));
         }
 
+        /**
+         * Sets a specified panel for available cars.
+         *
+         * @param availCar The number of available car spots.
+         */
         public void setPnlAvailCar(String availCar) {
             pnlAvailCar.setText(availCar);
         }
 
+        /**
+         * Sets a specified panel for available motors.
+         *
+         * @param availMotor The number of available motor spots.
+         */
         public void setPnlAvailMotor(String availMotor) {
             pnlAvailMotor.setText(availMotor);
         }
 
+        /**
+         * Sets a specified panel for total bookings of the user.
+         *
+         * @param totalBookings The number of total user bookings.
+         */
         public void setPnlTotalBookings(String totalBookings) {
             pnlTotalBookings.setText(totalBookings);
         }
 
+        /**
+         * Sets a specified action listener for the txtSearchBar.
+         *
+         * @param listener The specified action listener.
+         */
         public void setTxtSearchBarListener(ActionListener listener) {
             txtSearchbar.addActionListener(listener);
         }
 
+        /**
+         * Retrieves the current JTextField of txtSearchbar.
+         *
+         * @return The current txtSearchbar.
+         */
         public String getTxtSearchbar() {
             return txtSearchbar.getText();
         }
@@ -441,6 +544,9 @@ public class ReservationPageView extends JPanel {
          * The rounded panel.
          */
         private JPanel container;
+        /**
+         * The label for number.
+         */
         private JLabel number;
 
         /**
@@ -461,57 +567,62 @@ public class ReservationPageView extends JPanel {
             this.setPreferredSize(new Dimension(100, 100));
         }
 
+        /**
+         * Mutates the new text of the number label.
+         *
+         * @param number The new number.
+         */
         public void setText(String number) {
             this.number.setText(number);
         }
     }
 
     /**
-     * TODO: Documentation
+     * Panel for the buttons when selecting a parking spot.
      */
     public class ParkingSlotButtonsView extends JPanel {
         /**
-         * TODO: Documentation
+         * The button for close.
          */
         private JButton btnClose;
         /**
-         * TODO: Documentation
+         * The panel that holds the components.
          */
         private JPanel pnlContainer;
         /**
-         * TODO: Documentation
+         * The label for the parking spot/slot number.
          */
         private JLabel lblSlotNumber;
         /**
-         * TODO: Documentation
+         * The label for vehicle type.
          */
         private JLabel lblType;
         /**
-         * TODO: Documentation
+         * The label for parking status.
          */
         private JLabel lblStatus;
         /**
-         * TODO: Documentation
+         * The label for reservation date.
          */
         private JLabel lblDate;
         /**
-         * TODO: Documentation
+         * The button for reserve.
          */
         private JButton btnReserve;
         /**
-         * TODO: Documentation
+         * The combo box for user vehicles.
          */
         private JComboBox<String> cmbVehicle;
         /**
-         * TODO: Documentation
+         * The combo box for time.
          */
         private JComboBox<String> cmbTime;
         /**
-         * TODO: Documentation
+         * The combo box for duration.
          */
         private JComboBox<String> cmbDuration;
         /**
-         * TODO: Documentation
+         * The combo box for date.
          */
         private JComboBox<String> cmbDate;
 
@@ -641,101 +752,198 @@ public class ReservationPageView extends JPanel {
             this.setPreferredSize(new Dimension(1300, 130));
         }
 
+        /**
+         * Enables the dropdown box.
+         * @param enabled True if activated, false if otherwise.
+         */
         public void setDropdownsEnabled(boolean enabled) {
             cmbVehicle.setEnabled(enabled);
             cmbDate.setEnabled(enabled);
             cmbTime.setEnabled(enabled);
             cmbDuration.setEnabled(enabled);
         }
+
+        /**
+         * To be implemented in version 2.0.
+         */
         public void disableDropdowns() {
             setDropdownsEnabled(false);
         }
+
+        /**
+         * To be implemented in version 2.0.
+         */
         public void enableDropdowns() {
             setDropdownsEnabled(true);
         }
 
+        /**
+         * Mutates the label of the parking spot.
+         * @param label The new label.
+         */
         public void setLblSlotNumber(String label) {
-                lblSlotNumber.setText("SPOT " + label);
+            lblSlotNumber.setText("SPOT " + label);
         }
+
+        /**
+         * Sets a specified action listener for btnClose.
+         * @param listener The specified action listener.
+         */
         public void setBtnCloseListener(ActionListener listener) {
             btnClose.addActionListener(listener);
         }
 
+        /**
+         * Mutates the date.
+         * @param date The new date.
+         */
         public void setLblDate(String date) {
             lblDate.setText(date);
         }
 
+        /**
+         * Sets a specified action listener for btnReserve.
+         * @param listener The specified action listener.
+         */
         public void setReserveSlotListener(ActionListener listener) {
             btnReserve.addActionListener(listener);
         }
 
+        /**
+         * Mutates the type.
+         * @param type The new type.
+         */
         public void setLblType(String type) {
             lblType.setText(type);
         }
 
+        /**
+         * Mutates the status.
+         * @param status The new status.
+         */
         public void setLblStatus(String status) {
             lblStatus.setText(status);
         }
 
-
+        /**
+         * Sets a specified model of cmbVehicle.
+         * @param vehicles The specified model.
+         */
         public void setVehiclesList(String[] vehicles) {
             cmbVehicle.setModel(new javax.swing.DefaultComboBoxModel<>(vehicles));
         }
 
+        /**
+         * Sets a specified model of cmbTime.
+         * @param timeList The specified model.
+         */
         public void setTimeList(String[] timeList) {
             cmbTime.setModel(new javax.swing.DefaultComboBoxModel<>(timeList));
         }
 
+        /**
+         * Sets a specified model of cmbDate.
+         * @param dateList The specified model.
+         */
         public void setDateList(String[] dateList) {
             cmbDate.setModel(new javax.swing.DefaultComboBoxModel<>(dateList));
         }
 
-
+        /**
+         * Retrieves the current JComboBox of cmbTime.
+         * @return The current cmbTime.
+         */
         public String getStartTime() {
             return cmbTime.getItemAt(cmbTime.getSelectedIndex());
         }
 
+        /**
+         * Retrieves the current JComboBox of cmbDate.
+         * @return The current cmbDate.
+         */
         public String getDateChosen() {
             return cmbDate.getItemAt(cmbDate.getSelectedIndex());
         }
 
+        /**
+         * Retrieves the current JComboBox of cmbDuration.
+         * @return The current cmbDuration.
+         */
         public String getDurationChosen() {
             return String.valueOf(cmbDuration.getSelectedIndex());
         }
 
+        /**
+         * Resets the duration to the first index.
+         */
         public void resetDuration() {
             cmbDuration.setSelectedIndex(0);
         }
 
+        /**
+         * Resets the time to the first index.
+         */
         public void resetTime() {
             cmbTime.setSelectedIndex(0);
         }
 
+        /**
+         * Resets the date to the first index.
+         */
         public void resetDate() {
             cmbDate.setSelectedIndex(0);
         }
 
+        /**
+         * Sets a specified action listener for cmbDuration.
+         * @param listener The specified action listener.
+         */
         public void setDurationListener(ActionListener listener) {
             cmbDuration.addActionListener(listener);
         }
 
+        /**
+         * Sets a specified action listener for cmbDate.
+         * @param listener The specified action listener.
+         */
         public void setDateListener(ActionListener listener) {
             cmbDate.addActionListener(listener);
         }
 
-
+        /**
+         * Sets a specified model for the cmbDuration.
+         * @param durationList The specified model.
+         */
         public void setDurationList(String[] durationList) {
-        cmbDuration = new JComboBox<>(durationList);
+            cmbDuration = new JComboBox<>(durationList);
         }
     }
 
-
+    /**
+     * The dialog for successful bookings.
+     */
     public class ReserveSlotConfirmationView extends JDialog {
+        /**
+         * The stylesheet.
+         */
         private Resources res = new Resources();
+        /**
+         * The label for reserved.
+         */
         private JLabel lblReserved;
+        /**
+         * The label for confirmation message.
+         */
         private JLabel lblConfirmationMsg;
+        /**
+         * The button of closing the dialog.
+         */
         private JButton btnCloseConfirmation;
 
+        /**
+         * Constructs a dialog of ReserveSlotConfirmationView.
+         * @param success True if successful, false if otherwise.
+         */
         public ReserveSlotConfirmationView(boolean success) {
 
             this.setTitle("PARCS");
@@ -791,25 +999,47 @@ public class ReservationPageView extends JPanel {
             this.add(pnlConfirmation);
             this.add(pnlCloseBtn);
 
-            this.setPreferredSize(new Dimension(500,300));
+            this.setPreferredSize(new Dimension(500, 300));
             this.setResizable(false);
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
         }
+
+        /**
+         * Sets a specified action listener for btnCloseConfirmation.
+         * @param listener The specified action listener.
+         */
         public void setBtnCloseConfirmationListener(ActionListener listener) {
             btnCloseConfirmation.addActionListener(listener);
         }
     }
 
+    /**
+     * The dialog for errors.
+     */
     public class ErrorMessageView extends JDialog {
+        /**
+         * The stylesheet.
+         */
         private Resources res = new Resources();
+        /**
+         * The label for error.
+         */
         private JLabel lblError;
+        /**
+         * The label for specified error.
+         */
         private JLabel lblSpecificError;
+        /**
+         * The button for okay.
+         */
         private JButton btnOkay;
 
+        /**
+         * Constructs a dialog of ErrorMessageView.
+         */
         public ErrorMessageView() {
-
             this.setTitle("PARCS Error Message");
             this.setModal(true);
             this.setLayout(new GridLayout(3, 1));
@@ -853,26 +1083,44 @@ public class ReservationPageView extends JPanel {
             this.add(pnlErrorMessage);
             this.add(pnlButton);
 
-            this.setPreferredSize(new Dimension(500,300));
+            this.setPreferredSize(new Dimension(500, 300));
             this.setResizable(false);
             this.pack();
             this.setLocationRelativeTo(null);
             this.setVisible(true);
         }
+
+        /**
+         * Mutates the error message.
+         * @param errorMessage The new message.
+         */
         public void setErrorMessage(String errorMessage) {
             lblSpecificError.setText(errorMessage);
         }
     }
 
+    /**
+     * Retrieves the current panel of parkingSlotButtonsView.
+     * @return The current parkingSlotButtonsView.
+     */
     public ParkingSlotButtonsView getParkingSlotButtonsView() {
         return parkingSlotButtonsView;
     }
 
+    /**
+     * Retrieves the current panel of reserveSlotConfirmationView.
+     * @param booked True if booked, false if otherwise.
+     * @return The current reserveSlotConfirmationView.
+     */
     public ReserveSlotConfirmationView getReserveSlotConfirmationView(boolean booked) {
         reserveSlotConfirmationView = new ReserveSlotConfirmationView(booked);
         return reserveSlotConfirmationView;
     }
 
+    /**
+     * Retrieves the current dialog of error message.
+     * @return The current errorMessageView.
+     */
     public ErrorMessageView getErrorMessageView() {
         if (errorMessageView == null) {
             errorMessageView = new ErrorMessageView();
@@ -880,53 +1128,91 @@ public class ReservationPageView extends JPanel {
         return errorMessageView;
     }
 
+    /**
+     * Retrieves the current panel that holds different components.
+     * @return The current pnlCards.
+     */
     public JPanel getPnlCards() {
         return pnlCards;
     }
 
+    /**
+     * Retrieves the current JButton of btnAvailCar.
+     * @return The current btnAvailCar.
+     */
     public JButton getBtnAvailCar() {
         return btnAvailCar;
     }
 
+    /**
+     * Retrieves the current JButton of btnAvailMotor.
+     * @return The current btnAvailMotor.
+     */
     public JButton getBtnAvailMotor() {
         return btnAvailMotor;
     }
 
+    /**
+     * Retrieves the current JButton of btnTotalBookings.
+     * @return The current btnTotalBookings.
+     */
     public JButton getBtnTotalBookings() {
         return btnTotalBookings;
     }
 
+    /**
+     * Retrieves the current JTextField of txtSearchBar.
+     * @return The current txtSearchBar.
+     */
     public JTextField getTxtSearchbar() {
         return txtSearchbar;
     }
 
+    /**
+     * Retrieves the current JLabel of lblName.
+     * @return The current lblName.
+     */
     public JLabel getLblName() {
         return lblName;
     }
 
+    /**
+     * Mutates the full name of the user.
+     * @param fullName The new full name.
+     */
     public void setUserFullName(String fullName) {
         lblName.setText("Hello, " + fullName + "!");
     }
 
+    /**
+     * Retrieves the current JLabel of lblDate.
+     * @return The current lblDate.
+     */
     public JLabel getLblDate() {
         return lblDate;
     }
 
+    /**
+     * Retrieves the current top card layout that controls the components of mainTopPanel.
+     * @return The current topCardLayout.
+     */
     public CardLayout getTopCardLayout() {
         return topCardLayout;
     }
 
+    /**
+     * Retrieves the current MainBottomPanel of mainBottomPanel.
+     * @return The current mainBottomPanel.
+     */
     public MainBottomPanel getMainBottomPanel() {
         return mainBottomPanel;
     }
 
+    /**
+     * Retrieves the current MainTopPanel of mainTopPanel.
+     * @return The current mainTopPanel.
+     */
     public MainTopPanel getMainTopPanel() {
         return mainTopPanel;
-    }
-
-
-
-    public static void main(String[] args) {
-        ReservationPageView view = new ReservationPageView();
     }
 }
