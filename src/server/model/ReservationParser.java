@@ -577,7 +577,7 @@ public class ReservationParser {
 
                     String currUser = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
                     String currIdentifier = currParkingSpotElement.getAttribute("identifier");
-                    String currDate = currReservationElement.getAttribute("date");
+                    String currDate = currReservationElement.getAttribute("day");
                     String currStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
                     String currEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
 
@@ -631,7 +631,7 @@ public class ReservationParser {
 
                     String currUser = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
                     String currIdentifier = currParkingSpotElement.getAttribute("identifier");
-                    String currDate = currReservationElement.getAttribute("date");
+                    String currDate = currReservationElement.getAttribute("day");
                     String currStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
                     String currEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
 
