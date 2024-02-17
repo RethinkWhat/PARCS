@@ -61,7 +61,7 @@ public class DashboardView extends JPanel {
         setBorder(new EmptyBorder(25,25,25,25));
 
         // Main Panel
-        add(new MainTopPanel(), BorderLayout.NORTH);
+        add(pnlMainTop = new MainTopPanel(), BorderLayout.NORTH);
         add(pnlMainBottom = new MainBottomPanel(), BorderLayout.SOUTH);
 
         this.setPreferredSize(new Dimension(1100,700));
@@ -114,6 +114,8 @@ public class DashboardView extends JPanel {
     public void setRefreshListener(ActionListener actionListener) {
         btnRefresh.addActionListener(actionListener);
     }
+
+
 
     /**
      * The panel that contains the parking slots.
@@ -548,7 +550,31 @@ public class DashboardView extends JPanel {
     /**
      * The panel that contains multiple objects of the ButtonsPanel.
      */
-    class MainTopPanel extends JPanel {
+    public class MainTopPanel extends JPanel {
+        /**
+         * The label for the total car bookings.
+         */
+        private JLabel lblCarCount;
+        /**
+         * The label for car.
+         */
+        private JLabel lblAvailCar;
+        /**
+         * The label for the total motor bookings.
+         */
+        private JLabel lblMotorCount;
+        /**
+         * The label for motor.
+         */
+        private JLabel lblAvailMotor;
+        /**
+         * The label for the total bookings (car and motor).
+         */
+        private JLabel lblTotalCount;
+        /**
+         * The label for total
+         */
+        private JLabel lblTotal;
         /**
          * Constructs a panel of MainTopPanel.
          */
@@ -592,33 +618,81 @@ public class DashboardView extends JPanel {
             // Update parameters as models from controller when backend has commenced.
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
-                    res.createLblH1("13", res.eerieBlack),
-                    res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
+                    lblCarCount = res.createLblH1("13", res.eerieBlack),
+                    lblAvailCar = res.createLblP("<html>Available<br> Car Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
             ButtonPanel pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
-                    res.createLblH1("10", res.eerieBlack),
-                    res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
+                    lblMotorCount = res.createLblH1("10", res.eerieBlack),
+                    lblAvailMotor = res.createLblP("<html>Available<br> Motor Slots</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
             ButtonPanel pnlTotalBookings = new ButtonPanel(
                     btnTotalBookings = res.createBtnIconOnly(res.iconSolidTicket, 50,50),
-                    res.createLblH1("3", res.eerieBlack),
-                    res.createLblP("<html>Total<br> Bookings</html>", res.eerieBlack)
+                    lblTotalCount = res.createLblH1("3", res.eerieBlack),
+                    lblTotal = res.createLblP("<html>Total<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlTotalBookings);
 
             this.setPreferredSize(new Dimension(1300,150));
+        }
+
+        /**
+         * Retrieves the current JLabel of lblCarCount.
+         * @return The current lblCarCount.
+         */
+        public JLabel getLblCarCount() {
+            return lblCarCount;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblMotorCount.
+         * @return The current lblMotorCount.
+         */
+        public JLabel getLblMotorCount() {
+            return lblMotorCount;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblTotalCount.
+         * @return The current lblTotalCount.
+         */
+        public JLabel getLblTotalCount() {
+            return lblTotalCount;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblAvailCar.
+         * @return The current lblAvailCar.
+         */
+        public JLabel getLblAvailCar() {
+            return lblAvailCar;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblAvailMotor.
+         * @return The current lblAvailMotor.
+         */
+        public JLabel getLblAvailMotor() {
+            return lblAvailMotor;
+        }
+
+        /**
+         * Retrieves the current JLabel of lblTotal.
+         * @return The current lblTotal.
+         */
+        public JLabel getLblTotal() {
+            return lblTotal;
         }
     }
 
     /**
      * The panel that creates the useful buttons of the home page.
      */
-    class ButtonPanel extends JPanel {
+    public class ButtonPanel extends JPanel {
         /**
          * The rounded panel.
          */

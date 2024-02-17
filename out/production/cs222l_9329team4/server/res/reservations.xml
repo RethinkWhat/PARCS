@@ -14,4 +14,16 @@
             <user>basti</user>
         </reservation>
     </parkingSpot>
+    <parkingSpot identifier="M1">
+        <reservation day="02/17/24">
+            <startTime>9:00</startTime>
+            <endTime>10:00</endTime>
+            <user>basti</user>
+        </reservation>
+        <reservation day="02/17/24">
+            <startTime>9:00</startTime>
+            <endTime>10:00</endTime>
+            <user>basti</user>
+        </reservation>
+    </parkingSpot>
 </reservations>

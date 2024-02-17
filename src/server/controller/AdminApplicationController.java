@@ -6,6 +6,7 @@ import server.view.AdminApplicationView;
 import server.view.DashboardView;
 import utilities.Resources;
 
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
@@ -170,6 +171,12 @@ public class AdminApplicationController {
         // populate / repopulate lists
         carBookings = reservationParser.getAllCarBookings();
         motorBookings = reservationParser.getAllMotorBookings();
+
+        view.getDashboardView().getPnlMainTop().getLblCarCount().setText(String.valueOf(carBookings.size()));
+        view.getDashboardView().getPnlMainTop().getLblMotorCount().setText(String.valueOf(motorBookings.size()));
+        view.getDashboardView().getPnlMainTop().getLblTotalCount().
+                setText(String.valueOf(carBookings.size() + motorBookings.size()));
+
 
         // create / recreate record panels of car bookings
         carRecords = new DashboardView.MainBottomPanel.RecordPanel[carBookings.size()];
