@@ -86,6 +86,7 @@ public class LoginRegisterController {
         @Override
         public void actionPerformed(ActionEvent e) {
             String username = view.getUsername();
+            System.out.println("username got from login register controller: " + username);
             if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
                // if (!model.isAdmin()) {
                     view.dispose();
@@ -107,6 +108,7 @@ public class LoginRegisterController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
+            System.out.println("sign up button clicked");
             if (!model.verifySignupPassword(view.getSignupPassword(), view.getConfirmPassword())) {
                 view.displaySignupErrorMessage("Passwords do not match. Try again.");
             } else {

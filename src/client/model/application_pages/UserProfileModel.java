@@ -49,6 +49,7 @@ public class UserProfileModel {
      * @param client The specified client.
      */
     public UserProfileModel(Client client) {
+        System.out.println("user profile model");
         this.client = client;
     }
 
@@ -59,7 +60,29 @@ public class UserProfileModel {
         client.openSocket();
         client.writeString("getVehicles");
         client.writeString(client.getUsername());
-        vehicles = (HashMap<String, List<String>>) client.readObject();
+        vehicles = new HashMap<>(); //null; //(HashMap<String, List<String>>) client.readObject();
+
+        ArrayList<String> vehicleInfo;
+
+        while (true) {
+            String vehicleKey = client.readString();
+            System.out.println("KEY: " + vehicleKey);
+            vehicleInfo = new ArrayList<>();
+
+            if (vehicleKey.equals("empty") || vehicleKey.equals("complete"))
+                break;
+
+            while (true) {
+                String vehicleValue = client.readString();
+                System.out.println("\tvalue: " + vehicleValue);
+                if (vehicleValue.equals("nextKey")) {
+                    break;
+                }
+                vehicleInfo.add(vehicleValue);
+            }
+            vehicles.put(vehicleKey, vehicleInfo);
+        }
+
         client.closeSocket();
 
         vehicleList = new ArrayList();

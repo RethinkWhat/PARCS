@@ -3,6 +3,7 @@ package client.model.application_pages;
 import client.model.Client;
 import client.view.application_pages.Timer;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class TimerModel {
@@ -54,6 +55,7 @@ public class TimerModel {
      * @param client The specified client.
      */
     public TimerModel(Client client) {
+        System.out.println("timer model");
         this.client = client;
         getReservationInfo();
     }
@@ -65,7 +67,16 @@ public class TimerModel {
 
         client.writeString(client.getUsername());
 
-        reservationInfo = (List<String>) client.readObject();
+        reservationInfo = new ArrayList<>();
+        String reservations = "";
+        while (true) {
+            reservations = client.readString();
+            if (reservations.equals("complete"))
+                break;
+            reservationInfo.add(reservations);
+                 //   = null;// (List<String>) client.readObject();
+        }
+        System.out.println("reservation info: " + reservationInfo);
 
         duration = Integer.valueOf(client.readString());
 

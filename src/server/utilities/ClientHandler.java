@@ -42,20 +42,22 @@ public class ClientHandler implements Runnable {
     @Override
     public void run() {
             try {
+                reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
+                writer = new PrintWriter(client.getOutputStream(),true);
                 while (!disconnect) {
-                    reader = new BufferedReader(new InputStreamReader(client.getInputStream()));
-                    writer = new PrintWriter(new OutputStreamWriter(client.getOutputStream()), true);
-                    while (!disconnect) {
                         String page = reader.readLine();
                         if (page != null) {
+                            System.out.println("page : " + page);
                             switch (page) {
                                 case "logout":
                                     handleLogout();
                                     break;
                                 case "login":
+                                    System.out.println("login switch case reached");
                                     login();
                                     break;
                                 case "reservation":
+                                    System.out.println("reservation switch case reached");
                                     reserve();
                                     break;
                                 case "signUp":
@@ -91,7 +93,6 @@ public class ClientHandler implements Runnable {
                                     break;
                             }
                         }
-                    }
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -147,10 +148,10 @@ public class ClientHandler implements Runnable {
 
     public void login() throws IOException {
         System.out.println("login attempt");
-        String username = null;
-        while (username == null) {
-            username = reader.readLine();
-        }
+
+        String username = reader.readLine();
+        System.out.println(username);
+
         String password = reader.readLine();
 
         authenticateLogin = server.validateAccount(username, password);
@@ -165,6 +166,8 @@ public class ClientHandler implements Runnable {
         }
         else
             writer.println("false");
+
+
     }
 
 
@@ -229,9 +232,22 @@ public class ClientHandler implements Runnable {
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
             System.out.println("vehicles: " + vehicles);
-          //  ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-           // outputStreamWriter.writeObject(vehicles);
-            System.out.println("2. vehicles: " + vehicles);
+
+            if (vehicles.isEmpty()) {
+                writer.println("empty");
+            }
+            else {
+                for (String key : vehicles.keySet()) {
+                    writer.println(key);
+                    for (String value : vehicles.get(key)) {
+                        writer.println(value);
+                    }
+                    writer.println("nextKey");
+                }
+                writer.println("complete");
+                //outputStreamWriter.writeObject(vehicles);
+                System.out.println("2. vehicles: " + vehicles);
+            }
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -244,8 +260,24 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
-            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-            outputStreamWriter.writeObject(vehicles);
+            //ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
+           // outputStreamWriter.writeObject(vehicles);
+            if (vehicles.isEmpty()) {
+                writer.println("empty");
+            }
+            else {
+                for (String key : vehicles.keySet()) {
+                    writer.println(key);
+                    for (String value : vehicles.get(key)) {
+                        writer.println(value);
+                    }
+                    writer.println("nextKey");
+                }
+                writer.println("complete");
+                //outputStreamWriter.writeObject(vehicles);
+                System.out.println("2. vehicles: " + vehicles);
+            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -276,13 +308,21 @@ public class ClientHandler implements Runnable {
     }
 
     public void spotInfo() {
+        DateTime dateTime = new DateTime();
         try {
             String identifier = reader.readLine();
             String duration = reader.readLine();
             String date = reader.readLine();
             List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
-            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
-            outputStreamWriter.writeObject(availableTime);
+
+            for (String time : availableTime) {
+                if (Integer.valueOf(dateTime.getTime().split(":")[0]) <=
+                        Integer.valueOf(time.split(":")[0])) {
+                    writer.println(time);
+                }
+            }
+            writer.println("complete");
+          //  outputStreamWriter.writeObject(availableTime);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -312,10 +352,14 @@ public class ClientHandler implements Runnable {
         DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
-            ObjectOutputStream outputStreamWriter = new ObjectOutputStream(client.getOutputStream());
 
             List<String> userReservation = server.getClosestReservation(username, dateTime.getTime());
-            outputStreamWriter.writeObject(userReservation);
+
+            for (String reservation : userReservation) {
+                writer.println(reservation);//outputStreamWriter.writeObject(userReservation);
+                System.out.println("printing: " + reservation);
+            }
+            writer.println("complete");
 
             String duration = server.getDuration(userReservation.get(1), userReservation.get(2));
             writer.println(duration);
