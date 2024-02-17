@@ -36,6 +36,10 @@ public class UserProfileView extends JPanel {
      */
     private JButton btnNavHistory;
     /**
+     * The button to delete account.
+     */
+    private JButton btnNavDelete;
+    /**
      * The exit/logout button.
      */
     private JButton btnNavExit;
@@ -116,7 +120,7 @@ public class UserProfileView extends JPanel {
             this.setLayout(new BorderLayout()); // Use BorderLayout for easier component placement
             this.setBackground(res.white);
 
-            JPanel buttonsPanel = new JPanel(new GridLayout(5, 1, 0, 0));
+            JPanel buttonsPanel = new JPanel(new GridLayout(6, 1, 0, 0));
             buttonsPanel.setPreferredSize(new Dimension(300,400));
             buttonsPanel.setBackground(res.white);
 
@@ -153,6 +157,13 @@ public class UserProfileView extends JPanel {
             ImageIcon helpResized = new ImageIcon(historyIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
             btnNavHistory.setIcon(helpResized);
             buttonsPanel.add(btnNavHistory);
+
+            btnNavDelete = res.createBtnTxtOnly(" Delete Account", res.gray);
+            btnNavDelete.setFont(buttonFont);
+            btnNavDelete.setHorizontalAlignment(SwingConstants.LEFT);
+            ImageIcon deleteResized = new ImageIcon(res.iconDelete.getImage().getScaledInstance(25,25,Image.SCALE_SMOOTH));
+            btnNavDelete.setIcon(deleteResized);
+            buttonsPanel.add(btnNavDelete);
 
             ImageIcon exitIcon = new ImageIcon("res/drawable/icons/exit-grey-outline.png");
             btnNavExit = res.createBtnTxtOnly(" Logout", res.gray);
@@ -846,6 +857,14 @@ public class UserProfileView extends JPanel {
     }
 
     /**
+     * Sets a specified action listener for btnNavDelete.
+     * @param actionListener The specified action listener.
+     */
+    public void setDeleteListener(ActionListener actionListener) {
+        btnNavDelete.addActionListener(actionListener);
+    }
+
+    /**
      * Sets a specified action listener for btnNavSecurity.
      * @param actionListener The specified action listener.
      */
@@ -883,6 +902,14 @@ public class UserProfileView extends JPanel {
      */
     public JButton getBtnNavHistory() {
         return btnNavHistory;
+    }
+
+    /**
+     * Retrieves the current JButton of btnNavDelete.
+     * @return The current btnNavDelete.
+     */
+    public JButton getBtnNavDelete() {
+        return btnNavDelete;
     }
 
     /**
