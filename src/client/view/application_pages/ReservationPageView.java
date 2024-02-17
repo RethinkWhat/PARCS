@@ -829,7 +829,7 @@ public class ReservationPageView extends JPanel {
 
             // Labels for pnlErrorMessage
             lblError = res.createLblH1("ERROR", res.red);
-            lblSpecificError = res.createLblP("Please choose an option first before selecting the next.", res.eerieBlack);
+            lblSpecificError = res.createLblP("Please complete selection before reserving.", res.eerieBlack);
 
             // Add labels to pnlErrorMessage panel
             GridBagConstraints gbc = new GridBagConstraints();

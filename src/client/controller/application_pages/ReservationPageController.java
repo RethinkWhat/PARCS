@@ -104,15 +104,6 @@ public class ReservationPageController {
         //System.out.println("THIS IS DATELIST: " + dateList[0]);
         view.getParkingSlotButtonsView().setDateList(dateList);
 
-
-
-
-        // action listeners
-
-
-        // mouse listeners
-
-        // focus listeners
     }
 
     /**
