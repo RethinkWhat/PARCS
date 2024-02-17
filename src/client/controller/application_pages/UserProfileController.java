@@ -89,6 +89,7 @@ public class UserProfileController {
             view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
         });
         view.setNavSecurityListener(e -> view.getCardLayout().show(view.getPnlCards(), "security"));
+        view.setDeleteListener(new DeleteListener());
         view.setNavExitListener(e -> {
             parent.dispose();
             model.getClient().logout();
@@ -133,6 +134,7 @@ public class UserProfileController {
         view.getBtnNavHistory().addMouseListener(new Resources.CursorChanger(view.getBtnNavHistory()));
         view.getBtnNavSecurity().addMouseListener(new Resources.CursorChanger(view.getBtnNavSecurity()));
         view.getBtnNavExit().addMouseListener(new Resources.CursorChanger(view.getBtnNavExit()));
+        view.getBtnNavDelete().addMouseListener(new Resources.CursorChanger(view.getBtnNavDelete()));
 
         // edit profile page
         view.getPnlEditProfile().getBtnContinue().
@@ -219,6 +221,20 @@ public class UserProfileController {
 
         // Contact Number
         view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+    }
+
+    /**
+     * Processes the deletion of the account.
+     */
+    class DeleteListener implements ActionListener {
+        /**
+         * Deletes the user account.
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // TODO: @Rithik
+        }
     }
 
     /**
