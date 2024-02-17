@@ -1,10 +1,8 @@
 package client.controller.application_pages;
 
-import client.controller.LoginRegisterController;
 import client.model.LoginRegisterModel;
 import client.model.application_pages.UserProfileModel;
 import client.view.ApplicationView;
-import client.view.application_pages.HistoryPageView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
@@ -112,6 +110,7 @@ public class UserProfileController {
 
         // history page
         // TODO: action listeners for history page
+        view.get
 
         // security page
         view.getPnlSecurityPage().setConfirmListener(new SecurityConfirmListener());
