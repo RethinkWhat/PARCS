@@ -111,6 +111,7 @@ public class AdminApplicationController {
                     view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getPnlCards());
         });
 
+
         // mouse listeners
         view.getBtnNavDashboard().addMouseListener(new Resources.CursorChanger(view.getBtnNavDashboard()));
         view.getBtnNavStatus().addMouseListener(new Resources.CursorChanger(view.getBtnNavStatus()));
