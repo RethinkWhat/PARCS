@@ -136,7 +136,7 @@ public class ClientHandler implements Runnable {
     /**
      * Method to handle user logout
      */
-    public void handleLogout() {
+    public synchronized void handleLogout() {
         try {
             String username = reader.readLine();
             server.accountLogout(username);
@@ -182,7 +182,7 @@ public class ClientHandler implements Runnable {
      * Method to handle login, sending and receiving information between client and server
      * @throws IOException
      */
-    public void login() throws IOException {
+    public synchronized void login() throws IOException {
 
         String username = reader.readLine();
 
