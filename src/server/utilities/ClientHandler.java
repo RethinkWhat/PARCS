@@ -140,7 +140,8 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
             server.accountLogout(username);
-            handleDisconnect();
+            closeResources();
+            client.close();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
