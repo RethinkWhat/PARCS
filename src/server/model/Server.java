@@ -35,6 +35,7 @@ public class Server implements Runnable{
     }
 
     public boolean validateAccount(String username, String password) {
+        System.out.println("validating account");
         Map<String, String> accounts = userParser.getUserLoginCredentials();
         String associatedPass = accounts.getOrDefault(username, "");
         return password.equals(associatedPass);

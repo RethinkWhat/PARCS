@@ -194,7 +194,7 @@ public class ClientHandler implements Runnable {
             if (server.getUserLog().contains(username)) {
                 writer.println("userExists");
             }else {
-                server.accountLogin(username);
+                //server.accountLogin(username);
                 writer.println("true");
             }
         }
