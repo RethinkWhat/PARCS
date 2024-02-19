@@ -1,5 +1,6 @@
 <userClass>
-                                                                        
+                                                                            
+    
     
     
     
@@ -17,7 +18,8 @@
     
     
     <user username="johan">
-                                                                                                                                                
+                                                                                                                                                        
+        
         
         
         
@@ -35,7 +37,8 @@
         
         
         <type>user</type>
-                                                                                                                                                
+                                                                                                                                                        
+        
         
         
         
@@ -53,7 +56,8 @@
         
         
         <password>2aMVUAM+4H1uFDAu6oICwHwma2MxVFE9gXyou5HeQNE=</password>
-                                                                                                                                                
+                                                                                                                                                        
+        
         
         
         
@@ -71,7 +75,8 @@
         
         
         <lastName>johan</lastName>
-                                                                                                                                                
+                                                                                                                                                        
+        
         
         
         
@@ -89,7 +94,8 @@
         
         
         <firstName>johan</firstName>
-                                                                                                                                                
+                                                                                                                                                        
+        
         
         
         
@@ -107,8 +113,9 @@
         
         
         <phoneNumber>johan</phoneNumber>
-                                                                                                                                            
+                                                                                                                                                    
     
+        
         
         
         
@@ -125,7 +132,8 @@
         
         
         <vehicle>Car,Civic,NWA 991</vehicle>
-                                                                                                                            
+                                                                                                                                    
+    
     
     
     
@@ -141,7 +149,8 @@
     
     
     </user>
-                                                                    
+                                                                        
+    
     
     
     
@@ -159,7 +168,8 @@
     
     
     <user username="ArtOfJakuling">
-                                                                                                                                        
+                                                                                                                                                
+        
         
         
         
@@ -176,7 +186,8 @@
         
         
         <type>user</type>
-                                                                                                                                        
+                                                                                                                                                
+        
         
         
         
@@ -193,7 +204,8 @@
         
         
         <password>XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=</password>
-                                                                                                                                        
+                                                                                                                                                
+        
         
         
         
@@ -210,7 +222,8 @@
         
         
         <lastName>Jasmin</lastName>
-                                                                                                                                        
+                                                                                                                                                
+        
         
         
         
@@ -227,7 +240,8 @@
         
         
         <firstName>Ramon Emmiel</firstName>
-                                                                                                                                        
+                                                                                                                                                
+        
         
         
         
@@ -244,8 +258,9 @@
         
         
         <phoneNumber>09494177993</phoneNumber>
-                                                                                                                                    
+                                                                                                                                            
     
+        
         
         
         
@@ -261,7 +276,8 @@
         
         
         <vehicle>Motorcycle,Yamaha Fazzio,ILY 143</vehicle>
-                                                                                                                    
+                                                                                                                            
+    
     
     
     
@@ -276,9 +292,10 @@
     
     
     </user>
-                                                                
+                                                                    
 
 
+    
     
     
     
@@ -293,7 +310,8 @@
     
     
     <user username="patchoi">
-                                                                                                                
+                                                                                                                        
+        
         
         
         
@@ -307,7 +325,8 @@
         
         
         <type>user</type>
-                                                                                                                
+                                                                                                                        
+        
         
         
         
@@ -321,7 +340,8 @@
         
         
         <password>XohImNooBHFR0OVvjcYpJ3NgPQ1qq73WKhHvch0VQtg=</password>
-                                                                                                                
+                                                                                                                        
+        
         
         
         
@@ -335,7 +355,8 @@
         
         
         <lastName>Lacanilao</lastName>
-                                                                                                                
+                                                                                                                        
+        
         
         
         
@@ -349,7 +370,8 @@
         
         
         <firstName>Patrick</firstName>
-                                                                                                                
+                                                                                                                        
+        
         
         
         
@@ -363,7 +385,8 @@
         
         
         <phoneNumber>09232432323</phoneNumber>
-                                                                                                            
+                                                                                                                    
+        
         
         
         
@@ -377,7 +400,8 @@
         
         
         <vehicle>Car,Ford Everest,NAN 9234</vehicle>
-                                                                                                    
+                                                                                                            
+    
     
     
     
@@ -390,7 +414,7 @@
     
     
     </user>
-                                                    
+                                                        
 
     
     
@@ -403,8 +427,10 @@
     
     
     
+    
     <user username="basti">
-                                                                                                
+                                                                                                        
+        
         
         
         
@@ -416,7 +442,8 @@
         
         
         <type>user</type>
-                                                                                                
+                                                                                                        
+        
         
         
         
@@ -428,7 +455,8 @@
         
         
         <password>lbHDYUPBEZQInCfGlH0ZkagN7rvjF8y3CSZ81oVRUpc=</password>
-                                                                                                
+                                                                                                        
+        
         
         
         
@@ -440,7 +468,8 @@
         
         
         <lastName>Siccuan</lastName>
-                                                                                                
+                                                                                                        
+        
         
         
         
@@ -452,7 +481,8 @@
         
         
         <firstName>Sebastian</firstName>
-                                                                                                
+                                                                                                        
+        
         
         
         
@@ -464,7 +494,8 @@
         
         
         <phoneNumber>2233205</phoneNumber>
-                                                                                            
+                                                                                                    
+        
         
         
         
@@ -476,7 +507,8 @@
         
         
         <vehicle>Car,Montero Sport,NIG 4444</vehicle>
-                                                                                    
+                                                                                            
+    
     
     
     
@@ -487,8 +519,9 @@
     
     
     </user>
-                                            
+                                                
 
+    
     
     
     
@@ -499,7 +532,8 @@
     
     
     <user username="basti">
-                                                                                
+                                                                                        
+        
         
         
         
@@ -509,7 +543,8 @@
         
         
         <type>user</type>
-                                                                                
+                                                                                        
+        
         
         
         
@@ -519,7 +554,8 @@
         
         
         <password>lbHDYUPBEZQInCfGlH0ZkagN7rvjF8y3CSZ81oVRUpc=</password>
-                                                                                
+                                                                                        
+        
         
         
         
@@ -529,7 +565,8 @@
         
         
         <lastName>Siccuan</lastName>
-                                                                                
+                                                                                        
+        
         
         
         
@@ -539,7 +576,8 @@
         
         
         <firstName>Sebastian</firstName>
-                                                                                
+                                                                                        
+        
         
         
         
@@ -549,7 +587,8 @@
         
         
         <phoneNumber>2233205</phoneNumber>
-                                                                            
+                                                                                    
+        
         
         
         
@@ -559,7 +598,8 @@
         
         
         <vehicle>Car,NIG 4443,Lambo</vehicle>
-                                                                    
+                                                                            
+    
     
     
     
@@ -568,7 +608,7 @@
     
     
     </user>
-                                    
+                                        
 
 
 
@@ -576,20 +616,36 @@
 
 
 
+    
     
     <user username="rethinkwhat">
-                
+                        
+        
         <type>user</type>
-                
+                        
+        
         <password>LVnC+vO8d5OLPCstLDTT4RwWBvQ+wPY32BekbnGtiKg=</password>
-                
+                        
+        
         <lastName>tank</lastName>
-                
+                        
+        
         <firstName>rithik</firstName>
-                
+                        
+        
         <phoneNumber>09177900153</phoneNumber>
-            
+                    
+        
         <vehicle>Car,Honda Civic,NWA 991</vehicle>
+            
     </user>
-    
+        
+
+    <user username="Mizu">
+        <type>user</type>
+        <password>D0FoSQ44uER+EbpL1laqEbklvSKvMLrEZLwVP9tghQE=</password>
+        <lastName>Marcos</lastName>
+        <firstName>Jay</firstName>
+        <phoneNumber>09090909</phoneNumber>
+    </user>
 </userClass>
