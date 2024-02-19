@@ -81,7 +81,7 @@ public class LoginRegisterModel {
 
         String validationMessage = client.readString();
         boolean validated =  validationMessage.equals("true");
-
+        System.out.println("validating");
         if (!validated) {
             if (validationMessage.equals("userExists"))
                 errorMessage = "Account already logged in.";

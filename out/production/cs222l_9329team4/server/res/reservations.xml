@@ -1,69 +1,46 @@
 <reservations>
-                
-    
+            
     
     <parkingSpot identifier="C1">
-                                
+                        
         
-        
-        <reservation day="02/19/24">
-                                                
-            
-            
-            <startTime>9:00</startTime>
-                                                
-            
-            
-            <endTime>12:00</endTime>
-                                                
-            
-            
-            <user>johan</user>
-                                            
-        
-        
-        </reservation>
-                            
-        
-        
-        <reservation day="02/21/24">
+        <reservation day="02/20/24">
                                     
             
-            <startTime>11:00</startTime>
+            <startTime>12:00</startTime>
                                     
             
             <endTime>15:00</endTime>
                                     
             
-            <user>Mizu</user>
+            <user>patpat</user>
                                 
         
         </reservation>
                     
     
     </parkingSpot>
-            
-
+        
     
-    <parkingSpot identifier="C3">
+    <parkingSpot identifier="C10">
                 
         <reservation day="02/20/24">
                         
-            <startTime>10:00</startTime>
+            <startTime>7:00</startTime>
                         
-            <endTime>11:00</endTime>
+            <endTime>8:00</endTime>
                         
-            <user>patchoi</user>
+            <user>basti</user>
                     
         </reservation>
             
     </parkingSpot>
     
-    <parkingSpot identifier="C2">
-        <reservation day="02/21/24">
+    <parkingSpot identifier="M1">
+        <reservation day="02/20/24">
             <startTime>8:00</startTime>
-            <endTime>9:00</endTime>
-            <user>Mizu</user>
+            <endTime>10:00</endTime>
+            <user>johan</user>
         </reservation>
     </parkingSpot>
 </reservations>
