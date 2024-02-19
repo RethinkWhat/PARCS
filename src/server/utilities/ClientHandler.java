@@ -370,7 +370,6 @@ public class ClientHandler implements Runnable {
      * Method to handle getting the information of a parking spot
      */
     public void spotInfo() {
-        DateTime dateTime = new DateTime();
         try {
             String identifier = reader.readLine();
             String duration = reader.readLine();
@@ -379,13 +378,10 @@ public class ClientHandler implements Runnable {
             List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
 
             for (String time : availableTime) {
-               // if (Integer.valueOf(dateTime.getTime().split(":")[0]) <=
-                //        Integer.valueOf(time.split(":")[0])) {
+                if (time != null)
                     writer.println(time);
-                //}
             }
             writer.println("complete");
-          //  outputStreamWriter.writeObject(availableTime);
         } catch (IOException ex) {
             ex.printStackTrace();
         }
