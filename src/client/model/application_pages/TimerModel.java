@@ -85,19 +85,28 @@ public class TimerModel {
 
         duration = Integer.valueOf(client.readString());
 
-        parkingSlot = reservationInfo.get(0);
-        timeIn = reservationInfo.get(1);
-        timeOut = reservationInfo.get(2);
-        date = reservationInfo.get(3);
+        if (duration != -24) {
+            parkingSlot = reservationInfo.get(0);
+            timeIn = reservationInfo.get(1);
+            timeOut = reservationInfo.get(2);
+            date = reservationInfo.get(3);
 
-        if (parkingSlot.contains("C"))
-            parkingType = "Car";
-        else
-            parkingType = "Motorcycle";
-        client.closeSocket();
+            if (parkingSlot.contains("C"))
+                parkingType = "Car";
+            else
+                parkingType = "Motorcycle";
+            client.closeSocket();
 
-        if (date.equals(client.getDate())) {
-            startTimer = true;
+            if (date.equals(client.getDate())) {
+                startTimer = true;
+            }
+        } else {
+            parkingSlot = "";
+            timeIn = "";
+            timeOut = "";
+            date = "";
+            parkingType = "";
+            duration = 0;
         }
     }
 
