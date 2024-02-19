@@ -974,7 +974,7 @@ public class ReservationPageView extends JPanel {
                 lblConfirmationMsg = res.createLblP("You successfully created your reservation. Thank you!", res.eerieBlack);
             } else {
                 lblReserved = res.createLblH1("FAILED!", res.red);
-                lblConfirmationMsg = res.createLblP("No booking two parking spots at a time. Thank you!", res.eerieBlack);
+                lblConfirmationMsg = res.createLblP("No booking two parking spots at the same time. Thank you!", res.eerieBlack);
             }
 
             // Add labels to PnlConfirmation panel
