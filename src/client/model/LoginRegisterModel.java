@@ -72,6 +72,7 @@ public class LoginRegisterModel {
      */
     public boolean validateAccount(String username, String password) {
 
+
         client.openSocket();
 
         client.writeString("login");
@@ -79,7 +80,6 @@ public class LoginRegisterModel {
         client.writeString(password);
 
         String validationMessage = client.readString();
-        System.out.println(validationMessage);
         boolean validated =  validationMessage.equals("true");
 
         if (!validated) {

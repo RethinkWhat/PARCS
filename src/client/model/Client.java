@@ -216,12 +216,11 @@ public class Client {
      */
     public void logout() {
         openSocket();
+        this.writeString(this.getUsername());
         writeString("logout");
 
-        this.writeString(this.getUsername());
         username = null;
         startGUI();
-        closeSocket();
     }
 
     /**
