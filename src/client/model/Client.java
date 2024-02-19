@@ -186,41 +186,20 @@ public class Client {
     }
 
     /**
-     * Initializes a new socket connection using a specified port.
-     *
-     * @param port The port to connect to.
-     */
-    public void newSocket(int port) {
-        try {
-            Scanner fileReader = new Scanner(new File("src/client/host"));
-            String host = "";
-
-
-            // read host IP address
-            host = fileReader.nextLine();
-
-            // attempt to connect to server
-            client = new Socket(host, port);
-            client.close();
-
-            // if no exception occurs in connecting to server
-            socketAddress = new InetSocketAddress(host, port);
-            fileReader.close();
-        } catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
-
-    /**
      * Logs out the user from the server and starts the GUI.
      */
     public void logout() {
         openSocket();
         writeString("logout");
         this.writeString(this.getUsername());
-
         username = null;
-        startGUI();
+
+        Thread clientsThread = new Thread(() ->{
+            Client client = new Client(2040);
+
+            client.startGUI();
+        });
+        clientsThread.start();
     }
 
     /**
