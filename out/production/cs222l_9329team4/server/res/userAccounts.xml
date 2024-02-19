@@ -1,443 +1,88 @@
 <userClass>
-                                                        
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+        
     <user username="basti">
-                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <type>user</type>
-                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
-                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <lastName>Siccuan</lastName>
-                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <firstName>Sebastian</firstName>
-                                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <phoneNumber>2233205</phoneNumber>
-                                                                                                            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <vehicle>Car,Honda Civic,CS 222</vehicle>
-                                                                                                    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+            
     </user>
-                                                    
+        
 
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    <user username="jay">
-                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <type>user</type>
-                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <password>v+9K3DnwGwM/50m7XyjxC1gf7zGdNERdIae8Y/5zL6M=</password>
-                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <lastName>Marcos</lastName>
-                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <firstName>Jay Paolo</firstName>
-                                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <phoneNumber>2225158</phoneNumber>
-                                                                                            
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        
-        <vehicle>Car,Honda City,CS 222</vehicle>
-                                                                                    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    </user>
-                                            
 
-    
-    
-    
-    
-    
-    
-    
-    
     
     <user username="yuen">
-                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <type>user</type>
-                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <password>6EHvXy+WtVbomkfDlyzp/Nq8JUB9ktExYharVe68dcY=</password>
-                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <lastName>Yuen</lastName>
-                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <firstName>Ka Hang Chrstian</firstName>
-                                                                                
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <phoneNumber>Phone Number</phoneNumber>
-                                                                            
-        
-        
-        
-        
-        
-        
-        
-        
+                
         <vehicle>Car,Montero Sport,CS 223</vehicle>
-                                                                    
-    
-    
-    
-    
-    
-    
-    
-    </user>
-                                    
-
-    
-    
-    
-    
-    
-    
-    
-    <user username="pat">
-                                                                
-        
-        
-        
-        
-        
-        
-        <type>user</type>
-                                                                
-        
-        
-        
-        
-        
-        
-        <password>aNdT8FWxoVs5SZ/bvobWFPmG0OUOYoF7OOhrIKCTX4I=</password>
-                                                                
-        
-        
-        
-        
-        
-        
-        <lastName>Lacanilao</lastName>
-                                                                
-        
-        
-        
-        
-        
-        
-        <firstName>Marvin Patrick </firstName>
-                                                                
-        
-        
-        
-        
-        
-        
-        <phoneNumber>2230153</phoneNumber>
-                                                            
-        
-        
-        
-        
-        
-        
-        <vehicle>Car,Honda CR-V,CS 221</vehicle>
-                                                    
-    
-    
-    
-    
-    
-    </user>
-                            
-
-    
-    
-    
-    
-    
-    <user username="ram">
-                                                
-        
-        
-        
-        
-        <type>user</type>
-                                                
-        
-        
-        
-        
-        <password>pjH0SIpFfaJ7SmTcjy2FCFtQ/1aL6ZElz2+PRcdZh44=</password>
-                                                
-        
-        
-        
-        
-        <lastName>Jasmin</lastName>
-                                                
-        
-        
-        
-        
-        <firstName>Ramon Emmiel</firstName>
-                                                
-        
-        
-        
-        
-        <phoneNumber>2230748</phoneNumber>
-                                            
-        
-        
-        
-        
-        <vehicle>Motorcycle,Yamaha Fazzio,CS 321</vehicle>
-                                    
-    
-    
-    
-    </user>
-                    
-
-    
-    
-    
-    <user username="tank">
-                                
-        
-        
-        <type>user</type>
-                                
-        
-        
-        <password>KBo3R393LngheJlWpt5AhoLY0skyrVplxIXaVcT4P2k=</password>
-                                
-        
-        
-        <lastName>Tank</lastName>
-                                
-        
-        
-        <firstName>Rithik</firstName>
-                                
-        
-        
-        <phoneNumber>2233293</phoneNumber>
-                            
-        
-        
-        <vehicle>Car,Mitsubishi Mirage,CS 213</vehicle>
-                    
-    
-    </user>
             
-
-    
+    </user>
+        
+    <user username="pat">
+                
+        <type>user</type>
+                
+        <password>aNdT8FWxoVs5SZ/bvobWFPmG0OUOYoF7OOhrIKCTX4I=</password>
+                
+        <lastName>Lacanilao</lastName>
+                
+        <firstName>Marvin Patrick</firstName>
+                
+        <phoneNumber>2230153</phoneNumber>
+                
+        <vehicle>Car,Honda CR-V,CS 221</vehicle>
+            
+    </user>
+        
+    <user username="ram">
+                
+        <type>user</type>
+                
+        <password>pjH0SIpFfaJ7SmTcjy2FCFtQ/1aL6ZElz2+PRcdZh44=</password>
+                
+        <lastName>Jasmin</lastName>
+                
+        <firstName>Ramon Emmiel</firstName>
+                
+        <phoneNumber>2230748</phoneNumber>
+                
+        <vehicle>Motorcycle,Yamaha Fazzio,CS 321</vehicle>
+            
+    </user>
+        
+    <user username="tank">
+                
+        <type>user</type>
+                
+        <password>KBo3R393LngheJlWpt5AhoLY0skyrVplxIXaVcT4P2k=</password>
+                
+        <lastName>Tank</lastName>
+                
+        <firstName>Rithik</firstName>
+                
+        <phoneNumber>2233293</phoneNumber>
+                
+        <vehicle>Car,Mitsubishi Mirage,CS 213</vehicle>
+            
+    </user>
+        
     <user username="johan">
                 
         <type>user</type>
@@ -449,8 +94,9 @@
         <firstName>Johan Rickardo</firstName>
                 
         <phoneNumber>2233375</phoneNumber>
-            
+                
         <vehicle>Car,Honda Civic,CS 432</vehicle>
+            
     </user>
     
 </userClass>

@@ -13,7 +13,7 @@ import java.util.Scanner;
 
 
 /**
- * The Client class represents the client-side of the PARCS (Parking Reservation and Counting System) application.
+ * The Client class represents the client-side of the PARCS application.
  * It manages the connection to the server, socket operations, and GUI initialization.
  */
 public class Client {
