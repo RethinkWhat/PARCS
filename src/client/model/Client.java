@@ -195,7 +195,6 @@ public class Client {
         this.writeString(this.getUsername());
         username = null;
         closeSocket();
-        System.out.println("logging out");
         SwingUtilities.invokeLater(() -> startGUI());
     }
 
