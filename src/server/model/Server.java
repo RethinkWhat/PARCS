@@ -24,7 +24,7 @@ public class Server implements Runnable{
     private volatile boolean serverRunning;
 
     // List of users logged in to the system
-    List<String> userLog;
+    volatile List<String> userLog;
 
     public Server(int socketAddress)throws IOException {
         this.socketAddress = socketAddress;
