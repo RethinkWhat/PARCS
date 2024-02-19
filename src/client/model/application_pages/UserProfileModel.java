@@ -55,7 +55,6 @@ public class UserProfileModel {
      * @param client The specified client.
      */
     public UserProfileModel(Client client) {
-        System.out.println("user profile model");
         this.client = client;
     }
 
@@ -72,7 +71,6 @@ public class UserProfileModel {
 
         while (true) {
             String vehicleKey = client.readString();
-            System.out.println("KEY: " + vehicleKey);
             vehicleInfo = new ArrayList<>();
 
             if (vehicleKey.equals("empty") || vehicleKey.equals("complete"))
@@ -80,7 +78,6 @@ public class UserProfileModel {
 
             while (true) {
                 String vehicleValue = client.readString();
-                System.out.println("\tvalue: " + vehicleValue);
                 if (vehicleValue.equals("nextKey")) {
                     break;
                 }
@@ -277,7 +274,6 @@ public class UserProfileModel {
             bookings.add(parkingInfo);
         }
         client.closeSocket();
-        System.out.println(bookings);
     }
 
     /**

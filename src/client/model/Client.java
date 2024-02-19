@@ -217,7 +217,7 @@ public class Client {
     public void logout() {
         openSocket();
         writeString("logout");
-        System.out.println("logout");
+
         this.writeString(this.getUsername());
         username = null;
         startGUI();
@@ -233,7 +233,7 @@ public class Client {
         openSocket();
         try {
             writeString("logout");
-            System.out.println("logout and exit");
+
             this.writeString(this.getUsername());
             client.close();
         } catch (IOException ex) {

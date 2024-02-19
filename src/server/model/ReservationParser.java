@@ -731,7 +731,6 @@ public class ReservationParser {
             }
             userBookings.add(booking);
         }
-        System.out.println(userBookings);
 
 
     }

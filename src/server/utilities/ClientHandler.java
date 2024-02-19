@@ -66,21 +66,17 @@ public class ClientHandler implements Runnable {
                 while (!disconnect) {
                         String page = reader.readLine();
                         if (page != null) {
-                            System.out.println("page : " + page);
                             switch (page) {
                                 case "logout":
                                     handleLogout();
                                     break;
                                 case "login":
-                                    System.out.println("login switch case reached");
                                     login();
                                     break;
                                 case "reservation":
-                                    System.out.println("reservation switch case reached");
                                     reserve();
                                     break;
                                 case "signUp":
-                                    System.out.println("reached sign up");
                                     signUp();
                                     break;
                                 case "disconnect":
@@ -188,10 +184,8 @@ public class ClientHandler implements Runnable {
      * @throws IOException
      */
     public void login() throws IOException {
-        System.out.println("login attempt");
 
         String username = reader.readLine();
-        System.out.println(username);
 
         String password = reader.readLine();
 
@@ -289,17 +283,13 @@ public class ClientHandler implements Runnable {
         DateTime dateTime = new DateTime();
         try {
             String username = reader.readLine();
-            System.out.println("received username: " + username);
 
             writer.println(server.getUserFullName(username));
-            System.out.println("wrote full name: " + server.getUserFullName(username));
 
             String totalBookings = String.valueOf(server.countBookings(username,dateTime.getDateTime()));
             writer.println(totalBookings);
-            System.out.println("wrote total bookings: " + totalBookings);
 
             Map<String, List<String>> vehicles = server.getUserVehicles(username);
-            System.out.println("vehicles: " + vehicles);
 
             if (vehicles.isEmpty()) {
                 writer.println("empty");
@@ -314,7 +304,6 @@ public class ClientHandler implements Runnable {
                 }
                 writer.println("complete");
                 //outputStreamWriter.writeObject(vehicles);
-                System.out.println("2. vehicles: " + vehicles);
             }
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -341,7 +330,6 @@ public class ClientHandler implements Runnable {
                 }
                 writer.println("complete");
                 //outputStreamWriter.writeObject(vehicles);
-                System.out.println("2. vehicles: " + vehicles);
             }
 
         } catch (IOException e) {
@@ -389,9 +377,7 @@ public class ClientHandler implements Runnable {
             String duration = reader.readLine();
             String date = reader.readLine();
 
-            System.out.println("SERVER: " + identifier + ", " + duration + ", " + date);
             List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
-            System.out.println("AVAILABLE TIME: " +  availableTime);
 
             for (String time : availableTime) {
                // if (Integer.valueOf(dateTime.getTime().split(":")[0]) <=
@@ -441,7 +427,6 @@ public class ClientHandler implements Runnable {
 
             for (String reservation : userReservation) {
                 writer.println(reservation);//outputStreamWriter.writeObject(userReservation);
-                System.out.println("printing: " + reservation);
             }
             writer.println("complete");
 
@@ -459,7 +444,6 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
             List<List<String>> userBookings = server.getUserReservations(username);
-            System.out.println("SENDING: "  + userBookings);
 
             for (List<String> bookingList : userBookings) {
 

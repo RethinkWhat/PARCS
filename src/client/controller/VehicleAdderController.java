@@ -54,7 +54,7 @@ public class VehicleAdderController {
     class AddVehicleListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
-            System.out.println("vehicle adder button clicked");
+
             boolean validate = model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
             if (validate) {
                 view.dispose();

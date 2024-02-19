@@ -64,7 +64,7 @@ public class ReservationPageController {
 
         int availableCarCount = 0;
         for (int x = 0; x < carsNumber; x++) {
-            System.out.println("carNumber size: " + carsNumber);
+
             boolean isTaken = true;
             if (model.getAvailableTime(("C" + (x + 1)), "1", date).length > 1) {
                 isTaken = false;
@@ -101,7 +101,7 @@ public class ReservationPageController {
         view.getMainTopPanel().setPnlAvailMotor(String.valueOf(availableMotorCount));
         view.getMainTopPanel().setPnlTotalBookings(model.getTotalBookings());
 
-        //System.out.println("THIS IS DATELIST: " + dateList[0]);
+
         view.getParkingSlotButtonsView().setDateList(dateList);
 
     }
@@ -162,7 +162,7 @@ public class ReservationPageController {
             String duration = view.getParkingSlotButtonsView().getDurationChosen();
             if (!duration.equals("Duration:")) {
                 String[] time = model.getAvailableTime(btnID, duration, date);
-                System.out.println("DURATION LISTENER: " + time[1]);
+
                 view.getParkingSlotButtonsView().setTimeList(time);
                 if (time.length > 1)
                     view.getParkingSlotButtonsView().setLblStatus("Available");
@@ -207,7 +207,7 @@ public class ReservationPageController {
     class CloseConfirmationListener implements ActionListener {
 
         public void actionPerformed(ActionEvent e) {
-            System.out.println("reached");
+
             confirmationView.dispose();
         }
     }

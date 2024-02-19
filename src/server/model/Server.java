@@ -186,7 +186,6 @@ public class Server implements Runnable{
     }
 
     public void deleteUser(String username) {
-        System.out.println("deleting account");
         userParser.deleteUser(username);
     }
 

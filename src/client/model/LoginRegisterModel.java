@@ -71,9 +71,9 @@ public class LoginRegisterModel {
      * @return The success state.
      */
     public boolean validateAccount(String username, String password) {
-        System.out.println("login register model validation attempting");
+
         client.openSocket();
-        System.out.println("socket open");
+
         client.writeString("login");
         client.writeString(username);
         client.writeString(password);
@@ -142,7 +142,7 @@ public class LoginRegisterModel {
         if (signUpSuccess) {
             //client.writeString("disconnect");
             client.setUsername(username);
-            System.out.println("sign up success");
+
             new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel(client));
         }
         client.closeSocket();

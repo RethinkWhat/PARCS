@@ -138,7 +138,6 @@ public class UserParser {
 
                     if (currNode.getNodeType() == Node.ELEMENT_NODE) {
                         if (currChildren.item(y).getNodeName().equalsIgnoreCase(tagToEdit)) {
-                            System.out.println("reached");
                             currChildren.item(y).setTextContent(newInformation);
                             break;
                         }

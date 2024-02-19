@@ -58,28 +58,27 @@ public class ReservationPageModel {
      * @param client The specified client.
      */
     public ReservationPageModel(Client client) {
-        System.out.println("reservation model");
+
         this.client = client;
 
         client.openSocket();
-        System.out.println("socket open");
+
         client.writeString("reservation");
 
         client.writeString(client.getUsername());
-        System.out.println(client.getUsername());
+
 
         this.fullName = client.readString();
-        System.out.println(fullName);
+
 
         totalBookings = client.readString();
-        System.out.println(totalBookings);
+
 
         vehicles = new HashMap<>();
         List<String> vehicleInfo;
 
         while (true) {
             String vehicleKey = client.readString();
-            System.out.println("KEY: " + vehicleKey);
             vehicleInfo = new ArrayList<>();
 
             if (vehicleKey.equals("empty") || vehicleKey.equals("complete"))
@@ -87,7 +86,6 @@ public class ReservationPageModel {
 
             while (true) {
                 String vehicleValue = client.readString();
-                System.out.println("\tvalue: " + vehicleValue);
                 if (vehicleValue.equals("nextKey")) {
                     break;
                 }
@@ -97,7 +95,6 @@ public class ReservationPageModel {
         }
 
         //vehicles = (Map<String, List<String>>) client.readObject();
-        System.out.println(vehicles);
 
         client.closeSocket();
 
@@ -165,7 +162,6 @@ public class ReservationPageModel {
         ArrayList<String> listOfTime = new ArrayList<>();
         while (true) {
             String timeAccepted = client.readString();
-            System.out.println("LINE READ IN LOOP: " + timeAccepted);
             if (timeAccepted.equals("complete"))
                 break;
             listOfTime.add(timeAccepted);
@@ -221,7 +217,6 @@ public class ReservationPageModel {
 
             for (int x =0; x< carSize; x++) {
                 String time[] = getAvailableTime(("C" + (x+1)),"1",date);
-                System.out.println(("C" + (x+1)) + " : " + date);
 
                 if (time.length > 1)
                     return ("C"+(x+1));

@@ -59,7 +59,6 @@ public class TimerModel {
      * @param client The specified client.
      */
     public TimerModel(Client client) {
-        System.out.println("timer model");
         this.client = client;
         getReservationInfo();
     }
@@ -83,7 +82,6 @@ public class TimerModel {
             reservationInfo.add(reservations);
                  //   = null;// (List<String>) client.readObject();
         }
-        System.out.println("reservation info: " + reservationInfo);
 
         duration = Integer.valueOf(client.readString());
 

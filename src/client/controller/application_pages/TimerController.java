@@ -48,11 +48,9 @@ public class TimerController {
     }
 
     public void startTimer() {
-        System.out.println("reached");
+
         Thread thread = new Thread(() -> {
 
-            System.out.println("TIME IN: " + model.getTimeIn().split(":")[0]);
-            System.out.println("MODEL tiME: " + model.getClient().getTime().split(":")[0]);
             if (model.getClient().getDate().equals(model.getDate()) &&
                     Integer.valueOf(model.getTimeIn().split(":")[0]) >=
             Integer.valueOf(model.getClient().getTime().split(":")[0])) {
