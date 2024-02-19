@@ -378,7 +378,6 @@ public class ClientHandler implements Runnable {
             List<String> availableTime = server.getParkingAvailability(identifier, duration, date);
 
             for (String time : availableTime) {
-                if (time != null)
                     writer.println(time);
             }
             writer.println("complete");

@@ -162,9 +162,11 @@ public class ReservationPageModel {
         ArrayList<String> listOfTime = new ArrayList<>();
         while (true) {
             String timeAccepted = client.readString();
-            if (timeAccepted.equals("complete"))
-                break;
-            listOfTime.add(timeAccepted);
+            if (timeAccepted != null) {
+                if (timeAccepted.equals("complete"))
+                    break;
+                listOfTime.add(timeAccepted);
+            }
         }
 
         String[] arrayString = new String[1];
