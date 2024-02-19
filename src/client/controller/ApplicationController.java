@@ -43,7 +43,7 @@ public class ApplicationController {
         new ReservationPageController(view.getReservationPageView(), model.getReservationPageModel());
         new UserProfileController(view.getUserProfileView(), model.getUserProfileModel(), this.view);
         TimerController controller = new TimerController(view.getTimerView(), model.getTimerModel());
-        //controller.startTimer();
+        controller.startTimer();
 
         // action listeners
         view.setNavHomeListener(e -> {

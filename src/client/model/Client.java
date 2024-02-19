@@ -41,6 +41,8 @@ public class Client {
      */
     PrintWriter writer;
 
+    private static final int port = 2040;
+
     /**
      * Constructs a Client with a specified client socket.
      *
@@ -53,9 +55,8 @@ public class Client {
     /**
      * Constructs a Client with a specified port.
      *
-     * @param port The port to connect to.
      */
-    public Client(int port ) {
+    public Client() {
         try {
             Scanner fileReader = new Scanner(new File("src/client/host"));
             String host = "";
@@ -194,12 +195,7 @@ public class Client {
         this.writeString(this.getUsername());
         username = null;
 
-        Thread clientsThread = new Thread(() ->{
-            Client client = new Client(2040);
-
-            client.startGUI();
-        });
-        clientsThread.start();
+        SwingUtilities.invokeLater(() -> startGUI());
     }
 
     /**
@@ -338,7 +334,7 @@ public class Client {
      */
     public static void main(String[] args) {
         Thread clientsThread = new Thread(() ->{
-            Client client = new Client(2040);
+            Client client = new Client();
 
             client.startGUI();
         });
