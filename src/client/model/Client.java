@@ -196,6 +196,7 @@ public class Client {
         username = null;
 
         SwingUtilities.invokeLater(() -> startGUI());
+        closeSocket();
     }
 
     /**
