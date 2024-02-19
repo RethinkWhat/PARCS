@@ -140,6 +140,7 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
             server.accountLogout(username);
+            handleDisconnect();
         } catch (IOException ex) {
             ex.printStackTrace();
         }
@@ -194,7 +195,7 @@ public class ClientHandler implements Runnable {
             if (server.getUserLog().contains(username)) {
                 writer.println("userExists");
             }else {
-                //server.accountLogin(username);
+                server.accountLogin(username);
                 writer.println("true");
             }
         }
