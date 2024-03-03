@@ -1,12 +1,11 @@
 package client.controller.application_pages;
 
-import client.model.LoginRegisterModel;
+import client.model.RegisterModel;
 import client.model.application_pages.UserProfileModel;
 import client.view.ApplicationView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
-import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,11 +20,11 @@ import java.util.ArrayList;
 public class UserProfileController {
 
     /**
-     * The view LoginRegisterView object.
+     * The view UserRegisterView object.
      */
     private UserProfileView view;
     /**
-     * The model LoginRegisterModel object.
+     * The model UserProfile object.
      */
     private UserProfileModel model;
     /**
@@ -94,7 +93,6 @@ public class UserProfileController {
             parent.dispose();
             model.getClient().logout();
         });
-        // view.setNavExitListener(new LoginRegisterController());
 
         // edit profile page
         view.getPnlEditProfile().setContinueListener(new ProfileEditListener());
@@ -332,19 +330,19 @@ public class UserProfileController {
          */
         @Override
         public void actionPerformed(ActionEvent e) {
-            if (!LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getCurrentPassword()).equals(model.getPassword())) {
+            if (!RegisterModel.encryptPassword(view.getPnlSecurityPage().getCurrentPassword()).equals(model.getPassword())) {
                 view.getPnlSecurityPage().getLblMessage().setText("Current password does not match. Try again.");
                 view.getPnlSecurityPage().getLblMessage().setForeground(Color.RED);
             } else {
-                if (!LoginRegisterModel.verifySignupPassword(
+                if (!RegisterModel.verifySignupPassword(
                         view.getPnlSecurityPage().getNewPassword(), view.getPnlSecurityPage().getConfirmNewPassword())) {
                     view.getPnlSecurityPage().getLblMessage().setText("New passwords do not match. Try again.");
                     view.getPnlSecurityPage().getLblMessage().setForeground(Color.RED);
                 } else {
-                    model.editPassword(LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
+                    model.editPassword(RegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
                     view.getPnlSecurityPage().getLblMessage().setText("Your password has been successful changed.");
                     view.getPnlSecurityPage().getLblMessage().setForeground(Color.green);
-                    model.editPassword(LoginRegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
+                    model.editPassword(RegisterModel.encryptPassword(view.getPnlSecurityPage().getNewPassword()));
                 }
             }
         }

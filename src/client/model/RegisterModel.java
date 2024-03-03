@@ -1,21 +1,15 @@
 package client.model;
 
-import client.controller.ApplicationController;
-import client.controller.VehicleAdderController;
-import client.view.ApplicationView;
-import client.view.VehicleAdderView;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.Base64;
 
 /**
- * Represents the model for user login and registration functionality.
+ * Represents the model for user registration functionality.
  * This class provides methods for validating user credentials, encrypting passwords,
- * and handling user account creation and login.
+ * and handling user account creation
  */
-public class LoginRegisterModel {
+public class RegisterModel {
 
     /**
      * The client object for server communication.
@@ -27,11 +21,8 @@ public class LoginRegisterModel {
      */
     private String errorMessage;
 
-    /**
-     * Constructs a LoginRegisterModel with a specified client.
-     * @param client The client associated with the model.
-     */
-    public LoginRegisterModel(Client client) {
+
+    public RegisterModel(Client client) {
         this.client = client;
     }
 
@@ -60,42 +51,6 @@ public class LoginRegisterModel {
             e.printStackTrace();
         }
         return encrypted;
-    }
-
-    /**
-     * Verifies the given user credentials by sending the username and password to the server.
-     * Returns true if the given credentials are mapped to an existing account. Returns false if the account
-     * does not exist or the given credentials are incorrect.
-     * @param username The specified username.
-     * @param password The specified encrypted password.
-     * @return The success state.
-     */
-    public boolean validateAccount(String username, String password) {
-
-
-        client.openSocket();
-
-        client.writeString("login");
-        client.writeString(username);
-        client.writeString(password);
-
-        String validationMessage = client.readString();
-        boolean validated =  validationMessage.equals("true");
-        if (!validated) {
-            if (validationMessage.equals("userExists"))
-                errorMessage = "Account already logged in.";
-            else
-                errorMessage = "Wrong credentials or the account does not exist. Try again.";
-        }
-
-        if (validated) {
-           // client.writeString("disconnect");
-            client.setUsername(username);
-            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
-        }
-        client.closeSocket();
-
-        return validated;
     }
 
     /**

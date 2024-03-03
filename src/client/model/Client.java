@@ -1,7 +1,7 @@
 package client.model;
 
-import client.controller.LoginRegisterController;
-import client.view.LoginRegisterView;
+import client.controller.LoginController;
+import client.view.LoginView;
 import utilities.Resources;
 
 import javax.swing.*;
@@ -309,11 +309,10 @@ public class Client {
     /**
      * Initiates the login and registration process.
      */
-    private void loginRegister() {
-        LoginRegisterModel model = new LoginRegisterModel(this);
-        LoginRegisterView view = new LoginRegisterView();
-        //view.setDefaultCloseOperation(logoutAndExit());
-        new LoginRegisterController(view, model);
+    private void login() {
+        LoginModel model = new LoginModel(this);
+        LoginView view = new LoginView();
+        new LoginController(view, model);
     }
 
     /**
@@ -321,7 +320,7 @@ public class Client {
      */
     public void startGUI() {
         if (isServerOpen() && openSocket()) {
-            loginRegister();
+            login();
         } else {
             displayErrorMessage();
         }
