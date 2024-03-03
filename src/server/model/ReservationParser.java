@@ -762,40 +762,4 @@ public class ReservationParser {
         }
         return futureReservations;
     }
-
-
-    public static void main(String[] args) {
-        ReservationParser parser = new ReservationParser();
-        Map<String,Reservations> parkingSpotList = parser.getUserReservations("basti");
-
-        /*
-        ArrayList userBookings = new ArrayList<>();
-        for (String key : parkingSpotList.keySet()) {
-            ArrayList<String> booking = new ArrayList<>();
-            if (key.contains("C"))
-                booking.add("Car");
-            else
-                booking.add("Motor");
-
-            booking.add(key);
-
-            Reservations value = parkingSpotList.get(key);
-            booking.add(value.getDate());
-
-            for (TimeRange timeRange : value.getTimeAndUserMap().keySet()) {
-                booking.add(timeRange.startTime());
-                booking.add(timeRange.endTime());
-            }
-            userBookings.add(booking);
-        }
-         */
-
-        try {
-            List<List<String>> futureReservations = parser.getFutureReservations("02/29/24");
-            System.out.println(futureReservations);
-        } catch (ParseException e) {
-            throw new RuntimeException(e);
-        }
-
-    }
 }
