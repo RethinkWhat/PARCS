@@ -21,11 +21,11 @@ import java.util.ArrayList;
 public class UserProfileController {
 
     /**
-     * The view LoginRegisterView object.
+     * The view UserRegisterView object.
      */
     private UserProfileView view;
     /**
-     * The model LoginRegisterModel object.
+     * The model UserProfile object.
      */
     private UserProfileModel model;
     /**
@@ -94,7 +94,6 @@ public class UserProfileController {
             parent.dispose();
             model.getClient().logout();
         });
-        // view.setNavExitListener(new LoginRegisterController());
 
         // edit profile page
         view.getPnlEditProfile().setContinueListener(new ProfileEditListener());
