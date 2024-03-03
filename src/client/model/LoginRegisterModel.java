@@ -127,26 +127,24 @@ public class LoginRegisterModel {
         client.writeString(username);
 
         // Read if username already taken
-        boolean uniqueUsername = client.readString().equals("true");
+        boolean usernameExists = client.readString().equals("true");
 
-        if (!uniqueUsername) {
+        boolean signUpSuccess = false;
+        if (!usernameExists) {
+            System.out.println();
             client.writeString(encryptPassword(password));
             client.writeString(lastName);
             client.writeString(firstName);
             client.writeString(phoneNumber);
+            signUpSuccess =  client.readString().equals("true");
         }
 
-        boolean signUpSuccess =  client.readString().equals("true");
-
-        if (signUpSuccess) {
-            //client.writeString("disconnect");
-            client.setUsername(username);
-
-            new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel(client));
-        }
         client.closeSocket();
         return signUpSuccess;
 
     }
 
+    public Client getClient() {
+        return client;
+    }
 }

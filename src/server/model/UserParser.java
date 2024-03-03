@@ -319,7 +319,7 @@ public class UserParser {
         NodeList nodeList = document.getElementsByTagName("user");
 
         for (int x =0 ; x<nodeList.getLength(); x++) {
-            if (nodeList.item(x).getTextContent().equalsIgnoreCase(username))
+            if (nodeList.item(x).getAttributes().item(0).getTextContent().equalsIgnoreCase(username))
                 return true;
         }
         return false;
@@ -466,6 +466,5 @@ public class UserParser {
     public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
         UserParser obj = new UserParser();
 
-        obj.deleteUser("basti");
     }
 }

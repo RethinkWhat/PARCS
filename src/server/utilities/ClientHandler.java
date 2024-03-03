@@ -213,15 +213,20 @@ public class ClientHandler implements Runnable {
         try {
             String username = reader.readLine();
 
-            writer.println(server.checkUsernameExists(username));
 
-            String password = reader.readLine();
-            String lastName = reader.readLine();
-            String firstName = reader.readLine();
-            String phoneNumber = reader.readLine();
+            boolean usernameExists = server.checkUsernameExists(username);
 
-            boolean createAccount = server.createAccount(username,"user",password,lastName,firstName,phoneNumber,null);
-            writer.println(createAccount);
+            writer.println(usernameExists);
+            System.out.println("username exists" + usernameExists);
+            if (!usernameExists) {
+                String password = reader.readLine();
+                String lastName = reader.readLine();
+                String firstName = reader.readLine();
+                String phoneNumber = reader.readLine();
+
+                boolean createAccount = server.createAccount(username, "user", password, lastName, firstName, phoneNumber, null);
+                writer.println(createAccount);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }

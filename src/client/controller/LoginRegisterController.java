@@ -87,7 +87,6 @@ public class LoginRegisterController {
         public void actionPerformed(ActionEvent e) {
             String username = view.getUsername();
             if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
-               // if (!model.isAdmin()) {
                     view.dispose();
                 //}
             } else {
@@ -112,12 +111,16 @@ public class LoginRegisterController {
             } else {
                 model.encryptPassword(view.getSignupPassword());
 
-                if (model.createAccount(view.getSignupFirstName(), view.getSignupLastName(),
-                        view.getSignupUsername(), view.getSignupPhoneNo(), view.getSignupPassword()))  {
+                String username = view.getSignupUsername();
+                if (model.createAccount(view.getSignupFirstName(), view.getSignupLastName(), username, view.getSignupPhoneNo(), view.getSignupPassword()))  {
+                    model.getClient().setUsername(username);
+                    new VehicleAdderController(new VehicleAdderView(), new VehicleAdderModel(model.getClient()));
                     view.dispose();
+                } else {
+                    view.displaySignupErrorMessage("Username already exists.");
                 }
             }
-            view.displaySignupErrorMessage(""); // resets error message
+            //view.displaySignupErrorMessage(""); // resets error message
         }
     }
 
