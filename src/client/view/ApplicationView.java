@@ -180,15 +180,6 @@ public class ApplicationView extends JFrame {
         return timerView;
     }
 
-    // Temporary main method for testing. Omit before production.
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new ApplicationView();
-            }
-        });
-    }
 
     /**
      * Sets a specified action listener for btnNavHome.

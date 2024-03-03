@@ -461,10 +461,4 @@ public class UserParser {
         }
         transform();
     }
-
-    /** Will be deleted later */
-    public static void main(String[] args) throws ParserConfigurationException, IOException, SAXException, Exception {
-        UserParser obj = new UserParser();
-
-    }
 }

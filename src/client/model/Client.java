@@ -326,18 +326,4 @@ public class Client {
             displayErrorMessage();
         }
     }
-
-    /**
-     * The main method to start the client application.
-     *
-     * @param args Command line arguments.
-     */
-    public static void main(String[] args) {
-        Thread clientsThread = new Thread(() ->{
-            Client client = new Client();
-
-            client.startGUI();
-        });
-        clientsThread.start();
-    }
 }
