@@ -21,6 +21,8 @@ import java.io.File;
 import java.io.IOException;
 
 import java.sql.Time;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class ReservationParser {
@@ -707,11 +709,66 @@ public class ReservationParser {
         return motorBookings;
     }
 
+    /**
+     * Returns a list of reservations ahead of the passed date
+     * [username, parking identifier, date, start time, end time, duration]
+     * @param date
+     * @return
+     */
+    public List<List<String>> getFutureReservations(String date) throws ParseException {
+        getReservationsFile();
+
+        //Formats the passed date to a Date object
+        SimpleDateFormat dateFormat = new SimpleDateFormat("MM/dd/yy");
+        Date passedDate = dateFormat.parse(date);
+
+        List<List<String>> futureReservations = new ArrayList<>();
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+            for (int j = 0; j < reservationNodes.getLength(); j++){
+                Element currReservationElement = (Element) reservationNodes.item(j);
+
+                Date currReservationDate = dateFormat.parse(currReservationElement.getAttribute("day"));
+
+                //Check if current reservation's date is ahead of the passed date
+                if (currReservationDate.after(passedDate)){
+
+                    String username = currReservationElement.getElementsByTagName("user").item(0).getTextContent();
+                    String identifier = currParkingSpotElement.getAttribute("identifier");
+                    String reservationDate = currReservationElement.getAttribute("day");
+                    String startTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                    String endTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+                    String duration = computeDuration(startTime, endTime);
+
+                    List<String> currReservationDetails = new ArrayList<>();
+                    currReservationDetails.add(username);
+                    currReservationDetails.add(identifier);
+                    currReservationDetails.add(reservationDate);
+                    currReservationDetails.add(startTime);
+                    currReservationDetails.add(endTime);
+                    currReservationDetails.add(duration);
+
+                    futureReservations.add(currReservationDetails);
+                }
+            }
+        }
+        return futureReservations;
+    }
+
 
     public static void main(String[] args) {
         ReservationParser parser = new ReservationParser();
         Map<String,Reservations> parkingSpotList = parser.getUserReservations("basti");
 
+        /*
         ArrayList userBookings = new ArrayList<>();
         for (String key : parkingSpotList.keySet()) {
             ArrayList<String> booking = new ArrayList<>();
@@ -731,7 +788,14 @@ public class ReservationParser {
             }
             userBookings.add(booking);
         }
+         */
 
+        try {
+            List<List<String>> futureReservations = parser.getFutureReservations("02/29/24");
+            System.out.println(futureReservations);
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
 
     }
 }
