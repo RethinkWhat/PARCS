@@ -198,6 +198,7 @@ public class AdminApplicationController {
                 record.getLblDuration().setText(duration + " hour/s");
                 record.getLblVehicle().setText("Car");
 
+                
                 view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().
                         getPnlCards().add(record, String.valueOf(recordPanel));
                 view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().

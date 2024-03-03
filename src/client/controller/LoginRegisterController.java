@@ -91,7 +91,7 @@ public class LoginRegisterController {
                     view.dispose();
                 //}
             } else {
-                view.displayLoginErrorMessage(model.getErrorMessage());
+              //  view.displayLoginErrorMessage(model.getErrorMessage());
             }
             // add else where option pane message is displayed if server is offline.
         }

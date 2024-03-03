@@ -125,7 +125,7 @@ public class Server implements Runnable{
         this.serverRunning = serverRunning;
     }
 
-    ExecutorService executor = Executors.newFixedThreadPool(150);
+    ExecutorService executor = Executors.newFixedThreadPool(300);
 
     public void run() {
         while (true) {
