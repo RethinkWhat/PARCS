@@ -1,66 +1,50 @@
 package client.controller;
 
-import client.model.ApplicationModel;
-import client.model.Client;
-import client.model.LoginRegisterModel;
+import client.model.LoginModel;
+import client.model.RegisterModel;
 import client.model.VehicleAdderModel;
-import client.view.ApplicationView;
-import client.view.LoginRegisterView;
+import client.view.LoginView;
+import client.view.RegisterView;
 import client.view.VehicleAdderView;
-import utilities.Resources;
 
 import javax.swing.*;
-import java.awt.*;
 import java.awt.event.*;
 
 /**
- * Template for LoginRegisterController.
- * The LoginRegisterController processes the user requests for creating an account and logging in.
- * Based on the user request, the LoginRegisterController defines methods and invokes methods in the View and Model
+ * Template for RegisterController.
+ * The RegisterController processes the user requests for creating an account
+ * Based on the user request, the RegisterController defines methods and invokes methods in the View and Model
  * to accomplish the requested action.
  */
-public class LoginRegisterController {
+public class RegisterController {
     /**
-     * The view LoginRegisterView object.
+     * The Register view object.
      */
-    private final LoginRegisterView view;
+    private final RegisterView view;
     /**
-     * The model LoginRegisterModel object.
+     * The model RegisterModel object.
      */
-    private final LoginRegisterModel model;
+    private final RegisterModel model;
 
     /**
-     * Constructs a LoginRegisterController with a specified view and model.
+     * Constructs a RegisterController with a specified view and model.
      *
-     * @param view  The specified LoginRegisterView.
-     * @param model The specified LoginRegisterModel.
+     * @param view  The specified RegisterView.
+     * @param model The specified RegisterModel.
      */
-    public LoginRegisterController(LoginRegisterView view, LoginRegisterModel model) {
+    public RegisterController(RegisterView view, RegisterModel model) {
         this.view = view;
         this.model = model;
 
         // action listeners
-        view.setLoginListener(new LoginListener());
-        view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
-        view.setBackListener(e -> view.getCardLayout().show(view.getPnlCards(), "login"));
-        view.getChkShowPassword().addActionListener(new ShowPasswordListener(view.getChkShowPassword(),
-                view.getTxtPassword()));
         view.getChkShowSignupPassword().addActionListener(new ShowPasswordListener(view.getChkShowSignupPassword(),
                 view.getTxtSignupPassword()));
         view.getChkShowConfirmPassword().addActionListener(new ShowPasswordListener(view.getChkShowConfirmPassword(),
                 view.getTxtConfirmPassword()));
         view.setCreateAccountListener(new CreateAccountListener());
+        view.setBackListener(new LoginListener());
 
         // mouse listeners
-        view.getBtnSignup().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
-        view.getBtnLogin().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
-        view.getBtnBack().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
-        view.getBtnCreateAccount().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
-
-        // focus listeners
-        view.getTxtUsername().addFocusListener(new LoginTextFieldFocus(view.getTxtUsername(), "Username"));
-        view.getTxtPassword().addFocusListener(new PasswordFocus(view.getTxtPassword(),
-                view.getChkShowPassword(), "Password"));
         view.getTxtFirstName().addFocusListener(new LoginTextFieldFocus(view.getTxtFirstName(), "First Name"));
         view.getTxtLastName().addFocusListener(new LoginTextFieldFocus(view.getTxtLastName(), "Last Name"));
         view.getTxtSignupUsername().addFocusListener(new LoginTextFieldFocus(view.getTxtSignupUsername(), "Username"));
@@ -75,33 +59,10 @@ public class LoginRegisterController {
     }
 
     /**
-     * User inputs are sent to the server to verify whether the user's credentials are matching an existing account.
-     */
-    class LoginListener implements ActionListener {
-        /**
-         * The user input of username and password are sent to the server and validated if the account exists and if
-         * the credentials are correct. An error message is displayed if the user input is wrong.
-         * @param e the event to be processed
-         */
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            String username = view.getUsername();
-            if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
-                    view.dispose();
-                //}
-            } else {
-              //  view.displayLoginErrorMessage(model.getErrorMessage());
-            }
-            // add else where option pane message is displayed if server is offline.
-        }
-    }
-
-    /**
      * Creates an object that will be sent to the server for processing.
      */
     class CreateAccountListener implements ActionListener {
         /**
-         * TODO: Documentation
          * @param e the event to be processed
          */
         @Override
@@ -120,7 +81,16 @@ public class LoginRegisterController {
                     view.displaySignupErrorMessage("Username already exists.");
                 }
             }
-            //view.displaySignupErrorMessage(""); // resets error message
+        }
+    }
+
+    class LoginListener implements ActionListener {
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            LoginView loginView = new LoginView();
+            LoginModel loginModel = new LoginModel(model.getClient());
+            LoginController controller = new LoginController(loginView,loginModel);
         }
     }
 
@@ -191,7 +161,6 @@ public class LoginRegisterController {
          */
         @Override
         public void focusGained(FocusEvent e) {
-            view.displayLoginErrorMessage(""); // resets the login error message
             view.displaySignupErrorMessage(""); // resets the signup error message
             if (textField.getText().equals(placeholder)) {
                 textField.setText("");
@@ -249,7 +218,6 @@ public class LoginRegisterController {
          */
         @Override
         public void focusGained(FocusEvent e) {
-            view.displayLoginErrorMessage(""); // resets the login error message
             view.displaySignupErrorMessage(""); // resets the signup error message
             if (!chkShowPassword.isSelected()) {
                 passwordField.setEchoChar('●');

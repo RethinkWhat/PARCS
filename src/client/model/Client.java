@@ -1,8 +1,6 @@
 package client.model;
 
 import client.controller.LoginController;
-import client.controller.LoginRegisterController;
-import client.view.LoginRegisterView;
 import client.view.LoginView;
 import utilities.Resources;
 
@@ -311,7 +309,7 @@ public class Client {
     /**
      * Initiates the login and registration process.
      */
-    private void loginRegister() {
+    private void login() {
         LoginModel model = new LoginModel(this);
         LoginView view = new LoginView();
         new LoginController(view, model);
@@ -322,7 +320,7 @@ public class Client {
      */
     public void startGUI() {
         if (isServerOpen() && openSocket()) {
-            loginRegister();
+            login();
         } else {
             displayErrorMessage();
         }

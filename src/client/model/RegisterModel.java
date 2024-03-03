@@ -1,13 +1,7 @@
 package client.model;
 
-import client.controller.ApplicationController;
-import client.controller.VehicleAdderController;
-import client.view.ApplicationView;
-import client.view.VehicleAdderView;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
-import java.security.SecureRandom;
 import java.util.Base64;
 
 /**

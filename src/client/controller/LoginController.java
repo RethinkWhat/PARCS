@@ -1,33 +1,35 @@
 package client.controller;
 
 import client.model.*;
+import client.view.ApplicationView;
 import client.view.LoginView;
+import client.view.RegisterView;
 import utilities.Resources;
 
 import javax.swing.*;
 import java.awt.event.*;
 
 /**
- * Template for LoginRegisterController.
- * The LoginRegisterController processes the user requests for creating an account and logging in.
- * Based on the user request, the LoginRegisterController defines methods and invokes methods in the View and Model
+ * Template for LoginController.
+ * The LoginController processes the user requests for creating an account and logging in.
+ * Based on the user request, the LoginController defines methods and invokes methods in the View and Model
  * to accomplish the requested action.
  */
 public class LoginController {
     /**
-     * The view LoginRegisterView object.
+     * The view LoginView object.
      */
     private final LoginView view;
     /**
-     * The model LoginRegisterModel object.
+     * The model LoginModel object.
      */
     private final LoginModel model;
 
     /**
-     * Constructs a LoginRegisterController with a specified view and model.
+     * Constructs a LoginController with a specified view and model.
      *
-     * @param view  The specified LoginRegisterView.
-     * @param model The specified LoginRegisterModel.
+     * @param view  The specified LoginView.
+     * @param model The specified LoginModel.
      */
     public LoginController(LoginView view, LoginModel model) {
         this.view = view;
@@ -35,7 +37,7 @@ public class LoginController {
 
         // action listeners
         view.setLoginListener(new LoginListener());
-        view.setSignupListener(e -> view.getCardLayout().show(view.getPnlCards(), "signup"));
+        view.setSignupListener(new SignUpListener());
 
         // mouse listeners
         view.getBtnSignup().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
@@ -65,12 +67,22 @@ public class LoginController {
         public void actionPerformed(ActionEvent e) {
             String username = view.getUsername();
             if (model.validateAccount(username, model.encryptPassword(view.getPassword()))) {
+                model.getClient().setUsername(username);
+                new ApplicationController(new ApplicationView(), new ApplicationModel(model.getClient()));
                 view.dispose();
-                //}
             } else {
-                //  view.displayLoginErrorMessage(model.getErrorMessage());
+                  view.displayLoginErrorMessage(model.getErrorMessage());
             }
-            // add else where option pane message is displayed if server is offline.
+        }
+    }
+
+    class SignUpListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.dispose();
+            RegisterView registerView = new RegisterView();
+            RegisterModel registerModel = new RegisterModel(model.getClient());
+            RegisterController controller = new RegisterController(registerView,registerModel);
         }
     }
 

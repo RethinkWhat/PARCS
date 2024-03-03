@@ -1,8 +1,5 @@
 package client.model;
 
-import client.controller.ApplicationController;
-import client.view.ApplicationView;
-
 import java.nio.charset.StandardCharsets;
 import java.security.MessageDigest;
 import java.util.Base64;
@@ -74,12 +71,6 @@ public class LoginModel {
                 errorMessage = "Account already logged in.";
             else
                 errorMessage = "Wrong credentials or the account does not exist. Try again.";
-        }
-
-        if (validated) {
-            // client.writeString("disconnect");
-            client.setUsername(username);
-            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
         }
         client.closeSocket();
 
