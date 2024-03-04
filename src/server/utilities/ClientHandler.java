@@ -395,7 +395,7 @@ public class ClientHandler implements Runnable {
     /**
      * Method to handle make a reservation and validating if reservation can be made
      */
-    public void bookReservation() {
+    public synchronized void bookReservation() {
         try {
             String identifier = reader.readLine();
             String date = reader.readLine();
