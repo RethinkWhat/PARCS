@@ -763,6 +763,13 @@ public class ReservationParser {
         return futureReservations;
     }
 
+    /**
+     * TO ADD PARKING IDENTIFIER TOMORROW
+     * @param date
+     * @param startTime
+     * @param duration
+     * @return
+     */
     public boolean hasSchedulingConflicts(String date, String startTime, String duration){
         getReservationsFile();
 
@@ -785,7 +792,11 @@ public class ReservationParser {
                     String resStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
                     String resEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
 
-                    if ((startTime.compareTo(resStartTime) >= 0 && startTime.compareTo(resEndTime) < 0) || (endTime.compareTo(resStartTime) > 0 && endTime.compareTo(resEndTime) <= 0)){
+                    if ((startTime.compareTo(resStartTime) >= 0 && startTime.compareTo(resEndTime) < 0) ||
+                            // Check if the new reservation's end time is between existing reservation's start and end time
+                            (endTime.compareTo(resStartTime) > 0 && endTime.compareTo(resEndTime) <= 0) ||
+                            // Check if the new reservation encompasses an existing reservation
+                            (startTime.compareTo(resStartTime) <= 0 && endTime.compareTo(resEndTime) >= 0)){
                         return true;
                     }
 
@@ -794,6 +805,12 @@ public class ReservationParser {
         }
 
         return false;
+    }
+
+    public static void main(String[] args) {
+        ReservationParser parser = new ReservationParser();
+
+        System.out.println(parser.hasSchedulingConflicts("02/22/24", "12:00", "5"));
     }
 
 }
