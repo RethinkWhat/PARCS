@@ -762,4 +762,38 @@ public class ReservationParser {
         }
         return futureReservations;
     }
+
+    public boolean hasSchedulingConflicts(String date, String startTime, String duration){
+        getReservationsFile();
+
+        String endTime = computeEndTime(startTime, duration);
+
+        Element root = document.getDocumentElement();
+
+        NodeList parkingSpotNodes = root.getElementsByTagName("parkingSpot");
+
+        for (int i = 0; i < parkingSpotNodes.getLength(); i++){
+            Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
+
+            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+
+            for (int j = 0; j < reservationNodes.getLength(); j++){
+                Element currReservationElement = (Element) reservationNodes.item(j);
+
+                if (currReservationElement.getAttribute("day").equalsIgnoreCase(date)){
+
+                    String resStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
+                    String resEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+
+                    if ((startTime.compareTo(resStartTime) >= 0 && startTime.compareTo(resEndTime) < 0) || (endTime.compareTo(resStartTime) > 0 && endTime.compareTo(resEndTime) <= 0)){
+                        return true;
+                    }
+
+                }
+            }
+        }
+
+        return false;
+    }
+
 }
