@@ -1,5 +1,6 @@
 package client.view.application_pages;
 
+import client.controller.application_pages.UserProfileController;
 import utilities.Resources;
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -410,6 +411,10 @@ public class UserProfileView extends JPanel {
          * The button for continue.
          */
         private JButton btnContinue;
+        /**
+         * Button for Adding Vehicle
+         */
+        private JButton btnAddVehicle;
 
         /**
          * The Card Layout that controls multiple components.
@@ -444,6 +449,9 @@ public class UserProfileView extends JPanel {
             btnCancel = res.createBtnRounded("Cancel", res.lightGray, res.eerieBlack, 10);
             btnCancel.setVisible(false);
             pnlButtons.add(btnCancel);
+
+            btnAddVehicle = res.createBtnRounded("Add Vehicle", res.celadon, res.eerieBlack, 10);
+            pnlButtons.add(btnAddVehicle);
 
             btnContinue = res.createBtnRounded("Continue", res.celadon, res.celadon, 10);
             btnContinue.setVisible(false);
@@ -491,6 +499,12 @@ public class UserProfileView extends JPanel {
         public JButton getBtnContinue() {
             return btnContinue;
         }
+        /**
+         *
+         */
+        public JButton getBtnAddVehicle(){
+            return btnAddVehicle;
+        }
 
         /**
          * Retrieves the current card layout that controls the panels.
@@ -530,6 +544,10 @@ public class UserProfileView extends JPanel {
          */
         public void setContinueListener(ActionListener actionListener) {
             btnContinue.addActionListener(actionListener);
+        }
+
+        public void setAddVehicleListener(ActionListener addVehicleListener) {
+            btnAddVehicle.addActionListener((addVehicleListener));
         }
 
         /**

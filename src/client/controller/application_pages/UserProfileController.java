@@ -1,8 +1,12 @@
 package client.controller.application_pages;
 
+import client.controller.VehicleAdderController;
+import client.model.Client;
 import client.model.RegisterModel;
+import client.model.VehicleAdderModel;
 import client.model.application_pages.UserProfileModel;
 import client.view.ApplicationView;
+import client.view.VehicleAdderView;
 import client.view.application_pages.UserProfileView;
 import utilities.Resources;
 
@@ -104,6 +108,7 @@ public class UserProfileController {
         view.getPnlEditCars().setNextListener(new NextListener());
         view.getPnlEditCars().setPrevListener(new PreviousListener());
 
+
         for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
             panel.setEditListener(e -> {
                 panel.getTxtPlateNumber().setEditable(true);
@@ -145,6 +150,13 @@ public class UserProfileController {
         view.getPnlEditCars().getBtnNext().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnNext()));
         view.getPnlEditCars().getBtnContinue().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnContinue()));
         view.getPnlEditCars().getBtnCancel().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnCancel()));
+        view.getPnlEditCars().getBtnAddVehicle().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnAddVehicle()));
+        view.getPnlEditCars().setAddVehicleListener(new AddVehicleListener());
+
+
+
+
+
         for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
             panel.getBtnEdit().addMouseListener(new Resources.CursorChanger(panel.getBtnEdit()));
         }
@@ -219,6 +231,16 @@ public class UserProfileController {
 
         // Contact Number
         view.getPnlEditProfile().getTxtContact().setText(model.getContactNo());
+    }
+
+    class AddVehicleListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            VehicleAdderModel vehicleAdderModel = new VehicleAdderModel(model.getClient());
+            VehicleAdderView vehicleAdderView = new VehicleAdderView();
+            VehicleAdderController vehicleAdderController = new VehicleAdderController(vehicleAdderView, vehicleAdderModel);
+            vehicleAdderView.setVisible(true);
+        }
     }
 
     /**
