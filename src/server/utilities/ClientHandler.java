@@ -9,6 +9,9 @@ import server.model.Vehicle;
 import java.io.*;
 import java.net.*;
 import java.util.*;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 
 public class ClientHandler implements Runnable {
@@ -34,6 +37,8 @@ public class ClientHandler implements Runnable {
 
     /** The server's IP address */
     InetAddress address;
+
+    ReadWriteLock lock = new ReentrantReadWriteLock();
 
 
     /**
@@ -396,6 +401,7 @@ public class ClientHandler implements Runnable {
      * Method to handle make a reservation and validating if reservation can be made
      */
     public synchronized void bookReservation() {
+        Lock writeLock = lock.writeLock();
         try {
             String identifier = reader.readLine();
             String date = reader.readLine();
@@ -405,8 +411,16 @@ public class ClientHandler implements Runnable {
 
 
             if (server.checkScheduleConflicts(username,startTime,duration, date)) {
-                boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
-                writer.println(confirmed);
+
+                try {
+                    writeLock.lock();
+                    boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
+                    writer.println(confirmed);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+                    writeLock.unlock();
+                }
             } else {
                 writer.println("false");
             }
