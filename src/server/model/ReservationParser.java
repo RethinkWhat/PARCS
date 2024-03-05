@@ -821,11 +821,4 @@ public class ReservationParser {
 
         return false;
     }
-
-    public static void main(String[] args) {
-        ReservationParser parser = new ReservationParser();
-
-        System.out.println(parser.hasSchedulingConflicts("C1","02/22/24", "7:00", "5"));
-    }
-
 }
