@@ -764,13 +764,15 @@ public class ReservationParser {
     }
 
     /**
-     * TO ADD PARKING IDENTIFIER TOMORROW
+     * This method checks if the chosen parking spot, date, starting time, and duration of the user will have a conflict to other reservations of other users
+     * TRUE: conflicts exist
+     * FALSE: conflicts do not exist
      * @param date
      * @param startTime
      * @param duration
      * @return
      */
-    public boolean hasSchedulingConflicts(String date, String startTime, String duration){
+    public boolean hasSchedulingConflicts(String identifier, String date, String startTime, String duration){
         getReservationsFile();
 
         String endTime = computeEndTime(startTime, duration);
@@ -782,35 +784,41 @@ public class ReservationParser {
         for (int i = 0; i < parkingSpotNodes.getLength(); i++){
             Element currParkingSpotElement = (Element) parkingSpotNodes.item(i);
 
-            NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
+            if (currParkingSpotElement.getAttribute("identifier").equalsIgnoreCase(identifier)){
 
-            for (int j = 0; j < reservationNodes.getLength(); j++){
-                Element currReservationElement = (Element) reservationNodes.item(j);
+                NodeList reservationNodes = currParkingSpotElement.getElementsByTagName("reservation");
 
-                if (currReservationElement.getAttribute("day").equalsIgnoreCase(date)){
+                for (int j = 0; j < reservationNodes.getLength(); j++){
+                    Element currReservationElement = (Element) reservationNodes.item(j);
 
-                    String resStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent();
-                    String resEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent();
+                    if (currReservationElement.getAttribute("day").equalsIgnoreCase(date)){
 
-                    if ((startTime.compareTo(resStartTime) >= 0 && startTime.compareTo(resEndTime) < 0) ||
-                            // Check if the new reservation's end time is between existing reservation's start and end time
-                            (endTime.compareTo(resStartTime) > 0 && endTime.compareTo(resEndTime) <= 0) ||
-                            // Check if the new reservation encompasses an existing reservation
-                            (startTime.compareTo(resStartTime) <= 0 && endTime.compareTo(resEndTime) >= 0)){
-                        return true;
+                        String[] resStartTime = currReservationElement.getElementsByTagName("startTime").item(0).getTextContent().split(":");
+                        String[] resEndTime = currReservationElement.getElementsByTagName("endTime").item(0).getTextContent().split(":");
+
+                        String[] userStartTime = startTime.split(":");
+                        String[] userEndTime = endTime.split(":");
+
+                        //Checks if chosen startTime is inside a reservation timeframe
+                        if (Integer.parseInt(userStartTime[0]) >= Integer.parseInt(resStartTime[0]) && Integer.parseInt(userStartTime[0]) <= Integer.parseInt(resEndTime[0])){
+                            return true;
+                        }
+
+                        //Checks if chosen endTie is inside a reservation timeframe
+                        if (Integer.parseInt(userEndTime[0]) >= Integer.parseInt(resStartTime[0]) && Integer.parseInt(userEndTime[0]) <= Integer.parseInt(resEndTime[0])){
+                            return true;
+                        }
+
+                        //Checks if there's a reservation inside/between the chosen startTime and endTime
+                        if (Integer.parseInt(resStartTime[0]) >= Integer.parseInt(userStartTime[0]) && Integer.parseInt(resEndTime[0]) <= Integer.parseInt(userEndTime[0])){
+                            return true;
+                        }
                     }
-
                 }
             }
+
         }
 
         return false;
     }
-
-    public static void main(String[] args) {
-        ReservationParser parser = new ReservationParser();
-
-        System.out.println(parser.hasSchedulingConflicts("02/22/24", "12:00", "5"));
-    }
-
 }
