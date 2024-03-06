@@ -401,7 +401,7 @@ public class ClientHandler implements Runnable {
      * Method to handle make a reservation and validating if reservation can be made
      */
     public synchronized void bookReservation() {
-        Lock writeLock = lock.writeLock();
+     //   Lock writeLock = lock.writeLock();
         try {
             String identifier = reader.readLine();
             String date = reader.readLine();
@@ -410,17 +410,22 @@ public class ClientHandler implements Runnable {
             String username = reader.readLine();
 
 
-            if (server.checkScheduleConflicts(username,startTime,duration, date)) {
+            System.out.println("reached");
+           // if (server.checkUserScheduleConflicts(username,startTime,duration, date)) {
+                System.out.println(identifier + ", " + startTime + ", " + ", " + duration + ", " + date);
+                boolean check = server.checkSpotScheduleConflicts(identifier,startTime,duration,date);
+                System.out.println("conflicts = " + check);
+                if (check == false) {
 
-                try {
-                    writeLock.lock();
-                    boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
-                    writer.println(confirmed);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                } finally {
-                    writeLock.unlock();
-                }
+                  //  try {
+                    //    writeLock.lock();
+                        boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);
+                        writer.println(confirmed);
+                    //} catch (Exception e) {
+                      //  e.printStackTrace();
+                    //} finally {
+                      //  writeLock.unlock();
+                    //}
             } else {
                 writer.println("false");
             }
