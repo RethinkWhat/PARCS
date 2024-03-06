@@ -58,8 +58,8 @@ public class ReservationParser {
             builder = DocumentBuilderFactory.newNSInstance().newDocumentBuilder();
             document = builder.parse(reservationsFile);
             document.getDocumentElement().normalize();
-        } catch (IOException | SAXException ex) {
-            ex.printStackTrace();
+        } catch (IOException | SAXException ignore) {
+
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
