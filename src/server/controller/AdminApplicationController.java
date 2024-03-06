@@ -47,11 +47,11 @@ public class AdminApplicationController {
     /**
      * Array of RecordPanel to hold the car records.
      */
-    private volatile DashboardView.MainBottomPanel.RecordPanel[] carRecords;
+    // private volatile DashboardView.MainBottomPanel.RecordPanel[] carRecords;
     /**
      * Array of RecordPanel to hold the motor records.
      */
-    private volatile DashboardView.MainBottomPanel.RecordPanel[] motorRecords;
+    // private volatile DashboardView.MainBottomPanel.RecordPanel[] motorRecords;
 
     /**
      * Constructs a ServerController with a specified AdminApplicationView.
@@ -70,7 +70,7 @@ public class AdminApplicationController {
         this.view = view;
 
         // constants / variables
-        refreshBookings();
+        // refreshBookings();
 
         // action listeners
 
@@ -85,6 +85,9 @@ public class AdminApplicationController {
             view.getLblLocation().setText("Dashboard");
         });
 
+
+        // TODO: Fix action listeners
+        /*
         // dashboard page
         view.getDashboardView().setRefreshListener(e -> refreshBookings());
 
@@ -105,6 +108,7 @@ public class AdminApplicationController {
             view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getCardLayout().previous(
                     view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getPnlCards());
         });
+         */
 
 
         // mouse listeners
@@ -118,6 +122,9 @@ public class AdminApplicationController {
         // dashboard page
         view.getDashboardView().getBtnRefresh().addMouseListener(new Resources.CursorChanger(view.getDashboardView().getBtnRefresh()));
 
+        // TODO: Fix mouse listeners
+
+        /*
         view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnNext().addMouseListener(
                 new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnNext()));
         view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnPrev().addMouseListener(
@@ -127,6 +134,7 @@ public class AdminApplicationController {
         view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnPrev().addMouseListener(
                 new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnPrev()));
 
+         */
         view.repaint();
         view.revalidate();
     }
@@ -158,9 +166,10 @@ public class AdminApplicationController {
         }
     }
 
+    /*
     /**
      * Populates the list of car bookings and motor bookings.
-     */
+
     private void refreshBookings() {
         // clears the lists
         carBookings.clear();
@@ -237,4 +246,5 @@ public class AdminApplicationController {
             }
         }
     }
+    */
 }

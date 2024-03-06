@@ -246,6 +246,14 @@ public class DashboardView extends JPanel {
         }
 
         /**
+         * Retrieves the current JLabel of lblMotorCount.
+         * @return The current lblMotorCount.
+         */
+        public JLabel getLblMotorCount() {
+            return lblMotorCount;
+        }
+
+        /**
          * Retrieves the current JLabel of lblTotalCount.
          * @return The current lblTotalCount.
          */
