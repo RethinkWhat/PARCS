@@ -58,8 +58,8 @@ public class ReservationParser {
             builder = DocumentBuilderFactory.newNSInstance().newDocumentBuilder();
             document = builder.parse(reservationsFile);
             document.getDocumentElement().normalize();
-        } catch (IOException | SAXException ex) {
-            ex.printStackTrace();
+        } catch (IOException | SAXException ignore) {
+
         } catch (ParserConfigurationException e) {
             throw new RuntimeException(e);
         }
@@ -800,12 +800,12 @@ public class ReservationParser {
                         String[] userEndTime = endTime.split(":");
 
                         //Checks if chosen startTime is inside a reservation timeframe
-                        if (Integer.parseInt(userStartTime[0]) >= Integer.parseInt(resStartTime[0]) && Integer.parseInt(userStartTime[0]) <= Integer.parseInt(resEndTime[0])){
+                        if (Integer.parseInt(userStartTime[0]) >= Integer.parseInt(resStartTime[0]) && Integer.parseInt(userStartTime[0]) < Integer.parseInt(resEndTime[0])){
                             return true;
                         }
 
                         //Checks if chosen endTie is inside a reservation timeframe
-                        if (Integer.parseInt(userEndTime[0]) >= Integer.parseInt(resStartTime[0]) && Integer.parseInt(userEndTime[0]) <= Integer.parseInt(resEndTime[0])){
+                        if (Integer.parseInt(userEndTime[0]) > Integer.parseInt(resStartTime[0]) && Integer.parseInt(userEndTime[0]) <= Integer.parseInt(resEndTime[0])){
                             return true;
                         }
 
@@ -820,5 +820,10 @@ public class ReservationParser {
         }
 
         return false;
+    }
+
+    public static void main(String[] args) {
+        ReservationParser r = new ReservationParser();
+        System.out.println(r.hasSchedulingConflicts("C1","03/07/24", "7:00", "1"));
     }
 }
