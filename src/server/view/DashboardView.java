@@ -4,6 +4,7 @@ import utilities.Resources;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -123,6 +124,36 @@ public class DashboardView extends JPanel {
          * The panel that holds the different components.
          */
         private JPanel container;
+        /**
+         * The text field for the booking date.
+         */
+        private JTextField txtDate;
+        /**
+         * The combo box for the status of the booking.
+         * All, completed, and future.
+         */
+        private JComboBox<?> cmbStatus;
+        /**
+         * The combo box for the type of vehicle of the booking.
+         * All, Car, Motorcycle.
+         */
+        private JComboBox<?> cmbVehicleType;
+        /**
+         * The button to apply the filters.
+         */
+        private JButton btnApply;
+        /**
+         * The button to reset the filters.
+         */
+        private JButton btnClear;
+        /**
+         * The table to display the bookings
+         */
+        private JTable tblBookings;
+        /**
+         * The table model to hold the columns of tblBookings.
+         */
+        private DefaultTableModel tblModel;
 
         /**
          * Constructs a panel of MainBottomPanel.
@@ -131,16 +162,133 @@ public class DashboardView extends JPanel {
             setLayout(new BorderLayout());
             setBackground(res.lightGray);
 
-            GridLayout gridLayout = new GridLayout(0,2);
-            gridLayout.setHgap(20);
-
-            container = new JPanel(gridLayout);
+            container = res.createPnlRounded(1300,510,res.white, res.lightGray);
+            container.setBorder(new EmptyBorder(10,10,10,10));
             container.setPreferredSize(new Dimension(1300,510));
             container.setBackground(res.lightGray);
             add(container, BorderLayout.CENTER);
 
+            ButtonsPanel pnlButtons = new ButtonsPanel();
+            container.add(pnlButtons, BorderLayout.NORTH);
+
+            TablePanel pnlTable = new TablePanel();
+            container.add(pnlTable, BorderLayout.SOUTH);
+
             setPreferredSize(new Dimension(1300, 510));
             setVisible(true);
+        }
+
+        /**
+         * Panel to hold buttons, text field, and combo boxes.
+         */
+        class ButtonsPanel extends JPanel {
+            /**
+             * Constructs a panel of ButtonsPanel.
+             */
+            public ButtonsPanel() {
+                setLayout(new FlowLayout());
+                setBorder(new EmptyBorder(10,10,10,10));
+                setBackground(res.white);
+
+                txtDate = res.createTxtRounded("Search Date (MM/DD/YY)", res.lightGray, res.gray, 20);
+                add(txtDate);
+
+                cmbStatus = res.createCmbRounded(res.gray, res.lightGray, 10);
+                add(cmbStatus);
+
+                cmbVehicleType = res.createCmbRounded(res.gray, res.lightGray, 10);
+                add(cmbVehicleType);
+
+                btnApply = res.createBtnRounded("Apply Filters", res.celadon, res.eerieBlack, 10);
+                add(btnApply);
+
+                btnClear = res.createBtnRounded("Clear Filters", res.lightGray, res.eerieBlack, 10);
+                add(btnClear);
+
+                this.setPreferredSize(new Dimension(1100,100));
+            }
+        }
+
+        /**
+         * Panel to hold the table containing the data of bookings.
+         */
+        class TablePanel extends JPanel {
+            /**
+             * Constructs a panel of TablePanel.
+             */
+            public TablePanel() {
+                setLayout(new BorderLayout());
+                setBackground(res.white);
+
+                tblBookings = new JTable(tblModel);
+                tblBookings.getTableHeader().setResizingAllowed(false);
+                tblBookings.getTableHeader().setReorderingAllowed(false);
+                tblBookings.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
+                tblBookings.setAutoResizeMode(0);
+                tblBookings.setDragEnabled(false);
+                tblBookings.setOpaque(false);
+
+                JScrollPane scrollPane = new JScrollPane(tblBookings);
+                add(scrollPane, BorderLayout.CENTER);
+
+                this.setPreferredSize(new Dimension(1300, 410));
+            }
+        }
+
+        /**
+         * Retrieves the current JTextField of txtDate.
+         * @return The current txtDate.
+         */
+        public JTextField getTxtDate() {
+            return txtDate;
+        }
+
+        /**
+         * Retrieves the current JComboBox of cmbStatus.
+         * @return The current cmbStatus.
+         */
+        public JComboBox<?> getCmbStatus() {
+            return cmbStatus;
+        }
+
+        /**
+         * Retrieves the current JComboBox of cmbVehicleType.
+         * @return The current cmbVehicleType.
+         */
+        public JComboBox<?> getCmbVehicleType() {
+            return cmbVehicleType;
+        }
+
+        /**
+         * Retrieves the current JButton of btnApply.
+         * @return The current btnApply.
+         */
+        public JButton getBtnApply() {
+            return btnApply;
+        }
+
+        /**
+         * Retrieves the current JButton of btnClear.
+         * @return The current btnClear.
+         */
+        public JButton getBtnClear() {
+            return btnClear;
+        }
+
+        /**
+         * Sets a specified action listener for btnApply.
+         * @param actionListener The specified action listener.
+         */
+        public void setApplyListener(ActionListener actionListener) {
+            btnApply.addActionListener(actionListener);
+        }
+
+        /**
+         * Sets a specified action listener for btnClear.
+         * @param actionListener The specified action listener.
+         */
+        public void setClearListener(ActionListener actionListener) {
+            btnClear.addActionListener(actionListener);
         }
     }
 
@@ -216,14 +364,14 @@ public class DashboardView extends JPanel {
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     lblCarCount = res.createLblH1("13", res.eerieBlack),
-                    lblAvailCar = res.createLblP("<html>Total<br> Car Bookings</html>", res.eerieBlack)
+                    lblAvailCar = res.createLblP("<html>Total Car<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
             ButtonPanel pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     lblMotorCount = res.createLblH1("10", res.eerieBlack),
-                    lblAvailMotor = res.createLblP("<html>Total<br> Motor Bookings</html>", res.eerieBlack)
+                    lblAvailMotor = res.createLblP("<html>Total Motor<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
@@ -303,5 +451,9 @@ public class DashboardView extends JPanel {
 
             this.setPreferredSize(new Dimension(100, 100));
         }
+    }
+
+    public static void main(String[] args) {
+        new AdminApplicationView();
     }
 }
