@@ -8,9 +8,10 @@ import utilities.Resources;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * Processes the server initialization and viewing of pertinent activities in the server.
@@ -44,14 +45,6 @@ public class AdminApplicationController {
      * List of lists of motor bookings.
      */
     private volatile List<List<String>> motorBookings = new ArrayList<>();
-    /**
-     * Array of RecordPanel to hold the car records.
-     */
-    private volatile DashboardView.MainBottomPanel.RecordPanel[] carRecords;
-    /**
-     * Array of RecordPanel to hold the motor records.
-     */
-    private volatile DashboardView.MainBottomPanel.RecordPanel[] motorRecords;
 
     /**
      * Constructs a ServerController with a specified AdminApplicationView.
@@ -87,25 +80,14 @@ public class AdminApplicationController {
 
         // dashboard page
         view.getDashboardView().setRefreshListener(e -> refreshBookings());
-
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().setNextListener(e -> {
-            view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getCardLayout().next(
-                    view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getPnlCards());
+        view.getDashboardView().getPnlMainBottom().setApplyListener(new ApplyFiltersListener());
+        view.getDashboardView().getPnlMainBottom().setClearListener(e -> {
+            view.getDashboardView().getPnlMainBottom().getTblModel().setRowCount(0);
+            view.getDashboardView().getPnlMainBottom().getScrollPane().getVerticalScrollBar().setValue(0);
+            view.getDashboardView().getPnlMainBottom().getTxtDate().setText("");
+            view.getDashboardView().getPnlMainBottom().getCmbStatus().setSelectedIndex(0);
+            view.getDashboardView().getPnlMainBottom().getCmbVehicleType().setSelectedIndex(0);
         });
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().setPrevListener(e -> {
-            view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getCardLayout().previous(
-                    view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getPnlCards());
-        });
-
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().setNextListener(e -> {
-            view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getCardLayout().next(
-                    view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getPnlCards());
-        });
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().setPrevListener(e -> {
-            view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getCardLayout().previous(
-                    view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getPnlCards());
-        });
-
 
         // mouse listeners
         view.getBtnNavDashboard().addMouseListener(new Resources.CursorChanger(view.getBtnNavDashboard()));
@@ -118,15 +100,14 @@ public class AdminApplicationController {
         // dashboard page
         view.getDashboardView().getBtnRefresh().addMouseListener(new Resources.CursorChanger(view.getDashboardView().getBtnRefresh()));
 
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnNext().addMouseListener(
-                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnNext()));
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnPrev().addMouseListener(
-                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().getBtnPrev()));
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnNext().addMouseListener(
-                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnNext()));
-        view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnPrev().addMouseListener(
-                new Resources.CursorChanger(view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().getBtnPrev()));
+        view.getDashboardView().getPnlMainBottom().getBtnApply().addMouseListener(new Resources.CursorChanger(
+                view.getDashboardView().getPnlMainBottom().getBtnApply()));
+        view.getDashboardView().getPnlMainBottom().getBtnClear().addMouseListener(new Resources.CursorChanger(
+                view.getDashboardView().getPnlMainBottom().getBtnClear()));
 
+        // focus listeners
+        view.getDashboardView().getPnlMainBottom().getTxtDate().addFocusListener(new Resources.TextFieldFocus(
+                view.getDashboardView().getPnlMainBottom().getTxtDate(), "Search Date (MM/DD/YY)"));
         view.repaint();
         view.revalidate();
     }
@@ -175,66 +156,137 @@ public class AdminApplicationController {
         view.getDashboardView().getPnlMainTop().getLblTotalCount().
                 setText(String.valueOf(carBookings.size() + motorBookings.size()));
 
+        System.out.println(carBookings);
+        System.out.println(motorBookings);
+    }
 
-        // create / recreate record panels of car bookings
-        carRecords = new DashboardView.MainBottomPanel.RecordPanel[carBookings.size()];
-        Arrays.fill(carRecords, null);
-        for (DashboardView.MainBottomPanel.RecordPanel recordPanel : carRecords) {
-            for (List<String> booking : carBookings) {
-                String[] tokens = booking.toString().replace("[","").replace("]","").split(",");
-                String username = tokens[0];
-                String spot = tokens[1];
-                String date = tokens[2];
-                String timeIn = tokens[3];
-                String timeOut = tokens[4];
-                String duration = tokens[5];
+    /**
+     * Displays the appropriate data in the table according to user-defined filters.
+     */
+    class ApplyFiltersListener implements ActionListener {
+        /**
+         * Displays the data given a set of filters.
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            // clears the table before populating it
+            view.getDashboardView().getPnlMainBottom().getTblModel().setRowCount(0);
+            view.getDashboardView().getPnlMainBottom().getScrollPane().getVerticalScrollBar().setValue(0);
 
-                DashboardView.MainBottomPanel.RecordPanel record = new DashboardView.MainBottomPanel.RecordPanel();
-                record.getLblUsername().setText(username);
-                record.getLblSlot().setText("SLOT " + spot);
-                record.getLblDate().setText(date);
-                record.getLblCheckIn().setText(timeIn);
-                record.getLblCheckOut().setText(timeOut);
-                record.getLblDuration().setText(duration + " hour/s");
-                record.getLblVehicle().setText("Car");
+            LocalDateTime dateNow = LocalDateTime.now();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("MM/dd/yy");
 
-                
-                view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().
-                        getPnlCards().add(record, String.valueOf(recordPanel));
-                view.getDashboardView().getPnlMainBottom().getPnlCompletedCar().
-                        getCardLayout().show(view.getDashboardView().
-                                getPnlMainBottom().getPnlCompletedCar().getPnlCards(), String.valueOf(recordPanel));
+            String dateInput = String.valueOf(view.getDashboardView().getPnlMainBottom().getTxtDate().getText());
+            String status = String.valueOf(view.getDashboardView().getPnlMainBottom().getCmbStatus().getSelectedItem());
+            String type = String.valueOf(view.getDashboardView().getPnlMainBottom().getCmbVehicleType().getSelectedItem());
+
+            List<List<String>> filteredCarBookings = new ArrayList<>();
+            List<List<String>> filteredMotorBookings = new ArrayList<>();
+
+            if (status.equals("All")) {
+                if (dateInput.equals("All")) {
+                    filteredCarBookings = carBookings.stream()
+                            .toList();
+                    filteredMotorBookings = motorBookings.stream()
+                            .toList();
+                } else {
+                    filteredCarBookings = carBookings.stream()
+                            .filter(c -> c.get(2).equals(dateInput))
+                            .toList();
+                    filteredMotorBookings = motorBookings.stream()
+                            .filter(m -> m.get(2).equals(dateInput))
+                            .toList();
+                }
+            } else if (status.equals("Current")) {
+                filteredCarBookings = carBookings.stream()
+                        .filter(c -> c.get(2).equals(dateNow.format(timeFormatter)))
+                        .toList();
+                filteredMotorBookings = motorBookings.stream()
+                        .filter(m -> m.get(2).equals(dateNow.format(timeFormatter)))
+                        .toList();
+            } else if (status.equals("Future")) {
+                filteredCarBookings = carBookings.stream()
+                        .filter(c -> LocalDateTime.parse(c.get(2) + " " + c.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isAfter(dateNow))
+                        .toList();
+                filteredMotorBookings = motorBookings.stream()
+                        .filter(m -> LocalDateTime.parse(m.get(2) + " " + m.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isAfter(dateNow))
+                        .toList();
+            } else if (status.equals("Completed")) {
+                filteredCarBookings = carBookings.stream()
+                        .filter(c -> LocalDateTime.parse(c.get(2) + " " + c.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isBefore(dateNow))
+                        .toList();
+                filteredMotorBookings = motorBookings.stream()
+                        .filter(m -> LocalDateTime.parse(m.get(2) + " " + m.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isBefore(dateNow))
+                        .toList();
             }
-        }
 
-        // create record panels of motor bookings
-        motorRecords = new DashboardView.MainBottomPanel.RecordPanel[motorBookings.size()];
-        Arrays.fill(motorRecords, null);
-        for (DashboardView.MainBottomPanel.RecordPanel recordPanel : motorRecords) {
-            for (List<String> booking : motorBookings) {
-                String[] tokens = booking.toString().replace("[","").replace("]","").split(",");
-                String username = tokens[0];
-                String spot = tokens[1];
-                String date = tokens[2];
-                String timeIn = tokens[3];
-                String timeOut = tokens[4];
-                String duration = tokens[5];
+            switch (type) {
+                case "All" -> {
+                    for (List<String> mBooking : filteredMotorBookings) {
+                        String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
 
-                DashboardView.MainBottomPanel.RecordPanel record = new DashboardView.MainBottomPanel.RecordPanel();
-                record.getLblUsername().setText(username);
-                record.getLblSlot().setText("SLOT " + spot);
-                record.getLblDate().setText(date);
-                record.getLblCheckIn().setText(timeIn);
-                record.getLblCheckOut().setText(timeOut);
-                record.getLblDuration().setText(duration + " hour/s");
-                record.getLblVehicle().setText("Motor");
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s"
+                        });
+                    }
+                    for (List<String> cBooking : filteredCarBookings) {
+                        String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
 
-                view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().
-                        getPnlCards().add(record, String.valueOf(recordPanel));
-                view.getDashboardView().getPnlMainBottom().getPnlCompletedMotor().
-                        getCardLayout().show(view.getDashboardView().
-                                getPnlMainBottom().getPnlCompletedMotor().getPnlCards(), String.valueOf(recordPanel));
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Car", timeIn, timeOut, duration + "hour/s"
+                        });
+
+                    }
+                } // end of case -> all
+
+                case "Car" -> {
+                    for (List<String> cBooking : filteredCarBookings) {
+                        String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Car", timeIn, timeOut, duration + "hour/s"
+                        });
+                    }
+                } // end of case -> car
+
+                case "Motorcycle" -> {
+                    for (List<String> mBooking : filteredMotorBookings) {
+                        String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s"
+                        });
+                    }
+                } // end of case -> motorcycle
             }
         }
     }
 }
+

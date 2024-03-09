@@ -4,6 +4,7 @@ import utilities.Resources;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
@@ -115,8 +116,6 @@ public class DashboardView extends JPanel {
         btnRefresh.addActionListener(actionListener);
     }
 
-
-
     /**
      * The panel that contains the parking slots.
      */
@@ -126,13 +125,39 @@ public class DashboardView extends JPanel {
          */
         private JPanel container;
         /**
-         * The rounded panel for completed car bookings.
+         * The text field for the booking date.
          */
-        private CarPanel pnlCompletedCar;
+        private JTextField txtDate;
         /**
-         * The rounded panel for completed motorcycle bookings.
+         * The combo box for the status of the booking.
+         * All, completed, and future.
          */
-        private MotorPanel pnlCompletedMotor;
+        private JComboBox<String> cmbStatus;
+        /**
+         * The combo box for the type of vehicle of the booking.
+         * All, Car, Motorcycle.
+         */
+        private JComboBox<String> cmbVehicleType;
+        /**
+         * The button to apply the filters.
+         */
+        private JButton btnApply;
+        /**
+         * The button to reset the filters.
+         */
+        private JButton btnClear;
+        /**
+         * The table to display the bookings
+         */
+        private JTable tblBookings;
+        /**
+         * The table model to hold the columns of tblBookings.
+         */
+        private DefaultTableModel tblModel;
+        /**
+         * The scroll pane where the table will be instantiated.
+         */
+        private JScrollPane scrollPane;
 
         /**
          * Constructs a panel of MainBottomPanel.
@@ -141,409 +166,182 @@ public class DashboardView extends JPanel {
             setLayout(new BorderLayout());
             setBackground(res.lightGray);
 
-            GridLayout gridLayout = new GridLayout(0,2);
-            gridLayout.setHgap(20);
-
-            container = new JPanel(gridLayout);
+            container = res.createPnlRounded(1300,510,res.white, res.lightGray);
+            container.setBorder(new EmptyBorder(10,10,10,10));
             container.setPreferredSize(new Dimension(1300,510));
             container.setBackground(res.lightGray);
             add(container, BorderLayout.CENTER);
 
-            pnlCompletedCar = new CarPanel();
-            container.add(pnlCompletedCar);
+            ButtonsPanel pnlButtons = new ButtonsPanel();
+            container.add(pnlButtons, BorderLayout.NORTH);
 
-            pnlCompletedMotor = new MotorPanel();
-            container.add(pnlCompletedMotor);
+            TablePanel pnlTable = new TablePanel();
+            container.add(pnlTable, BorderLayout.SOUTH);
 
             setPreferredSize(new Dimension(1300, 510));
             setVisible(true);
         }
 
         /**
-         * Retrieves the current CarPanel of pnlCompletedCar.
-         * @return The current pnlCompletedCar.
+         * Panel to hold buttons, text field, and combo boxes.
          */
-        public CarPanel getPnlCompletedCar() {
-            return pnlCompletedCar;
-        }
-
-        /**
-         * Retrieves the current MotorPanel of pnlCompletedMotor
-         * @return The current pnlCompletedMotor.
-         */
-        public MotorPanel getPnlCompletedMotor() {
-            return pnlCompletedMotor;
-        }
-
-        /**
-         * The CarPanel displays the completed car bookings.
-         */
-        public class CarPanel extends JPanel {
+        class ButtonsPanel extends JPanel {
             /**
-             * Holds the components.
+             * Constructs a panel of ButtonsPanel.
              */
-            private JPanel container;
-            /**
-             * The button for previous record.
-             */
-            private JButton btnPrev;
-            /**
-             * The button for next record.
-             */
-            private JButton btnNext;
-            /**
-             * The panel that holds different components panels of booking histories.
-             */
-            private JPanel pnlCards;
-            /**
-             * The CardLayout that controls the components of the bookings.
-             */
-            private CardLayout cardLayout = new CardLayout();
-
-            /**
-             * Constructs a panel of CarPanel.
-             */
-            public CarPanel() {
-                setLayout(new BorderLayout());
-
-                container = res.createPnlRounded(400, 500,res.white, res.lightGray);
-                container.setBorder(new EmptyBorder(20,15,20,15));
-                container.setLayout(new BorderLayout());
-                add(container,BorderLayout.CENTER);
-
-                JLabel lblTitle = res.createLblH1("All Car Bookings", res.eerieBlack);
-                lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-                container.add(lblTitle, BorderLayout.NORTH);
-
-                btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 25,25);
-                container.add(btnPrev, BorderLayout.WEST);
-
-                btnNext = res.createBtnIconOnly(res.iconRightArrow, 25,25);
-                container.add(btnNext, BorderLayout.EAST);
-
-                pnlCards = new JPanel(cardLayout);
-                pnlCards.setPreferredSize(new Dimension(400,300));
-                container.add(pnlCards, BorderLayout.CENTER);
-
-                this.setPreferredSize(new Dimension(400,500));
-            }
-
-            /**
-             * Sets a specified action listener to btnNext.
-             * @param actionListener The specified action listener.
-             */
-            public void setNextListener(ActionListener actionListener) {
-                btnNext.addActionListener(actionListener);
-            }
-
-            /**
-             * Sets a specified action listener for btnPrev.
-             * @param actionListener The specified action listener.
-             */
-            public void setPrevListener(ActionListener actionListener) {
-                btnPrev.addActionListener(actionListener);
-            }
-
-            /**
-             * Retrieves the current panel that holds the different components.
-             * @return The current pnlCards.
-             */
-            public JPanel getPnlCards() {
-                return pnlCards;
-            }
-
-            /**
-             * Retrieves the current Card Layout that manages pnlCards.
-             * @return The current cardLayout.
-             */
-            public CardLayout getCardLayout() {
-                return cardLayout;
-            }
-
-            /**
-             * Retrieves the current JButton of btnPrev.
-             * @return THe current btnPrev.
-             */
-            public JButton getBtnPrev() {
-                return btnPrev;
-            }
-
-            /**
-             * Retrieves the current JButton of btnNext.
-             * @return The current btnNext.
-             */
-            public JButton getBtnNext() {
-                return btnNext;
-            }
-        }
-
-        /**
-         * The MotorPanel displays the completed motorcycle bookings.
-         */
-        public class MotorPanel extends JPanel {
-            /**
-             * Holds the components.
-             */
-            private JPanel container;
-            /**
-             * The button for previous record.
-             */
-            private JButton btnPrev;
-            /**
-             * The button for next record.
-             */
-            private JButton btnNext;
-            /**
-             * The panel that holds different components panels of booking histories.
-             */
-            private JPanel pnlCards;
-            /**
-             * The CardLayout that controls the components of the bookings.
-             */
-            private CardLayout cardLayout = new CardLayout();
-
-            /**
-             * Constructs a panel of MotorPanel.
-             */
-            public MotorPanel() {
-                setLayout(new BorderLayout());
-
-                container = res.createPnlRounded(400, 500,res.white, res.lightGray);
-                container.setBorder(new EmptyBorder(20,10,20,10));
-                container.setLayout(new BorderLayout());
-                add(container,BorderLayout.CENTER);
-
-                JLabel lblTitle = res.createLblH1("All Motorcycle Bookings", res.eerieBlack);
-                lblTitle.setHorizontalAlignment(SwingConstants.CENTER);
-                container.add(lblTitle, BorderLayout.NORTH);
-
-                btnPrev = res.createBtnIconOnly(res.iconLeftArrow, 25,25);
-                container.add(btnPrev, BorderLayout.WEST);
-
-                btnNext = res.createBtnIconOnly(res.iconRightArrow, 25,25);
-                container.add(btnNext, BorderLayout.EAST);
-
-                pnlCards = new JPanel(cardLayout);
-                pnlCards.setPreferredSize(new Dimension(400,300));
-                container.add(pnlCards, BorderLayout.CENTER);
-
-                this.setPreferredSize(new Dimension(400,500));
-            }
-
-            /**
-             * Sets a specified action listener to btnNext.
-             * @param actionListener The specified action listener.
-             */
-            public void setNextListener(ActionListener actionListener) {
-                btnNext.addActionListener(actionListener);
-            }
-
-            /**
-             * Sets a specified action listener for btnPrev.
-             * @param actionListener The specified action listener.
-             */
-            public void setPrevListener(ActionListener actionListener) {
-                btnPrev.addActionListener(actionListener);
-            }
-
-            /**
-             * Retrieves the current JButton of btnPrev.
-             * @return THe current btnPrev.
-             */
-            public JButton getBtnPrev() {
-                return btnPrev;
-            }
-
-            /**
-             * Retrieves the current JButton of btnNext.
-             * @return The current btnNext.
-             */
-            public JButton getBtnNext() {
-                return btnNext;
-            }
-
-            /**
-             * Retrieves the current panel that
-             * @return
-             */
-            public JPanel getPnlCards() {
-                return pnlCards;
-            }
-
-            public CardLayout getCardLayout() {
-                return cardLayout;
-            }
-        }
-
-        /**
-         * The record panel holds one record of a booking. It displays the pertinent information about the particular
-         * completed booking.
-         */
-        public static class RecordPanel extends JPanel {
-            /**
-             * The label for username.
-             */
-            private JLabel lblUsername;
-            /**
-             * The label for vehicle.
-             */
-            private JLabel lblVehicle;
-            /**
-             * The label for parking slot.
-             */
-            private JLabel lblSlot;
-            /**
-             * The label for date.
-             */
-            private JLabel lblDate;
-            /**
-             * The label for check-in time.
-             */
-            private JLabel lblCheckIn;
-            /**
-             * The label for check-out time.
-             */
-            private JLabel lblCheckOut;
-            /**
-             * The label for duration in hours.
-             */
-            private JLabel lblDuration;
-
-            /**
-             * Constructs a panel of RecordPanel.
-             */
-            public RecordPanel() {
-                setLayout(new GridBagLayout());
+            public ButtonsPanel() {
+                setLayout(new FlowLayout(FlowLayout.LEFT));
+                setBorder(new EmptyBorder(10,20,10,20));
                 setBackground(res.white);
-                GridBagConstraints gbc = new GridBagConstraints();
 
-                gbc.ipadx = 5;
-                gbc.ipady = 10;
-                gbc.insets = new Insets(3,10,3,10);
-                gbc.gridwidth = 5;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                gbc.anchor = GridBagConstraints.WEST;
+                txtDate = res.createTxtRounded("Search Date (MM/DD/YY)", res.lightGray, res.gray, 25);
+                add(txtDate);
 
-                gbc.gridx = 0;
-                gbc.gridy = 0;
+                cmbStatus = new JComboBox<>(new String[]{"Select Status:", "All", "Completed", "Current", "Future"});
+                cmbStatus.setPreferredSize(new Dimension(200,40));
+                cmbStatus.setFont(new Font("Arial", Font.BOLD, 16));
+                add(cmbStatus);
 
-                // upper row
-                lblUsername = res.createLblH2("Username",res.eerieBlack);
-                add(lblUsername, gbc);
+                cmbVehicleType = new JComboBox<>(new String[]{"Select Vehicle Type:", "All", "Car", "Motorcycle"});
+                cmbVehicleType.setPreferredSize(new Dimension(280,40));
+                cmbVehicleType.setFont(new Font("Arial", Font.BOLD, 16));
+                add(cmbVehicleType);
 
-                gbc.gridy = 1;
-                lblVehicle = res.createLblH3("Vehicle", res.eerieBlack);
-                add(lblVehicle, gbc);
+                btnApply = res.createBtnRounded("Apply Filters", res.celadon, res.eerieBlack, 10);
+                add(btnApply);
 
-                gbc.gridy = 2;
-                gbc.gridwidth = 10;
-                gbc.fill = GridBagConstraints.HORIZONTAL;
-                JSeparator separator = new JSeparator(JSeparator.HORIZONTAL);
-                separator.setPreferredSize(new Dimension(400,1));
-                separator.setForeground(res.gray);
-                add(separator, gbc);
+                btnClear = res.createBtnRounded("Clear Filters", res.lightGray, res.eerieBlack, 10);
+                add(btnClear);
 
-                // lower row
-                gbc.gridy = 3;
-                lblSlot = res.createLblH3("SLOT C1", res.eerieBlack);
-                add(lblSlot, gbc);
-
-                // left column
-                gbc.gridwidth = 3;
-                gbc.gridx = 0;
-                gbc.gridy = 4;
-                JLabel lblDateLabel = res.createLblP("Date:", res.gray);
-                add(lblDateLabel, gbc);
-
-                gbc.gridy = 5;
-                JLabel lblCheckInLabel = res.createLblP("Check-In Time:", res.gray);
-                add(lblCheckInLabel, gbc);
-
-                gbc.gridy = 6;
-                JLabel lblCheckOutLabel = res.createLblP("Check-Out Time:", res.gray);
-                add(lblCheckOutLabel, gbc);
-
-                gbc.gridy = 7;
-                JLabel lblDurationLabel = res.createLblP("Duration:", res.gray);
-                add(lblDurationLabel, gbc);
-
-                // right column
-                gbc.gridwidth = 3;
-                gbc.gridx = 4;
-                gbc.gridy = 4;
-                lblDate = res.createLblP("August 20, 1996", res.eerieBlack);
-                add(lblDate, gbc);
-
-                gbc.gridy = 5;
-                lblCheckIn = res.createLblP("1:00 PM", res.eerieBlack);
-                add(lblCheckIn, gbc);
-
-                gbc.gridy = 6;
-                lblCheckOut = res.createLblP("5:00 PM", res.eerieBlack);
-                add(lblCheckOut, gbc);
-
-                gbc.gridy = 7;
-                lblDuration = res.createLblP("4 hours",res.eerieBlack);
-                add(lblDuration, gbc);
-
-                this.setPreferredSize(new Dimension(300,400));
+                this.setPreferredSize(new Dimension(1200,100));
             }
+        }
 
+        /**
+         * Panel to hold the table containing the data of bookings.
+         */
+        class TablePanel extends JPanel {
             /**
-             * Retrieves the current JLabel of lblUsername.
-             * @return The current lblUsername.
+             * Constructs a panel of TablePanel.
              */
-            public JLabel getLblUsername() {
-                return lblUsername;
-            }
+            public TablePanel() {
+                setLayout(new BorderLayout());
+                setBackground(res.white);
 
-            /**
-             * Retrieves the current JLabel of lblVehicle.
-             * @return The current lblVehicle.
-             */
-            public JLabel getLblVehicle() {
-                return lblVehicle;
-            }
+                tblModel = new DefaultTableModel();
+                tblModel.addColumn("Date");
+                tblModel.addColumn("Username");
+                tblModel.addColumn("Spot");
+                tblModel.addColumn("Vehicle Type");
+                tblModel.addColumn("Check-in Time");
+                tblModel.addColumn("Check-out Time");
+                tblModel.addColumn("Duration");
 
-            /**
-             * Retrieves the current JLabel of lblSlot.
-             * @return The current lblSlot.
-             */
-            public JLabel getLblSlot() {
-                return lblSlot;
-            }
+                tblBookings = new JTable(tblModel);
+                tblBookings.getTableHeader().setResizingAllowed(false);
+                tblBookings.getTableHeader().setReorderingAllowed(false);
+                tblBookings.getTableHeader().setFont(new Font("Arial", Font.BOLD, 12));
+                tblBookings.setAutoResizeMode(0);
+                tblBookings.setDragEnabled(false);
+                tblBookings.setOpaque(false);
+                tblBookings.setFillsViewportHeight(true);
+                tblBookings.setPreferredSize(new Dimension(1100,1000));
 
-            /**
-             * Retrieves the current JLabel of lblDate.
-             * @return The current lblDate.
-             */
-            public JLabel getLblDate() {
-                return lblDate;
-            }
+                tblBookings.getColumnModel().getColumn(0).setPreferredWidth(100);
+                tblBookings.getColumnModel().getColumn(1).setPreferredWidth(300);
+                tblBookings.getColumnModel().getColumn(2).setPreferredWidth(150);
+                tblBookings.getColumnModel().getColumn(3).setPreferredWidth(200);
+                tblBookings.getColumnModel().getColumn(4).setPreferredWidth(150);
+                tblBookings.getColumnModel().getColumn(5).setPreferredWidth(150);
+                tblBookings.getColumnModel().getColumn(6).setPreferredWidth(100);
+                tblBookings.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-            /**
-             * Retrieves the current JLabel of lblCheckIn.
-             * @return The current lblCheckIn.
-             */
-            public JLabel getLblCheckIn() {
-                return lblCheckIn;
-            }
+                scrollPane = new JScrollPane(tblBookings);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
+                add(scrollPane, BorderLayout.CENTER);
 
-            /**
-             * Retrieves the current JLabel of lblCheckOut.
-             * @return The current lblCheckOut.
-             */
-            public JLabel getLblCheckOut() {
-                return lblCheckOut;
+                this.setPreferredSize(new Dimension(1150, 370));
             }
+        }
 
-            /**
-             * Retrieves the current JLabel of lblDuration.
-             * @return The current lblDuration.
-             */
-            public JLabel getLblDuration() {
-                return lblDuration;
-            }
+        /**
+         * Retrieves the current JTextField of txtDate.
+         * @return The current txtDate.
+         */
+        public JTextField getTxtDate() {
+            return txtDate;
+        }
+
+        /**
+         * Retrieves the current JComboBox of cmbStatus.
+         * @return The current cmbStatus.
+         */
+        public JComboBox<?> getCmbStatus() {
+            return cmbStatus;
+        }
+
+        /**
+         * Retrieves the current JComboBox of cmbVehicleType.
+         * @return The current cmbVehicleType.
+         */
+        public JComboBox<?> getCmbVehicleType() {
+            return cmbVehicleType;
+        }
+
+        /**
+         * Retrieves the current JButton of btnApply.
+         * @return The current btnApply.
+         */
+        public JButton getBtnApply() {
+            return btnApply;
+        }
+
+        /**
+         * Retrieves the current JButton of btnClear.
+         * @return The current btnClear.
+         */
+        public JButton getBtnClear() {
+            return btnClear;
+        }
+
+        /**
+         * Retrieves the current JTable of tblBookings.
+         * @return The current tblBookings.
+         */
+        public JTable getTblBookings() {
+            return tblBookings;
+        }
+
+        /**
+         * Retrieves the current DefaultTableModel of tblModel.
+         * @return The current tblModel.
+         */
+        public DefaultTableModel getTblModel() {
+            return tblModel;
+        }
+
+        /**
+         * Retrieves the current JScrollPane of scrollPane.
+         * @return The current scrollPane.
+         */
+        public JScrollPane getScrollPane() {
+            return scrollPane;
+        }
+
+        /**
+         * Sets a specified action listener for btnApply.
+         * @param actionListener The specified action listener.
+         */
+        public void setApplyListener(ActionListener actionListener) {
+            btnApply.addActionListener(actionListener);
+        }
+
+        /**
+         * Sets a specified action listener for btnClear.
+         * @param actionListener The specified action listener.
+         */
+        public void setClearListener(ActionListener actionListener) {
+            btnClear.addActionListener(actionListener);
         }
     }
 
@@ -619,14 +417,14 @@ public class DashboardView extends JPanel {
             ButtonPanel pnlAvailCar = new ButtonPanel(
                     btnAvailCar = res.createBtnIconOnly(res.iconSolidCar, 50, 50),
                     lblCarCount = res.createLblH1("13", res.eerieBlack),
-                    lblAvailCar = res.createLblP("<html>Total<br> Car Bookings</html>", res.eerieBlack)
+                    lblAvailCar = res.createLblP("<html>Total Car<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailCar);
 
             ButtonPanel pnlAvailMotor = new ButtonPanel(
                     btnAvailMotor = res.createBtnIconOnly(res.iconSolidMotor, 50, 50),
                     lblMotorCount = res.createLblH1("10", res.eerieBlack),
-                    lblAvailMotor = res.createLblP("<html>Total<br> Motor Bookings</html>", res.eerieBlack)
+                    lblAvailMotor = res.createLblP("<html>Total Motor<br> Bookings</html>", res.eerieBlack)
             );
             pnlButtons.add(pnlAvailMotor);
 
@@ -673,14 +471,6 @@ public class DashboardView extends JPanel {
         }
 
         /**
-         * Retrieves the current JLabel of lblAvailMotor.
-         * @return The current lblAvailMotor.
-         */
-        public JLabel getLblAvailMotor() {
-            return lblAvailMotor;
-        }
-
-        /**
          * Retrieves the current JLabel of lblTotal.
          * @return The current lblTotal.
          */
@@ -714,5 +504,9 @@ public class DashboardView extends JPanel {
 
             this.setPreferredSize(new Dimension(100, 100));
         }
+    }
+
+    public static void main(String[] args) {
+        new AdminApplicationView();
     }
 }
