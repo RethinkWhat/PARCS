@@ -38,6 +38,8 @@ public class LoginController {
         // action listeners
         view.setLoginListener(new LoginListener());
         view.setSignupListener(new SignUpListener());
+        view.getChkShowPassword().addActionListener(new ShowPasswordListener(view.getChkShowPassword(),
+                view.getTxtPassword()));
 
         // mouse listeners
         view.getBtnSignup().addMouseListener(new Resources.CursorChanger((view.getBtnSignup())));
@@ -195,6 +197,44 @@ public class LoginController {
             if (String.valueOf(passwordField.getPassword()).isEmpty()) {
                 passwordField.setText(placeholder);
                 passwordField.setEchoChar((char) 0);
+            }
+        }
+    }
+
+
+    /**
+     * Shows the password of a specified JPasswordField.
+     */
+    class ShowPasswordListener implements ActionListener {
+        /**
+         * The specified checkbox of show password.
+         */
+        private JCheckBox checkBox;
+        /**
+         * The specified password field.
+         */
+        private JPasswordField passwordField;
+
+        /**
+         * Constructs an object of ShowPasswordField listener with a specified JCheckBox and JPasswordField.
+         * @param checkBox The specified "show password" checkbox.
+         * @param passwordField The specified password field.
+         */
+        public ShowPasswordListener(JCheckBox checkBox, JPasswordField passwordField) {
+            this.checkBox = checkBox;
+            this.passwordField = passwordField;
+        }
+
+        /**
+         * Processes the user request.
+         * @param e the event to be processed
+         */
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            if (checkBox.isSelected()) {
+                passwordField.setEchoChar((char) 0); // shows password in characters
+            } else if (!checkBox.isSelected()) {
+                passwordField.setEchoChar('●');
             }
         }
     }
