@@ -1,7 +1,6 @@
 package client.model;
 
-import client.controller.LoginController;
-import client.view.LoginView;
+import client.Main;
 import utilities.Resources;
 
 import javax.swing.*;
@@ -195,7 +194,12 @@ public class Client {
         this.writeString(this.getUsername());
         username = null;
         closeSocket();
-        SwingUtilities.invokeLater(() -> startGUI());
+        if (isServerOpen() && openSocket()) {
+            Main start = new Main();
+        } else {
+            displayErrorMessage();
+        }
+
     }
 
     /**
@@ -306,23 +310,4 @@ public class Client {
         }
     }
 
-    /**
-     * Initiates the login and registration process.
-     */
-    private void login() {
-        LoginModel model = new LoginModel(this);
-        LoginView view = new LoginView();
-        new LoginController(view, model);
-    }
-
-    /**
-     * Checks if the server is open and initializes the GUI accordingly.
-     */
-    public void startGUI() {
-        if (isServerOpen() && openSocket()) {
-            login();
-        } else {
-            displayErrorMessage();
-        }
-    }
 }

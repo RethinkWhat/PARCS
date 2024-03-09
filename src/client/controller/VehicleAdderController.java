@@ -57,6 +57,7 @@ public class VehicleAdderController {
 
             boolean validate = model.writeVehicle(view.getVehicleType(),view.getModel(),view.getPlateNumber());
             if (validate) {
+                new ApplicationController(new ApplicationView(), new ApplicationModel(model.getClient()));
                 view.dispose();
             }
         }

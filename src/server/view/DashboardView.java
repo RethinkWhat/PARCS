@@ -505,8 +505,4 @@ public class DashboardView extends JPanel {
             this.setPreferredSize(new Dimension(100, 100));
         }
     }
-
-    public static void main(String[] args) {
-        new AdminApplicationView();
-    }
 }

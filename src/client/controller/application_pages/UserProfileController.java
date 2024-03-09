@@ -1,7 +1,6 @@
 package client.controller.application_pages;
 
 import client.controller.VehicleAdderController;
-import client.model.Client;
 import client.model.RegisterModel;
 import client.model.VehicleAdderModel;
 import client.model.application_pages.UserProfileModel;

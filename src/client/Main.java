@@ -1,6 +1,9 @@
 package client;
 
+import client.controller.LoginController;
 import client.model.Client;
+import client.model.LoginModel;
+import client.view.LoginView;
 
 public class Main {
 
@@ -13,7 +16,9 @@ public class Main {
         Thread clientsThread = new Thread(() ->{
             Client client = new Client();
 
-            client.startGUI();
+            LoginModel model = new LoginModel(client);
+            LoginView view = new LoginView();
+            new LoginController(view, model);
         });
         clientsThread.start();
     }

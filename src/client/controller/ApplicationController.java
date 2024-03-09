@@ -4,14 +4,7 @@ import client.controller.application_pages.ReservationPageController;
 import client.controller.application_pages.TimerController;
 import client.controller.application_pages.UserProfileController;
 import client.model.ApplicationModel;
-import client.model.Client;
-import client.model.application_pages.ReservationPageModel;
-import client.model.application_pages.UserProfileModel;
 import client.view.ApplicationView;
-import client.view.application_pages.ReservationPageView;
-import client.view.application_pages.UserProfileView;
-
-import java.sql.Time;
 
 /**
  * Template for ApplicationController object.

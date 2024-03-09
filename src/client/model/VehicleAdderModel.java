@@ -1,8 +1,5 @@
 package client.model;
 
-import client.controller.ApplicationController;
-import client.view.ApplicationView;
-
 /**
  * Represents the model for adding vehicles to the user's account.
  * This class provides methods for retrieving vehicle types, writing vehicle information to the server,
@@ -16,7 +13,7 @@ public class VehicleAdderModel {
     /**
      * The compiled data of user input to be sent to the server.
      */
-    private Object userInput;
+
 
     /**
      * Reference to the client
@@ -56,18 +53,9 @@ public class VehicleAdderModel {
         boolean vehicleAccepted = client.readString().equals("true");
         client.closeSocket();
 
-        if (vehicleAccepted) {
-            new ApplicationController(new ApplicationView(), new ApplicationModel(client));
-        }
         return vehicleAccepted;
     }
 
-    /**
-     * Navigates back to the main application view.
-     */
-    public void returnToApplication() {
-        new ApplicationController(new ApplicationView(), new ApplicationModel(client));
-    }
 
     /**
      * Gets the associated client.

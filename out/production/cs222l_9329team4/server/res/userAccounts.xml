@@ -1,1 +1,41 @@
-<userClass> </userClass>
+<userClass>
+             
+    
+    
+    <user username="yuen">
+                        
+        
+        <type>user</type>
+                        
+        
+        <password>6EHvXy+WtVbomkfDlyzp/Nq8JUB9ktExYharVe68dcY=</password>
+                        
+        
+        <lastName>Fliptop</lastName>
+                        
+        
+        <firstName>Blkd</firstName>
+                        
+        
+        <phoneNumber>290381</phoneNumber>
+                    
+    
+    </user>
+        
+    
+    <user username="basti">
+                
+        <type>user</type>
+                
+        <password>gm+0YJJrOz/BuKLSMBE9JHmHxHFuVefXgg8tlMLeWkQ=</password>
+                
+        <lastName>basti</lastName>
+                
+        <firstName>bastoi</firstName>
+                
+        <phoneNumber>128903</phoneNumber>
+            
+        <vehicle>Car,asdfas,adf 321</vehicle>
+    </user>
+    
+</userClass>
