@@ -75,9 +75,6 @@ public class AdminApplicationView extends JFrame {
         // Dashboard Page
         pnlCards.add(dashboardView = new DashboardView(), "dashboard");
 
-        // TODO: Omit code below before merging
-        mainCardLayout.show(pnlCards, "dashboard");
-
         this.setContentPane(contentArea);
         this.setLocationRelativeTo(null);
         this.pack();
