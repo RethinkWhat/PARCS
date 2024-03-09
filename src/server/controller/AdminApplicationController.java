@@ -310,7 +310,6 @@ public class AdminApplicationController {
                     }
                 }
             }
-            if (status.equals("Done"))
         }
     }
 }
