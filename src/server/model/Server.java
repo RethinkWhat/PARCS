@@ -107,9 +107,13 @@ public class Server implements Runnable{
         }
     }
 
-    public boolean checkScheduleConflicts(String username, String startTime, String duration, String date) {
+    public boolean checkUserScheduleConflicts(String username, String startTime, String duration, String date) {
         String endTime = reservationParser.computeEndTime(startTime,duration);
         return reservationParser.checkScheduleConflicts(username, startTime, endTime, date);
+    }
+
+    public boolean checkSpotScheduleConflicts(String identifier, String startTime, String duration, String date) {
+        return reservationParser.hasSchedulingConflicts(identifier, date, startTime, duration);
     }
 
     public boolean serverRunning() {
@@ -144,7 +148,7 @@ public class Server implements Runnable{
             this.setServerRunning(false);
             server.close();
         } catch (IOException ex) {
-            ex.printStackTrace( );
+            //ex.printStackTrace( );
         }
     }
 
