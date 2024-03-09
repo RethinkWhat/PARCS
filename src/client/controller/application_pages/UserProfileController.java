@@ -1,7 +1,6 @@
 package client.controller.application_pages;
 
 import client.controller.VehicleAdderController;
-import client.model.Client;
 import client.model.RegisterModel;
 import client.model.VehicleAdderModel;
 import client.model.application_pages.UserProfileModel;
@@ -13,7 +12,10 @@ import utilities.Resources;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * The UserProfileController processes the user requests for editing user account information, vehicle information,
@@ -85,11 +87,6 @@ public class UserProfileController {
         view.setNavHistoryListener(e -> {
             view.getCardLayout().show(view.getPnlCards(), "history");
             model.viewHistory();
-            view.getHistoryPage().recordPanel().setLblType(model.getType());
-            view.getHistoryPage().recordPanel().setLblSpot(model.getSpot());
-            view.getHistoryPage().recordPanel().setLblCheckIn(model.getCheckIn());
-            view.getHistoryPage().recordPanel().setLblCheckOut(model.getCheckOut());
-            view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
         });
         view.setNavSecurityListener(e -> view.getCardLayout().show(view.getPnlCards(), "security"));
         view.setDeleteListener(new DeleteListener());
@@ -108,7 +105,6 @@ public class UserProfileController {
         view.getPnlEditCars().setNextListener(new NextListener());
         view.getPnlEditCars().setPrevListener(new PreviousListener());
 
-
         for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
             panel.setEditListener(e -> {
                 panel.getTxtPlateNumber().setEditable(true);
@@ -121,10 +117,13 @@ public class UserProfileController {
         }
 
         // history page
-        view.getHistoryPage().recordPanel().btnNextListener(new HistoryNextListener());
-        view.getHistoryPage().recordPanel().btnPrevListener(new HistoryPreviousListener());
-
-
+        view.getPnlBookingsView().bookingPanel().getFilterPanel().setApplyListener(new ApplyFiltersListener());
+        view.getPnlBookingsView().bookingPanel().getFilterPanel().setClearListener(e -> {
+            view.getPnlBookingsView().bookingPanel().getTablePanel().getTableModel().setRowCount(0);
+            view.getPnlBookingsView().bookingPanel().getFilterPanel().getTxtDate().setText("Search Date (MM/DD/YY or All)");
+            view.getPnlBookingsView().bookingPanel().getFilterPanel().getCmbStatus().setSelectedIndex(0);
+            view.getPnlBookingsView().bookingPanel().getFilterPanel().getCmbVehicleType().setSelectedIndex(0);
+        });
 
         // security page
         view.getPnlSecurityPage().setConfirmListener(new SecurityConfirmListener());
@@ -153,16 +152,15 @@ public class UserProfileController {
         view.getPnlEditCars().getBtnAddVehicle().addMouseListener(new Resources.CursorChanger(view.getPnlEditCars().getBtnAddVehicle()));
         view.getPnlEditCars().setAddVehicleListener(new AddVehicleListener());
 
-
-
-
-
         for (UserProfileView.EditCars.CarsPanel panel : pnlsCars) {
             panel.getBtnEdit().addMouseListener(new Resources.CursorChanger(panel.getBtnEdit()));
         }
 
         // history page
-        // TODO: mouse listeners for history page
+        view.getPnlBookingsView().bookingPanel().getFilterPanel().getBtnApply().addMouseListener(new Resources.CursorChanger(
+                view.getPnlBookingsView().bookingPanel().getFilterPanel().getBtnApply()));
+        view.getPnlBookingsView().bookingPanel().getFilterPanel().getBtnClear().addMouseListener(new Resources.CursorChanger(
+                view.getPnlBookingsView().bookingPanel().getFilterPanel().getBtnClear()));
 
         // security page
         view.getPnlSecurityPage().getBtnConfirm().addMouseListener(
@@ -206,8 +204,8 @@ public class UserProfileController {
                 ));
 
         // history page
-
-
+        view.getPnlBookingsView().bookingPanel().getFilterPanel().getTxtDate().addFocusListener(new Resources.TextFieldFocus(
+                view.getPnlBookingsView().bookingPanel().getFilterPanel().getTxtDate(), "Search Date (MM/DD/YY)"));
 
         view.revalidate();
         view.repaint();
@@ -370,6 +368,98 @@ public class UserProfileController {
         }
     }
 
+    class ApplyFiltersListener implements ActionListener {
+        @Override
+        public void actionPerformed(ActionEvent e) {
+            view.getPnlBookingsView().bookingPanel().getTablePanel().getTableModel().setRowCount(0);
+            view.getPnlBookingsView().bookingPanel().getTablePanel().getScrollPane().getVerticalScrollBar().setValue(0);
+            model.viewHistory();
+
+            LocalDateTime dateNow = LocalDateTime.now();
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("MM/dd/yy");
+
+            String dateInput = String.valueOf(view.getPnlBookingsView().bookingPanel().getFilterPanel().getTxtDate().getText());
+            String status = String.valueOf(view.getPnlBookingsView().bookingPanel().getFilterPanel().getCmbStatus().getSelectedItem());
+            String type = String.valueOf(view.getPnlBookingsView().bookingPanel().getFilterPanel().getCmbVehicleType().getSelectedItem());
+
+            List<List<String>> filteredBookings = new ArrayList<>();
+
+            if (status.equals("All")) {
+                if (dateInput.equals("All")) {
+                    filteredBookings = model.getBookings().stream()
+                            .toList();
+                } else {
+                    filteredBookings = model.getBookings().stream()
+                            .filter(c -> c.get(2).equals(dateInput))
+                            .toList();
+                }
+            } else if (status.equals("Current")) {
+                filteredBookings = model.getBookings().stream()
+                        .filter(c -> c.get(2).equals(dateNow.format(timeFormatter)))
+                        .toList();
+            } else if (status.equals("Future")) {
+                filteredBookings = model.getBookings().stream()
+                        .filter(c -> LocalDateTime.parse(c.get(2) + " " + c.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isAfter(dateNow))
+                        .toList();
+            } else if (status.equals("Completed")) {
+                filteredBookings = model.getBookings().stream()
+                        .filter(c -> LocalDateTime.parse(c.get(2) + " " + c.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isBefore(dateNow))
+                        .toList();
+            }
+
+            switch (type) {
+                case "All" -> {
+                    for (java.util.List<String> booking : filteredBookings) {
+                        String[] token = booking.toString().replace("[", "").replace("]", "").split(",");
+                        String vehicleType = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+
+                        view.getPnlBookingsView().bookingPanel().getTablePanel().getTableModel().addRow(new Object[]{
+                                vehicleType, spot, date, timeIn, timeOut
+                        });
+                    }
+                } // end of case -> all
+                case "Car" -> {
+                    for (java.util.List<String> booking : filteredBookings) {
+                        String[] token = booking.toString().replace("[", "").replace("]", "").split(",");
+                        String vehicleType = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+
+                        if (vehicleType.equals("Car")) {
+                            view.getPnlBookingsView().bookingPanel().getTablePanel().getTableModel().addRow(new Object[]{
+                                    vehicleType, spot, date, timeIn, timeOut
+                            });
+                        }
+                    }
+                } // end of case -> car
+                case "Motor" -> {
+                    for (java.util.List<String> booking : filteredBookings) {
+                        String[] token = booking.toString().replace("[", "").replace("]", "").split(",");
+                        String vehicleType = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+
+                        if (vehicleType.equals("Motor")) {
+                            view.getPnlBookingsView().bookingPanel().getTablePanel().getTableModel().addRow(new Object[]{
+                                    vehicleType, spot, date, timeIn, timeOut
+                            });
+                        }
+                    }
+                } // end of case -> car
+            }
+        }
+    }
+
     class NextListener implements ActionListener {
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -389,33 +479,6 @@ public class UserProfileController {
             }
         }
     }
-
-    class HistoryNextListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (model.validateEndOrStart(1)) {
-                view.getHistoryPage().recordPanel().setLblType(model.getType());
-                view.getHistoryPage().recordPanel().setLblSpot(model.getSpot());
-                view.getHistoryPage().recordPanel().setLblCheckIn(model.getCheckIn());
-                view.getHistoryPage().recordPanel().setLblCheckOut(model.getCheckOut());
-                view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
-            }
-        }
-    }
-
-    class HistoryPreviousListener implements ActionListener {
-        @Override
-        public void actionPerformed(ActionEvent e) {
-            if (model.validateEndOrStart(-1)) {
-                view.getHistoryPage().recordPanel().setLblType(model.getType());
-                view.getHistoryPage().recordPanel().setLblSpot(model.getSpot());
-                view.getHistoryPage().recordPanel().setLblCheckIn(model.getCheckIn());
-                view.getHistoryPage().recordPanel().setLblCheckOut(model.getCheckOut());
-                view.getHistoryPage().recordPanel().setLblDuration(model.getDuration());
-            }
-        }
-    }
-
 
 }
 

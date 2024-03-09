@@ -67,7 +67,7 @@ public class UserProfileView extends JPanel {
     /**
      * The panel for History.
      */
-    private HistoryView pnlHistoryPage;
+    private BookingsView pnlBookingsView;
     /**
      * The panel for Security.
      */
@@ -96,7 +96,7 @@ public class UserProfileView extends JPanel {
         // security page
         pnlCards.add(pnlSecurityPage = new SecurityPage(), "security");
         // history page
-        pnlCards.add(pnlHistoryPage = new HistoryView(), "history");
+        pnlCards.add(pnlBookingsView = new BookingsView(), "history");
         //shows edit profile first
         cardLayout.show(pnlCards, "profile");
 
@@ -152,7 +152,7 @@ public class UserProfileView extends JPanel {
             buttonsPanel.add(btnNavSecurity);
 
             ImageIcon historyIcon = new ImageIcon("res/drawable/icons/history.png");
-            btnNavHistory = res.createBtnTxtOnly(" History", res.gray);
+            btnNavHistory = res.createBtnTxtOnly(" Bookings", res.gray);
             btnNavHistory.setFont(buttonFont);
             btnNavHistory.setHorizontalAlignment(SwingConstants.LEFT);
             ImageIcon helpResized = new ImageIcon(historyIcon.getImage().getScaledInstance(25, 25, Image.SCALE_SMOOTH));
@@ -988,10 +988,10 @@ public class UserProfileView extends JPanel {
 
     /**
      * Retrieves the current panel of HistoryPage.
-     * @return The current pnlHistoryPage.
+     * @return The current pnlBookingsView.
      */
-    public HistoryView getHistoryPage() {
-        return pnlHistoryPage;
+    public BookingsView getPnlBookingsView() {
+        return pnlBookingsView;
     }
 }
 
