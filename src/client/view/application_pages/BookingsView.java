@@ -245,6 +245,7 @@ public class BookingsView extends JPanel {
             setLayout(new BorderLayout());
             setBackground(res.white);
 
+
             DefaultTableModel model = new DefaultTableModel();
             model.addColumn("Vehicle Type");
             model.addColumn("Spot");

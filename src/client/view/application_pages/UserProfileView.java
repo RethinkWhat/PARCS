@@ -166,6 +166,7 @@ public class UserProfileView extends JPanel {
             btnNavDelete.setIcon(deleteResized);
             buttonsPanel.add(btnNavDelete);
 
+
             ImageIcon exitIcon = new ImageIcon("res/drawable/icons/exit-grey-outline.png");
             btnNavExit = res.createBtnTxtOnly(" Logout", res.gray);
             btnNavExit.setFont(buttonFont);

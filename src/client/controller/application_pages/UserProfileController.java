@@ -375,6 +375,7 @@ public class UserProfileController {
             view.getPnlBookingsView().bookingPanel().getTablePanel().getScrollPane().getVerticalScrollBar().setValue(0);
             model.viewHistory();
 
+
             LocalDateTime dateNow = LocalDateTime.now();
             DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("MM/dd/yy");
 
