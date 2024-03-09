@@ -47,7 +47,7 @@ public class UserProfileModel {
     /** Histroy page variables */
     private int historyPageNo =0;
 
-    private ArrayList<ArrayList<String>> bookings;
+    private List<List<String>> bookings;
 
     /**
      * Constructs a model of UserProfile with a specified client.
@@ -56,6 +56,10 @@ public class UserProfileModel {
      */
     public UserProfileModel(Client client) {
         this.client = client;
+    }
+
+    public List<List<String>> getBookings() {
+        return bookings;
     }
 
     /**
