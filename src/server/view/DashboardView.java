@@ -193,12 +193,12 @@ public class DashboardView extends JPanel {
                 txtDate = res.createTxtRounded("Search Date (MM/DD/YY)", res.lightGray, res.gray, 25);
                 add(txtDate);
 
-                cmbStatus = new JComboBox<>(new String[]{"Select Status:", "Info"});
+                cmbStatus = new JComboBox<>(new String[]{"Select Status:", "All", "Completed", "Future"});
                 cmbStatus.setPreferredSize(new Dimension(200,40));
                 cmbStatus.setFont(new Font("Arial", Font.BOLD, 16));
                 add(cmbStatus);
 
-                cmbVehicleType = new JComboBox<>(new String[]{"Select Vehicle Type:", "Info"});
+                cmbVehicleType = new JComboBox<>(new String[]{"Select Vehicle Type:", "All", "Car", "Motorcycle"});
                 cmbVehicleType.setPreferredSize(new Dimension(280,40));
                 cmbVehicleType.setFont(new Font("Arial", Font.BOLD, 16));
                 add(cmbVehicleType);
