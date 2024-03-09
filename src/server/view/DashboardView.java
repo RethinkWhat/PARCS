@@ -154,6 +154,10 @@ public class DashboardView extends JPanel {
          * The table model to hold the columns of tblBookings.
          */
         private DefaultTableModel tblModel;
+        /**
+         * The scroll pane where the table will be instantiated.
+         */
+        private JScrollPane scrollPane;
 
         /**
          * Constructs a panel of MainBottomPanel.
@@ -193,7 +197,7 @@ public class DashboardView extends JPanel {
                 txtDate = res.createTxtRounded("Search Date (MM/DD/YY)", res.lightGray, res.gray, 25);
                 add(txtDate);
 
-                cmbStatus = new JComboBox<>(new String[]{"Select Status:", "All", "Completed", "Future"});
+                cmbStatus = new JComboBox<>(new String[]{"Select Status:", "All", "Completed", "Current", "Future"});
                 cmbStatus.setPreferredSize(new Dimension(200,40));
                 cmbStatus.setFont(new Font("Arial", Font.BOLD, 16));
                 add(cmbStatus);
@@ -225,7 +229,6 @@ public class DashboardView extends JPanel {
                 setBackground(res.white);
 
                 tblModel = new DefaultTableModel();
-
                 tblModel.addColumn("Date");
                 tblModel.addColumn("Username");
                 tblModel.addColumn("Spot");
@@ -233,7 +236,6 @@ public class DashboardView extends JPanel {
                 tblModel.addColumn("Check-in Time");
                 tblModel.addColumn("Check-out Time");
                 tblModel.addColumn("Duration");
-                tblModel.addColumn("Status");
 
                 tblBookings = new JTable(tblModel);
                 tblBookings.getTableHeader().setResizingAllowed(false);
@@ -243,19 +245,18 @@ public class DashboardView extends JPanel {
                 tblBookings.setDragEnabled(false);
                 tblBookings.setOpaque(false);
                 tblBookings.setFillsViewportHeight(true);
+                tblBookings.setPreferredSize(new Dimension(1100,1000));
 
                 tblBookings.getColumnModel().getColumn(0).setPreferredWidth(100);
-                tblBookings.getColumnModel().getColumn(1).setPreferredWidth(200);
+                tblBookings.getColumnModel().getColumn(1).setPreferredWidth(300);
                 tblBookings.getColumnModel().getColumn(2).setPreferredWidth(150);
                 tblBookings.getColumnModel().getColumn(3).setPreferredWidth(200);
                 tblBookings.getColumnModel().getColumn(4).setPreferredWidth(150);
                 tblBookings.getColumnModel().getColumn(5).setPreferredWidth(150);
                 tblBookings.getColumnModel().getColumn(6).setPreferredWidth(100);
-                tblBookings.getColumnModel().getColumn(7).setPreferredWidth(80);
-
                 tblBookings.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
-                JScrollPane scrollPane = new JScrollPane(tblBookings);
+                scrollPane = new JScrollPane(tblBookings);
                 scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
                 add(scrollPane, BorderLayout.CENTER);
 
@@ -317,6 +318,14 @@ public class DashboardView extends JPanel {
          */
         public DefaultTableModel getTblModel() {
             return tblModel;
+        }
+
+        /**
+         * Retrieves the current JScrollPane of scrollPane.
+         * @return The current scrollPane.
+         */
+        public JScrollPane getScrollPane() {
+            return scrollPane;
         }
 
         /**

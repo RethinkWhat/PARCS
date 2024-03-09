@@ -440,7 +440,58 @@
     
     
     </parkingSpot>
-            
+
+    <parkingSpot identifier="M2">
+
+
+
+        <reservation day="03/09/24">
+
+
+
+            <startTime>7:00</startTime>
+
+
+
+            <endTime>8:00</endTime>
+
+
+
+            <user>ramon</user>
+
+
+
+        </reservation>
+
+
+
+    </parkingSpot>
+
+    <parkingSpot identifier="C2">
+
+
+
+        <reservation day="03/11/24">
+
+
+
+            <startTime>7:00</startTime>
+
+
+
+            <endTime>8:00</endTime>
+
+
+
+            <user>ramon</user>
+
+
+
+        </reservation>
+
+
+
+    </parkingSpot>
 
 
 </reservations>

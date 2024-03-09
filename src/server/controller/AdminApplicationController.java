@@ -83,6 +83,7 @@ public class AdminApplicationController {
         view.getDashboardView().getPnlMainBottom().setApplyListener(new ApplyFiltersListener());
         view.getDashboardView().getPnlMainBottom().setClearListener(e -> {
             view.getDashboardView().getPnlMainBottom().getTblModel().setRowCount(0);
+            view.getDashboardView().getPnlMainBottom().getScrollPane().getVerticalScrollBar().setValue(0);
             view.getDashboardView().getPnlMainBottom().getTxtDate().setText("");
             view.getDashboardView().getPnlMainBottom().getCmbStatus().setSelectedIndex(0);
             view.getDashboardView().getPnlMainBottom().getCmbVehicleType().setSelectedIndex(0);
@@ -171,145 +172,121 @@ public class AdminApplicationController {
         public void actionPerformed(ActionEvent e) {
             // clears the table before populating it
             view.getDashboardView().getPnlMainBottom().getTblModel().setRowCount(0);
+            view.getDashboardView().getPnlMainBottom().getScrollPane().getVerticalScrollBar().setValue(0);
 
             LocalDateTime dateNow = LocalDateTime.now();
-            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("MM-dd-yy");
-            String formattedDate = dateNow.format(timeFormatter);
+            DateTimeFormatter timeFormatter = DateTimeFormatter.ofPattern("MM/dd/yy");
 
             String dateInput = String.valueOf(view.getDashboardView().getPnlMainBottom().getTxtDate().getText());
             String status = String.valueOf(view.getDashboardView().getPnlMainBottom().getCmbStatus().getSelectedItem());
             String type = String.valueOf(view.getDashboardView().getPnlMainBottom().getCmbVehicleType().getSelectedItem());
 
-            List<List<String>> filteredCarBookings = carBookings.stream()
-                    .filter(c -> c.get(2).equals(dateInput))
-                    .toList();
-            List<List<String>> filteredMotorBookings = motorBookings.stream()
-                    .filter(m -> m.get(2).equals(dateInput))
-                    .toList();
+            List<List<String>> filteredCarBookings = new ArrayList<>();
+            List<List<String>> filteredMotorBookings = new ArrayList<>();
 
-            if (dateInput.equals("All")) {
-                switch (type) {
-                    case "All" -> {
-                        for (List<String> mBooking : motorBookings) {
-                            String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
-
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-                        }
-                        for (List<String> cBooking : carBookings) {
-                            String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
-
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Car", timeIn, timeOut, duration + "hour/s", "Done"
-
-                            });
-
-                        }
-                    }
-                    case "Car" -> {
-                        for (List<String> cBooking : carBookings) {
-                            String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Car", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-                        }
-                    }
-                    case "Motorcycle" -> {
-                        for (List<String> mBooking : motorBookings) {
-                            String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-                        }
-                    }
+            if (status.equals("All")) {
+                if (dateInput.equals("All")) {
+                    filteredCarBookings = carBookings.stream()
+                            .toList();
+                    filteredMotorBookings = motorBookings.stream()
+                            .toList();
+                } else {
+                    filteredCarBookings = carBookings.stream()
+                            .filter(c -> c.get(2).equals(dateInput))
+                            .toList();
+                    filteredMotorBookings = motorBookings.stream()
+                            .filter(m -> m.get(2).equals(dateInput))
+                            .toList();
                 }
-            } else {
-                switch (type) {
-                    case "All" -> {
-                        for (List<String> mBooking : filteredMotorBookings) {
-                            String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
+            } else if (status.equals("Current")) {
+                filteredCarBookings = carBookings.stream()
+                        .filter(c -> c.get(2).equals(dateNow.format(timeFormatter)))
+                        .toList();
+                filteredMotorBookings = motorBookings.stream()
+                        .filter(m -> m.get(2).equals(dateNow.format(timeFormatter)))
+                        .toList();
+            } else if (status.equals("Future")) {
+                filteredCarBookings = carBookings.stream()
+                        .filter(c -> LocalDateTime.parse(c.get(2) + " " + c.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isAfter(dateNow))
+                        .toList();
+                filteredMotorBookings = motorBookings.stream()
+                        .filter(m -> LocalDateTime.parse(m.get(2) + " " + m.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isAfter(dateNow))
+                        .toList();
+            } else if (status.equals("Completed")) {
+                filteredCarBookings = carBookings.stream()
+                        .filter(c -> LocalDateTime.parse(c.get(2) + " " + c.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isBefore(dateNow))
+                        .toList();
+                filteredMotorBookings = motorBookings.stream()
+                        .filter(m -> LocalDateTime.parse(m.get(2) + " " + m.get(3),
+                                DateTimeFormatter.ofPattern("MM/dd/yy H:mm")).isBefore(dateNow))
+                        .toList();
+            }
 
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-                        }
-                        for (List<String> cBooking : filteredCarBookings) {
-                            String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
+            switch (type) {
+                case "All" -> {
+                    for (List<String> mBooking : filteredMotorBookings) {
+                        String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
 
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Car", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-
-                        }
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s"
+                        });
                     }
-                    case "Car" -> {
-                        for (List<String> cBooking : filteredCarBookings) {
-                            String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Car", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-                        }
-                    }
+                    for (List<String> cBooking : filteredCarBookings) {
+                        String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
 
-                    case "Motorcycle" -> {
-                        for (List<String> mBooking : filteredMotorBookings) {
-                            String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
-                            String username = token[0];
-                            String spot = token[1];
-                            String date = token[2];
-                            String timeIn = token[3];
-                            String timeOut = token[4];
-                            String duration = token[5];
-                            view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
-                                    date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s", "Done"
-                            });
-                        }
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Car", timeIn, timeOut, duration + "hour/s"
+                        });
+
                     }
-                }
+                } // end of case -> all
+
+                case "Car" -> {
+                    for (List<String> cBooking : filteredCarBookings) {
+                        String[] token = cBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Car", timeIn, timeOut, duration + "hour/s"
+                        });
+                    }
+                } // end of case -> car
+
+                case "Motorcycle" -> {
+                    for (List<String> mBooking : filteredMotorBookings) {
+                        String[] token = mBooking.toString().replace("[", "").replace("]", "").split(",");
+                        String username = token[0];
+                        String spot = token[1];
+                        String date = token[2];
+                        String timeIn = token[3];
+                        String timeOut = token[4];
+                        String duration = token[5];
+                        view.getDashboardView().getPnlMainBottom().getTblModel().addRow(new Object[]{
+                                date, username, spot, "Motorcycle", timeIn, timeOut, duration + "hour/s"
+                        });
+                    }
+                } // end of case -> motorcycle
             }
         }
     }
 }
+
