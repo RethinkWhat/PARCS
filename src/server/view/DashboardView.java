@@ -132,12 +132,12 @@ public class DashboardView extends JPanel {
          * The combo box for the status of the booking.
          * All, completed, and future.
          */
-        private JComboBox<?> cmbStatus;
+        private JComboBox<String> cmbStatus;
         /**
          * The combo box for the type of vehicle of the booking.
          * All, Car, Motorcycle.
          */
-        private JComboBox<?> cmbVehicleType;
+        private JComboBox<String> cmbVehicleType;
         /**
          * The button to apply the filters.
          */
@@ -186,17 +186,21 @@ public class DashboardView extends JPanel {
              * Constructs a panel of ButtonsPanel.
              */
             public ButtonsPanel() {
-                setLayout(new FlowLayout());
-                setBorder(new EmptyBorder(10,10,10,10));
+                setLayout(new FlowLayout(FlowLayout.LEFT));
+                setBorder(new EmptyBorder(10,20,10,20));
                 setBackground(res.white);
 
-                txtDate = res.createTxtRounded("Search Date (MM/DD/YY)", res.lightGray, res.gray, 20);
+                txtDate = res.createTxtRounded("Search Date (MM/DD/YY)", res.lightGray, res.gray, 25);
                 add(txtDate);
 
-                cmbStatus = res.createCmbRounded(res.gray, res.lightGray, 10);
+                cmbStatus = new JComboBox<>(new String[]{"Select Status:", "Info"});
+                cmbStatus.setPreferredSize(new Dimension(200,40));
+                cmbStatus.setFont(new Font("Arial", Font.BOLD, 16));
                 add(cmbStatus);
 
-                cmbVehicleType = res.createCmbRounded(res.gray, res.lightGray, 10);
+                cmbVehicleType = new JComboBox<>(new String[]{"Select Vehicle Type:", "Info"});
+                cmbVehicleType.setPreferredSize(new Dimension(280,40));
+                cmbVehicleType.setFont(new Font("Arial", Font.BOLD, 16));
                 add(cmbVehicleType);
 
                 btnApply = res.createBtnRounded("Apply Filters", res.celadon, res.eerieBlack, 10);
@@ -205,7 +209,7 @@ public class DashboardView extends JPanel {
                 btnClear = res.createBtnRounded("Clear Filters", res.lightGray, res.eerieBlack, 10);
                 add(btnClear);
 
-                this.setPreferredSize(new Dimension(1100,100));
+                this.setPreferredSize(new Dimension(1200,100));
             }
         }
 
@@ -220,6 +224,17 @@ public class DashboardView extends JPanel {
                 setLayout(new BorderLayout());
                 setBackground(res.white);
 
+                tblModel = new DefaultTableModel();
+
+                tblModel.addColumn("Date");
+                tblModel.addColumn("Username");
+                tblModel.addColumn("Spot");
+                tblModel.addColumn("Vehicle Type");
+                tblModel.addColumn("Check-in Time");
+                tblModel.addColumn("Check-out Time");
+                tblModel.addColumn("Duration");
+                tblModel.addColumn("Status");
+
                 tblBookings = new JTable(tblModel);
                 tblBookings.getTableHeader().setResizingAllowed(false);
                 tblBookings.getTableHeader().setReorderingAllowed(false);
@@ -227,11 +242,24 @@ public class DashboardView extends JPanel {
                 tblBookings.setAutoResizeMode(0);
                 tblBookings.setDragEnabled(false);
                 tblBookings.setOpaque(false);
+                tblBookings.setFillsViewportHeight(true);
+
+                tblBookings.getColumnModel().getColumn(0).setPreferredWidth(100);
+                tblBookings.getColumnModel().getColumn(1).setPreferredWidth(200);
+                tblBookings.getColumnModel().getColumn(2).setPreferredWidth(150);
+                tblBookings.getColumnModel().getColumn(3).setPreferredWidth(200);
+                tblBookings.getColumnModel().getColumn(4).setPreferredWidth(150);
+                tblBookings.getColumnModel().getColumn(5).setPreferredWidth(150);
+                tblBookings.getColumnModel().getColumn(6).setPreferredWidth(100);
+                tblBookings.getColumnModel().getColumn(7).setPreferredWidth(80);
+
+                tblBookings.setAutoResizeMode(JTable.AUTO_RESIZE_OFF);
 
                 JScrollPane scrollPane = new JScrollPane(tblBookings);
+                scrollPane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_ALWAYS);
                 add(scrollPane, BorderLayout.CENTER);
 
-                this.setPreferredSize(new Dimension(1300, 410));
+                this.setPreferredSize(new Dimension(1150, 370));
             }
         }
 
@@ -273,6 +301,22 @@ public class DashboardView extends JPanel {
          */
         public JButton getBtnClear() {
             return btnClear;
+        }
+
+        /**
+         * Retrieves the current JTable of tblBookings.
+         * @return The current tblBookings.
+         */
+        public JTable getTblBookings() {
+            return tblBookings;
+        }
+
+        /**
+         * Retrieves the current DefaultTableModel of tblModel.
+         * @return The current tblModel.
+         */
+        public DefaultTableModel getTblModel() {
+            return tblModel;
         }
 
         /**
