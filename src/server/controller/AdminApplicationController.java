@@ -46,6 +46,8 @@ public class AdminApplicationController {
      */
     private volatile List<List<String>> motorBookings = new ArrayList<>();
 
+    private Thread threadServer = new Thread(server);;
+
     /**
      * Constructs a ServerController with a specified AdminApplicationView.
      * @param view The specified AdminApplicationView.
@@ -127,11 +129,11 @@ public class AdminApplicationController {
                 serverStatus = true;
 
                 // Create and start a new thread for the server
-                Thread thread = new Thread(server);
-                thread.start();
+                threadServer.start();
             } else {
                 view.getServerStatusView().setOffline();
                 serverStatus = false;
+                threadServer.interrupt();
 
                 // Stop the server logic
                 server.stopAccepting();
