@@ -158,8 +158,6 @@ public class AdminApplicationController {
         view.getDashboardView().getPnlMainTop().getLblTotalCount().
                 setText(String.valueOf(carBookings.size() + motorBookings.size()));
 
-        System.out.println(carBookings);
-        System.out.println(motorBookings);
     }
 
     /**

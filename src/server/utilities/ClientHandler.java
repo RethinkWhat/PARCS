@@ -214,7 +214,7 @@ public class ClientHandler implements Runnable {
     /**
      * Method to handle sign up, creating account and validating credentials
      */
-    public void signUp() {
+    public synchronized void signUp() {
         try {
             String username = reader.readLine();
 
@@ -222,7 +222,6 @@ public class ClientHandler implements Runnable {
             boolean usernameExists = server.checkUsernameExists(username);
 
             writer.println(usernameExists);
-            System.out.println("username exists" + usernameExists);
             if (!usernameExists) {
                 String password = reader.readLine();
                 String lastName = reader.readLine();
@@ -410,7 +409,6 @@ public class ClientHandler implements Runnable {
             String username = reader.readLine();
 
 
-            System.out.println("reached");
             boolean check = server.checkSpotScheduleConflicts(identifier, startTime, duration, date);
             if (check == false) {
                 boolean confirmed = server.makeReservation(identifier, date, startTime, duration, username);

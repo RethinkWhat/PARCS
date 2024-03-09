@@ -110,7 +110,6 @@ public class LoginModel {
 
         boolean signUpSuccess = false;
         if (!usernameExists) {
-            System.out.println();
             client.writeString(encryptPassword(password));
             client.writeString(lastName);
             client.writeString(firstName);
